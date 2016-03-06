@@ -6,6 +6,7 @@
   <script type="text/javascript" src="vis.js"></script>
   <link href="vis.css" rel="stylesheet" type="text/css" />
 
+  <button type ="button" id="button" onclick=getCard()>Draw cards</button>
   <style type="text/css">
     #mynetwork {
       width: 600px;
@@ -16,15 +17,28 @@
 </head>
 <body>
 <div id="mynetwork"></div>
-<form>
-  Number of cards: <input type="text" id="cards" name="cards"><br>
-  Number of players: <input type="text" id="players" name="players"><br>
-  <input type="submit" value="Generate kripke model" onclick="retrieve('cards','players')">
-</form>
 
 <script type="text/javascript">
+  card_value = 5;
+  player_value = 3;
 
 
+  color_array =['red', 'green', 'blue', 'orange', 'yellow']
+  makeGraph(range1(card_value));
+
+  function getCard() {
+    var array = [];
+    var counter = 0;
+    while (counter != player_value) {
+      var random_number = Math.floor(Math.random() * card_value) + 2;
+
+      if (!(contains.call(array, random_number))) {
+        counter = counter + 1;
+        array.push(random_number);
+      }
+    }
+    makeGraph(array)
+  }
   function allPossibleCases(arr) {
     if (arr.length == 1) {
       return arr[0];
@@ -55,79 +69,78 @@
     }
     return array_number;
   }
-  function calculate_fac(number){
-    var fac = 1;
-    for (var i=2;i<number+1;i++){
-      fac = fac*i;
+  var contains = function(needle) {
+    // Per spec, the way to identify NaN is that it is not equal to itself
+    var findNaN = needle !== needle;
+    var indexOf;
+
+    if(!findNaN && typeof Array.prototype.indexOf === 'function') {
+      indexOf = Array.prototype.indexOf;
+    } else {
+      indexOf = function(needle) {
+        var i = -1, index = -1;
+
+        for(i = 0; i < this.length; i++) {
+          var item = this[i];
+
+          if((findNaN && item !== item) || item === needle) {
+            index = i;
+            break;
+          }
+        }
+
+        return index;
+      };
     }
-    return fac
-  }
 
-  function retrieve(id_card,id_player) {
-    var card = document.getElementById(id_card);
-    var card_value = card.value;
-    var player = document.getElementById(id_player)
-    var player_value = player.value;
-    return [player_value,card_value]
-  }
+    return indexOf.call(this, needle) > -1;
+  };
 
-  card_value = 5;
-  card_fac = calculate_fac(card_value);
-
-  player_value = 3;
-
-  //function makeGraph(){
-  //  var value_array = retrieve('cards','players');
-    // create an array with nodesnod
-    //var nodes_array = [{id:  1,label: 'node 1'}];
-    var nodes_array =[];
-    var array = [];
-    var range_array = range1(card_value);
-    for (var i=0;i<player_value;i++){
-      array[i] = range_array;
-    }
-    var result =allPossibleCases(array);
-    for (var i=0;i<result.length;i++){
-      nodes_array.push({id: i, label:result[i]})
-    }
-    var nodes = new vis.DataSet(nodes_array);
+  function makeGraph(range_array){
 
 
-    // create an array with edges
+      var nodes_array = [];
+      var array = [];
+      for (var i = 0; i < player_value; i++) {
+        array[i] = range_array;
+      }
+      var result = allPossibleCases(array);
+      for (var i = 0; i < result.length; i++) {
+        nodes_array.push({id: i, label: result[i]})
+      }
+      var nodes = new vis.DataSet(nodes_array);
 
-    var edges_array = [];
-    for (var i=0;i<result.length;i++) {
-      for (var j = 0; j < result.length; j++) {
-        var counter = 0;
-        var index = 0;
-        if (i != j) {
-          /** 0 - 3 : 4
-           *  1 - 4 : 1
-           *  0-1 + 2-4 :2
-           *  0-2 + 3-4 :3
-           */
-          for (var k = 0; k < player_value; k++) {
-            if (result[i][k] != result[j][k]) {
+      // create an array with edges
+      var edges_array = [];
+      for (var i = 0; i < result.length; i++) {
+        for (var j = 0; j < result.length; j++) {
+          var counter = 0;
+          var index = 0;
+          if (i != j) {
+            for (var k = 0; k < player_value; k++) {
+              if (result[i][k] != result[j][k]) {
                 counter = counter + 1;
-               index = k
-            }
-            if (counter == 1 && k == player_value-1) {
-              edges_array.push({from: i, to: j, arrows: 'to', label: 'k' + index});
+                index = k
+              }
+              if (counter == 1 && k == player_value - 1) {
+
+                edges_array.push({from: i, to: j, arrows: 'to', label: 'k' + index, color: color_array[index]});
+              }
             }
           }
         }
       }
-    }
-    var edges = new vis.DataSet(edges_array);
+      var edges = new vis.DataSet(edges_array);
 
-    // create a network
-    var container = document.getElementById('mynetwork');
-    var data = {
-      nodes: nodes,
-      edges: edges
-    };
-    var options = {};
-    var network = new vis.Network(container, data, options);
+      // create a network
+      var container = document.getElementById('mynetwork');
+      var data = {
+        nodes: nodes,
+        edges: edges
+      };
+      var options = {};
+      var network = new vis.Network(container, data, options);
+  }
 </script>
 </body>
 </html>
