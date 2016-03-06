@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+  <title>Network | Basic usage</title>
+
+  <script type="text/javascript" src="vis.js"></script>
+  <link href="vis.css" rel="stylesheet" type="text/css" />
+
+  <style type="text/css">
+    #mynetwork {
+      width: 600px;
+      height: 400px;
+      border: 1px solid lightgray;
+    }
+  </style>
+</head>
+<body>
+<div id="mynetwork"></div>
+<form>
+  Number of cards: <input type="text" id="cards" name="cards"><br>
+  Number of players: <input type="text" id="players" name="players"><br>
+  <input type="submit" value="Generate kripke model" onclick="retrieve('cards','players')">
+</form>
+
+<script type="text/javascript">
+
+
+  function allPossibleCases(arr) {
+    if (arr.length == 1) {
+      return arr[0];
+    } else {
+      var result = [];
+      var allCasesOfRest = allPossibleCases(arr.slice(1));  // recur with the rest of array
+      for (var i = 0; i < allCasesOfRest.length; i++) {
+        for (var j = 0; j < arr[0].length; j++) {
+          for (var k = 0; k < allCasesOfRest.length; k++) {
+            if (arr[0][j] == allCasesOfRest[i][k]) {
+              break;
+            }
+            if (k == allCasesOfRest.length - 1 && arr[0][j] != allCasesOfRest[i]) {
+              result.push(allCasesOfRest[i].toString() + arr[0][j].toString());
+            }
+          }
+        }
+      }
+    }
+      return result;
+
+  }
+
+  function range1(number){
+    var array_number =[];
+    for (var i=2;i<number+2;i++){
+      array_number.push(i)
+    }
+    return array_number;
+  }
+  function calculate_fac(number){
+    var fac = 1;
+    for (var i=2;i<number+1;i++){
+      fac = fac*i;
+    }
+    return fac
+  }
+
+  function retrieve(id_card,id_player) {
+    var card = document.getElementById(id_card);
+    var card_value = card.value;
+    var player = document.getElementById(id_player)
+    var player_value = player.value;
+    return [player_value,card_value]
+  }
+
+  card_value = 5;
+  card_fac = calculate_fac(card_value);
+
+  player_value = 3;
+
+  //function makeGraph(){
+  //  var value_array = retrieve('cards','players');
+    // create an array with nodesnod
+    //var nodes_array = [{id:  1,label: 'node 1'}];
+    var nodes_array =[];
+    var array = [];
+    var range_array = range1(card_value);
+    for (var i=0;i<player_value;i++){
+      array[i] = range_array;
+    }
+    var result =allPossibleCases(array);
+    for (var i=0;i<result.length;i++){
+      nodes_array.push({id: i, label:result[i]})
+    }
+    var nodes = new vis.DataSet(nodes_array);
+
+
+    // create an array with edges
+
+    var edges_array = [];
+    for (var i=0;i<result.length;i++) {
+      for (var j = 0; j < result.length; j++) {
+        var counter = 0;
+        var index = 0;
+        if (i != j) {
+          /** 0 - 3 : 4
+           *  1 - 4 : 1
+           *  0-1 + 2-4 :2
+           *  0-2 + 3-4 :3
+           */
+          for (var k = 0; k < player_value; k++) {
+            if (result[i][k] != result[j][k]) {
+                counter = counter + 1;
+               index = k
+            }
+            if (counter == 1 && k == player_value-1) {
+              edges_array.push({from: i, to: j, arrows: 'to', label: 'k' + index});
+            }
+          }
+        }
+      }
+    }
+    var edges = new vis.DataSet(edges_array);
+
+    // create a network
+    var container = document.getElementById('mynetwork');
+    var data = {
+      nodes: nodes,
+      edges: edges
+    };
+    var options = {};
+    var network = new vis.Network(container, data, options);
+</script>
+</body>
+</html>
+
