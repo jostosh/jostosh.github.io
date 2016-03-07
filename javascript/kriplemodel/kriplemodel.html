@@ -6,10 +6,9 @@
   <script type="text/javascript" src="vis.js"></script>
   <link href="vis.css" rel="stylesheet" type="text/css" />
 
-  <button type ="button" id="button" onclick=getCard()>Draw cards</button>
   <style type="text/css">
     #mynetwork {
-      width: 600px;
+      width: 800px;
       height: 400px;
       border: 1px solid lightgray;
     }
@@ -18,27 +17,118 @@
 <body>
 <div id="mynetwork"></div>
 
-<script type="text/javascript">
-  card_value = 5;
-  player_value = 3;
+<select id="dropdown">
+  <option value="34">3 players with 4 cards</option>
+  <option value="35">3 players with 5 cards</option>
+  <option value="36">3 players with 6 cards</option>
+  <option value="45">4 players wtih 5 cards</option>
+</select>
 
+
+<button type = "button" id="graph" onclick=createGraph()>Create graph</button>
+<button type ="button" id="draw_card" onclick=getCard()>Draw cards</button>
+<button type ="button" id="person1" onclick=viewPerson(1)>Person 1</button>
+<button type ="button" id="person2" onclick=viewPerson(2)>Person 2</button>
+<button type ="button" id="person3" onclick=viewPerson(3)>Person 3</button>
+<button type= "button" id="person4" onclick=viewPerson(4)>Person 4</button>
+<div id="printableArea">
+</div>
+<script type="text/javascript">
+  card_value = 0;
+  player_value = 0;
+  card_array = [];
 
   color_array =['red', 'green', 'blue', 'orange', 'yellow']
-  makeGraph(range1(card_value));
+  //makeGraph(range1(card_value));
+  disableButton();
+
+  function createGraph(){
+    var options = document.getElementById("dropdown");
+    var dropdown_value = options.options[options.selectedIndex].value;
+    card_value = parseInt(dropdown_value[1]);
+    player_value = parseInt(dropdown_value[0]);
+    document.getElementById("printableArea").innerHTML = "";
+    disableButton()
+    makeGraph(range1(card_value))
+  }
+
+  function disableButton(){
+    document.getElementById("draw_card").disabled =false;
+    document.getElementById("person1").disabled = true;
+    document.getElementById("person2").disabled = true;
+    document.getElementById("person3").disabled = true;
+    document.getElementById("person4").disabled = true;
+  }
+
+
+  function enableButton(){
+    document.getElementById("person1").disabled = false;
+    document.getElementById("person2").disabled = false;
+    document.getElementById("person3").disabled = false;
+    if(player_value==4){
+      document.getElementById("person4").disabled = false;
+    }
+  }
+
+  function setTextToArea(text){
+    document.getElementById("printableArea").innerHTML += text;
+  }
+
+  function possibleCases(person_number){
+    var array = [];
+
+    for(var i=2; i<card_value+2;i++){
+
+      var temp_card_array = card_array.slice();
+      temp_card_array[person_number-1] = i;
+      var string = "";
+
+      for(var j=0;j<player_value;j++) {
+        string = string + temp_card_array[j];
+      }
+
+      array.push(string);
+    }
+    return array;
+  }
+
+  function viewPerson(number){
+    var result = possibleCases(number);
+    var nodes_array = setNodes(result);
+    var nodes = new vis.DataSet(nodes_array);
+
+    // create an array with edges
+    var edges_array =  setEdges(result)
+
+    var edges = new vis.DataSet(edges_array);
+
+    // create a network
+    var container = document.getElementById('mynetwork');
+    var data = {
+      nodes: nodes,
+      edges: edges
+    };
+    var options = {};
+    var network = new vis.Network(container, data, options);
+  }
+
 
   function getCard() {
-    var array = [];
+    card_array =[]
     var counter = 0;
     while (counter != player_value) {
       var random_number = Math.floor(Math.random() * card_value) + 2;
-
-      if (!(contains.call(array, random_number))) {
+      if (!(contains.call(card_array, random_number))) {
         counter = counter + 1;
-        array.push(random_number);
+        card_array.push(random_number);
       }
     }
-    makeGraph(array)
+    enableButton();
+    for(var i=1;i<card_array.length+1;i++){
+      setTextToArea("<p> Person " + i + " draw card " + card_array[i-1] + "</p>");
+    }
   }
+
   function allPossibleCases(arr) {
     if (arr.length == 1) {
       return arr[0];
@@ -96,42 +186,51 @@
     return indexOf.call(this, needle) > -1;
   };
 
+  function setNodes(result){
+    var nodes_array = [];
+    for (var i = 0; i < result.length; i++) {
+      nodes_array.push({id: i, label: result[i]})
+    }
+    return nodes_array
+  }
+
+  function setEdges(result){
+    var edges_array = [];
+    for (var i = 0; i < result.length; i++) {
+      for (var j = 0; j < result.length; j++) {
+        var counter = 0;
+        var index = 0;
+        if (i != j) {
+          for (var k = 0; k < player_value; k++) {
+            if (result[i][k] != result[j][k]) {
+              counter = counter + 1;
+              index = k
+            }
+            if (counter == 1 && k == player_value - 1) {
+              edges_array.push({from: i, to: j, arrows: 'to', label: 'k' + (index+1), color: color_array[index]});
+            }
+          }
+        }
+      }
+    }
+    return edges_array
+  }
+
   function makeGraph(range_array){
 
-
-      var nodes_array = [];
       var array = [];
       for (var i = 0; i < player_value; i++) {
         array[i] = range_array;
       }
       var result = allPossibleCases(array);
-      for (var i = 0; i < result.length; i++) {
-        nodes_array.push({id: i, label: result[i]})
-      }
+
+      var nodes_array = setNodes(result);
       var nodes = new vis.DataSet(nodes_array);
 
       // create an array with edges
-      var edges_array = [];
-      for (var i = 0; i < result.length; i++) {
-        for (var j = 0; j < result.length; j++) {
-          var counter = 0;
-          var index = 0;
-          if (i != j) {
-            for (var k = 0; k < player_value; k++) {
-              if (result[i][k] != result[j][k]) {
-                counter = counter + 1;
-                index = k
-              }
-              if (counter == 1 && k == player_value - 1) {
+      var edges_array =  setEdges(result)
 
-                edges_array.push({from: i, to: j, arrows: 'to', label: 'k' + index, color: color_array[index]});
-              }
-            }
-          }
-        }
-      }
       var edges = new vis.DataSet(edges_array);
-
       // create a network
       var container = document.getElementById('mynetwork');
       var data = {
