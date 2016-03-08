@@ -105,7 +105,7 @@
   /* Make the graph for only one person, where number is the number of the person */
   /* TODO:Found out that there is a little error in the model, because now also 334 is modelled
   for one person but that can't be because he already sees an 3 and there only can be one 3 in the model, 
-  so this need to be fixed that it can only sees for example guess 234 or 534 or 634 etc. */
+  so this need to be fixed that it can only sees for example guess 234 or 534 or 634 etc.
   function viewPerson(number){
     /* Get all possible cases for a single person */
     var result = possibleCases(number);
