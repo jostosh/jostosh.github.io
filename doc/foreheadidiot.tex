@@ -54,6 +54,7 @@ Diederik Greveling}
 \begin{document}
 \maketitle
 \section{General Kripke structure}
+\subsection{Kripke model}
 For modeling Forehead idiot we consider the structures $M = \langle S, \pi, R \rangle$. We consider the games for 3 players. The states are given by $\boldsymbol s = (s_1,s_2,\ldots,s_m) \in S$, where $s_i \in D = \{ 2,3,4,5,6,7,8,9,10,j,q,k,a \}$. This means that if $s_3 = 5$, then player 3 has 5 on his forehead. Note that $D$ is an ordered set:
 $2<3<4<5<6<7<8<9<10<j<q<k<a$.
 
@@ -72,6 +73,22 @@ The valuation will be as follows:
  \item Furthermore, we have $\pi(\boldsymbol s)(w_i) = \mathbb{t}$ and $\pi(\boldsymbol s)(l_i) = \mathbb{f}$ iff $s_i > s_j$ for all $j \neq i$. In other words, $\pi(\boldsymbol s)(w_i)=\mathbb{f}$ and $\pi(\boldsymbol s)(l_i) = \mathbb{t}$ if for some $j\neq i$ we have that $s_i < s_j$. 
 \end{itemize}
 
+\subsection{Theory}
+Before the cards are put on the foreheads, every player knows that every player has exactly one card. This can be captured by
+\begin{align*}
+ K_i \bigwedge_{j=1}^m \bigg((p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge \neg p_j c_a) \vee (\neg p_j c_2 \wedge p_j c_3 \wedge \cdots \wedge \neg p_j c_a) \vee \cdots \vee (\neg p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge p_j c_a) \bigg)
+\end{align*}
+
+The moment that the players put the cards on their foreheads it is as if $m$ announcements are made. Every player announces that he knows what the other players' cards are (without actually saying it). This means that every player also knows his remaining possibilities.
+
+In the most general case, we could express this as follows:
+\begin{align*}
+ M \models \left[ \bigwedge_{i=1}^m K_i \left(\bigwedge_{j\neq i} p_j c_{u^{(j)}} \right) \right] \bigwedge_{i=1}^m \left( K_i \bigvee_{u^{(i)} \notin \{ u^{(j)} \}_{j\neq i}} p_i c_{u^{(i)}} \right)
+\end{align*}
+where $u^{(j)} \in D'$ is the card that player $j$ is holding. This greatly reduces the number of possible worlds. In fact, if there are $n$ cards and $m$ players, we have that each player has $n-m+1$ alternative worlds. Hence there are $m(n-m+1) - m +1$ possible worlds left. 
+
+
+\section{Game analysis}
 \subsection{$n$ cards game with $m=n$ players}
 In the scenario of $n$ cards with $m=n$ players there will be $\displaystyle g = \frac{n!}{(n-m)!} = n!$ possible games. Once the cards are dealt, each player is able to see the other players' cards. Because of the fact that $m=n$ and the fact that all cards are unique, for any pair of states $\boldsymbol s, \boldsymbol t$ such that $\boldsymbol s \neq \boldsymbol t$, we have that at least two cards are changed: $s_i \neq t_i$ and $s_j \neq t_j$ for $i,j\leq m$ and $i\neq j$.
 
@@ -105,21 +122,21 @@ Let $T^{(w_j)}_i \subseteq T_i$ be the subset of states such that for all states
 \paragraph{Calling a bet}
 Before we get to the optimal strategy, let us define the utility. If $\mathcal G^{(k)}_i$ denotes the `gain' of winning the game at round $k$, the utility will be given by:
 \begin{equation}
- U^{(w)}_i = \mathcal G^{(k)}_i \mathcal P^{(w)}_i
+ U^{(w_i)}_i = \mathcal G^{(k)}_i \mathcal P^{(w_i)}_i
 \label{eq:util}
  \end{equation}
 Let $\mathcal{L}^{(k)}_i$ be the loss of folding or losing the game after calling round $k$. In other words, $\mathcal L^{(k)}_i$ denotes the amount of coins that the player $i$ will have to bet for playing until round $k$. Note that $\displaystyle \mathcal G^{(k)}_i = \sum_{j\neq i} \mathcal L^{(k)}_j$. 
 
 The utility of losing a game will be given by:
 \begin{equation}
- U^{(l)}_i = -\mathcal L^{k}_i (1-\mathcal P^{(w)}_i)
+ U^{(l_i)}_i = -\mathcal L^{k}_i (1-\mathcal P^{(w_i)}_i)
 \end{equation}
 
 Now we can define a player's strategy for calling any bet as follows. Let $C_i^{(k)} \in \{\mathbb t, \mathbb f\}$ denote the decision of player $i$ at round $k$, where $\mathbb t$ corresponds to calling the bet and $\mathbb f$ corresponds to folding. The decision will be given by:
 \begin{equation}
 C_i^{(k)}  =
 \begin{cases}
- \mathbb t & \text{if } \gamma_i U^{(w)}_i + U^{(l)}_i \geq 0\\
+ \mathbb t & \text{if } \gamma_i U^{(w_i)}_i + U^{(l_i)}_i \geq 0\\
  \mathbb f & \text{otherwise}
 \end{cases}
 \label{eq:strat}
@@ -131,7 +148,7 @@ We can also decide to make the gain $\mathcal G^{(k)}_i$ a bit more specific:
 \mathcal G^{(k)}_i = {\color{red} \sum_{j=1}^{i-1} \mathcal L^{(k)}_j} + {\color{blue} \sum_{j=i+1}^m \mathcal L^{(k-1)}_j} + {\color{magenta} \sum_{j=i+1}^m \{ C^{(k)}_j\} (\mathcal L^{(k)}_j - \mathcal L^{(k-1)}_j)}
 \label{eq:gain}
 \end{equation}
-where we have the {\color{red} bet of all players hat have already called the current bet}, the {\color{blue} bet of all players that still have to call the current bet} and {\color{magenta} the bets that those players are going to place this round}. In this equation $\{C^{(k)})_j\} = 1$ if $C^{(k)}_j=\mathbb{t}$ and $\{C^{(k)})_j\} = 0$ otherwise.
+where we have the {\color{red} bet of all players hat have already called the current bet}, the {\color{blue} bet of all players that still have to call the current bet} and {\color{magenta} the bets that those players are going to place this round}. In this equation $\{C^{(k)}_j\} = 1$ if $C^{(k)}_j=\mathbb{t}$ and $\{C^{(k)}_j\} = 0$ otherwise.
 
 It is interesting to see if we can let the players deduce the value of $\gamma_i$ for the other players. Until then, it seems reasonable to simplify equation (\ref{eq:gain}) to:
 \begin{equation}
@@ -140,14 +157,17 @@ It is interesting to see if we can let the players deduce the value of $\gamma_i
 \end{equation}
 
 
-\paragraph{Raising the current bet}
+\paragraph{Raising the current bet: bluffing}
 A player can also decide to raise the current bet. The main reason for raising your bet is to make the other players decide to quit the game, or to increase the final gain. A player now bluffs if, after its bluffing bet, $\gamma_i U^{(w)}_i + U^{(l)}_i < 0$. 
 
 Based on the information that is available, a player can estimate the utilities of other players. Hence, it can make its own estimations of the other players' gains: $\langle \mathcal G^{(k)}_j \rangle_i$, which is the estimated gain for player $j$ from player $i$'s point of view. 
 
 The estimations can be obtained by using equations (\ref{eq:util}) through (\ref{eq:sgain}), but now we will start with some estimated probability $\mathcal P^{w_j}_i$, from equation (\ref{eq:prob}).
 
-Once we have the estimated gains we can make an estimation of the other player's decisions. For bluffing we want to achieve that $C^{(k)}_j = \mathbb{f}$ for the players $j\neq i$. Hence, if a player decides to bluff, he should try to ensure that $\langle C^{(k)}_j \rangle_i = \mathbb{f}$ for those player's that have a higher probability of winning. Formally, it should make at least those players $j$ fold such that $\mathcal P^{(w_j)}_i > P^{(w_i)}_i$.
+Once we have the estimated gains we can make an estimation of the other player's decisions. For bluffing we want to achieve that $C^{(k)}_j = \mathbb{f}$ for the players $j\neq i$. Hence, if a player decides to bluff, he should try to ensure that $\langle C^{(k)}_j \rangle_i = \mathbb{f}$ for those player's that have a higher probability of winning. Formally, it should make at least those players $j$ fold such that $\mathcal P^{(w_j)}_i > \mathcal P^{(w_i)}_i$. 
+
+\paragraph{Raising the current bet: increasing the gain}
+If a player is confident of winning the round, he can decide to raise the current bet. A player should try to accomplish that $C^{(k)}_j = \mathbb{t}$ while it should also maximize the expected gain. 
 
 \begin{comment}
 \begin{figure}[!h]
