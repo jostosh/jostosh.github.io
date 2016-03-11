@@ -130,6 +130,7 @@ Let $\mathcal{L}^{(k)}_i$ be the loss of folding or losing the game after callin
 The utility of losing a game will be given by:
 \begin{equation}
  U^{(l_i)}_i = -\mathcal L^{k}_i (1-\mathcal P^{(w_i)}_i)
+ \label{eq:loss}
 \end{equation}
 
 Now we can define a player's strategy for calling any bet as follows. Let $C_i^{(k)} \in \{\mathbb t, \mathbb f\}$ denote the decision of player $i$ at round $k$, where $\mathbb t$ corresponds to calling the bet and $\mathbb f$ corresponds to folding. The decision will be given by:
@@ -156,7 +157,6 @@ It is interesting to see if we can let the players deduce the value of $\gamma_i
 \label{eq:sgain}
 \end{equation}
 
-
 \paragraph{Raising the current bet: bluffing}
 A player can also decide to raise the current bet. The main reason for raising your bet is to make the other players decide to quit the game, or to increase the final gain. A player now bluffs if, after its bluffing bet, $\gamma_i U^{(w)}_i + U^{(l)}_i < 0$. 
 
@@ -166,8 +166,59 @@ The estimations can be obtained by using equations (\ref{eq:util}) through (\ref
 
 Once we have the estimated gains we can make an estimation of the other player's decisions. For bluffing we want to achieve that $C^{(k)}_j = \mathbb{f}$ for the players $j\neq i$. Hence, if a player decides to bluff, he should try to ensure that $\langle C^{(k)}_j \rangle_i = \mathbb{f}$ for those player's that have a higher probability of winning. Formally, it should make at least those players $j$ fold such that $\mathcal P^{(w_j)}_i > \mathcal P^{(w_i)}_i$. 
 
+As of now, we will not consider bluffing in full detail.
+
 \paragraph{Raising the current bet: increasing the gain}
 If a player is confident of winning the round, he can decide to raise the current bet. A player should try to accomplish that $C^{(k)}_j = \mathbb{t}$ while it should also maximize the expected gain. 
+
+\subsection{Reasoning about strategies}
+We now want to address the agents' reasoning during a game. We will start out small by simplifying the rules of the game. We will only have a single betting round. Each player can choose to either call the minimum bet of 1 coin, or fold. The player that is seated on the left side of the dealer has to put in a blind bet of 1 coin. This is to encourage other players for participating (knowing that there is at least something at stake).
+
+Let's extend our set of propositions to $\boldsymbol{P}'=\boldsymbol{P} \cup \{r_i,o_i,h_i\}_{i=1}^m$ in which $r_i$ will resemble a risky strategy for player $i$, $o_i$ will be used for optimal strategy and $h_i$ for safe or `harmless' strategy. A risky strategy will mean that $\gamma_i=1.1$, an optimal strategy will mean that $\gamma_i=1.0$ and a harmless strategy will resemble $\gamma_i=0.9$.
+
+Note that we have:
+\begin{align*}
+ M &\models K_i r_i \vee K_i o_i \vee K_i h_i\\
+ M &\models K_i \bigwedge_{j=1}^m\bigg( (r_j \wedge \neg o_j \wedge \neg h_j ) \vee
+					(\neg r_j \wedge o_j \wedge \neg h_j) \vee
+					(\neg r_j \wedge \neg o_j \wedge h_j)\bigg)
+\end{align*}
+for $i=1,2,\ldots,m$.
+
+\subsubsection{First round}
+First we can compute the loss for each player of participating. This is simply the amount of coins, so $\forall i,~\mathcal{L}^{(1)}_i=1$. Thus, we can simplify the utility for losing (equation \ref{eq:loss}):
+\begin{equation}
+U^{(l_i)}_i = -(1 - \mathcal{P}^{(w_i)}_i)
+\end{equation}
+
+At the first round, the players know nothing about each other's strategies (given by $\gamma_i$). Hence, they will play based solely on what they see by looking at the opponents' foreheads.
+
+There is no way to estimate the decisions of the other players yet. Hence, we will compute the gain simply by adding the losses of the other people (equation \ref{eq:sgain}). Note that this should be simply $m-1$.
+
+Once we have the gain, we can compute the utility of winning a game and so we can also obtain the decision for each player (equation \ref{eq:strat}).
+
+\subsubsection{Ending the round}
+At the end of a round, the players are allowed to see their own cards. Hence they now know on which cards the decision of each opponent was based on. It is as if each player gets to know the utility of all other players during the round that just ended.
+
+First, suppose that $C^{(k)}_i = \mathbb{t}$. Now any player $j\neq i$ knows that the threshold of 0 was exceeded. Hence each player $j$ knows 
+\begin{align*}
+\gamma_i U^{(w_i)}_i + U^{(l_i)}_i &\geq 0\\
+\gamma_i &\geq -\frac{U^{(l_i)}_i }{U^{(w_i)}_i}\\
+\end{align*}
+So the lower bound of $\gamma_i$ from $j$'s perspective is increased.
+
+Second, suppose that $C^{(k)}_i = \mathbb{f}$. Now any player $j\neq i$ knows:
+\begin{align*}
+\gamma_i U^{(w_i)}_i + U^{(l_i)}_i &< 0\\
+\gamma_i &< -\frac{U^{(l_i)}_i }{U^{(w_i)}_i}\\
+\end{align*}
+
+In either case, we could consider it to be an announcement of the possibilities that are left. For example, if players $j\neq i$ find that $\gamma_i < 1.5$, it is as if it is announced that $r_i \vee o_i \vee h_i$. In other words, we might not gain any information. However, a series of rounds could enable agents $j$ to deduce $\gamma_i$. For example, let's say that three rounds are played, in which $\gamma_i < 1.5,\gamma \geq 0.93,\gamma_i < 1.06$. This sequence of announcements can be captured by:
+\begin{equation*}
+M\models [r_i \vee o_i \vee h_i][r_i \vee o_i][o_i \vee h_i] \bigwedge_{j=1}^m K_j o_i
+\end{equation*}
+
+TODO: now that we have $\gamma_i$, how does it change the dynamics of the game?
 
 \begin{comment}
 \begin{figure}[!h]
