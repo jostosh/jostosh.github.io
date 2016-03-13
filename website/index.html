@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Sticky Footer Navbar Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]>
+    <script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Forehead Idiot Game</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<!-- Begin page content -->
+<div class="container">
+    <div class="page-header">
+    </div>
+    <H1><A NAME="SECTION00010000000000000000">
+        General Kripke structure</A>
+    </H1>
+
+    <H2><A NAME="SECTION00011000000000000000">
+        Kripke model</A>
+    </H2>
+    For modeling Forehead idiot we consider the structures <!-- MATH
+ $M = \langle S, \pi, R \rangle$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="100" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+        SRC="img1.png"
+        ALT="$ M = \langle S, \pi, R \rangle$"></SPAN>. We consider the games for 3 players. The states are given by <!-- MATH
+ $\boldsymbol s = (s_1,s_2,\ldots,s_m) \in S$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="167" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+        SRC="img2.png"
+        ALT="$ \boldsymbol s = (s_1,s_2,\ldots,s_m) \in S$"></SPAN>, where <!-- MATH
+ $s_i \in D = \{ 2,3,4,5,6,7,8,9,10,j,q,k,a \}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="283" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+        SRC="img3.png"
+        ALT="$ s_i \in D = \{ 2,3,4,5,6,7,8,9,10,j,q,k,a \}$"></SPAN>. This means that if <SPAN CLASS="MATH"><IMG
+        WIDTH="47" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img4.png"
+        ALT="$ s_3 = 5$"></SPAN>, then player 3 has 5 on his forehead. Note that <SPAN CLASS="MATH"><IMG
+        WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+        SRC="img5.png"
+        ALT="$ D$"></SPAN> is an ordered set:
+    <!-- MATH
+     $2<3<4<5<6<7<8<9<10<j<q<k<a$
+     -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="370" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img6.png"
+        ALT="$ 2&lt;3&lt;4&lt;5&lt;6&lt;7&lt;8&lt;9&lt;10&lt;j&lt;q&lt;k&lt;a$"></SPAN>.
+
+    <P>
+        Since any player can only see those cards that are on the forehead of the other players, the relations are
+        defined as <!-- MATH
+ $\boldsymbol s R_i \boldsymbol t$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img7.png"
+        ALT="$ \boldsymbol s R_i \boldsymbol t$"></SPAN> such that <!-- MATH
+ $s_j = t_j,~\forall j \neq i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="107" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img8.png"
+        ALT="$ s_j = t_j,~\forall j \neq i$"></SPAN>. A player's card is unique: <!-- MATH
+ $s_1 \neq s_2 \neq \cdots \neq s_m$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="135" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img9.png"
+        ALT="$ s_1 \neq s_2 \neq \cdots \neq s_m$"></SPAN>. Note that relations are symmetric and reflexive.
+
+    <P>
+        Suppose we take a subset of the total deck <!-- MATH
+ $D'\subseteq D$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="57" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+        SRC="img10.png"
+        ALT="$ D'\subseteq D$"></SPAN> with <SPAN CLASS="MATH"><IMG
+            WIDTH="61" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+            SRC="img11.png"
+            ALT="$ \vert D'\vert=n$"></SPAN>. There are <SPAN CLASS="MATH"><IMG
+            WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+            SRC="img12.png"
+            ALT="$ n!$"></SPAN> different sequences of cards. If the number of players is <SPAN CLASS="MATH"><IMG
+            WIDTH="48" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img13.png"
+            ALT="$ m\leq n$"></SPAN>, then for each possible set of cards there will be <SPAN CLASS="MATH"><IMG
+            WIDTH="63" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+            SRC="img14.png"
+            ALT="$ (n-m)!$"></SPAN> games with the same sequence of cards for the first <SPAN CLASS="MATH"><IMG
+            WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+            SRC="img15.png"
+            ALT="$ m$"></SPAN> cards. Hence, the total number of possible games <SPAN CLASS="MATH"><IMG
+            WIDTH="12" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img16.png"
+            ALT="$ g$"></SPAN> is:
+
+    <P></P>
+
+    <DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+g=\frac{n!}{(n-m)!}
+\end{equation}
+ -->
+        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+                        WIDTH="97" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img17.png"
+                        ALT="$\displaystyle g=\frac{n!}{(n-m)!}$"></SPAN></TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    (<SPAN CLASS="arabic">1</SPAN>)
+                </TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <BR CLEAR="ALL">
+
+    <P></P>
+
+    <P>
+        The propositions in our model will be given by <!-- MATH
+ $\boldsymbol P = \{ p_ic_2,p_ic_3,\ldots,p_ic_a,w_i,l_i\}_{i=1}^m$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="242" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+        SRC="img18.png"
+        ALT="$ \boldsymbol P = \{ p_ic_2,p_ic_3,\ldots,p_ic_a,w_i,l_i\}_{i=1}^m$"></SPAN>. For example, <SPAN
+            CLASS="MATH"><IMG
+            WIDTH="33" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img19.png"
+            ALT="$ p_2 c_7$"></SPAN> means that player 2 holds card 7. The proposition <SPAN CLASS="MATH"><IMG
+            WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img20.png"
+            ALT="$ w_i$"></SPAN> means that player <SPAN CLASS="MATH"><IMG
+            WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+            SRC="img21.png"
+            ALT="$ i$"></SPAN> wins the game, whereas <SPAN CLASS="MATH"><IMG
+            WIDTH="14" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img22.png"
+            ALT="$ l_i$"></SPAN> means that player <SPAN CLASS="MATH"><IMG
+            WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+            SRC="img21.png"
+            ALT="$ i$"></SPAN> loses the game.
+
+    <P>
+        The valuation will be as follows:
+
+    <UL>
+        <LI>We have that <!-- MATH
+ $\pi(\boldsymbol s)(p_ic_j) = \mathbb{t}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="107" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+        SRC="img23.png"
+        ALT="$ \pi(\boldsymbol s)(p_ic_j) = \mathbb{t}$"></SPAN> iff <SPAN CLASS="MATH"><IMG
+                    WIDTH="45" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+                    SRC="img24.png"
+                    ALT="$ s_i = j$"></SPAN>, so <!-- MATH
+ $\pi(\boldsymbol s)(p_ic_j) = \mathbb{f}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="106" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+        SRC="img25.png"
+        ALT="$ \pi(\boldsymbol s)(p_ic_j) = \mathbb{f}$"></SPAN> iff <!-- MATH
+ $s_i \neq j$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="45" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img26.png"
+        ALT="$ s_i \neq j$"></SPAN>.
+        </LI>
+        <LI>Furthermore, we have <!-- MATH
+ $\pi(\boldsymbol s)(w_i) = \mathbb{t}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="97" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+        SRC="img27.png"
+        ALT="$ \pi(\boldsymbol s)(w_i) = \mathbb{t}$"></SPAN> and <!-- MATH
+ $\pi(\boldsymbol s)(l_i) = \mathbb{f}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="89" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+        SRC="img28.png"
+        ALT="$ \pi(\boldsymbol s)(l_i) = \mathbb{f}$"></SPAN> iff <SPAN CLASS="MATH"><IMG
+                    WIDTH="52" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+                    SRC="img29.png"
+                    ALT="$ s_i &gt; s_j$"></SPAN> for all <SPAN CLASS="MATH"><IMG
+                    WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+                    SRC="img30.png"
+                    ALT="$ j \neq i$"></SPAN>. In other words, <!-- MATH
+ $\pi(\boldsymbol s)(w_i)=\mathbb{f}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="96" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+        SRC="img31.png"
+        ALT="$ \pi(\boldsymbol s)(w_i)=\mathbb{f}$"></SPAN> and <!-- MATH
+ $\pi(\boldsymbol s)(l_i) = \mathbb{t}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="90" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+        SRC="img32.png"
+        ALT="$ \pi(\boldsymbol s)(l_i) = \mathbb{t}$"></SPAN> if for some <SPAN CLASS="MATH"><IMG
+                    WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+                    SRC="img30.png"
+                    ALT="$ j \neq i$"></SPAN> we have that <SPAN CLASS="MATH"><IMG
+                    WIDTH="52" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+                    SRC="img33.png"
+                    ALT="$ s_i &lt; s_j$"></SPAN>.
+        </LI>
+    </UL>
+
+    <P>
+
+    <H2><A NAME="SECTION00012000000000000000">
+        Theory</A>
+    </H2>
+    Before the cards are put on the foreheads, every player knows that every player has exactly one card. This can be
+    captured by
+    <P></P>
+
+    <DIV ALIGN="CENTER" CLASS="mathdisplay">
+        <TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+                        WIDTH="716" HEIGHT="61" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img34.png"
+                        ALT="$\displaystyle K_i \bigwedge_{j=1}^m \bigg((p_j c_2 \wedge \neg p_j c_3 \wedge \...
+...ots \vee (\neg p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge p_j c_a) \bigg)$"></SPAN></TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    &nbsp;&nbsp;&nbsp;</TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <BR CLEAR="ALL">
+
+    <P></P>
+
+    <P>
+        The moment that the players put the cards on their foreheads it is as if <SPAN CLASS="MATH"><IMG
+            WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+            SRC="img15.png"
+            ALT="$ m$"></SPAN> announcements are made. Every player announces that he knows what the other players'
+        cards are (without actually saying it). This means that every player also knows his remaining possibilities.
+
+    <P>
+        In the most general case, we could express this as follows:
+
+    <P></P>
+
+    <DIV ALIGN="CENTER" CLASS="mathdisplay">
+        <TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+                        WIDTH="408" HEIGHT="75" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img35.png"
+                        ALT="$\displaystyle M \models \left[ \bigwedge_{i=1}^m K_i \left(\bigwedge_{j\neq i} ...
+...t( K_i \bigvee_{u^{(i)} \notin \{ u^{(j)} \}_{j\neq i}} p_i c_{u^{(i)}} \right)$"></SPAN></TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    &nbsp;&nbsp;&nbsp;</TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <BR CLEAR="ALL">
+
+    <P></P>
+    where <!-- MATH
+ $u^{(j)} \in D'$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="67" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+        SRC="img36.png"
+        ALT="$ u^{(j)} \in D'$"></SPAN> is the card that player <SPAN CLASS="MATH"><IMG
+        WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+        SRC="img37.png"
+        ALT="$ j$"></SPAN> is holding. This greatly reduces the number of possible worlds. In fact, if there are <SPAN
+        CLASS="MATH"><IMG
+        WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+        SRC="img38.png"
+        ALT="$ n$"></SPAN> cards and <SPAN CLASS="MATH"><IMG
+        WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+        SRC="img15.png"
+        ALT="$ m$"></SPAN> players, we have that each player has <SPAN CLASS="MATH"><IMG
+        WIDTH="74" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img39.png"
+        ALT="$ n-m+1$"></SPAN> alternative worlds. Hence there are <!-- MATH
+ $m(n-m+1) - m +1$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="161" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+        SRC="img40.png"
+        ALT="$ m(n-m+1) - m +1$"></SPAN> possible worlds left.
+
+    <P>
+    <H1><A>
+        GAME Simulation</A>
+    </H1>
+
+    <script type="text/javascript" src="js/vis.js"></script>
+    <link href="vis.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        #mynetwork {
+            width: 800px;
+            height: 400px;
+            border: 1px solid lightgray;
+        }
+    </style>
+
+    <div id="mynetwork"></div>
+    <!-- Maybe use a text field instead of a dropdown
+    TODO: because of the code styling I couldnt use number 9+1 = 10,stupid mistake but maybe if have some time we can fix this
+    -->
+    <select id="dropdown">
+        <option value="34">3 players with 4 cards</option>
+        <option value="35">3 players with 5 cards</option>
+        <option value="36">3 players with 6 cards</option>
+        <option value="37">3 players with 7 cards</option>
+        <option value="38">3 players with 8 cards</option>
+        <option value="45">4 players with 5 cards</option>
+        <option value="46">4 players with 6 cards</option>
+        <option value="47">4 players with 7 cards</option>
+        <option value="48">4 players with 8 cards</option>
+        <option value="56">5 players with 6 cards</option>
+        <option value="57">5 players with 7 cards</option>
+        <option value="58">5 players with 8 cards</option>
+        <option value="67">6 players with 7 cards</option>
+        <option value="68">6 players with 8 cards</option>
+        <option value="78">7 players with 8 cards</option>
+    </select>
+
+    <button type = "button" id="graph" onclick=createGraph(true)>View graph</button>
+    <button type=  "button" id="start_game" onclick=createGraph(false)>Start game</button>
+    <button type ="button" id="draw_card" onclick=getCard()>Draw cards</button>
+    <button type ="button" id="allpersons" onclick=viewAllPersons()>All persons</button>
+    <!-- TODO: maybe expand with more buttons -->
+    <button type ="button" id="person1" onclick=viewPerson(1)>Person 1</button>
+    <button type ="button" id="person2" onclick=viewPerson(2)>Person 2</button>
+    <button type ="button" id="person3" onclick=viewPerson(3)>Person 3</button>
+    <button type= "button" id="person4" onclick=viewPerson(4)>Person 4</button>
+    <div id="cardArea">
+    </div>
+    <div id="resultArea">
+    </div>
+
+    <script src="js/kripke.js"></script>
+
+
+    <H1><A NAME="SECTION00020000000000000000">
+        Game analysis</A>
+    </H1>
+
+    <H2><A NAME="SECTION00021000000000000000">
+<SPAN CLASS="MATH"><IMG
+        WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+        SRC="img38.png"
+        ALT="$ n$"></SPAN> cards game with <SPAN CLASS="MATH"><IMG
+            WIDTH="48" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+            SRC="img41.png"
+            ALT="$ m=n$"></SPAN> players</A>
+    </H2>
+    In the scenario of <SPAN CLASS="MATH"><IMG
+        WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+        SRC="img38.png"
+        ALT="$ n$"></SPAN> cards with <SPAN CLASS="MATH"><IMG
+        WIDTH="48" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+        SRC="img41.png"
+        ALT="$ m=n$"></SPAN> players there will be <!-- MATH
+ $\displaystyle g = \frac{n!}{(n-m)!} = n!$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="132" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+        SRC="img42.png"
+        ALT="$ \displaystyle g = \frac{n!}{(n-m)!} = n!$"></SPAN> possible games. Once the cards are dealt, each player
+    is able to see the other players' cards. Because of the fact that <SPAN CLASS="MATH"><IMG
+        WIDTH="48" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+        SRC="img41.png"
+        ALT="$ m=n$"></SPAN> and the fact that all cards are unique, for any pair of states <!-- MATH
+ $\boldsymbol s, \boldsymbol t$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="26" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img43.png"
+        ALT="$ \boldsymbol s, \boldsymbol t$"></SPAN> such that <!-- MATH
+ $\boldsymbol s \neq \boldsymbol t$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="40" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img44.png"
+        ALT="$ \boldsymbol s \neq \boldsymbol t$"></SPAN>, we have that at least two cards are changed: <!-- MATH
+ $s_i \neq t_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="49" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img45.png"
+        ALT="$ s_i \neq t_i$"></SPAN> and <!-- MATH
+ $s_j \neq t_j$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="52" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img46.png"
+        ALT="$ s_j \neq t_j$"></SPAN> for <SPAN CLASS="MATH"><IMG
+        WIDTH="59" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+        SRC="img47.png"
+        ALT="$ i,j\leq m$"></SPAN> and <SPAN CLASS="MATH"><IMG
+        WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img48.png"
+        ALT="$ i\neq j$"></SPAN>.
+
+    <P>
+        This implies that there are only reflexive relations: <!-- MATH
+ $\boldsymbol s R_i \boldsymbol s$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img49.png"
+        ALT="$ \boldsymbol s R_i \boldsymbol s$"></SPAN>, since for any other <!-- MATH
+ $\boldsymbol t \neq \boldsymbol s$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="40" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img50.png"
+        ALT="$ \boldsymbol t \neq \boldsymbol s$"></SPAN>, we require that all cards but one are the same. For any state <!-- MATH
+ $\boldsymbol s$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+        SRC="img51.png"
+        ALT="$ \boldsymbol s$"></SPAN> this relation is only satisfied by <!-- MATH
+ $\boldsymbol s$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+        SRC="img51.png"
+        ALT="$ \boldsymbol s$"></SPAN> itself.
+
+    <P>
+        Therefore, once a player sees the other players' cards, he will know his own card, since there is only one state
+        to go to. Hence, each player knows whether he wins or loses. Therefore, from a game theoretic point of view,
+        this scenario is not particularly interesting.
+
+    <P>
+        TODO: maybe formalize this more...
+
+    <P>
+
+    <H2><A NAME="SECTION00022000000000000000">
+<SPAN CLASS="MATH"><IMG
+        WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+        SRC="img38.png"
+        ALT="$ n$"></SPAN> cards with <SPAN CLASS="MATH"><IMG
+            WIDTH="48" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img52.png"
+            ALT="$ m&lt;n$"></SPAN> players</A>
+    </H2>
+    A more difficult scenario arises when there are <SPAN CLASS="MATH"><IMG
+        WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+        SRC="img38.png"
+        ALT="$ n$"></SPAN> cards and <SPAN CLASS="MATH"><IMG
+        WIDTH="48" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img52.png"
+        ALT="$ m&lt;n$"></SPAN> players. In this case there are relations <!-- MATH
+ $\boldsymbol s R_i \boldsymbol t$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img7.png"
+        ALT="$ \boldsymbol s R_i \boldsymbol t$"></SPAN> for those pairs of <!-- MATH
+ $\boldsymbol s$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+        SRC="img51.png"
+        ALT="$ \boldsymbol s$"></SPAN> and <!-- MATH
+ $\boldsymbol t$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
+        SRC="img53.png"
+        ALT="$ \boldsymbol t$"></SPAN> such that <SPAN CLASS="MATH"><IMG
+        WIDTH="52" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img54.png"
+        ALT="$ s_j = t_j$"></SPAN> for all <SPAN CLASS="MATH"><IMG
+        WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img30.png"
+        ALT="$ j \neq i$"></SPAN>.
+
+    <P>
+
+    <H3><A NAME="SECTION00022100000000000000">
+        The probability of winning the game</A>
+    </H3>
+
+    <P>
+
+    <H4><A NAME="SECTION00022110000000000000">
+        Estimating one's own odds</A>
+    </H4>
+    Since there are <SPAN CLASS="MATH"><IMG
+        WIDTH="47" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img55.png"
+        ALT="$ n-m$"></SPAN> cards that have not been dealt, each player has <SPAN CLASS="MATH"><IMG
+        WIDTH="74" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img39.png"
+        ALT="$ n-m+1$"></SPAN> possibilities for his own card and, consequently, <SPAN CLASS="MATH"><IMG
+        WIDTH="74" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img39.png"
+        ALT="$ n-m+1$"></SPAN> possible outcomes of the game. To determine the probability for a player to win, let <!-- MATH
+ $T_i \subseteq S$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="50" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img56.png"
+        ALT="$ T_i \subseteq S$"></SPAN> be the subset of possible states such that <!-- MATH
+ $\boldsymbol s R_i \boldsymbol t$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img7.png"
+        ALT="$ \boldsymbol s R_i \boldsymbol t$"></SPAN>. Note that <!-- MATH
+ $|T_i| = n-m+1$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="119" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+        SRC="img57.png"
+        ALT="$ \vert T_i\vert = n-m+1$"></SPAN>. Now let <!-- MATH
+ $T^{(w_i)}_i \subseteq T_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="76" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img58.png"
+        ALT="$ T^{(w_i)}_i \subseteq T_i$"></SPAN> be a subset of states such that for <!-- MATH
+ $\boldsymbol t \in T^{(w_i)}_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="66" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img59.png"
+        ALT="$ \boldsymbol t \in T^{(w_i)}_i$"></SPAN> we have that <!-- MATH
+ $(M,\boldsymbol t) \models w_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="86" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+        SRC="img60.png"
+        ALT="$ (M,\boldsymbol t) \models w_i$"></SPAN>. The probability that player <SPAN CLASS="MATH"><IMG
+        WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+        SRC="img21.png"
+        ALT="$ i$"></SPAN> wins based on the information available is:
+    <P></P>
+
+    <DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+\mathcal{P}^{(w_i)}_i = \frac{|T^{(w_i)}_i|}{|T_i|} = \frac{\lvert T^{(w_i)}_i\rvert}{n-m+1}
+\end{equation}
+ -->
+        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+                        WIDTH="207" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img61.png"
+                        ALT="$\displaystyle \mathcal{P}^{(w_i)}_i = \frac{\vert T^{(w_i)}_i\vert}{\vert T_i\vert} = \frac{\lvert T^{(w_i)}_i\rvert}{n-m+1}$"></SPAN>
+                </TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    (<SPAN CLASS="arabic">2</SPAN>)
+                </TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <BR CLEAR="ALL">
+
+    <P></P>
+
+    <P>
+        The relations are symmetric. Hence, <!-- MATH
+ $\mathcal{P}^{(w_i)}_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="41" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img62.png"
+        ALT="$ \mathcal{P}^{(w_i)}_i$"></SPAN> will be the same for all states.
+
+    <P>
+
+    <H4><A NAME="SECTION00022120000000000000">
+        Estimating another player's odds</A>
+    </H4>
+    Let <!-- MATH
+ $T^{(w_j)}_i \subseteq T_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="77" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+        SRC="img63.png"
+        ALT="$ T^{(w_j)}_i \subseteq T_i$"></SPAN> be the subset of states such that for all states <!-- MATH
+ $\boldsymbol t \in T^{(w_j)}_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="67" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+        SRC="img64.png"
+        ALT="$ \boldsymbol t \in T^{(w_j)}_i$"></SPAN> we have that <!-- MATH
+ $(M,\boldsymbol t) \models w_j$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="87" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+        SRC="img65.png"
+        ALT="$ (M,\boldsymbol t) \models w_j$"></SPAN>. Based on this information and perhaps not surprisingly, the
+    probability for player <SPAN CLASS="MATH"><IMG
+        WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+        SRC="img37.png"
+        ALT="$ j$"></SPAN> to win this game from player <SPAN CLASS="MATH"><IMG
+        WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+        SRC="img21.png"
+        ALT="$ i$"></SPAN>'s point of view will be given by:
+    <P></P>
+
+    <DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:prob"></A><!-- MATH
+ \begin{equation}
+\mathcal{P}^{(w_j)}_i = \frac{|T^{(w_j)}_i|}{|T_i|} = \frac{\lvert T^{(w_j)}_i\rvert}{n-m+1}
+\end{equation}
+ -->
+        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+                        WIDTH="209" HEIGHT="65" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img66.png"
+                        ALT="$\displaystyle \mathcal{P}^{(w_j)}_i = \frac{\vert T^{(w_j)}_i\vert}{\vert T_i\vert} = \frac{\lvert T^{(w_j)}_i\rvert}{n-m+1}$"></SPAN>
+                </TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    (<SPAN CLASS="arabic">3</SPAN>)
+                </TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <BR CLEAR="ALL">
+
+    <P></P>
+
+    <P>
+
+    <H3><A NAME="SECTION00022200000000000000">
+        Playing strategies</A>
+    </H3>
+
+    <H4><A NAME="SECTION00022210000000000000">
+        Calling a bet</A>
+    </H4>
+    Before we get to the optimal strategy, let us define the utility. If <!-- MATH
+ $\mathcal G^{(k)}_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="32" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img67.png"
+        ALT="$ \mathcal G^{(k)}_i$"></SPAN> denotes the `gain' of winning the game at round <SPAN CLASS="MATH"><IMG
+        WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+        SRC="img68.png"
+        ALT="$ k$"></SPAN>, the utility will be given by:
+    <P></P>
+
+    <DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:util"></A><!-- MATH
+ \begin{equation}
+U^{(w_i)}_i = \mathcal G^{(k)}_i \mathcal P^{(w_i)}_i
+\end{equation}
+ -->
+        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+                        WIDTH="128" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img69.png"
+                        ALT="$\displaystyle U^{(w_i)}_i = \mathcal G^{(k)}_i \mathcal P^{(w_i)}_i$"></SPAN></TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    (<SPAN CLASS="arabic">4</SPAN>)
+                </TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <BR CLEAR="ALL">
+
+    <P></P>
+    Let <!-- MATH
+ $\mathcal{L}^{(k)}_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="32" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img70.png"
+        ALT="$ \mathcal{L}^{(k)}_i$"></SPAN> be the loss of folding or losing the game after calling round <SPAN
+        CLASS="MATH"><IMG
+        WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+        SRC="img68.png"
+        ALT="$ k$"></SPAN>. In other words, <!-- MATH
+ $\mathcal L^{(k)}_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="32" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img71.png"
+        ALT="$ \mathcal L^{(k)}_i$"></SPAN> denotes the amount of coins that the player <SPAN CLASS="MATH"><IMG
+        WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+        SRC="img21.png"
+        ALT="$ i$"></SPAN> will have to bet for playing until round <SPAN CLASS="MATH"><IMG
+        WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+        SRC="img68.png"
+        ALT="$ k$"></SPAN>. Note that <!-- MATH
+ $\displaystyle \mathcal G^{(k)}_i = \sum_{j\neq i} \mathcal L^{(k)}_j$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="108" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+        SRC="img72.png"
+        ALT="$ \displaystyle \mathcal G^{(k)}_i = \sum_{j\neq i} \mathcal L^{(k)}_j$"></SPAN>.
+
+    <P>
+        The utility of losing a game will be given by:
+
+    <P></P>
+
+    <DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:loss"></A><!-- MATH
+ \begin{equation}
+U^{(l_i)}_i = -\mathcal L^{k}_i (1-\mathcal P^{(w_i)}_i)
+\end{equation}
+ -->
+        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+                        WIDTH="166" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img73.png"
+                        ALT="$\displaystyle U^{(l_i)}_i = -\mathcal L^{k}_i (1-\mathcal P^{(w_i)}_i)$"></SPAN></TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    (<SPAN CLASS="arabic">5</SPAN>)
+                </TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <BR CLEAR="ALL">
+
+    <P></P>
+
+    <P>
+        Now we can define a player's strategy for calling any bet as follows. Let <!-- MATH
+ $C_i^{(k)} \in \{\mathbb{t}, \mathbb{f}\}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="100" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img74.png"
+        ALT="$ C_i^{(k)} \in \{\mathbb{t}, \mathbb{f}\}$"></SPAN> denote the decision of player <SPAN CLASS="MATH"><IMG
+            WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+            SRC="img21.png"
+            ALT="$ i$"></SPAN> at round <SPAN CLASS="MATH"><IMG
+            WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+            SRC="img68.png"
+            ALT="$ k$"></SPAN>, where <!-- MATH
+ $\mathbb{t}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+        SRC="img75.png"
+        ALT="$ \mathbb{t}$"></SPAN> corresponds to calling the bet and <!-- MATH
+ $\mathbb{f}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+        SRC="img76.png"
+        ALT="$ \mathbb{f}$"></SPAN> corresponds to folding. The decision will be given by:
+
+    <P></P>
+
+    <DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:strat"></A><!-- MATH
+ \begin{equation}
+C_i^{(k)}  =
+\begin{cases}
+ \mathbb{t} & \text{if } \gamma_i U^{(w_i)}_i + U^{(l_i)}_i \geq 0\\
+ \mathbb{f} & \text{otherwise}
+\end{cases}
+\end{equation}
+ -->
+        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+                        WIDTH="245" HEIGHT="64" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img77.png"
+                        ALT="$\displaystyle C_i^{(k)} = \begin{cases}\mathbb{t} &amp; \text{if } \gamma_i U^{(w_i)}_i + U^{(l_i)}_i \geq 0\\ \mathbb{f} &amp; \text{otherwise} \end{cases}$"></SPAN>
+                </TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    (<SPAN CLASS="arabic">6</SPAN>)
+                </TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <BR CLEAR="ALL">
+
+    <P></P>
+    In equation <A HREF="#eq:strat"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+                                         SRC="/usr/share/latex2html/icons/crossref.png"></A>, <SPAN CLASS="MATH"><IMG
+        WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img78.png"
+        ALT="$ \gamma_i$"></SPAN> will characterize the player's characteristic strategy. If <!-- MATH
+ $\gamma_i = 1$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img79.png"
+        ALT="$ \gamma_i = 1$"></SPAN>, the player has an optimal strategy. If <!-- MATH
+ $\gamma_i > 1$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img80.png"
+        ALT="$ \gamma_i &gt; 1$"></SPAN> the player exhibits a risky strategy. If <!-- MATH
+ $\gamma_i < 1$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img81.png"
+        ALT="$ \gamma_i &lt; 1$"></SPAN> the player exhibits a safe strategy.
+
+    <P>
+        We can also decide to make the gain <!-- MATH
+ $\mathcal G^{(k)}_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="32" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img67.png"
+        ALT="$ \mathcal G^{(k)}_i$"></SPAN> a bit more specific:
+
+    <P></P>
+
+    <DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:gain"></A><!-- MATH
+ \begin{equation}
+\mathcal G^{(k)}_i = {\color{red} \sum_{j=1}^{i-1} \mathcal L^{(k)}_j} + {\color{blue} \sum_{j=i+1}^m \mathcal L^{(k-1)}_j} + {\color{magenta} \sum_{j=i+1}^m \{ C^{(k)}_j\} (\mathcal L^{(k)}_j - \mathcal L^{(k-1)}_j)}
+\end{equation}
+ -->
+        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+                        WIDTH="418" HEIGHT="66" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img82.png"
+                        ALT="$\displaystyle \mathcal G^{(k)}_i = {\color{red} \sum_{j=1}^{i-1} \mathcal L^{(k...
+...nta} \sum_{j=i+1}^m \{ C^{(k)}_j\} (\mathcal L^{(k)}_j - \mathcal L^{(k-1)}_j)}$"></SPAN></TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    (<SPAN CLASS="arabic">7</SPAN>)
+                </TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <BR CLEAR="ALL">
+
+    <P></P>
+    where we have the
+    <FONT COLOR="#ff0000"> bet of all players hat have already called the current bet</FONT>, the
+    <FONT COLOR="#0000ff"> bet of all players that still have to call the current bet</FONT> and
+    <FONT COLOR="#ff00ff"> the bets that those players are going to place this round</FONT>. In this equation <!-- MATH
+ $\{C^{(k)}_j\} = 1$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="79" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img83.png"
+        ALT="$ \{C^{(k)}_j\} = 1$"></SPAN> if <!-- MATH
+ $C^{(k)}_j=\mathbb{t}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="68" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img84.png"
+        ALT="$ C^{(k)}_j=\mathbb{t}$"></SPAN> and <!-- MATH
+ $\{C^{(k)}_j\} = 0$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="79" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img85.png"
+        ALT="$ \{C^{(k)}_j\} = 0$"></SPAN> otherwise.
+
+    <P>
+        It is interesting to see if we can let the players deduce the value of <SPAN CLASS="MATH"><IMG
+            WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img78.png"
+            ALT="$ \gamma_i$"></SPAN> for the other players. Until then, it seems reasonable to simplify equation (<A
+            HREF="#eq:gain"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+                                 SRC="/usr/share/latex2html/icons/crossref.png"></A>) to:
+
+    <P></P>
+
+    <DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:sgain"></A><!-- MATH
+ \begin{equation}
+\mathcal{G}^{(k)}_i = \sum_{j\neq i} \mathcal L^{(k)}_j
+\end{equation}
+ -->
+        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+                        WIDTH="108" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img86.png"
+                        ALT="$\displaystyle \mathcal{G}^{(k)}_i = \sum_{j\neq i} \mathcal L^{(k)}_j$"></SPAN></TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    (<SPAN CLASS="arabic">8</SPAN>)
+                </TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <BR CLEAR="ALL">
+
+    <P></P>
+
+    <P>
+
+    <H4><A NAME="SECTION00022220000000000000">
+        Raising the current bet: bluffing</A>
+    </H4>
+    A player can also decide to raise the current bet. The main reason for raising your bet is to make the other players
+    decide to quit the game, or to increase the final gain. A player now bluffs if, after its bluffing bet, <!-- MATH
+ $\gamma_i U^{(w)}_i + U^{(l)}_i < 0$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="126" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img87.png"
+        ALT="$ \gamma_i U^{(w)}_i + U^{(l)}_i &lt; 0$"></SPAN>.
+
+    <P>
+        Based on the information that is available, a player can estimate the utilities of other players. Hence, it can
+        make its own estimations of the other players' gains: <!-- MATH
+ $\langle \mathcal G^{(k)}_j \rangle_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="50" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img88.png"
+        ALT="$ \langle \mathcal G^{(k)}_j \rangle_i$"></SPAN>, which is the estimated gain for player <SPAN
+            CLASS="MATH"><IMG
+            WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+            SRC="img37.png"
+            ALT="$ j$"></SPAN> from player <SPAN CLASS="MATH"><IMG
+            WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+            SRC="img21.png"
+            ALT="$ i$"></SPAN>'s point of view.
+
+    <P>
+        The estimations can be obtained by using equations (<A HREF="#eq:util"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+                                                                                    SRC="/usr/share/latex2html/icons/crossref.png"></A>)
+        through (<A HREF="#eq:sgain"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+                                          SRC="/usr/share/latex2html/icons/crossref.png"></A>), but now we will start
+        with some estimated probability <!-- MATH
+ $\mathcal P^{w_j}_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="32" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+        SRC="img89.png"
+        ALT="$ \mathcal P^{w_j}_i$"></SPAN>, from equation (<A HREF="#eq:prob"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+                                                                                    SRC="/usr/share/latex2html/icons/crossref.png"></A>).
+
+    <P>
+        Once we have the estimated gains we can make an estimation of the other player's decisions. For bluffing we want
+        to achieve that <!-- MATH
+ $C^{(k)}_j = \mathbb{f}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="67" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img90.png"
+        ALT="$ C^{(k)}_j = \mathbb{f}$"></SPAN> for the players <SPAN CLASS="MATH"><IMG
+            WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img30.png"
+            ALT="$ j \neq i$"></SPAN>. Hence, if a player decides to bluff, he should try to ensure that <!-- MATH
+ $\langle C^{(k)}_j \rangle_i = \mathbb{f}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="84" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img91.png"
+        ALT="$ \langle C^{(k)}_j \rangle_i = \mathbb{f}$"></SPAN> for those player's that have a higher probability of
+        winning. Formally, it should make at least those players <SPAN CLASS="MATH"><IMG
+            WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+            SRC="img37.png"
+            ALT="$ j$"></SPAN> fold such that <!-- MATH
+ $\mathcal P^{(w_j)}_i > \mathcal P^{(w_i)}_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="101" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+        SRC="img92.png"
+        ALT="$ \mathcal P^{(w_j)}_i &gt; \mathcal P^{(w_i)}_i$"></SPAN>.
+
+    <P>
+        As of now, we will not consider bluffing in full detail.
+
+    <P>
+
+    <H4><A NAME="SECTION00022230000000000000">
+        Raising the current bet: increasing the gain</A>
+    </H4>
+    If a player is confident of winning the round, he can decide to raise the current bet. A player should try to
+    accomplish that <!-- MATH
+ $C^{(k)}_j = \mathbb{t}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="68" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img84.png"
+        ALT="$ C^{(k)}_j=\mathbb{t}$"></SPAN> while it should also maximize the expected gain.
+
+    <P>
+
+    <H2><A NAME="SECTION00023000000000000000">
+        Reasoning about strategies</A>
+    </H2>
+    We now want to address the agents' reasoning during a game. We will start out small by simplifying the rules of the
+    game. We will only have a single betting round. Each player can choose to either call the minimum bet of 1 coin, or
+    fold. The player that is seated on the left side of the dealer has to put in a blind bet of 1 coin. This is to
+    encourage other players for participating (knowing that there is at least something at stake).
+
+    <P>
+        Let's extend our set of propositions to <!-- MATH
+ $\boldsymbol{P}'=\boldsymbol{P} \cup \{r_i,o_i,h_i\}_{i=1}^m$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="167" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+        SRC="img93.png"
+        ALT="$ \boldsymbol{P}'=\boldsymbol{P} \cup \{r_i,o_i,h_i\}_{i=1}^m$"></SPAN> in which <SPAN CLASS="MATH"><IMG
+            WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img94.png"
+            ALT="$ r_i$"></SPAN> will resemble a risky strategy for player <SPAN CLASS="MATH"><IMG
+            WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+            SRC="img21.png"
+            ALT="$ i$"></SPAN>, <SPAN CLASS="MATH"><IMG
+            WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img95.png"
+            ALT="$ o_i$"></SPAN> will be used for optimal strategy and <SPAN CLASS="MATH"><IMG
+            WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img96.png"
+            ALT="$ h_i$"></SPAN> for safe or `harmless' strategy. A risky strategy will mean that <!-- MATH
+ $\gamma_i=1.1$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="59" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img97.png"
+        ALT="$ \gamma_i=1.1$"></SPAN>, an optimal strategy will mean that <!-- MATH
+ $\gamma_i=1.0$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="59" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img98.png"
+        ALT="$ \gamma_i=1.0$"></SPAN> and a harmless strategy will resemble <!-- MATH
+ $\gamma_i=0.9$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="59" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img99.png"
+        ALT="$ \gamma_i=0.9$"></SPAN>.
+
+    <P>
+        Note that we have:
+
+    <P></P>
+
+    <DIV ALIGN="CENTER" CLASS="mathdisplay">
+        <TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+                        WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img100.png"
+                        ALT="$\displaystyle M$"></SPAN></TD>
+                <TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+                        WIDTH="154" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img101.png"
+                        ALT="$\displaystyle \models K_i r_i \vee K_i o_i \vee K_i h_i$"></SPAN></TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    &nbsp;&nbsp;&nbsp;</TD>
+            </TR>
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+                        WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img100.png"
+                        ALT="$\displaystyle M$"></SPAN></TD>
+                <TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+                        WIDTH="467" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img102.png"
+                        ALT="$\displaystyle \models K_i \bigwedge_{j=1}^m\bigg( (r_j \wedge \neg o_j \wedge \...
+..._j \wedge o_j \wedge \neg h_j) \vee (\neg r_j \wedge \neg o_j \wedge h_j)\bigg)$"></SPAN></TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    &nbsp;&nbsp;&nbsp;</TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <BR CLEAR="ALL">
+
+    <P></P>
+    for <!-- MATH
+ $i=1,2,\ldots,m$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="103" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+        SRC="img103.png"
+        ALT="$ i=1,2,\ldots,m$"></SPAN>.
+
+    <P>
+
+    <H3><A NAME="SECTION00023100000000000000">
+        First round</A>
+    </H3>
+    First we can compute the loss for each player of participating. This is simply the amount of coins, so <!-- MATH
+ $\forall i,~\mathcal{L}^{(1)}_i=1$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="88" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img104.png"
+        ALT="$ \forall i,~\mathcal{L}^{(1)}_i=1$"></SPAN>. Thus, we can simplify the utility for losing (equation <A
+        HREF="#eq:loss"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+                             SRC="/usr/share/latex2html/icons/crossref.png"></A>):
+    <P></P>
+
+    <DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation}
+U^{(l_i)}_i = -(1 - \mathcal{P}^{(w_i)}_i)
+\end{equation}
+ -->
+        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+                        WIDTH="147" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img105.png"
+                        ALT="$\displaystyle U^{(l_i)}_i = -(1 - \mathcal{P}^{(w_i)}_i)$"></SPAN></TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    (<SPAN CLASS="arabic">9</SPAN>)
+                </TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <BR CLEAR="ALL">
+
+    <P></P>
+
+    <P>
+        At the first round, the players know nothing about each other's strategies (given by <SPAN CLASS="MATH"><IMG
+            WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img78.png"
+            ALT="$ \gamma_i$"></SPAN>). Hence, they will play based solely on what they see by looking at the opponents'
+        foreheads.
+
+    <P>
+        There is no way to estimate the decisions of the other players yet. Hence, we will compute the gain simply by
+        adding the losses of the other people (equation <A HREF="#eq:sgain"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+                                                                                 SRC="/usr/share/latex2html/icons/crossref.png"></A>).
+        Note that this should be simply <SPAN CLASS="MATH"><IMG
+            WIDTH="45" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img106.png"
+            ALT="$ m-1$"></SPAN>.
+
+    <P>
+        Once we have the gain, we can compute the utility of winning a game and so we can also obtain the decision for
+        each player (equation <A HREF="#eq:strat"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
+                                                       SRC="/usr/share/latex2html/icons/crossref.png"></A>).
+
+    <P>
+
+    <H3><A NAME="SECTION00023200000000000000">
+        Ending the round</A>
+    </H3>
+    At the end of a round, the players are allowed to see their own cards. Hence they now know on which cards the
+    decision of each opponent was based on. It is as if each player gets to know the utility of all other players during
+    the round that just ended.
+
+    <P>
+        First, suppose that <!-- MATH
+ $C^{(k)}_i = \mathbb{t}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="68" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img107.png"
+        ALT="$ C^{(k)}_i = \mathbb{t}$"></SPAN>. Now any player <SPAN CLASS="MATH"><IMG
+            WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img30.png"
+            ALT="$ j \neq i$"></SPAN> knows that the threshold of 0 was exceeded. Hence each player <SPAN
+            CLASS="MATH"><IMG
+            WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+            SRC="img37.png"
+            ALT="$ j$"></SPAN> knows
+
+    <P></P>
+
+    <DIV ALIGN="CENTER" CLASS="mathdisplay">
+        <TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+                        WIDTH="107" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img108.png"
+                        ALT="$\displaystyle \gamma_i U^{(w_i)}_i + U^{(l_i)}_i$"></SPAN></TD>
+                <TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+                        WIDTH="28" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img109.png"
+                        ALT="$\displaystyle \geq 0$"></SPAN></TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    &nbsp;&nbsp;&nbsp;</TD>
+            </TR>
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+                        WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img110.png"
+                        ALT="$\displaystyle \gamma_i$"></SPAN></TD>
+                <TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+                        WIDTH="74" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img111.png"
+                        ALT="$\displaystyle \geq -\frac{U^{(l_i)}_i }{U^{(w_i)}_i}$"></SPAN></TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    &nbsp;&nbsp;&nbsp;</TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <BR CLEAR="ALL">
+
+    <P></P>
+    So the lower bound of <SPAN CLASS="MATH"><IMG
+        WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img78.png"
+        ALT="$ \gamma_i$"></SPAN> from <SPAN CLASS="MATH"><IMG
+        WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+        SRC="img37.png"
+        ALT="$ j$"></SPAN>'s perspective is increased.
+
+    <P>
+        Second, suppose that <!-- MATH
+ $C^{(k)}_i = \mathbb{f}$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="67" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+        SRC="img112.png"
+        ALT="$ C^{(k)}_i = \mathbb{f}$"></SPAN>. Now any player <SPAN CLASS="MATH"><IMG
+            WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img30.png"
+            ALT="$ j \neq i$"></SPAN> knows:
+
+    <P></P>
+
+    <DIV ALIGN="CENTER" CLASS="mathdisplay">
+        <TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+                        WIDTH="107" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img108.png"
+                        ALT="$\displaystyle \gamma_i U^{(w_i)}_i + U^{(l_i)}_i$"></SPAN></TD>
+                <TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+                        WIDTH="28" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img113.png"
+                        ALT="$\displaystyle &lt; 0$"></SPAN></TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    &nbsp;&nbsp;&nbsp;</TD>
+            </TR>
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
+                        WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img110.png"
+                        ALT="$\displaystyle \gamma_i$"></SPAN></TD>
+                <TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
+                        WIDTH="74" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img114.png"
+                        ALT="$\displaystyle &lt; -\frac{U^{(l_i)}_i }{U^{(w_i)}_i}$"></SPAN></TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    &nbsp;&nbsp;&nbsp;</TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <BR CLEAR="ALL">
+
+    <P></P>
+
+    <P>
+        In either case, we could consider it to be an announcement of the possibilities that are left. For example, if
+        players <SPAN CLASS="MATH"><IMG
+            WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img30.png"
+            ALT="$ j \neq i$"></SPAN> find that <!-- MATH
+ $\gamma_i < 1.5$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="59" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img115.png"
+        ALT="$ \gamma_i &lt; 1.5$"></SPAN>, it is as if it is announced that <!-- MATH
+ $r_i \vee o_i \vee h_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="79" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img116.png"
+        ALT="$ r_i \vee o_i \vee h_i$"></SPAN>. In other words, we might not gain any information. However, a series of
+        rounds could enable agents <SPAN CLASS="MATH"><IMG
+            WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+            SRC="img37.png"
+            ALT="$ j$"></SPAN> to deduce <SPAN CLASS="MATH"><IMG
+            WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img78.png"
+            ALT="$ \gamma_i$"></SPAN>. For example, let's say that three rounds are played, in which <!-- MATH
+ $\gamma_i < 1.5,\gamma \geq 0.93,\gamma_i < 1.06$
+ -->
+<SPAN CLASS="MATH"><IMG
+        WIDTH="195" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+        SRC="img117.png"
+        ALT="$ \gamma_i &lt; 1.5,\gamma \geq 0.93,\gamma_i &lt; 1.06$"></SPAN>. This sequence of announcements can be
+        captured by:
+
+    <P></P>
+
+    <DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
+ \begin{equation*}
+M\models [r_i \vee o_i \vee h_i][r_i \vee o_i][o_i \vee h_i] \bigwedge_{j=1}^m K_j o_i
+\end{equation*}
+ -->
+        <TABLE CLASS="equation*" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+            <TR VALIGN="MIDDLE">
+                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+                        WIDTH="295" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
+                        SRC="img118.png"
+                        ALT="$\displaystyle M\models [r_i \vee o_i \vee h_i][r_i \vee o_i][o_i \vee h_i] \bigwedge_{j=1}^m K_j o_i$"></SPAN>
+                </TD>
+                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+                    &nbsp;&nbsp;&nbsp;</TD>
+            </TR>
+        </TABLE>
+    </DIV>
+    <BR CLEAR="ALL">
+
+    <P></P>
+
+    <P>
+        TODO: now that we have <SPAN CLASS="MATH"><IMG
+            WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
+            SRC="img78.png"
+            ALT="$ \gamma_i$"></SPAN>, how does it change the dynamics of the game?
+
+    <P>
+
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">Created by Jos van de Wolfshaar, Siebert Looije en Diederik Greveling</p>
+    </div>
+</footer>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
