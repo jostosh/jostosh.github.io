@@ -32,6 +32,16 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- hlatex code -->
+    <link rel="stylesheet" type="text/css" href="foreheadidiot.css" />
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+    ></script>
+
+    <style type="text/css">
+        .MathJax_MathML {text-indent: 0;}
+    </style>
 </head>
 
 <body>
@@ -56,299 +66,36 @@
     </div>
 </nav>
 
-<!-- Begin page content -->
 <div class="container">
-    <div class="page-header">
-    </div>
-    <H1><A NAME="SECTION00010000000000000000">
-        General Kripke structure</A>
-    </H1>
 
-    <H2><A NAME="SECTION00011000000000000000">
-        Kripke model</A>
-    </H2>
-    For modeling Forehead idiot we consider the structures <!-- MATH
- $M = \langle S, \pi, R \rangle$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="100" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-        SRC="img1.png"
-        ALT="$ M = \langle S, \pi, R \rangle$"></SPAN>. We consider the games for 3 players. The states are given by <!-- MATH
- $\boldsymbol s = (s_1,s_2,\ldots,s_m) \in S$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="167" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-        SRC="img2.png"
-        ALT="$ \boldsymbol s = (s_1,s_2,\ldots,s_m) \in S$"></SPAN>, where <!-- MATH
- $s_i \in D = \{ 2,3,4,5,6,7,8,9,10,j,q,k,a \}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="283" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-        SRC="img3.png"
-        ALT="$ s_i \in D = \{ 2,3,4,5,6,7,8,9,10,j,q,k,a \}$"></SPAN>. This means that if <SPAN CLASS="MATH"><IMG
-        WIDTH="47" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img4.png"
-        ALT="$ s_3 = 5$"></SPAN>, then player 3 has 5 on his forehead. Note that <SPAN CLASS="MATH"><IMG
-        WIDTH="17" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
-        SRC="img5.png"
-        ALT="$ D$"></SPAN> is an ordered set:
-    <!-- MATH
-     $2<3<4<5<6<7<8<9<10<j<q<k<a$
-     -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="370" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img6.png"
-        ALT="$ 2&lt;3&lt;4&lt;5&lt;6&lt;7&lt;8&lt;9&lt;10&lt;j&lt;q&lt;k&lt;a$"></SPAN>.
+    <h2> Introduction </h2>
+        <p>This is a website created for the MAS Project 2016.</p>
 
-    <P>
-        Since any player can only see those cards that are on the forehead of the other players, the relations are
-        defined as <!-- MATH
- $\boldsymbol s R_i \boldsymbol t$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img7.png"
-        ALT="$ \boldsymbol s R_i \boldsymbol t$"></SPAN> such that <!-- MATH
- $s_j = t_j,~\forall j \neq i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="107" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img8.png"
-        ALT="$ s_j = t_j,~\forall j \neq i$"></SPAN>. A player's card is unique: <!-- MATH
- $s_1 \neq s_2 \neq \cdots \neq s_m$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="135" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img9.png"
-        ALT="$ s_1 \neq s_2 \neq \cdots \neq s_m$"></SPAN>. Note that relations are symmetric and reflexive.
+        <p>For our project we analyse the forehead idiot game. In the next sections the game is described,
+        a simulation is given where the knowledge of every player is represented in a kripke model, an analyses of the game and the kripke model is given and a conclusion
+            is drawn from the analysis.</p>
 
-    <P>
-        Suppose we take a subset of the total deck <!-- MATH
- $D'\subseteq D$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="57" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-        SRC="img10.png"
-        ALT="$ D'\subseteq D$"></SPAN> with <SPAN CLASS="MATH"><IMG
-            WIDTH="61" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-            SRC="img11.png"
-            ALT="$ \vert D'\vert=n$"></SPAN>. There are <SPAN CLASS="MATH"><IMG
-            WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
-            SRC="img12.png"
-            ALT="$ n!$"></SPAN> different sequences of cards. If the number of players is <SPAN CLASS="MATH"><IMG
-            WIDTH="48" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img13.png"
-            ALT="$ m\leq n$"></SPAN>, then for each possible set of cards there will be <SPAN CLASS="MATH"><IMG
-            WIDTH="63" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-            SRC="img14.png"
-            ALT="$ (n-m)!$"></SPAN> games with the same sequence of cards for the first <SPAN CLASS="MATH"><IMG
-            WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
-            SRC="img15.png"
-            ALT="$ m$"></SPAN> cards. Hence, the total number of possible games <SPAN CLASS="MATH"><IMG
-            WIDTH="12" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img16.png"
-            ALT="$ g$"></SPAN> is:
+    <h2> Game Explanation </h2>
 
-    <P></P>
+    Forehead idiot is a card game that is known as a ``bluff" game. The game is played with a standard Anglo-American deck of 52 cards. Before the start of the game every player gets a standard value of coins to play with. The goal for a player is to maximize the coins that he possesses. The ranks of cards are 2-3-4-5-6-7-8-9-10-J-Q-K-A in ascending order, which implies that A is the highest card.
 
-    <DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
- \begin{equation}
-g=\frac{n!}{(n-m)!}
-\end{equation}
- -->
-        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
-                        WIDTH="97" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img17.png"
-                        ALT="$\displaystyle g=\frac{n!}{(n-m)!}$"></SPAN></TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    (<SPAN CLASS="arabic">1</SPAN>)
-                </TD>
-            </TR>
-        </TABLE>
-    </DIV>
-    <BR CLEAR="ALL">
+    <h3> Playing a round </h3>
+    At the beginning of a round, each player receives a card. A player is not allowed to see his own card. All the players push or stick their card on their foreheads. All players are required to put a minimum amount of coins in the pot before the betting begins.
 
-    <P></P>
+    The player left of the dealer starts the round. At any turn, a player can decide to either call, fold, or raise the current bet. Calling means that the player agrees with the current highest bet, while raising means that the player raises the highest bet. Folding means refusing to agree to the current bet. Folding means that the player loses his current bet and the round automatically.
 
-    <P>
-        The propositions in our model will be given by <!-- MATH
- $\boldsymbol P = \{ p_ic_2,p_ic_3,\ldots,p_ic_a,w_i,l_i\}_{i=1}^m$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="242" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-        SRC="img18.png"
-        ALT="$ \boldsymbol P = \{ p_ic_2,p_ic_3,\ldots,p_ic_a,w_i,l_i\}_{i=1}^m$"></SPAN>. For example, <SPAN
-            CLASS="MATH"><IMG
-            WIDTH="33" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img19.png"
-            ALT="$ p_2 c_7$"></SPAN> means that player 2 holds card 7. The proposition <SPAN CLASS="MATH"><IMG
-            WIDTH="20" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img20.png"
-            ALT="$ w_i$"></SPAN> means that player <SPAN CLASS="MATH"><IMG
-            WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
-            SRC="img21.png"
-            ALT="$ i$"></SPAN> wins the game, whereas <SPAN CLASS="MATH"><IMG
-            WIDTH="14" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img22.png"
-            ALT="$ l_i$"></SPAN> means that player <SPAN CLASS="MATH"><IMG
-            WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
-            SRC="img21.png"
-            ALT="$ i$"></SPAN> loses the game.
+    If all remaining players refuse to raise and if they have called the current highest bet, the round ends. The player with the highest card wins the pot. If all players but one decide to fold, the remaining player wins. If only one player is able to raise the bet any further, the round also ends (the others have gone all-in). In case of a tie between cards, the pot is divided among the winners.
 
-    <P>
-        The valuation will be as follows:
+    For example: the first player makes a bet, the second player will call the bet since he thinks he has a chance to win based on the cards the other people have. The third player folds because he thinks that his card is lower than that of the other players.
 
-    <UL>
-        <LI>We have that <!-- MATH
- $\pi(\boldsymbol s)(p_ic_j) = \mathbb{t}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="107" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-        SRC="img23.png"
-        ALT="$ \pi(\boldsymbol s)(p_ic_j) = \mathbb{t}$"></SPAN> iff <SPAN CLASS="MATH"><IMG
-                    WIDTH="45" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
-                    SRC="img24.png"
-                    ALT="$ s_i = j$"></SPAN>, so <!-- MATH
- $\pi(\boldsymbol s)(p_ic_j) = \mathbb{f}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="106" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-        SRC="img25.png"
-        ALT="$ \pi(\boldsymbol s)(p_ic_j) = \mathbb{f}$"></SPAN> iff <!-- MATH
- $s_i \neq j$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="45" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img26.png"
-        ALT="$ s_i \neq j$"></SPAN>.
-        </LI>
-        <LI>Furthermore, we have <!-- MATH
- $\pi(\boldsymbol s)(w_i) = \mathbb{t}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="97" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-        SRC="img27.png"
-        ALT="$ \pi(\boldsymbol s)(w_i) = \mathbb{t}$"></SPAN> and <!-- MATH
- $\pi(\boldsymbol s)(l_i) = \mathbb{f}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="89" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-        SRC="img28.png"
-        ALT="$ \pi(\boldsymbol s)(l_i) = \mathbb{f}$"></SPAN> iff <SPAN CLASS="MATH"><IMG
-                    WIDTH="52" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-                    SRC="img29.png"
-                    ALT="$ s_i &gt; s_j$"></SPAN> for all <SPAN CLASS="MATH"><IMG
-                    WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-                    SRC="img30.png"
-                    ALT="$ j \neq i$"></SPAN>. In other words, <!-- MATH
- $\pi(\boldsymbol s)(w_i)=\mathbb{f}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="96" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-        SRC="img31.png"
-        ALT="$ \pi(\boldsymbol s)(w_i)=\mathbb{f}$"></SPAN> and <!-- MATH
- $\pi(\boldsymbol s)(l_i) = \mathbb{t}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="90" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-        SRC="img32.png"
-        ALT="$ \pi(\boldsymbol s)(l_i) = \mathbb{t}$"></SPAN> if for some <SPAN CLASS="MATH"><IMG
-                    WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-                    SRC="img30.png"
-                    ALT="$ j \neq i$"></SPAN> we have that <SPAN CLASS="MATH"><IMG
-                    WIDTH="52" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-                    SRC="img33.png"
-                    ALT="$ s_i &lt; s_j$"></SPAN>.
-        </LI>
-    </UL>
 
-    <P>
+    <h3> Strategies </h3>
 
-    <H2><A NAME="SECTION00012000000000000000">
-        Theory</A>
-    </H2>
-    Before the cards are put on the foreheads, every player knows that every player has exactly one card. This can be
-    captured by
-    <P></P>
+    In this game you do not know your own card and only know the cards that are on the heads of the other players. A decision is made based on the cards of the others but also on the decisions of the other players because they can see your card. The difficulty of the game increases because players can ``bluff". So you cannot say with certainty that the decisions of the players are good or that they are ``bluffing".
 
-    <DIV ALIGN="CENTER" CLASS="mathdisplay">
-        <TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
-                        WIDTH="716" HEIGHT="61" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img34.png"
-                        ALT="$\displaystyle K_i \bigwedge_{j=1}^m \bigg((p_j c_2 \wedge \neg p_j c_3 \wedge \...
-...ots \vee (\neg p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge p_j c_a) \bigg)$"></SPAN></TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    &nbsp;&nbsp;&nbsp;</TD>
-            </TR>
-        </TABLE>
-    </DIV>
-    <BR CLEAR="ALL">
+    Because of these rules, there is epistemic logic in the game. To make it a little harder you can use different types of players. You could decide to make a player that plays safer than others etc.
 
-    <P></P>
-
-    <P>
-        The moment that the players put the cards on their foreheads it is as if <SPAN CLASS="MATH"><IMG
-            WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
-            SRC="img15.png"
-            ALT="$ m$"></SPAN> announcements are made. Every player announces that he knows what the other players'
-        cards are (without actually saying it). This means that every player also knows his remaining possibilities.
-
-    <P>
-        In the most general case, we could express this as follows:
-
-    <P></P>
-
-    <DIV ALIGN="CENTER" CLASS="mathdisplay">
-        <TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
-                        WIDTH="408" HEIGHT="75" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img35.png"
-                        ALT="$\displaystyle M \models \left[ \bigwedge_{i=1}^m K_i \left(\bigwedge_{j\neq i} ...
-...t( K_i \bigvee_{u^{(i)} \notin \{ u^{(j)} \}_{j\neq i}} p_i c_{u^{(i)}} \right)$"></SPAN></TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    &nbsp;&nbsp;&nbsp;</TD>
-            </TR>
-        </TABLE>
-    </DIV>
-    <BR CLEAR="ALL">
-
-    <P></P>
-    where <!-- MATH
- $u^{(j)} \in D'$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="67" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
-        SRC="img36.png"
-        ALT="$ u^{(j)} \in D'$"></SPAN> is the card that player <SPAN CLASS="MATH"><IMG
-        WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
-        SRC="img37.png"
-        ALT="$ j$"></SPAN> is holding. This greatly reduces the number of possible worlds. In fact, if there are <SPAN
-        CLASS="MATH"><IMG
-        WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
-        SRC="img38.png"
-        ALT="$ n$"></SPAN> cards and <SPAN CLASS="MATH"><IMG
-        WIDTH="18" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
-        SRC="img15.png"
-        ALT="$ m$"></SPAN> players, we have that each player has <SPAN CLASS="MATH"><IMG
-        WIDTH="74" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img39.png"
-        ALT="$ n-m+1$"></SPAN> alternative worlds. Hence there are <!-- MATH
- $m(n-m+1) - m +1$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="161" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-        SRC="img40.png"
-        ALT="$ m(n-m+1) - m +1$"></SPAN> possible worlds left.
-
-    <P>
-    <H1><A>
-        GAME Simulation</A>
-    </H1>
+    <h2> Game Simulation </h2>
 
     <script type="text/javascript" src="js/vis.js"></script>
     <link href="vis.css" rel="stylesheet" type="text/css" />
@@ -361,6 +108,10 @@ g=\frac{n!}{(n-m)!}
         }
     </style>
 
+    For the simulation of this game we have chosen to not use a full deck of cards. The user can however choose a different number of cards and players in order to see how
+    the game and kripke is influenced by these two factors.
+
+    <p>
     <div id="mynetwork"></div>
     <!-- Maybe use a text field instead of a dropdown
     TODO: because of the code styling I couldnt use number 9+1 = 10,stupid mistake but maybe if have some time we can fix this
@@ -396,980 +147,2829 @@ g=\frac{n!}{(n-m)!}
     </div>
     <div id="resultArea">
     </div>
-
+    </p>
     <script src="js/kripke.js"></script>
 
-
-    <H1><A NAME="SECTION00020000000000000000">
-        Game analysis</A>
-    </H1>
-
-    <H2><A NAME="SECTION00021000000000000000">
-<SPAN CLASS="MATH"><IMG
-        WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
-        SRC="img38.png"
-        ALT="$ n$"></SPAN> cards game with <SPAN CLASS="MATH"><IMG
-            WIDTH="48" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
-            SRC="img41.png"
-            ALT="$ m=n$"></SPAN> players</A>
-    </H2>
-    In the scenario of <SPAN CLASS="MATH"><IMG
-        WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
-        SRC="img38.png"
-        ALT="$ n$"></SPAN> cards with <SPAN CLASS="MATH"><IMG
-        WIDTH="48" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
-        SRC="img41.png"
-        ALT="$ m=n$"></SPAN> players there will be <!-- MATH
- $\displaystyle g = \frac{n!}{(n-m)!} = n!$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="132" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
-        SRC="img42.png"
-        ALT="$ \displaystyle g = \frac{n!}{(n-m)!} = n!$"></SPAN> possible games. Once the cards are dealt, each player
-    is able to see the other players' cards. Because of the fact that <SPAN CLASS="MATH"><IMG
-        WIDTH="48" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
-        SRC="img41.png"
-        ALT="$ m=n$"></SPAN> and the fact that all cards are unique, for any pair of states <!-- MATH
- $\boldsymbol s, \boldsymbol t$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="26" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img43.png"
-        ALT="$ \boldsymbol s, \boldsymbol t$"></SPAN> such that <!-- MATH
- $\boldsymbol s \neq \boldsymbol t$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="40" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img44.png"
-        ALT="$ \boldsymbol s \neq \boldsymbol t$"></SPAN>, we have that at least two cards are changed: <!-- MATH
- $s_i \neq t_i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="49" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img45.png"
-        ALT="$ s_i \neq t_i$"></SPAN> and <!-- MATH
- $s_j \neq t_j$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="52" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img46.png"
-        ALT="$ s_j \neq t_j$"></SPAN> for <SPAN CLASS="MATH"><IMG
-        WIDTH="59" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
-        SRC="img47.png"
-        ALT="$ i,j\leq m$"></SPAN> and <SPAN CLASS="MATH"><IMG
-        WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img48.png"
-        ALT="$ i\neq j$"></SPAN>.
-
-    <P>
-        This implies that there are only reflexive relations: <!-- MATH
- $\boldsymbol s R_i \boldsymbol s$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img49.png"
-        ALT="$ \boldsymbol s R_i \boldsymbol s$"></SPAN>, since for any other <!-- MATH
- $\boldsymbol t \neq \boldsymbol s$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="40" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img50.png"
-        ALT="$ \boldsymbol t \neq \boldsymbol s$"></SPAN>, we require that all cards but one are the same. For any state <!-- MATH
- $\boldsymbol s$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
-        SRC="img51.png"
-        ALT="$ \boldsymbol s$"></SPAN> this relation is only satisfied by <!-- MATH
- $\boldsymbol s$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
-        SRC="img51.png"
-        ALT="$ \boldsymbol s$"></SPAN> itself.
-
-    <P>
-        Therefore, once a player sees the other players' cards, he will know his own card, since there is only one state
-        to go to. Hence, each player knows whether he wins or loses. Therefore, from a game theoretic point of view,
-        this scenario is not particularly interesting.
-
-    <P>
-        TODO: maybe formalize this more...
-
-    <P>
-
-    <H2><A NAME="SECTION00022000000000000000">
-<SPAN CLASS="MATH"><IMG
-        WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
-        SRC="img38.png"
-        ALT="$ n$"></SPAN> cards with <SPAN CLASS="MATH"><IMG
-            WIDTH="48" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img52.png"
-            ALT="$ m&lt;n$"></SPAN> players</A>
-    </H2>
-    A more difficult scenario arises when there are <SPAN CLASS="MATH"><IMG
-        WIDTH="13" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
-        SRC="img38.png"
-        ALT="$ n$"></SPAN> cards and <SPAN CLASS="MATH"><IMG
-        WIDTH="48" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img52.png"
-        ALT="$ m&lt;n$"></SPAN> players. In this case there are relations <!-- MATH
- $\boldsymbol s R_i \boldsymbol t$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img7.png"
-        ALT="$ \boldsymbol s R_i \boldsymbol t$"></SPAN> for those pairs of <!-- MATH
- $\boldsymbol s$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="12" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
-        SRC="img51.png"
-        ALT="$ \boldsymbol s$"></SPAN> and <!-- MATH
- $\boldsymbol t$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="10" HEIGHT="13" ALIGN="BOTTOM" BORDER="0"
-        SRC="img53.png"
-        ALT="$ \boldsymbol t$"></SPAN> such that <SPAN CLASS="MATH"><IMG
-        WIDTH="52" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img54.png"
-        ALT="$ s_j = t_j$"></SPAN> for all <SPAN CLASS="MATH"><IMG
-        WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img30.png"
-        ALT="$ j \neq i$"></SPAN>.
-
-    <P>
-
-    <H3><A NAME="SECTION00022100000000000000">
-        The probability of winning the game</A>
-    </H3>
-
-    <P>
-
-    <H4><A NAME="SECTION00022110000000000000">
-        Estimating one's own odds</A>
-    </H4>
-    Since there are <SPAN CLASS="MATH"><IMG
-        WIDTH="47" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img55.png"
-        ALT="$ n-m$"></SPAN> cards that have not been dealt, each player has <SPAN CLASS="MATH"><IMG
-        WIDTH="74" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img39.png"
-        ALT="$ n-m+1$"></SPAN> possibilities for his own card and, consequently, <SPAN CLASS="MATH"><IMG
-        WIDTH="74" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img39.png"
-        ALT="$ n-m+1$"></SPAN> possible outcomes of the game. To determine the probability for a player to win, let <!-- MATH
- $T_i \subseteq S$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="50" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img56.png"
-        ALT="$ T_i \subseteq S$"></SPAN> be the subset of possible states such that <!-- MATH
- $\boldsymbol s R_i \boldsymbol t$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="36" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img7.png"
-        ALT="$ \boldsymbol s R_i \boldsymbol t$"></SPAN>. Note that <!-- MATH
- $|T_i| = n-m+1$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="119" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-        SRC="img57.png"
-        ALT="$ \vert T_i\vert = n-m+1$"></SPAN>. Now let <!-- MATH
- $T^{(w_i)}_i \subseteq T_i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="76" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img58.png"
-        ALT="$ T^{(w_i)}_i \subseteq T_i$"></SPAN> be a subset of states such that for <!-- MATH
- $\boldsymbol t \in T^{(w_i)}_i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="66" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img59.png"
-        ALT="$ \boldsymbol t \in T^{(w_i)}_i$"></SPAN> we have that <!-- MATH
- $(M,\boldsymbol t) \models w_i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="86" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-        SRC="img60.png"
-        ALT="$ (M,\boldsymbol t) \models w_i$"></SPAN>. The probability that player <SPAN CLASS="MATH"><IMG
-        WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
-        SRC="img21.png"
-        ALT="$ i$"></SPAN> wins based on the information available is:
-    <P></P>
-
-    <DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
- \begin{equation}
-\mathcal{P}^{(w_i)}_i = \frac{|T^{(w_i)}_i|}{|T_i|} = \frac{\lvert T^{(w_i)}_i\rvert}{n-m+1}
-\end{equation}
- -->
-        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
-                        WIDTH="207" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img61.png"
-                        ALT="$\displaystyle \mathcal{P}^{(w_i)}_i = \frac{\vert T^{(w_i)}_i\vert}{\vert T_i\vert} = \frac{\lvert T^{(w_i)}_i\rvert}{n-m+1}$"></SPAN>
-                </TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    (<SPAN CLASS="arabic">2</SPAN>)
-                </TD>
-            </TR>
-        </TABLE>
-    </DIV>
-    <BR CLEAR="ALL">
-
-    <P></P>
-
-    <P>
-        The relations are symmetric. Hence, <!-- MATH
- $\mathcal{P}^{(w_i)}_i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="41" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img62.png"
-        ALT="$ \mathcal{P}^{(w_i)}_i$"></SPAN> will be the same for all states.
-
-    <P>
-
-    <H4><A NAME="SECTION00022120000000000000">
-        Estimating another player's odds</A>
-    </H4>
-    Let <!-- MATH
- $T^{(w_j)}_i \subseteq T_i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="77" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
-        SRC="img63.png"
-        ALT="$ T^{(w_j)}_i \subseteq T_i$"></SPAN> be the subset of states such that for all states <!-- MATH
- $\boldsymbol t \in T^{(w_j)}_i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="67" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
-        SRC="img64.png"
-        ALT="$ \boldsymbol t \in T^{(w_j)}_i$"></SPAN> we have that <!-- MATH
- $(M,\boldsymbol t) \models w_j$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="87" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-        SRC="img65.png"
-        ALT="$ (M,\boldsymbol t) \models w_j$"></SPAN>. Based on this information and perhaps not surprisingly, the
-    probability for player <SPAN CLASS="MATH"><IMG
-        WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
-        SRC="img37.png"
-        ALT="$ j$"></SPAN> to win this game from player <SPAN CLASS="MATH"><IMG
-        WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
-        SRC="img21.png"
-        ALT="$ i$"></SPAN>'s point of view will be given by:
-    <P></P>
-
-    <DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:prob"></A><!-- MATH
- \begin{equation}
-\mathcal{P}^{(w_j)}_i = \frac{|T^{(w_j)}_i|}{|T_i|} = \frac{\lvert T^{(w_j)}_i\rvert}{n-m+1}
-\end{equation}
- -->
-        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
-                        WIDTH="209" HEIGHT="65" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img66.png"
-                        ALT="$\displaystyle \mathcal{P}^{(w_j)}_i = \frac{\vert T^{(w_j)}_i\vert}{\vert T_i\vert} = \frac{\lvert T^{(w_j)}_i\rvert}{n-m+1}$"></SPAN>
-                </TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    (<SPAN CLASS="arabic">3</SPAN>)
-                </TD>
-            </TR>
-        </TABLE>
-    </DIV>
-    <BR CLEAR="ALL">
-
-    <P></P>
-
-    <P>
-
-    <H3><A NAME="SECTION00022200000000000000">
-        Playing strategies</A>
-    </H3>
-
-    <H4><A NAME="SECTION00022210000000000000">
-        Calling a bet</A>
-    </H4>
-    Before we get to the optimal strategy, let us define the utility. If <!-- MATH
- $\mathcal G^{(k)}_i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="32" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img67.png"
-        ALT="$ \mathcal G^{(k)}_i$"></SPAN> denotes the `gain' of winning the game at round <SPAN CLASS="MATH"><IMG
-        WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
-        SRC="img68.png"
-        ALT="$ k$"></SPAN>, the utility will be given by:
-    <P></P>
-
-    <DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:util"></A><!-- MATH
- \begin{equation}
-U^{(w_i)}_i = \mathcal G^{(k)}_i \mathcal P^{(w_i)}_i
-\end{equation}
- -->
-        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
-                        WIDTH="128" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img69.png"
-                        ALT="$\displaystyle U^{(w_i)}_i = \mathcal G^{(k)}_i \mathcal P^{(w_i)}_i$"></SPAN></TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    (<SPAN CLASS="arabic">4</SPAN>)
-                </TD>
-            </TR>
-        </TABLE>
-    </DIV>
-    <BR CLEAR="ALL">
-
-    <P></P>
-    Let <!-- MATH
- $\mathcal{L}^{(k)}_i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="32" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img70.png"
-        ALT="$ \mathcal{L}^{(k)}_i$"></SPAN> be the loss of folding or losing the game after calling round <SPAN
-        CLASS="MATH"><IMG
-        WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
-        SRC="img68.png"
-        ALT="$ k$"></SPAN>. In other words, <!-- MATH
- $\mathcal L^{(k)}_i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="32" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img71.png"
-        ALT="$ \mathcal L^{(k)}_i$"></SPAN> denotes the amount of coins that the player <SPAN CLASS="MATH"><IMG
-        WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
-        SRC="img21.png"
-        ALT="$ i$"></SPAN> will have to bet for playing until round <SPAN CLASS="MATH"><IMG
-        WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
-        SRC="img68.png"
-        ALT="$ k$"></SPAN>. Note that <!-- MATH
- $\displaystyle \mathcal G^{(k)}_i = \sum_{j\neq i} \mathcal L^{(k)}_j$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="108" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
-        SRC="img72.png"
-        ALT="$ \displaystyle \mathcal G^{(k)}_i = \sum_{j\neq i} \mathcal L^{(k)}_j$"></SPAN>.
-
-    <P>
-        The utility of losing a game will be given by:
-
-    <P></P>
-
-    <DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:loss"></A><!-- MATH
- \begin{equation}
-U^{(l_i)}_i = -\mathcal L^{k}_i (1-\mathcal P^{(w_i)}_i)
-\end{equation}
- -->
-        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
-                        WIDTH="166" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img73.png"
-                        ALT="$\displaystyle U^{(l_i)}_i = -\mathcal L^{k}_i (1-\mathcal P^{(w_i)}_i)$"></SPAN></TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    (<SPAN CLASS="arabic">5</SPAN>)
-                </TD>
-            </TR>
-        </TABLE>
-    </DIV>
-    <BR CLEAR="ALL">
-
-    <P></P>
-
-    <P>
-        Now we can define a player's strategy for calling any bet as follows. Let <!-- MATH
- $C_i^{(k)} \in \{\mathbb{t}, \mathbb{f}\}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="100" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img74.png"
-        ALT="$ C_i^{(k)} \in \{\mathbb{t}, \mathbb{f}\}$"></SPAN> denote the decision of player <SPAN CLASS="MATH"><IMG
-            WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
-            SRC="img21.png"
-            ALT="$ i$"></SPAN> at round <SPAN CLASS="MATH"><IMG
-            WIDTH="12" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
-            SRC="img68.png"
-            ALT="$ k$"></SPAN>, where <!-- MATH
- $\mathbb{t}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
-        SRC="img75.png"
-        ALT="$ \mathbb{t}$"></SPAN> corresponds to calling the bet and <!-- MATH
- $\mathbb{f}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
-        SRC="img76.png"
-        ALT="$ \mathbb{f}$"></SPAN> corresponds to folding. The decision will be given by:
-
-    <P></P>
-
-    <DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:strat"></A><!-- MATH
- \begin{equation}
-C_i^{(k)}  =
-\begin{cases}
- \mathbb{t} & \text{if } \gamma_i U^{(w_i)}_i + U^{(l_i)}_i \geq 0\\
- \mathbb{f} & \text{otherwise}
-\end{cases}
-\end{equation}
- -->
-        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
-                        WIDTH="245" HEIGHT="64" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img77.png"
-                        ALT="$\displaystyle C_i^{(k)} = \begin{cases}\mathbb{t} &amp; \text{if } \gamma_i U^{(w_i)}_i + U^{(l_i)}_i \geq 0\\ \mathbb{f} &amp; \text{otherwise} \end{cases}$"></SPAN>
-                </TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    (<SPAN CLASS="arabic">6</SPAN>)
-                </TD>
-            </TR>
-        </TABLE>
-    </DIV>
-    <BR CLEAR="ALL">
-
-    <P></P>
-    In equation <A HREF="#eq:strat"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
-                                         SRC="/usr/share/latex2html/icons/crossref.png"></A>, <SPAN CLASS="MATH"><IMG
-        WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img78.png"
-        ALT="$ \gamma_i$"></SPAN> will characterize the player's characteristic strategy. If <!-- MATH
- $\gamma_i = 1$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img79.png"
-        ALT="$ \gamma_i = 1$"></SPAN>, the player has an optimal strategy. If <!-- MATH
- $\gamma_i > 1$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img80.png"
-        ALT="$ \gamma_i &gt; 1$"></SPAN> the player exhibits a risky strategy. If <!-- MATH
- $\gamma_i < 1$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="46" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img81.png"
-        ALT="$ \gamma_i &lt; 1$"></SPAN> the player exhibits a safe strategy.
-
-    <P>
-        We can also decide to make the gain <!-- MATH
- $\mathcal G^{(k)}_i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="32" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img67.png"
-        ALT="$ \mathcal G^{(k)}_i$"></SPAN> a bit more specific:
-
-    <P></P>
-
-    <DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:gain"></A><!-- MATH
- \begin{equation}
-\mathcal G^{(k)}_i = {\color{red} \sum_{j=1}^{i-1} \mathcal L^{(k)}_j} + {\color{blue} \sum_{j=i+1}^m \mathcal L^{(k-1)}_j} + {\color{magenta} \sum_{j=i+1}^m \{ C^{(k)}_j\} (\mathcal L^{(k)}_j - \mathcal L^{(k-1)}_j)}
-\end{equation}
- -->
-        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
-                        WIDTH="418" HEIGHT="66" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img82.png"
-                        ALT="$\displaystyle \mathcal G^{(k)}_i = {\color{red} \sum_{j=1}^{i-1} \mathcal L^{(k...
-...nta} \sum_{j=i+1}^m \{ C^{(k)}_j\} (\mathcal L^{(k)}_j - \mathcal L^{(k-1)}_j)}$"></SPAN></TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    (<SPAN CLASS="arabic">7</SPAN>)
-                </TD>
-            </TR>
-        </TABLE>
-    </DIV>
-    <BR CLEAR="ALL">
-
-    <P></P>
-    where we have the
-    <FONT COLOR="#ff0000"> bet of all players hat have already called the current bet</FONT>, the
-    <FONT COLOR="#0000ff"> bet of all players that still have to call the current bet</FONT> and
-    <FONT COLOR="#ff00ff"> the bets that those players are going to place this round</FONT>. In this equation <!-- MATH
- $\{C^{(k)}_j\} = 1$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="79" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img83.png"
-        ALT="$ \{C^{(k)}_j\} = 1$"></SPAN> if <!-- MATH
- $C^{(k)}_j=\mathbb{t}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="68" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img84.png"
-        ALT="$ C^{(k)}_j=\mathbb{t}$"></SPAN> and <!-- MATH
- $\{C^{(k)}_j\} = 0$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="79" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img85.png"
-        ALT="$ \{C^{(k)}_j\} = 0$"></SPAN> otherwise.
-
-    <P>
-        It is interesting to see if we can let the players deduce the value of <SPAN CLASS="MATH"><IMG
-            WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img78.png"
-            ALT="$ \gamma_i$"></SPAN> for the other players. Until then, it seems reasonable to simplify equation (<A
-            HREF="#eq:gain"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
-                                 SRC="/usr/share/latex2html/icons/crossref.png"></A>) to:
-
-    <P></P>
-
-    <DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:sgain"></A><!-- MATH
- \begin{equation}
-\mathcal{G}^{(k)}_i = \sum_{j\neq i} \mathcal L^{(k)}_j
-\end{equation}
- -->
-        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
-                        WIDTH="108" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img86.png"
-                        ALT="$\displaystyle \mathcal{G}^{(k)}_i = \sum_{j\neq i} \mathcal L^{(k)}_j$"></SPAN></TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    (<SPAN CLASS="arabic">8</SPAN>)
-                </TD>
-            </TR>
-        </TABLE>
-    </DIV>
-    <BR CLEAR="ALL">
-
-    <P></P>
-
-    <P>
-
-    <H4><A NAME="SECTION00022220000000000000">
-        Raising the current bet: bluffing</A>
-    </H4>
-    A player can also decide to raise the current bet. The main reason for raising your bet is to make the other players
-    decide to quit the game, or to increase the final gain. A player now bluffs if, after its bluffing bet, <!-- MATH
- $\gamma_i U^{(w)}_i + U^{(l)}_i < 0$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="126" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img87.png"
-        ALT="$ \gamma_i U^{(w)}_i + U^{(l)}_i &lt; 0$"></SPAN>.
-
-    <P>
-        Based on the information that is available, a player can estimate the utilities of other players. Hence, it can
-        make its own estimations of the other players' gains: <!-- MATH
- $\langle \mathcal G^{(k)}_j \rangle_i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="50" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img88.png"
-        ALT="$ \langle \mathcal G^{(k)}_j \rangle_i$"></SPAN>, which is the estimated gain for player <SPAN
-            CLASS="MATH"><IMG
-            WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
-            SRC="img37.png"
-            ALT="$ j$"></SPAN> from player <SPAN CLASS="MATH"><IMG
-            WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
-            SRC="img21.png"
-            ALT="$ i$"></SPAN>'s point of view.
-
-    <P>
-        The estimations can be obtained by using equations (<A HREF="#eq:util"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
-                                                                                    SRC="/usr/share/latex2html/icons/crossref.png"></A>)
-        through (<A HREF="#eq:sgain"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
-                                          SRC="/usr/share/latex2html/icons/crossref.png"></A>), but now we will start
-        with some estimated probability <!-- MATH
- $\mathcal P^{w_j}_i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="32" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
-        SRC="img89.png"
-        ALT="$ \mathcal P^{w_j}_i$"></SPAN>, from equation (<A HREF="#eq:prob"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
-                                                                                    SRC="/usr/share/latex2html/icons/crossref.png"></A>).
-
-    <P>
-        Once we have the estimated gains we can make an estimation of the other player's decisions. For bluffing we want
-        to achieve that <!-- MATH
- $C^{(k)}_j = \mathbb{f}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="67" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img90.png"
-        ALT="$ C^{(k)}_j = \mathbb{f}$"></SPAN> for the players <SPAN CLASS="MATH"><IMG
-            WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img30.png"
-            ALT="$ j \neq i$"></SPAN>. Hence, if a player decides to bluff, he should try to ensure that <!-- MATH
- $\langle C^{(k)}_j \rangle_i = \mathbb{f}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="84" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img91.png"
-        ALT="$ \langle C^{(k)}_j \rangle_i = \mathbb{f}$"></SPAN> for those player's that have a higher probability of
-        winning. Formally, it should make at least those players <SPAN CLASS="MATH"><IMG
-            WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
-            SRC="img37.png"
-            ALT="$ j$"></SPAN> fold such that <!-- MATH
- $\mathcal P^{(w_j)}_i > \mathcal P^{(w_i)}_i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="101" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
-        SRC="img92.png"
-        ALT="$ \mathcal P^{(w_j)}_i &gt; \mathcal P^{(w_i)}_i$"></SPAN>.
-
-    <P>
-        As of now, we will not consider bluffing in full detail.
-
-    <P>
-
-    <H4><A NAME="SECTION00022230000000000000">
-        Raising the current bet: increasing the gain</A>
-    </H4>
-    If a player is confident of winning the round, he can decide to raise the current bet. A player should try to
-    accomplish that <!-- MATH
- $C^{(k)}_j = \mathbb{t}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="68" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img84.png"
-        ALT="$ C^{(k)}_j=\mathbb{t}$"></SPAN> while it should also maximize the expected gain.
-
-    <P>
-
-    <H2><A NAME="SECTION00023000000000000000">
-        Reasoning about strategies</A>
-    </H2>
-    We now want to address the agents' reasoning during a game. We will start out small by simplifying the rules of the
-    game. We will only have a single betting round. Each player can choose to either call the minimum bet of 1 coin, or
-    fold. The player that is seated on the left side of the dealer has to put in a blind bet of 1 coin. This is to
-    encourage other players for participating (knowing that there is at least something at stake).
-
-    <P>
-        Let's extend our set of propositions to <!-- MATH
- $\boldsymbol{P}'=\boldsymbol{P} \cup \{r_i,o_i,h_i\}_{i=1}^m$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="167" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
-        SRC="img93.png"
-        ALT="$ \boldsymbol{P}'=\boldsymbol{P} \cup \{r_i,o_i,h_i\}_{i=1}^m$"></SPAN> in which <SPAN CLASS="MATH"><IMG
-            WIDTH="16" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img94.png"
-            ALT="$ r_i$"></SPAN> will resemble a risky strategy for player <SPAN CLASS="MATH"><IMG
-            WIDTH="9" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
-            SRC="img21.png"
-            ALT="$ i$"></SPAN>, <SPAN CLASS="MATH"><IMG
-            WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img95.png"
-            ALT="$ o_i$"></SPAN> will be used for optimal strategy and <SPAN CLASS="MATH"><IMG
-            WIDTH="18" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img96.png"
-            ALT="$ h_i$"></SPAN> for safe or `harmless' strategy. A risky strategy will mean that <!-- MATH
- $\gamma_i=1.1$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="59" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img97.png"
-        ALT="$ \gamma_i=1.1$"></SPAN>, an optimal strategy will mean that <!-- MATH
- $\gamma_i=1.0$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="59" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img98.png"
-        ALT="$ \gamma_i=1.0$"></SPAN> and a harmless strategy will resemble <!-- MATH
- $\gamma_i=0.9$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="59" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img99.png"
-        ALT="$ \gamma_i=0.9$"></SPAN>.
-
-    <P>
-        Note that we have:
-
-    <P></P>
-
-    <DIV ALIGN="CENTER" CLASS="mathdisplay">
-        <TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
-                        WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img100.png"
-                        ALT="$\displaystyle M$"></SPAN></TD>
-                <TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
-                        WIDTH="154" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img101.png"
-                        ALT="$\displaystyle \models K_i r_i \vee K_i o_i \vee K_i h_i$"></SPAN></TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    &nbsp;&nbsp;&nbsp;</TD>
-            </TR>
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
-                        WIDTH="21" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img100.png"
-                        ALT="$\displaystyle M$"></SPAN></TD>
-                <TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
-                        WIDTH="467" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img102.png"
-                        ALT="$\displaystyle \models K_i \bigwedge_{j=1}^m\bigg( (r_j \wedge \neg o_j \wedge \...
-..._j \wedge o_j \wedge \neg h_j) \vee (\neg r_j \wedge \neg o_j \wedge h_j)\bigg)$"></SPAN></TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    &nbsp;&nbsp;&nbsp;</TD>
-            </TR>
-        </TABLE>
-    </DIV>
-    <BR CLEAR="ALL">
-
-    <P></P>
-    for <!-- MATH
- $i=1,2,\ldots,m$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="103" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
-        SRC="img103.png"
-        ALT="$ i=1,2,\ldots,m$"></SPAN>.
-
-    <P>
-
-    <H3><A NAME="SECTION00023100000000000000">
-        First round</A>
-    </H3>
-    First we can compute the loss for each player of participating. This is simply the amount of coins, so <!-- MATH
- $\forall i,~\mathcal{L}^{(1)}_i=1$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="88" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img104.png"
-        ALT="$ \forall i,~\mathcal{L}^{(1)}_i=1$"></SPAN>. Thus, we can simplify the utility for losing (equation <A
-        HREF="#eq:loss"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
-                             SRC="/usr/share/latex2html/icons/crossref.png"></A>):
-    <P></P>
-
-    <DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
- \begin{equation}
-U^{(l_i)}_i = -(1 - \mathcal{P}^{(w_i)}_i)
-\end{equation}
- -->
-        <TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
-                        WIDTH="147" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img105.png"
-                        ALT="$\displaystyle U^{(l_i)}_i = -(1 - \mathcal{P}^{(w_i)}_i)$"></SPAN></TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    (<SPAN CLASS="arabic">9</SPAN>)
-                </TD>
-            </TR>
-        </TABLE>
-    </DIV>
-    <BR CLEAR="ALL">
-
-    <P></P>
-
-    <P>
-        At the first round, the players know nothing about each other's strategies (given by <SPAN CLASS="MATH"><IMG
-            WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img78.png"
-            ALT="$ \gamma_i$"></SPAN>). Hence, they will play based solely on what they see by looking at the opponents'
-        foreheads.
-
-    <P>
-        There is no way to estimate the decisions of the other players yet. Hence, we will compute the gain simply by
-        adding the losses of the other people (equation <A HREF="#eq:sgain"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
-                                                                                 SRC="/usr/share/latex2html/icons/crossref.png"></A>).
-        Note that this should be simply <SPAN CLASS="MATH"><IMG
-            WIDTH="45" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img106.png"
-            ALT="$ m-1$"></SPAN>.
-
-    <P>
-        Once we have the gain, we can compute the utility of winning a game and so we can also obtain the decision for
-        each player (equation <A HREF="#eq:strat"><IMG ALIGN="BOTTOM" BORDER="1" ALT="[*]"
-                                                       SRC="/usr/share/latex2html/icons/crossref.png"></A>).
-
-    <P>
-
-    <H3><A NAME="SECTION00023200000000000000">
-        Ending the round</A>
-    </H3>
-    At the end of a round, the players are allowed to see their own cards. Hence they now know on which cards the
-    decision of each opponent was based on. It is as if each player gets to know the utility of all other players during
-    the round that just ended.
-
-    <P>
-        First, suppose that <!-- MATH
- $C^{(k)}_i = \mathbb{t}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="68" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img107.png"
-        ALT="$ C^{(k)}_i = \mathbb{t}$"></SPAN>. Now any player <SPAN CLASS="MATH"><IMG
-            WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img30.png"
-            ALT="$ j \neq i$"></SPAN> knows that the threshold of 0 was exceeded. Hence each player <SPAN
-            CLASS="MATH"><IMG
-            WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
-            SRC="img37.png"
-            ALT="$ j$"></SPAN> knows
-
-    <P></P>
-
-    <DIV ALIGN="CENTER" CLASS="mathdisplay">
-        <TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
-                        WIDTH="107" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img108.png"
-                        ALT="$\displaystyle \gamma_i U^{(w_i)}_i + U^{(l_i)}_i$"></SPAN></TD>
-                <TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
-                        WIDTH="28" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img109.png"
-                        ALT="$\displaystyle \geq 0$"></SPAN></TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    &nbsp;&nbsp;&nbsp;</TD>
-            </TR>
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
-                        WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img110.png"
-                        ALT="$\displaystyle \gamma_i$"></SPAN></TD>
-                <TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
-                        WIDTH="74" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img111.png"
-                        ALT="$\displaystyle \geq -\frac{U^{(l_i)}_i }{U^{(w_i)}_i}$"></SPAN></TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    &nbsp;&nbsp;&nbsp;</TD>
-            </TR>
-        </TABLE>
-    </DIV>
-    <BR CLEAR="ALL">
-
-    <P></P>
-    So the lower bound of <SPAN CLASS="MATH"><IMG
-        WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img78.png"
-        ALT="$ \gamma_i$"></SPAN> from <SPAN CLASS="MATH"><IMG
-        WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
-        SRC="img37.png"
-        ALT="$ j$"></SPAN>'s perspective is increased.
-
-    <P>
-        Second, suppose that <!-- MATH
- $C^{(k)}_i = \mathbb{f}$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="67" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-        SRC="img112.png"
-        ALT="$ C^{(k)}_i = \mathbb{f}$"></SPAN>. Now any player <SPAN CLASS="MATH"><IMG
-            WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img30.png"
-            ALT="$ j \neq i$"></SPAN> knows:
-
-    <P></P>
-
-    <DIV ALIGN="CENTER" CLASS="mathdisplay">
-        <TABLE CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
-                        WIDTH="107" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img108.png"
-                        ALT="$\displaystyle \gamma_i U^{(w_i)}_i + U^{(l_i)}_i$"></SPAN></TD>
-                <TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
-                        WIDTH="28" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img113.png"
-                        ALT="$\displaystyle &lt; 0$"></SPAN></TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    &nbsp;&nbsp;&nbsp;</TD>
-            </TR>
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="RIGHT"><SPAN CLASS="MATH"><IMG
-                        WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img110.png"
-                        ALT="$\displaystyle \gamma_i$"></SPAN></TD>
-                <TD NOWRAP ALIGN="LEFT"><SPAN CLASS="MATH"><IMG
-                        WIDTH="74" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img114.png"
-                        ALT="$\displaystyle &lt; -\frac{U^{(l_i)}_i }{U^{(w_i)}_i}$"></SPAN></TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    &nbsp;&nbsp;&nbsp;</TD>
-            </TR>
-        </TABLE>
-    </DIV>
-    <BR CLEAR="ALL">
-
-    <P></P>
-
-    <P>
-        In either case, we could consider it to be an announcement of the possibilities that are left. For example, if
-        players <SPAN CLASS="MATH"><IMG
-            WIDTH="38" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img30.png"
-            ALT="$ j \neq i$"></SPAN> find that <!-- MATH
- $\gamma_i < 1.5$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="59" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img115.png"
-        ALT="$ \gamma_i &lt; 1.5$"></SPAN>, it is as if it is announced that <!-- MATH
- $r_i \vee o_i \vee h_i$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="79" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img116.png"
-        ALT="$ r_i \vee o_i \vee h_i$"></SPAN>. In other words, we might not gain any information. However, a series of
-        rounds could enable agents <SPAN CLASS="MATH"><IMG
-            WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
-            SRC="img37.png"
-            ALT="$ j$"></SPAN> to deduce <SPAN CLASS="MATH"><IMG
-            WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img78.png"
-            ALT="$ \gamma_i$"></SPAN>. For example, let's say that three rounds are played, in which <!-- MATH
- $\gamma_i < 1.5,\gamma \geq 0.93,\gamma_i < 1.06$
- -->
-<SPAN CLASS="MATH"><IMG
-        WIDTH="195" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-        SRC="img117.png"
-        ALT="$ \gamma_i &lt; 1.5,\gamma \geq 0.93,\gamma_i &lt; 1.06$"></SPAN>. This sequence of announcements can be
-        captured by:
-
-    <P></P>
-
-    <DIV ALIGN="CENTER" CLASS="mathdisplay"><!-- MATH
- \begin{equation*}
-M\models [r_i \vee o_i \vee h_i][r_i \vee o_i][o_i \vee h_i] \bigwedge_{j=1}^m K_j o_i
-\end{equation*}
- -->
-        <TABLE CLASS="equation*" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
-            <TR VALIGN="MIDDLE">
-                <TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
-                        WIDTH="295" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
-                        SRC="img118.png"
-                        ALT="$\displaystyle M\models [r_i \vee o_i \vee h_i][r_i \vee o_i][o_i \vee h_i] \bigwedge_{j=1}^m K_j o_i$"></SPAN>
-                </TD>
-                <TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
-                    &nbsp;&nbsp;&nbsp;</TD>
-            </TR>
-        </TABLE>
-    </DIV>
-    <BR CLEAR="ALL">
-
-    <P></P>
-
-    <P>
-        TODO: now that we have <SPAN CLASS="MATH"><IMG
-            WIDTH="17" HEIGHT="30" ALIGN="MIDDLE" BORDER="0"
-            SRC="img78.png"
-            ALT="$ \gamma_i$"></SPAN>, how does it change the dynamics of the game?
-
-    <P>
-
+    <h2> Game analysis </h2>
+<!-- PAGE CONTENT----------------------------------------------- -->
+    <h3 class="sectionHead"><span class="titlemark">1   </span> <a
+            id="x1-10001"></a>General Kripke structure</h3>
+    <!--l. 57--><p class="noindent" >
+</p>
+    <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a
+            id="x1-20001.1"></a>Kripke model</h4>
+    <!--l. 58--><p class="noindent" >For modeling Forehead idiot we consider the structures
+    <!--l. 58--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >M</mi> <mo
+            class="MathClass-rel">=</mo> <mrow ><mo
+            class="MathClass-open">⟨</mo><mrow><mi
+    >S</mi><mo
+            class="MathClass-punc">,</mo><mi
+    >π</mi><mo
+            class="MathClass-punc">,</mo><mi
+    >R</mi></mrow><mo
+            class="MathClass-close">⟩</mo></mrow></math>.
+    We consider the games for 3 players. The states are given by
+    <!--l. 58--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >s</mi> <mo
+            class="MathClass-rel">=</mo> <mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >s</mi></mrow><mrow
+    ><mn>1</mn></mrow></msub
+    ><mo
+            class="MathClass-punc">,</mo><msub><mrow
+    ><mi
+    >s</mi></mrow><mrow
+    ><mn>2</mn></mrow></msub
+    ><mo
+            class="MathClass-punc">,</mo><mo
+            class="MathClass-op">…</mo><mo
+            class="MathClass-punc">,</mo><msub><mrow
+    ><mi
+    >s</mi></mrow><mrow
+    ><mi
+    >m</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow> <mo
+            class="MathClass-rel">∈</mo> <mi
+    >S</mi></math>, where
+    <!--l. 58--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >s</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-rel">∈</mo> <mi
+    >D</mi> <mo
+            class="MathClass-rel">=</mo> <mrow ><mo
+            class="MathClass-open">{</mo><mrow><mn>2</mn><mo
+            class="MathClass-punc">,</mo><mn>3</mn><mo
+            class="MathClass-punc">,</mo><mn>4</mn><mo
+            class="MathClass-punc">,</mo><mn>5</mn><mo
+            class="MathClass-punc">,</mo><mn>6</mn><mo
+            class="MathClass-punc">,</mo><mn>7</mn><mo
+            class="MathClass-punc">,</mo><mn>8</mn><mo
+            class="MathClass-punc">,</mo><mn>9</mn><mo
+            class="MathClass-punc">,</mo><mn>1</mn><mn>0</mn><mo
+            class="MathClass-punc">,</mo><mi
+    >j</mi><mo
+            class="MathClass-punc">,</mo><mi
+    >q</mi><mo
+            class="MathClass-punc">,</mo><mi
+    >k</mi><mo
+            class="MathClass-punc">,</mo><mi
+    >a</mi></mrow><mo
+            class="MathClass-close">}</mo></mrow></math>. This means that if
+    <!--l. 58--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >s</mi></mrow><mrow
+    ><mn>3</mn></mrow></msub
+    > <mo
+            class="MathClass-rel">=</mo> <mn>5</mn></math>, then player 3 has 5 on
+    his forehead. Note that <!--l. 58--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >D</mi></math>
+    is an ordered set: <!--l. 59--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mn>2</mn> <mo
+            class="MathClass-rel">&#x003C;</mo> <mn>3</mn> <mo
+            class="MathClass-rel">&#x003C;</mo> <mn>4</mn> <mo
+            class="MathClass-rel">&#x003C;</mo> <mn>5</mn> <mo
+            class="MathClass-rel">&#x003C;</mo> <mn>6</mn> <mo
+            class="MathClass-rel">&#x003C;</mo> <mn>7</mn> <mo
+            class="MathClass-rel">&#x003C;</mo> <mn>8</mn> <mo
+            class="MathClass-rel">&#x003C;</mo> <mn>9</mn> <mo
+            class="MathClass-rel">&#x003C;</mo> <mn>1</mn><mn>0</mn> <mo
+            class="MathClass-rel">&#x003C;</mo> <mi
+    >j</mi> <mo
+            class="MathClass-rel">&#x003C;</mo> <mi
+    >q</mi> <mo
+            class="MathClass-rel">&#x003C;</mo> <mi
+    >k</mi> <mo
+            class="MathClass-rel">&#x003C;</mo> <mi
+    >a</mi></math>.
+</p><!--l. 61--><p class="indent" >   Since any player can only see those cards that are on the forehead of the other players, the relations are deﬁned
+    as <!--l. 61--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >s</mi><msub><mrow
+    ><mi
+    >R</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><mi
+    >t</mi></math> such that
+    <!--l. 61--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >s</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    > <mo
+            class="MathClass-rel">=</mo> <msub><mrow
+    ><mi
+    >t</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ><mo
+            class="MathClass-punc">,</mo><mspace width="1em" class="nbsp" /><mo
+            class="MathClass-op">∀</mo><mi
+    >j</mi><mo
+            class="MathClass-rel">≠</mo><mi
+    >i</mi></math>. A player&#x2019;s
+    card is unique: <!--l. 61--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >s</mi></mrow><mrow
+    ><mn>1</mn></mrow></msub
+    ><mo
+            class="MathClass-rel">≠</mo><msub><mrow
+    ><mi
+    >s</mi></mrow><mrow
+    ><mn>2</mn></mrow></msub
+    ><mo
+            class="MathClass-rel">≠</mo><mo
+            class="MathClass-rel">⋯</mo><mo
+            class="MathClass-rel">≠</mo><msub><mrow
+    ><mi
+    >s</mi></mrow><mrow
+    ><mi
+    >m</mi></mrow></msub
+    ></math>.
+    Note that relations are symmetric and reﬂexive.
+</p><!--l. 63--><p class="indent" >   Suppose we take a subset of the total deck <!--l. 63--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="inline" ><msup><mrow
+><mi
+>D</mi></mrow><mrow
+><mi
+>′</mi></mrow></msup
+><mo
+        class="MathClass-rel">⊆</mo> <mi
+>D</mi></math>
+    with <!--l. 63--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mo
+            class="MathClass-rel">|</mo><msup><mrow
+    ><mi
+    >D</mi></mrow><mrow
+    ><mi
+    >′</mi></mrow></msup
+    ><mo
+            class="MathClass-rel">|</mo> <mo
+            class="MathClass-rel">=</mo> <mi
+    >n</mi></math>. There are
+    <!--l. 63--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >n</mi><mo
+            class="MathClass-punc">!</mo></math> diﬀerent sequences of cards. If the
+    number of players is <!--l. 63--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >m</mi> <mo
+            class="MathClass-rel">≤</mo> <mi
+    >n</mi></math>, then for each
+    possible set of cards there will be <!--l. 63--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >n</mi> <mo
+            class="MathClass-bin">−</mo> <mi
+    >m</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow><mo
+            class="MathClass-punc">!</mo></math>
+    games with the same sequence of cards for the ﬁrst
+    <!--l. 63--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >m</mi></math> cards. Hence, the total
+    number of possible games <!--l. 63--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >g</mi></math>
+    is: </p><table class="equation"><tr><td> <a
+        id="x1-2001r1"></a>
+
+
+    <!--l. 64--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="block" class="equation">
+        <mi
+        >g</mi> <mo
+            class="MathClass-rel">=</mo>      <mfrac><mrow
+    ><mi
+    >n</mi><mo
+            class="MathClass-punc">!</mo></mrow>
+        <mrow
+        ><mrow ><mo
+                class="MathClass-open">(</mo><mrow><mi
+        >n</mi> <mo
+                class="MathClass-bin">−</mo> <mi
+        >m</mi></mrow><mo
+                class="MathClass-close">)</mo></mrow><mo
+                class="MathClass-punc">!</mo></mrow></mfrac>
+    </math></td><td class="eq-no">(1)</td></tr></table>
+    <!--l. 68--><p class="indent" >   The propositions in our model will be given by
+    <!--l. 68--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >P</mi> <mo
+            class="MathClass-rel">=</mo> <msubsup><mrow
+    ><mrow ><mo
+            class="MathClass-open">{</mo><mrow><msub><mrow
+    ><mi
+    >p</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >c</mi></mrow><mrow
+    ><mn>2</mn></mrow></msub
+    ><mo
+            class="MathClass-punc">,</mo><msub><mrow
+    ><mi
+    >p</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >c</mi></mrow><mrow
+    ><mn>3</mn></mrow></msub
+    ><mo
+            class="MathClass-punc">,</mo><mo
+            class="MathClass-op">…</mo><mo
+            class="MathClass-punc">,</mo><msub><mrow
+    ><mi
+    >p</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >c</mi></mrow><mrow
+    ><mi
+    >a</mi></mrow></msub
+    ><mo
+            class="MathClass-punc">,</mo><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><mo
+            class="MathClass-punc">,</mo><msub><mrow
+    ><mi
+    >l</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">}</mo></mrow></mrow><mrow
+    ><mi
+    >i</mi><mo
+            class="MathClass-rel">=</mo><mn>1</mn></mrow><mrow
+    ><mi
+    >m</mi></mrow></msubsup
+    ></math>. For example,
+    <!--l. 68--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >p</mi></mrow><mrow
+    ><mn>2</mn></mrow></msub
+    ><msub><mrow
+    ><mi
+    >c</mi></mrow><mrow
+    ><mn>7</mn></mrow></msub
+    ></math> means that player 2 holds
+    card 7. The proposition <!--l. 68--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></math>
+    means that player <!--l. 68--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >i</mi></math> wins
+    the game, whereas <!--l. 68--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >l</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></math>
+    means that player <!--l. 68--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >i</mi></math>
+    loses the game.
+</p><!--l. 70--><p class="indent" >   The valuation will be as follows: </p>
+    <ul class="itemize1">
+        <li class="itemize">We have that <!--l. 72--><math
+                xmlns="http://www.w3.org/1998/Math/MathML"
+                display="inline" ><mi
+        >π</mi><mrow ><mo
+                class="MathClass-open">(</mo><mrow><mi
+        >s</mi></mrow><mo
+                class="MathClass-close">)</mo></mrow><mrow ><mo
+                class="MathClass-open">(</mo><mrow><msub><mrow
+        ><mi
+        >p</mi></mrow><mrow
+        ><mi
+        >i</mi></mrow></msub
+        ><msub><mrow
+        ><mi
+        >c</mi></mrow><mrow
+        ><mi
+        >j</mi></mrow></msub
+        ></mrow><mo
+                class="MathClass-close">)</mo></mrow> <mo
+                class="MathClass-rel">=</mo> <mo
+                class="MathClass-rel"></mo></math>
+            iﬀ <!--l. 72--><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"
+                    display="inline" ><msub><mrow
+            ><mi
+            >s</mi></mrow><mrow
+            ><mi
+            >i</mi></mrow></msub
+            > <mo
+                    class="MathClass-rel">=</mo> <mi
+            >j</mi></math>,
+            so <!--l. 72--><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"
+                    display="inline" ><mi
+            >π</mi><mrow ><mo
+                    class="MathClass-open">(</mo><mrow><mi
+            >s</mi></mrow><mo
+                    class="MathClass-close">)</mo></mrow><mrow ><mo
+                    class="MathClass-open">(</mo><mrow><msub><mrow
+            ><mi
+            >p</mi></mrow><mrow
+            ><mi
+            >i</mi></mrow></msub
+            ><msub><mrow
+            ><mi
+            >c</mi></mrow><mrow
+            ><mi
+            >j</mi></mrow></msub
+            ></mrow><mo
+                    class="MathClass-close">)</mo></mrow> <mo
+                    class="MathClass-rel">=</mo> <mi
+            >℧</mi></math>
+            iﬀ <!--l. 72--><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"
+                    display="inline" ><msub><mrow
+            ><mi
+            >s</mi></mrow><mrow
+            ><mi
+            >i</mi></mrow></msub
+            ><mo
+                    class="MathClass-rel">≠</mo><mi
+            >j</mi></math>.
+        </li>
+        <li class="itemize">Furthermore, we have <!--l. 73--><math
+                xmlns="http://www.w3.org/1998/Math/MathML"
+                display="inline" ><mi
+        >π</mi><mrow ><mo
+                class="MathClass-open">(</mo><mrow><mi
+        >s</mi></mrow><mo
+                class="MathClass-close">)</mo></mrow><mrow ><mo
+                class="MathClass-open">(</mo><mrow><msub><mrow
+        ><mi
+        >w</mi></mrow><mrow
+        ><mi
+        >i</mi></mrow></msub
+        ></mrow><mo
+                class="MathClass-close">)</mo></mrow> <mo
+                class="MathClass-rel">=</mo> <mo
+                class="MathClass-rel"></mo></math>
+            and <!--l. 73--><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"
+                    display="inline" ><mi
+            >π</mi><mrow ><mo
+                    class="MathClass-open">(</mo><mrow><mi
+            >s</mi></mrow><mo
+                    class="MathClass-close">)</mo></mrow><mrow ><mo
+                    class="MathClass-open">(</mo><mrow><msub><mrow
+            ><mi
+            >l</mi></mrow><mrow
+            ><mi
+            >i</mi></mrow></msub
+            ></mrow><mo
+                    class="MathClass-close">)</mo></mrow> <mo
+                    class="MathClass-rel">=</mo> <mi
+            >℧</mi></math>
+            iﬀ <!--l. 73--><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"
+                    display="inline" ><msub><mrow
+            ><mi
+            >s</mi></mrow><mrow
+            ><mi
+            >i</mi></mrow></msub
+            > <mo
+                    class="MathClass-rel">&#x003E;</mo> <msub><mrow
+            ><mi
+            >s</mi></mrow><mrow
+            ><mi
+            >j</mi></mrow></msub
+            ></math>
+            for all <!--l. 73--><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"
+                    display="inline" ><mi
+            >j</mi><mo
+                    class="MathClass-rel">≠</mo><mi
+            >i</mi></math>.
+            In other words, <!--l. 73--><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"
+                    display="inline" ><mi
+            >π</mi><mrow ><mo
+                    class="MathClass-open">(</mo><mrow><mi
+            >s</mi></mrow><mo
+                    class="MathClass-close">)</mo></mrow><mrow ><mo
+                    class="MathClass-open">(</mo><mrow><msub><mrow
+            ><mi
+            >w</mi></mrow><mrow
+            ><mi
+            >i</mi></mrow></msub
+            ></mrow><mo
+                    class="MathClass-close">)</mo></mrow> <mo
+                    class="MathClass-rel">=</mo> <mi
+            >℧</mi></math>
+            and <!--l. 73--><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"
+                    display="inline" ><mi
+            >π</mi><mrow ><mo
+                    class="MathClass-open">(</mo><mrow><mi
+            >s</mi></mrow><mo
+                    class="MathClass-close">)</mo></mrow><mrow ><mo
+                    class="MathClass-open">(</mo><mrow><msub><mrow
+            ><mi
+            >l</mi></mrow><mrow
+            ><mi
+            >i</mi></mrow></msub
+            ></mrow><mo
+                    class="MathClass-close">)</mo></mrow> <mo
+                    class="MathClass-rel">=</mo> <mo
+                    class="MathClass-rel"></mo></math>
+            if for some <!--l. 73--><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"
+                    display="inline" ><mi
+            >j</mi><mo
+                    class="MathClass-rel">≠</mo><mi
+            >i</mi></math>
+            we have that <!--l. 73--><math
+                    xmlns="http://www.w3.org/1998/Math/MathML"
+                    display="inline" ><msub><mrow
+            ><mi
+            >s</mi></mrow><mrow
+            ><mi
+            >i</mi></mrow></msub
+            > <mo
+                    class="MathClass-rel">&#x003C;</mo> <msub><mrow
+            ><mi
+            >s</mi></mrow><mrow
+            ><mi
+            >j</mi></mrow></msub
+            ></math>.</li></ul>
+    <!--l. 76--><p class="noindent" >
+</p>
+    <h4 class="subsectionHead"><span class="titlemark">1.2   </span> <a
+            id="x1-30001.2"></a>Theory</h4>
+    <!--l. 77--><p class="noindent" >Before the cards are put on the foreheads, every player knows that every player has exactly one card.
+    This can be captured by
+
+
+</p><!--tex4ht:inline--><!--l. 80--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="block" ><mtable
+        columnalign="left" class="align-star">
+    <mtr><mtd
+            columnalign="right" class="align-odd"><msub><mrow
+    ><mi
+    >K</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><munderover accentunder="false" accent="false"><mrow
+    ><mo mathsize="big"
+    > ∧</mo>
+    </mrow><mrow
+    ><mi
+    >j</mi><mo
+            class="MathClass-rel">=</mo><mn>1</mn></mrow><mrow
+    ><mi
+    >m</mi></mrow></munderover
+    ><mstyle mathsize="2.03em"><mfenced separators=""
+                                        open="("  close="" ><mrow></mrow></mfenced></mstyle><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >p</mi></mrow><mrow
+    >
+        <mi
+        >j</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >c</mi></mrow><mrow
+    ><mn>2</mn></mrow></msub
+    > <mo
+            class="MathClass-bin">∧</mo><mo
+            class="MathClass-op">¬</mo><msub><mrow
+    ><mi
+    >p</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >c</mi></mrow><mrow
+    ><mn>3</mn></mrow></msub
+    > <mo
+            class="MathClass-bin">∧</mo><mo
+            class="MathClass-rel">⋯</mo> <mo
+            class="MathClass-bin">∧</mo><mo
+            class="MathClass-op">¬</mo><msub><mrow
+    ><mi
+    >p</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >c</mi></mrow><mrow
+    ><mi
+    >a</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow> <mo
+            class="MathClass-bin">∨</mo> <mrow ><mo
+            class="MathClass-open">(</mo><mrow><mo
+            class="MathClass-op">¬</mo><msub><mrow
+    ><mi
+    >p</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >c</mi></mrow><mrow
+    ><mn>2</mn></mrow></msub
+    > <mo
+            class="MathClass-bin">∧</mo> <msub><mrow
+    ><mi
+    >p</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >c</mi></mrow><mrow
+    ><mn>3</mn></mrow></msub
+    > <mo
+            class="MathClass-bin">∧</mo><mo
+            class="MathClass-rel">⋯</mo> <mo
+            class="MathClass-bin">∧</mo><mo
+            class="MathClass-op">¬</mo><msub><mrow
+    ><mi
+    >p</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >c</mi></mrow><mrow
+    ><mi
+    >a</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow> <mo
+            class="MathClass-bin">∨</mo><mo
+            class="MathClass-rel">⋯</mo> <mo
+            class="MathClass-bin">∨</mo> <mrow ><mo
+            class="MathClass-open">(</mo><mrow><mo
+            class="MathClass-op">¬</mo><msub><mrow
+    ><mi
+    >p</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >c</mi></mrow><mrow
+    ><mn>2</mn></mrow></msub
+    > <mo
+            class="MathClass-bin">∧</mo><mo
+            class="MathClass-op">¬</mo><msub><mrow
+    ><mi
+    >p</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >c</mi></mrow><mrow
+    ><mn>3</mn></mrow></msub
+    > <mo
+            class="MathClass-bin">∧</mo><mo
+            class="MathClass-rel">⋯</mo> <mo
+            class="MathClass-bin">∧</mo> <msub><mrow
+    ><mi
+    >p</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >c</mi></mrow><mrow
+    ><mi
+    >a</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow><mstyle mathsize="2.03em"><mfenced separators=""
+                                                                                    open=")"  close="" ><mrow></mrow></mfenced></mstyle></mtd><mtd
+            class="align-even"><mspace width="2em"/></mtd><mtd
+            columnalign="right" class="align-label">
+    </mtd></mtr></mtable></math>
+    <!--l. 82--><p class="noindent" >The moment that the players put the cards on their foreheads it is as if
+    <!--l. 82--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >m</mi></math>
+    announcements are made. Every player announces that he knows what the other players&#x2019;
+    cards are (without actually saying it). This means that every player also knows his remaining
+    possibilities.
+</p><!--l. 84--><p class="indent" >   In the most general case, we could express this as follows:
+</p><!--tex4ht:inline--><!--l. 87--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="block" ><mtable
+        columnalign="left" class="align-star">
+    <mtr><mtd
+            columnalign="right" class="align-odd"><mi
+    >M</mi><mo
+            class="MathClass-rel">⊧</mo> <mfenced separators=""
+                                                  open="["  close="]" ><mrow><munderover accentunder="false" accent="false"><mrow
+    ><mo mathsize="big"
+    >∧</mo>
+    </mrow><mrow
+    ><mi
+    >i</mi><mo
+            class="MathClass-rel">=</mo><mn>1</mn></mrow><mrow
+    ><mi
+    >m</mi></mrow></munderover
+    ><msub><mrow
+    ><mi
+    >K</mi></mrow><mrow
+    >
+        <mi
+        >i</mi></mrow></msub
+    > <mfenced separators=""
+               open="("  close=")" ><mrow><munder class="msub"><mrow
+    ><mo mathsize="big"
+    >∧</mo>
+    </mrow><mrow
+    ><mi
+    >j</mi><mo
+            class="MathClass-rel">≠</mo><mi
+    >i</mi></mrow></munder
+    ><msub><mrow
+    ><mi
+    >p</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >c</mi></mrow><mrow
+    ><msup><mrow
+    ><mi
+    >u</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >j</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msup
+    ></mrow></msub
+    > </mrow></mfenced> </mrow></mfenced><munderover accentunder="false" accent="false"><mrow
+    ><mo mathsize="big"
+    > ∧</mo>
+    </mrow><mrow
+    ><mi
+    >i</mi><mo
+            class="MathClass-rel">=</mo><mn>1</mn></mrow><mrow
+    ><mi
+    >m</mi></mrow></munderover
+    > <mfenced separators=""
+               open="("  close=")" ><mrow><msub><mrow
+    ><mi
+    >K</mi></mrow><mrow
+    >
+        <mi
+        >i</mi></mrow></msub
+    ><munder class="msub"><mrow
+    ><mo mathsize="big"
+    > ∨</mo>
+    </mrow><mrow
+    ><msup><mrow
+    ><mi
+    >u</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >i</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msup
+    ><mo
+            class="MathClass-rel">∉</mo><msub><mrow
+    ><mrow ><mo
+            class="MathClass-open">{</mo><mrow><msup><mrow
+    ><mi
+    >u</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >j</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msup
+    ></mrow><mo
+            class="MathClass-close">}</mo></mrow></mrow><mrow
+    ><mi
+    >j</mi><mo
+            class="MathClass-rel">≠</mo><mi
+    >i</mi></mrow></msub
+    ></mrow></munder
+    ><msub><mrow
+    ><mi
+    >p</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >c</mi></mrow><mrow
+    ><msup><mrow
+    ><mi
+    >u</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >i</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msup
+    ></mrow></msub
+    > </mrow></mfenced></mtd>                <mtd
+            class="align-even"><mspace width="2em"/></mtd>                <mtd
+            columnalign="right" class="align-label">
+    </mtd></mtr></mtable></math>
+    <!--l. 88--><p class="noindent" >where <!--l. 88--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="inline" ><msup><mrow
+><mi
+>u</mi></mrow><mrow
+><mrow ><mo
+        class="MathClass-open">(</mo><mrow><mi
+>j</mi></mrow><mo
+        class="MathClass-close">)</mo></mrow></mrow></msup
+> <mo
+        class="MathClass-rel">∈</mo> <msup><mrow
+><mi
+>D</mi></mrow><mrow
+><mi
+>′</mi></mrow></msup
+></math> is the
+    card that player <!--l. 88--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >j</mi></math>
+    is holding. This greatly reduces the number of possible worlds. In fact, if there are
+    <!--l. 88--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >n</mi></math> cards and
+    <!--l. 88--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >m</mi></math> players, we have that each
+    player has <!--l. 88--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >n</mi> <mo
+            class="MathClass-bin">−</mo> <mi
+    >m</mi> <mo
+            class="MathClass-bin">+</mo> <mn>1</mn></math> alternative
+    worlds. Hence there are <!--l. 88--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >m</mi><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >n</mi> <mo
+            class="MathClass-bin">−</mo> <mi
+    >m</mi> <mo
+            class="MathClass-bin">+</mo> <mn>1</mn></mrow><mo
+            class="MathClass-close">)</mo></mrow> <mo
+            class="MathClass-bin">−</mo> <mi
+    >m</mi> <mo
+            class="MathClass-bin">+</mo> <mn>1</mn></math>
+    possible worlds left.
+</p><!--l. 91--><p class="noindent" >
+</p>
+    <h3 class="sectionHead"><span class="titlemark">2   </span> <a
+            id="x1-40002"></a>Game analysis</h3>
+    <!--l. 92--><p class="noindent" >
+</p>
+    <h4 class="subsectionHead"><span class="titlemark">2.1   </span> <a
+            id="x1-50002.1"></a><!--l. 92--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >n</mi></math> cards
+        game with <!--l. 92--><math
+                xmlns="http://www.w3.org/1998/Math/MathML"
+                display="inline" ><mi
+        >m</mi> <mo
+                class="MathClass-rel">=</mo> <mi
+        >n</mi></math>
+        players</h4>
+    <!--l. 93--><p class="noindent" >In the scenario of <!--l. 93--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="inline" ><mi
+>n</mi></math>
+    cards with <!--l. 93--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >m</mi> <mo
+            class="MathClass-rel">=</mo> <mi
+    >n</mi></math> players
+    there will be <!--l. 93--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >g</mi> <mo
+            class="MathClass-rel">=</mo>      <mfrac><mrow
+    ><mi
+    >n</mi><mo
+            class="MathClass-punc">!</mo></mrow>
+        <mrow
+        ><mrow ><mo
+                class="MathClass-open">(</mo><mrow><mi
+        >n</mi> <mo
+                class="MathClass-bin">−</mo> <mi
+        >m</mi></mrow><mo
+                class="MathClass-close">)</mo></mrow><mo
+                class="MathClass-punc">!</mo></mrow></mfrac> <mo
+            class="MathClass-rel">=</mo> <mi
+    >n</mi><mo
+            class="MathClass-punc">!</mo></math>
+
+
+    possible games. Once the cards are dealt, each player is able to see the other players&#x2019; cards. Because of the
+    fact that <!--l. 93--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >m</mi> <mo
+            class="MathClass-rel">=</mo> <mi
+    >n</mi></math>
+    and the fact that all cards are unique, for any pair of states
+    <!--l. 93--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >s</mi><mo
+            class="MathClass-punc">,</mo><mi
+    >t</mi></math> such that
+    <!--l. 93--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >s</mi><mo
+            class="MathClass-rel">≠</mo><mi
+    >t</mi></math>, we have that at least
+    two cards are changed: <!--l. 93--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >s</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><mo
+            class="MathClass-rel">≠</mo><msub><mrow
+    ><mi
+    >t</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></math>
+    and <!--l. 93--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >s</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ><mo
+            class="MathClass-rel">≠</mo><msub><mrow
+    ><mi
+    >t</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ></math> for
+    <!--l. 93--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >i</mi><mo
+            class="MathClass-punc">,</mo><mi
+    >j</mi> <mo
+            class="MathClass-rel">≤</mo> <mi
+    >m</mi></math> and
+    <!--l. 93--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >i</mi><mo
+            class="MathClass-rel">≠</mo><mi
+    >j</mi></math>.
+</p><!--l. 95--><p class="indent" >   This implies that there are only reﬂexive relations:
+    <!--l. 95--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >s</mi><msub><mrow
+    ><mi
+    >R</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><mi
+    >s</mi></math>, since for
+    any other <!--l. 95--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >t</mi><mo
+            class="MathClass-rel">≠</mo><mi
+    >s</mi></math>,
+    we require that all cards but one are the same. For any state
+    <!--l. 95--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >s</mi></math> this relation is
+    only satisﬁed by <!--l. 95--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >s</mi></math>
+    itself.
+</p><!--l. 97--><p class="indent" >   Therefore, once a player sees the other players&#x2019; cards, he will know his own card, since there is only
+    one state to go to. Hence, each player knows whether he wins or loses. Therefore, from a game theoretic
+    point of view, this scenario is not particularly interesting.
+</p><!--l. 99--><p class="indent" >   TODO: maybe formalize this more...
+</p><!--l. 101--><p class="noindent" >
+</p>
+    <h4 class="subsectionHead"><span class="titlemark">2.2   </span> <a
+            id="x1-60002.2"></a><!--l. 101--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >n</mi></math>
+        cards with <!--l. 101--><math
+                xmlns="http://www.w3.org/1998/Math/MathML"
+                display="inline" ><mi
+        >m</mi> <mo
+                class="MathClass-rel">&#x003C;</mo> <mi
+        >n</mi></math>
+        players</h4>
+    <!--l. 102--><p class="noindent" >A more diﬃcult scenario arises when there are <!--l. 102--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="inline" ><mi
+>n</mi></math>
+    cards and <!--l. 102--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >m</mi> <mo
+            class="MathClass-rel">&#x003C;</mo> <mi
+    >n</mi></math> players. In this
+    case there are relations <!--l. 102--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >s</mi><msub><mrow
+    ><mi
+    >R</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><mi
+    >t</mi></math>
+    for those pairs of <!--l. 102--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >s</mi></math>
+    and <!--l. 102--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >t</mi></math> such
+    that <!--l. 102--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >s</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    > <mo
+            class="MathClass-rel">=</mo> <msub><mrow
+    ><mi
+    >t</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ></math> for
+    all <!--l. 102--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >j</mi><mo
+            class="MathClass-rel">≠</mo><mi
+    >i</mi></math>.
+</p><!--l. 104--><p class="noindent" >
+</p>
+    <h5 class="subsubsectionHead"><span class="titlemark">2.2.1   </span> <a
+            id="x1-70002.2.1"></a>The probability of winning the game</h5>
+    <!--l. 106--><p class="noindent" ><span class="paragraphHead"><a
+        id="x1-80002.2.1"></a><span
+        class="cmbx-10">Estimating one&#x2019;s own odds</span></span>
+    Since there are <!--l. 107--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >n</mi> <mo
+            class="MathClass-bin">−</mo> <mi
+    >m</mi></math> cards that have not
+    been dealt, each player has <!--l. 107--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >n</mi> <mo
+            class="MathClass-bin">−</mo> <mi
+    >m</mi> <mo
+            class="MathClass-bin">+</mo> <mn>1</mn></math> possibilities
+    for his own card and, consequently, <!--l. 107--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >n</mi> <mo
+            class="MathClass-bin">−</mo> <mi
+    >m</mi> <mo
+            class="MathClass-bin">+</mo> <mn>1</mn></math>
+    possible outcomes of the game. To determine the probability for a player to win, let
+    <!--l. 107--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >T</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-rel">⊆</mo> <mi
+    >S</mi></math> be the subset of possible
+    states such that <!--l. 107--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >s</mi><msub><mrow
+    ><mi
+    >R</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><mi
+    >t</mi></math>.
+    Note that <!--l. 107--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mo
+            class="MathClass-rel">|</mo><msub><mrow
+    ><mi
+    >T</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><mo
+            class="MathClass-rel">|</mo> <mo
+            class="MathClass-rel">=</mo> <mi
+    >n</mi> <mo
+            class="MathClass-bin">−</mo> <mi
+    >m</mi> <mo
+            class="MathClass-bin">+</mo> <mn>1</mn></math>. Now
+    let <!--l. 107--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msubsup><mrow
+    ><mi
+    >T</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-rel">⊆</mo> <msub><mrow
+    ><mi
+    >T</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></math> be a subset of
+    states such that for <!--l. 107--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >t</mi> <mo
+            class="MathClass-rel">∈</mo> <msubsup><mrow
+    ><mi
+    >T</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></math>
+    we have that <!--l. 107--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >M</mi><mo
+            class="MathClass-punc">,</mo><mi
+    >t</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow><mo
+            class="MathClass-rel">⊧</mo><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></math>. The
+    probability that player <!--l. 107--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >i</mi></math>
+
+
+    wins based on the information available is: </p><table class="equation"><tr><td> <a
+        id="x1-8001r2"></a>
+    <!--l. 108--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="block" class="equation">
+        <msubsup><mrow
+        ><mi
+                mathvariant="bold-script">𝒫</mi></mrow><mrow
+        ><mi
+        >i</mi></mrow><mrow
+        ><mrow ><mo
+                class="MathClass-open">(</mo><mrow><msub><mrow
+        ><mi
+        >w</mi></mrow><mrow
+        ><mi
+        >i</mi></mrow></msub
+        ></mrow><mo
+                class="MathClass-close">)</mo></mrow></mrow></msubsup
+        > <mo
+            class="MathClass-rel">=</mo> <mfrac><mrow
+    ><mo
+            class="MathClass-rel">|</mo><msubsup><mrow
+    ><mi
+    >T</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ><mo
+            class="MathClass-rel">|</mo></mrow>
+        <mrow
+        ><mo
+                class="MathClass-rel">|</mo><msub><mrow
+        ><mi
+        >T</mi></mrow><mrow
+        ><mi
+        >i</mi></mrow></msub
+        ><mo
+                class="MathClass-rel">|</mo></mrow></mfrac>  <mo
+            class="MathClass-rel">=</mo>   <mfrac><mrow
+    ><mo
+            class="MathClass-rel">|</mo><msubsup><mrow
+    ><mi
+    >T</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ><mo
+            class="MathClass-rel">|</mo></mrow>
+        <mrow
+        ><mi
+        >n</mi> <mo
+                class="MathClass-bin">−</mo> <mi
+        >m</mi> <mo
+                class="MathClass-bin">+</mo> <mn>1</mn></mrow></mfrac>
+    </math></td><td class="eq-no">(2)</td></tr></table>
+    <!--l. 112--><p class="indent" >   The relations are symmetric. Hence, <!--l. 112--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="inline" ><msubsup><mrow
+><mi
+        mathvariant="bold-script">𝒫</mi></mrow><mrow
+><mi
+>i</mi></mrow><mrow
+><mrow ><mo
+        class="MathClass-open">(</mo><mrow><msub><mrow
+><mi
+>w</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+></mrow><mo
+        class="MathClass-close">)</mo></mrow></mrow></msubsup
+></math>
+    will be the same for all states.
+</p>
+    <!--l. 114--><p class="noindent" ><span class="paragraphHead"><a
+        id="x1-90002.2.1"></a><span
+        class="cmbx-10">Estimating another player&#x2019;s odds</span></span>
+    Let <!--l. 115--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msubsup><mrow
+    ><mi
+    >T</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-rel">⊆</mo> <msub><mrow
+    ><mi
+    >T</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></math> be the subset of
+    states such that for all states <!--l. 115--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >t</mi> <mo
+            class="MathClass-rel">∈</mo> <msubsup><mrow
+    ><mi
+    >T</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></math>
+    we have that <!--l. 115--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >M</mi><mo
+            class="MathClass-punc">,</mo><mi
+    >t</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow><mo
+            class="MathClass-rel">⊧</mo><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ></math>.
+    Based on this information and perhaps not surprisingly, the probability for player
+    <!--l. 115--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >j</mi></math> to win this game
+    from player <!--l. 115--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >i</mi></math>&#x2019;s
+    point of view will be given by: </p><table class="equation"><tr><td> <a
+        id="x1-9001r3"></a>
+    <!--l. 116--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="block" class="equation">
+        <msubsup><mrow
+        ><mi
+                mathvariant="bold-script">𝒫</mi></mrow><mrow
+        ><mi
+        >i</mi></mrow><mrow
+        ><mrow ><mo
+                class="MathClass-open">(</mo><mrow><msub><mrow
+        ><mi
+        >w</mi></mrow><mrow
+        ><mi
+        >j</mi></mrow></msub
+        ></mrow><mo
+                class="MathClass-close">)</mo></mrow></mrow></msubsup
+        > <mo
+            class="MathClass-rel">=</mo> <mfrac><mrow
+    ><mo
+            class="MathClass-rel">|</mo><msubsup><mrow
+    ><mi
+    >T</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ><mo
+            class="MathClass-rel">|</mo></mrow>
+        <mrow
+        ><mo
+                class="MathClass-rel">|</mo><msub><mrow
+        ><mi
+        >T</mi></mrow><mrow
+        ><mi
+        >i</mi></mrow></msub
+        ><mo
+                class="MathClass-rel">|</mo></mrow></mfrac>  <mo
+            class="MathClass-rel">=</mo>   <mfrac><mrow
+    ><mo
+            class="MathClass-rel">|</mo><msubsup><mrow
+    ><mi
+    >T</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ><mo
+            class="MathClass-rel">|</mo></mrow>
+        <mrow
+        ><mi
+        >n</mi> <mo
+                class="MathClass-bin">−</mo> <mi
+        >m</mi> <mo
+                class="MathClass-bin">+</mo> <mn>1</mn></mrow></mfrac>
+    </math></td><td class="eq-no">(3)</td></tr></table>
+    <!--l. 121--><p class="noindent" >
+</p>
+    <h5 class="subsubsectionHead"><span class="titlemark">2.2.2   </span> <a
+            id="x1-100002.2.2"></a>Playing strategies</h5>
+    <!--l. 122--><p class="noindent" ><span class="paragraphHead"><a
+        id="x1-110002.2.2"></a><span
+        class="cmbx-10">Calling a bet</span></span>
+    Before we get to the optimal strategy, let us deﬁne the utility. If
+    <!--l. 123--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">𝒢</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></math> denotes the ‘gain&#x2019; of
+    winning the game at round <!--l. 123--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >k</mi></math>,
+    the utility will be given by: </p><table class="equation"><tr><td> <a
+        id="x1-11001r4"></a>
+
+
+    <!--l. 124--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="block" class="equation">
+        <msubsup><mrow
+        ><mi
+        >U</mi></mrow><mrow
+        ><mi
+        >i</mi></mrow><mrow
+        ><mrow ><mo
+                class="MathClass-open">(</mo><mrow><msub><mrow
+        ><mi
+        >w</mi></mrow><mrow
+        ><mi
+        >i</mi></mrow></msub
+        ></mrow><mo
+                class="MathClass-close">)</mo></mrow></mrow></msubsup
+        > <mo
+            class="MathClass-rel">=</mo> <msubsup><mrow
+    ><mi
+            mathvariant="bold-script">𝒢</mi></mrow><mrow
+    >
+        <mi
+        >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">𝒫</mi></mrow><mrow
+    >
+        <mi
+        >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    >
+    </math></td><td class="eq-no">(4)</td></tr></table>
+    <!--l. 128--><p class="indent" >   Let <!--l. 128--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="inline" ><msubsup><mrow
+><mi
+        mathvariant="bold-script">ℒ</mi></mrow><mrow
+><mi
+>i</mi></mrow><mrow
+><mrow ><mo
+        class="MathClass-open">(</mo><mrow><mi
+>k</mi></mrow><mo
+        class="MathClass-close">)</mo></mrow></mrow></msubsup
+></math>
+    be the loss of folding or losing the game after calling round
+    <!--l. 128--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >k</mi></math>. In other words,
+    <!--l. 128--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">ℒ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></math> denotes the amount of coins
+    that the player <!--l. 128--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >i</mi></math> will have to
+    bet for playing until round <!--l. 128--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >k</mi></math>.
+    Note that <!--l. 128--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">𝒢</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-rel">=</mo><msub><mrow
+    ><mo
+            class="MathClass-op"> ∑</mo>
+        <!--nolimits--></mrow><mrow
+    ><mi
+    >j</mi><mo
+            class="MathClass-rel">≠</mo><mi
+    >i</mi></mrow></msub
+    ><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">ℒ</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></math>.
+</p><!--l. 130--><p class="indent" >   The utility of losing a game will be given by: </p><table class="equation"><tr><td> <a
+        id="x1-11002r5"></a>
+    <!--l. 131--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="block" class="equation">
+        <msubsup><mrow
+        ><mi
+        >U</mi></mrow><mrow
+        ><mi
+        >i</mi></mrow><mrow
+        ><mrow ><mo
+                class="MathClass-open">(</mo><mrow><msub><mrow
+        ><mi
+        >l</mi></mrow><mrow
+        ><mi
+        >i</mi></mrow></msub
+        ></mrow><mo
+                class="MathClass-close">)</mo></mrow></mrow></msubsup
+        > <mo
+            class="MathClass-rel">=</mo> <mo
+            class="MathClass-bin">−</mo><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">ℒ</mi></mrow><mrow
+    >
+        <mi
+        >i</mi></mrow><mrow
+    ><mi
+    >k</mi></mrow></msubsup
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mn>1</mn> <mo
+            class="MathClass-bin">−</mo><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">𝒫</mi></mrow><mrow
+    >
+        <mi
+        >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow>
+    </math></td><td class="eq-no">(5)</td></tr></table>
+    <!--l. 136--><p class="indent" >   Now we can deﬁne a player&#x2019;s strategy for calling any bet as follows. Let
+    <!--l. 136--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msubsup><mrow
+    ><mi
+    >C</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-rel">∈</mo><mrow ><mo
+            class="MathClass-open">{</mo><mrow><mo
+            class="MathClass-rel"></mo><mo
+            class="MathClass-punc">,</mo> <mi
+    >℧</mi></mrow><mo
+            class="MathClass-close">}</mo></mrow></math> denote the decision
+    of player <!--l. 136--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >i</mi></math> at
+    round <!--l. 136--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >k</mi></math>, where
+    <!--l. 136--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mo
+            class="MathClass-rel"></mo></math> corresponds to
+    calling the bet and <!--l. 136--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >℧</mi></math>
+    corresponds to folding. The decision will be given by: </p><table class="equation"><tr><td> <a
+        id="x1-11003r6"></a>
+    <!--l. 137--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="block" class="equation"><msubsup><mrow
+    >
+        <mi
+        >C</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-rel">=</mo>  <mfenced separators=""
+                                                   open="{"  close="" ><mrow> <mtable  style="text-align:axis;"
+                                                                                       equalrows="false" columnlines="none" equalcolumns="false" class="array"><mtr><mtd
+            class="array"  columnalign="left"><mo
+            class="MathClass-rel"></mo><mspace width="1em" class="quad"/></mtd><mtd
+            class="array"  columnalign="left"><mstyle
+            class="text"><mtext  >if </mtext></mstyle><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><msubsup><mrow
+    ><mi
+    >U</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-bin">+</mo> <msubsup><mrow
+    ><mi
+    >U</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >l</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-rel">≥</mo> <mn>0</mn></mtd>
+    </mtr><mtr><mtd
+            class="array"  columnalign="left"><mi
+    >℧</mi> <mspace width="1em" class="quad"/></mtd><mtd
+            class="array"  columnalign="left"><mstyle
+            class="text"><mtext  >otherwise</mtext></mstyle>                  </mtd></mtr> <!--@{}l@{\quad }l@{}--></mtable>                                                                                               </mrow></mfenced>
+    </math></td><td class="eq-no">(6)</td></tr></table>
+    <!--l. 145--><p class="indent" >   In equation <a
+        href="#x1-11003r6">6<!--tex4ht:ref: eq:strat --></a>, <!--l. 145--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="inline" ><msub><mrow
+><mi
+>γ</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+></math>
+    will characterize the player&#x2019;s characteristic strategy. If
+    <!--l. 145--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-rel">=</mo> <mn>1</mn></math>, the player has an optimal
+    strategy. If <!--l. 145--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-rel">&#x003E;</mo> <mn>1</mn></math> the player
+    exhibits a risky strategy. If <!--l. 145--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-rel">&#x003C;</mo> <mn>1</mn></math>
+    the player exhibits a safe strategy.
+
+
+</p><!--l. 147--><p class="indent" >   We can also decide to make the gain <!--l. 147--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="inline" ><msubsup><mrow
+><mi
+        mathvariant="bold-script">𝒢</mi></mrow><mrow
+><mi
+>i</mi></mrow><mrow
+><mrow ><mo
+        class="MathClass-open">(</mo><mrow><mi
+>k</mi></mrow><mo
+        class="MathClass-close">)</mo></mrow></mrow></msubsup
+></math>
+    a bit more speciﬁc: </p><table class="equation"><tr><td> <a
+        id="x1-11004r7"></a>
+    <!--l. 148--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="block" class="equation">
+        <msubsup><mrow
+        ><mi
+                mathvariant="bold-script">𝒢</mi></mrow><mrow
+        ><mi
+        >i</mi></mrow><mrow
+        ><mrow ><mo
+                class="MathClass-open">(</mo><mrow><mi
+        >k</mi></mrow><mo
+                class="MathClass-close">)</mo></mrow></mrow></msubsup
+        > <mo
+            class="MathClass-rel">=</mo> <munderover accentunder="false" accent="false"><mrow
+    ><mo mathsize="big"
+    >∑</mo>
+    </mrow><mrow
+    ><mi
+    >j</mi><mo
+            class="MathClass-rel">=</mo><mn>1</mn></mrow><mrow
+    ><mi
+    >i</mi><mo
+            class="MathClass-bin">−</mo><mn>1</mn></mrow></munderover
+    ><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">ℒ</mi></mrow><mrow
+    >
+        <mi
+        >j</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-bin">+</mo> <munderover accentunder="false" accent="false"><mrow
+    ><mo mathsize="big"
+    >∑</mo>
+    </mrow><mrow
+    ><mi
+    >j</mi><mo
+            class="MathClass-rel">=</mo><mi
+    >i</mi><mo
+            class="MathClass-bin">+</mo><mn>1</mn></mrow><mrow
+    ><mi
+    >m</mi></mrow></munderover
+    ><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">ℒ</mi></mrow><mrow
+    >
+        <mi
+        >j</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi><mo
+            class="MathClass-bin">−</mo><mn>1</mn></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-bin">+</mo> <munderover accentunder="false" accent="false"><mrow
+    ><mo mathsize="big"
+    >∑</mo>
+    </mrow><mrow
+    ><mi
+    >j</mi><mo
+            class="MathClass-rel">=</mo><mi
+    >i</mi><mo
+            class="MathClass-bin">+</mo><mn>1</mn></mrow><mrow
+    ><mi
+    >m</mi></mrow></munderover
+    ><mrow ><mo
+            class="MathClass-open">{</mo><mrow><msubsup><mrow
+    ><mi
+    >C</mi></mrow><mrow
+    >
+        <mi
+        >j</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></mrow><mo
+            class="MathClass-close">}</mo></mrow><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">ℒ</mi></mrow><mrow
+    >
+        <mi
+        >j</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-bin">−</mo><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">ℒ</mi></mrow><mrow
+    >
+        <mi
+        >j</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi><mo
+            class="MathClass-bin">−</mo><mn>1</mn></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow>
+    </math></td><td class="eq-no">(7)</td></tr></table>
+    <!--l. 152--><p class="indent" >   where we have the bet of all players hat have already called the current bet, the bet of all players that still
+    have to call the current bet and the bets that those players are going to place this round. In this equation
+    <!--l. 152--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mrow ><mo
+            class="MathClass-open">{</mo><mrow><msubsup><mrow
+    ><mi
+    >C</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></mrow><mo
+            class="MathClass-close">}</mo></mrow> <mo
+            class="MathClass-rel">=</mo> <mn>1</mn></math> if
+    <!--l. 152--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msubsup><mrow
+    ><mi
+    >C</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-rel">=</mo> <mo
+            class="MathClass-rel"></mo></math> and
+    <!--l. 152--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mrow ><mo
+            class="MathClass-open">{</mo><mrow><msubsup><mrow
+    ><mi
+    >C</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></mrow><mo
+            class="MathClass-close">}</mo></mrow> <mo
+            class="MathClass-rel">=</mo> <mn>0</mn></math>
+    otherwise.
+</p><!--l. 154--><p class="indent" >   It is interesting to see if we can let the players deduce the value of
+    <!--l. 154--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></math> for the
+    other players. Until then, it seems reasonable to simplify equation (<a
+            href="#x1-11004r7">7<!--tex4ht:ref: eq:gain --></a>) to: </p><table class="equation"><tr><td> <a
+        id="x1-11005r8"></a>
+    <!--l. 155--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="block" class="equation">
+        <msubsup><mrow
+        ><mi
+                mathvariant="bold-script">𝒢</mi></mrow><mrow
+        ><mi
+        >i</mi></mrow><mrow
+        ><mrow ><mo
+                class="MathClass-open">(</mo><mrow><mi
+        >k</mi></mrow><mo
+                class="MathClass-close">)</mo></mrow></mrow></msubsup
+        > <mo
+            class="MathClass-rel">=</mo><munder class="msub"><mrow
+    ><mo mathsize="big"
+    > ∑</mo>
+    </mrow><mrow
+    ><mi
+    >j</mi><mo
+            class="MathClass-rel">≠</mo><mi
+    >i</mi></mrow></munder
+    ><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">ℒ</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    >
+    </math></td><td class="eq-no">(8)</td></tr></table>
+    <!--l. 160--><p class="noindent" ><span class="paragraphHead"><a
+        id="x1-120002.2.2"></a><span
+        class="cmbx-10">Raising the current bet: bluﬃng</span></span>
+    A player can also decide to raise the current bet. The main reason for raising your bet is to make the
+    other players decide to quit the game, or to increase the ﬁnal gain. A player now bluﬀs if, after its bluﬃng
+    bet, <!--l. 161--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><msubsup><mrow
+    ><mi
+    >U</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >w</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-bin">+</mo> <msubsup><mrow
+    ><mi
+    >U</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >l</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-rel">&#x003C;</mo> <mn>0</mn></math>.
+</p><!--l. 163--><p class="indent" >   Based on the information that is available, a player can estimate the utilities of
+    other players. Hence, it can make its own estimations of the other players&#x2019; gains:
+    <!--l. 163--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mrow ><mo
+            class="MathClass-open">⟨</mo><mrow><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">𝒢</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></mrow><mo
+            class="MathClass-close">⟩</mo></mrow></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></math>, which is the estimated
+    gain for player <!--l. 163--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >j</mi></math>
+    from player <!--l. 163--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >i</mi></math>&#x2019;s
+    point of view.
+</p><!--l. 165--><p class="indent" >   The estimations can be obtained by using equations (<a
+        href="#x1-11001r4">4<!--tex4ht:ref: eq:util --></a>) through (<a
+        href="#x1-11005r8">8<!--tex4ht:ref: eq:sgain --></a>), but now we will start with some estimated
+    probability <!--l. 165--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">𝒫</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ></mrow></msubsup
+    ></math>,
+    from equation (<a
+            href="#x1-9001r3">3<!--tex4ht:ref: eq:prob --></a>).
+</p><!--l. 167--><p class="indent" >   Once we have the estimated gains we can make an estimation of the other player&#x2019;s decisions. For bluﬃng we want
+    to achieve that <!--l. 167--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msubsup><mrow
+    ><mi
+    >C</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-rel">=</mo> <mi
+    >℧</mi></math>
+    for the players <!--l. 167--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >j</mi><mo
+            class="MathClass-rel">≠</mo><mi
+    >i</mi></math>.
+    Hence, if a player decides to bluﬀ, he should try to ensure that
+
+
+    <!--l. 167--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mrow ><mo
+            class="MathClass-open">⟨</mo><mrow><msubsup><mrow
+    ><mi
+    >C</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></mrow><mo
+            class="MathClass-close">⟩</mo></mrow></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-rel">=</mo> <mi
+    >℧</mi></math> for
+    those player&#x2019;s that have a higher probability of winning. Formally, it should make at least those players
+    <!--l. 167--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >j</mi></math> fold such
+    that <!--l. 167--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">𝒫</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-rel">&#x003E;</mo> <msubsup><mrow
+    ><mi
+            mathvariant="bold-script">𝒫</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></math>.
+</p><!--l. 169--><p class="indent" >   As of now, we will not consider bluﬃng in full detail.
+</p>
+    <!--l. 171--><p class="noindent" ><span class="paragraphHead"><a
+        id="x1-130002.2.2"></a><span
+        class="cmbx-10">Raising the current bet: increasing the gain</span></span>
+    If a player is conﬁdent of winning the round, he can decide to raise the current bet. A player should try to
+    accomplish that <!--l. 172--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msubsup><mrow
+    ><mi
+    >C</mi></mrow><mrow
+    ><mi
+    >j</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mi
+    >k</mi></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-rel">=</mo> <mo
+            class="MathClass-rel"></mo></math>
+    while it should also maximize the expected gain.
+</p><!--l. 174--><p class="noindent" >
+</p>
+    <h4 class="subsectionHead"><span class="titlemark">2.3   </span> <a
+            id="x1-140002.3"></a>Reasoning about strategies</h4>
+    <!--l. 175--><p class="noindent" >We now want to address the agents&#x2019; reasoning during a game. We will start out small by simplifying the
+    rules of the game. We will only have a single betting round. Each player can choose to either call the
+    minimum bet of 1 coin, or fold. The player that is seated on the left side of the dealer has to put in a
+    blind bet of 1 coin. This is to encourage other players for participating (knowing that there is at least
+    something at stake).
+</p><!--l. 177--><p class="indent" >   Let&#x2019;s extend our set of propositions to <!--l. 177--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="inline" ><msup><mrow
+><mi
+>P</mi></mrow><mrow
+><mi
+>′</mi></mrow></msup
+> <mo
+        class="MathClass-rel">=</mo> <mi
+>P</mi> <mo
+        class="MathClass-bin">∪</mo><msubsup><mrow
+><mrow ><mo
+        class="MathClass-open">{</mo><mrow><msub><mrow
+><mi
+>r</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+><mo
+        class="MathClass-punc">,</mo><msub><mrow
+><mi
+>o</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+><mo
+        class="MathClass-punc">,</mo><msub><mrow
+><mi
+>h</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+></mrow><mo
+        class="MathClass-close">}</mo></mrow></mrow><mrow
+><mi
+>i</mi><mo
+        class="MathClass-rel">=</mo><mn>1</mn></mrow><mrow
+><mi
+>m</mi></mrow></msubsup
+></math>
+    in which <!--l. 177--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >r</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></math> will resemble a
+    risky strategy for player <!--l. 177--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >i</mi></math>,
+    <!--l. 177--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >o</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></math> will be used for
+    optimal strategy and <!--l. 177--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >h</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></math>
+    for safe or ‘harmless&#x2019; strategy. A risky strategy will mean that
+    <!--l. 177--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-rel">=</mo> <mn>1</mn><mo
+            class="MathClass-punc">.</mo><mn>1</mn></math>, an optimal strategy will
+    mean that <!--l. 177--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-rel">=</mo> <mn>1</mn><mo
+            class="MathClass-punc">.</mo><mn>0</mn></math> and a harmless
+    strategy will resemble <!--l. 177--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-rel">=</mo> <mn>0</mn><mo
+            class="MathClass-punc">.</mo><mn>9</mn></math>.
+</p><!--l. 179--><p class="indent" >   Note that we have:
+</p><!--tex4ht:inline--><!--l. 185--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="block" ><mtable
+        columnalign="left" class="align-star">
+    <mtr><mtd
+            columnalign="right" class="align-odd"><mi
+    >M</mi></mtd>            <mtd
+            class="align-even"><mo
+            class="MathClass-rel">⊧</mo><msub><mrow
+    ><mi
+    >K</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >r</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-bin">∨</mo> <msub><mrow
+    ><mi
+    >K</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >o</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-bin">∨</mo> <msub><mrow
+    ><mi
+    >K</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><msub><mrow
+    ><mi
+    >h</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><mspace width="2em"/></mtd>                                                  <mtd
+            columnalign="right" class="align-label"></mtd>            <mtd
+            class="align-label">
+        <mspace width="2em"/></mtd></mtr><mtr><mtd
+        columnalign="right" class="align-odd"><mi
+>M</mi></mtd>            <mtd
+        class="align-even"><mo
+        class="MathClass-rel">⊧</mo><msub><mrow
+><mi
+>K</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+><munderover accentunder="false" accent="false"><mrow
+><mo mathsize="big"
+> ∧</mo>
+</mrow><mrow
+><mi
+>j</mi><mo
+        class="MathClass-rel">=</mo><mn>1</mn></mrow><mrow
+><mi
+>m</mi></mrow></munderover
+><mstyle mathsize="2.03em"><mfenced separators=""
+                                    open="("  close="" ><mrow></mrow></mfenced></mstyle><mrow ><mo
+        class="MathClass-open">(</mo><mrow><msub><mrow
+><mi
+>r</mi></mrow><mrow
+>
+    <mi
+    >j</mi></mrow></msub
+> <mo
+        class="MathClass-bin">∧</mo><mo
+        class="MathClass-op">¬</mo><msub><mrow
+><mi
+>o</mi></mrow><mrow
+><mi
+>j</mi></mrow></msub
+> <mo
+        class="MathClass-bin">∧</mo><mo
+        class="MathClass-op">¬</mo><msub><mrow
+><mi
+>h</mi></mrow><mrow
+><mi
+>j</mi></mrow></msub
+></mrow><mo
+        class="MathClass-close">)</mo></mrow> <mo
+        class="MathClass-bin">∨</mo> <mrow ><mo
+        class="MathClass-open">(</mo><mrow><mo
+        class="MathClass-op">¬</mo><msub><mrow
+><mi
+>r</mi></mrow><mrow
+><mi
+>j</mi></mrow></msub
+> <mo
+        class="MathClass-bin">∧</mo> <msub><mrow
+><mi
+>o</mi></mrow><mrow
+><mi
+>j</mi></mrow></msub
+> <mo
+        class="MathClass-bin">∧</mo><mo
+        class="MathClass-op">¬</mo><msub><mrow
+><mi
+>h</mi></mrow><mrow
+><mi
+>j</mi></mrow></msub
+></mrow><mo
+        class="MathClass-close">)</mo></mrow> <mo
+        class="MathClass-bin">∨</mo> <mrow ><mo
+        class="MathClass-open">(</mo><mrow><mo
+        class="MathClass-op">¬</mo><msub><mrow
+><mi
+>r</mi></mrow><mrow
+><mi
+>j</mi></mrow></msub
+> <mo
+        class="MathClass-bin">∧</mo><mo
+        class="MathClass-op">¬</mo><msub><mrow
+><mi
+>o</mi></mrow><mrow
+><mi
+>j</mi></mrow></msub
+> <mo
+        class="MathClass-bin">∧</mo> <msub><mrow
+><mi
+>h</mi></mrow><mrow
+><mi
+>j</mi></mrow></msub
+></mrow><mo
+        class="MathClass-close">)</mo></mrow><mstyle mathsize="2.03em"><mfenced separators=""
+                                                                                open=")"  close="" ><mrow></mrow></mfenced></mstyle><mspace width="2em"/></mtd>            <mtd
+        columnalign="right" class="align-label"></mtd>            <mtd
+        class="align-label">
+    <mspace width="2em"/></mtd></mtr></mtable></math>
+    <!--l. 186--><p class="noindent" >for <!--l. 186--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="inline" ><mi
+>i</mi> <mo
+        class="MathClass-rel">=</mo> <mn>1</mn><mo
+        class="MathClass-punc">,</mo><mn>2</mn><mo
+        class="MathClass-punc">,</mo><mo
+        class="MathClass-op">…</mo><mo
+        class="MathClass-punc">,</mo><mi
+>m</mi></math>.
+
+
+</p><!--l. 188--><p class="noindent" >
+</p>
+    <h5 class="subsubsectionHead"><span class="titlemark">2.3.1   </span> <a
+            id="x1-150002.3.1"></a>First round</h5>
+    <!--l. 189--><p class="noindent" >First we can compute the loss for each player of participating. This is simply the amount of coins, so
+    <!--l. 189--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mo
+            class="MathClass-op">∀</mo><mi
+    >i</mi><mo
+            class="MathClass-punc">,</mo><mspace width="1em" class="nbsp" /><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">ℒ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mn>1</mn></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-rel">=</mo> <mn>1</mn></math>. Thus,
+    we can simplify the utility for losing (equation <a
+            href="#x1-11002r5">5<!--tex4ht:ref: eq:loss --></a>): </p><table class="equation"><tr><td> <a
+        id="x1-15001r9"></a>
+    <!--l. 190--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="block" class="equation">
+        <msubsup><mrow
+        ><mi
+        >U</mi></mrow><mrow
+        ><mi
+        >i</mi></mrow><mrow
+        ><mrow ><mo
+                class="MathClass-open">(</mo><mrow><msub><mrow
+        ><mi
+        >l</mi></mrow><mrow
+        ><mi
+        >i</mi></mrow></msub
+        ></mrow><mo
+                class="MathClass-close">)</mo></mrow></mrow></msubsup
+        > <mo
+            class="MathClass-rel">=</mo> <mo
+            class="MathClass-bin">−</mo><mrow ><mo
+            class="MathClass-open">(</mo><mrow><mn>1</mn> <mo
+            class="MathClass-bin">−</mo><msubsup><mrow
+    ><mi
+            mathvariant="bold-script">𝒫</mi></mrow><mrow
+    >
+        <mi
+        >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow>
+    </math></td><td class="eq-no">(9)</td></tr></table>
+    <!--l. 194--><p class="indent" >   At the ﬁrst round, the players know nothing about each other&#x2019;s strategies (given by
+    <!--l. 194--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></math>).
+    Hence, they will play based solely on what they see by looking at the opponents&#x2019; foreheads.
+</p><!--l. 196--><p class="indent" >   There is no way to estimate the decisions of the other players yet. Hence, we will compute the gain
+    simply by adding the losses of the other people (equation <a
+            href="#x1-11005r8">8<!--tex4ht:ref: eq:sgain --></a>). Note that this should be simply
+    <!--l. 196--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >m</mi> <mo
+            class="MathClass-bin">−</mo> <mn>1</mn></math>.
+</p><!--l. 198--><p class="indent" >   Once we have the gain, we can compute the utility of winning a game and so we can also obtain the
+    decision for each player (equation <a
+            href="#x1-11003r6">6<!--tex4ht:ref: eq:strat --></a>).
+</p><!--l. 200--><p class="noindent" >
+</p>
+    <h5 class="subsubsectionHead"><span class="titlemark">2.3.2   </span> <a
+            id="x1-160002.3.2"></a>Ending the round</h5>
+    <!--l. 201--><p class="noindent" >At the end of a round, the players are allowed to see their own cards. Hence they now know on which
+    cards the decision of each opponent was based on. It is as if each player gets to know the utility of all
+    other players during the round that just ended.
+</p><!--l. 203--><p class="indent" >   First, suppose that <!--l. 203--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="inline" ><msubsup><mrow
+><mi
+>C</mi></mrow><mrow
+><mi
+>i</mi></mrow><mrow
+><mrow ><mo
+        class="MathClass-open">(</mo><mrow><mi
+>k</mi></mrow><mo
+        class="MathClass-close">)</mo></mrow></mrow></msubsup
+> <mo
+        class="MathClass-rel">=</mo> <mo
+        class="MathClass-rel"></mo></math>.
+    Now any player <!--l. 203--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >j</mi><mo
+            class="MathClass-rel">≠</mo><mi
+    >i</mi></math>
+    knows that the threshold of 0 was exceeded. Hence each player
+    <!--l. 203--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >j</mi></math>
+    knows
+
+
+</p><!--tex4ht:inline--><!--l. 207--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="block" ><mtable
+        columnalign="left" class="align-star">
+    <mtr><mtd
+            columnalign="right" class="align-odd"><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><msubsup><mrow
+    ><mi
+    >U</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-bin">+</mo> <msubsup><mrow
+    ><mi
+    >U</mi></mrow><mrow
+    >
+        <mi
+        >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >l</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></mtd>                              <mtd
+            class="align-even"> <mo
+            class="MathClass-rel">≥</mo> <mn>0</mn><mspace width="2em"/></mtd>                                    <mtd
+            columnalign="right" class="align-label"></mtd>                              <mtd
+            class="align-label">
+        <mspace width="2em"/></mtd></mtr><mtr><mtd
+        columnalign="right" class="align-odd"><msub><mrow
+><mi
+>γ</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+></mtd>                                          <mtd
+        class="align-even"> <mo
+        class="MathClass-rel">≥</mo><mo
+        class="MathClass-bin">−</mo><mfrac><mrow
+><msubsup><mrow
+><mi
+>U</mi></mrow><mrow
+><mi
+>i</mi></mrow><mrow
+><mrow ><mo
+        class="MathClass-open">(</mo><mrow><msub><mrow
+><mi
+>l</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+></mrow><mo
+        class="MathClass-close">)</mo></mrow></mrow></msubsup
+></mrow>
+    <mrow
+    ><msubsup><mrow
+    ><mi
+    >U</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></mrow></mfrac><mspace width="2em"/></mtd>                              <mtd
+        columnalign="right" class="align-label"></mtd>                              <mtd
+        class="align-label">
+    <mspace width="2em"/></mtd></mtr><mtr><mtd
+        columnalign="right" class="align-odd"></mtd>                                            <mtd
+        class="align-even"><mspace width="2em"/></mtd>                                        <mtd
+        columnalign="right" class="align-label">
+</mtd></mtr></mtable></math>
+    <!--l. 208--><p class="noindent" >So the lower bound of <!--l. 208--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="inline" ><msub><mrow
+><mi
+>γ</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+></math>
+    from <!--l. 208--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >j</mi></math>&#x2019;s
+    perspective is increased.
+</p><!--l. 210--><p class="indent" >   Second, suppose that <!--l. 210--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="inline" ><msubsup><mrow
+><mi
+>C</mi></mrow><mrow
+><mi
+>i</mi></mrow><mrow
+><mrow ><mo
+        class="MathClass-open">(</mo><mrow><mi
+>k</mi></mrow><mo
+        class="MathClass-close">)</mo></mrow></mrow></msubsup
+> <mo
+        class="MathClass-rel">=</mo> <mi
+>℧</mi></math>.
+    Now any player <!--l. 210--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >j</mi><mo
+            class="MathClass-rel">≠</mo><mi
+    >i</mi></math>
+    knows:
+</p><!--tex4ht:inline--><!--l. 214--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="block" ><mtable
+        columnalign="left" class="align-star">
+    <mtr><mtd
+            columnalign="right" class="align-odd"><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><msubsup><mrow
+    ><mi
+    >U</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-bin">+</mo> <msubsup><mrow
+    ><mi
+    >U</mi></mrow><mrow
+    >
+        <mi
+        >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >l</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></mtd>                              <mtd
+            class="align-even"> <mo
+            class="MathClass-rel">&#x003C;</mo> <mn>0</mn><mspace width="2em"/></mtd>                                    <mtd
+            columnalign="right" class="align-label"></mtd>                              <mtd
+            class="align-label">
+        <mspace width="2em"/></mtd></mtr><mtr><mtd
+        columnalign="right" class="align-odd"><msub><mrow
+><mi
+>γ</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+></mtd>                                          <mtd
+        class="align-even"> <mo
+        class="MathClass-rel">&#x003C;</mo> <mo
+        class="MathClass-bin">−</mo><mfrac><mrow
+><msubsup><mrow
+><mi
+>U</mi></mrow><mrow
+><mi
+>i</mi></mrow><mrow
+><mrow ><mo
+        class="MathClass-open">(</mo><mrow><msub><mrow
+><mi
+>l</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+></mrow><mo
+        class="MathClass-close">)</mo></mrow></mrow></msubsup
+></mrow>
+    <mrow
+    ><msubsup><mrow
+    ><mi
+    >U</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></mrow></mfrac><mspace width="2em"/></mtd>                              <mtd
+        columnalign="right" class="align-label"></mtd>                              <mtd
+        class="align-label">
+    <mspace width="2em"/></mtd></mtr><mtr><mtd
+        columnalign="right" class="align-odd"></mtd>                                            <mtd
+        class="align-even"><mspace width="2em"/></mtd>                                        <mtd
+        columnalign="right" class="align-label">
+</mtd></mtr></mtable></math>
+    <!--l. 216--><p class="noindent" >In either case, we could consider it to be an announcement of the possibilities that are left. For example, if players
+    <!--l. 216--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >j</mi><mo
+            class="MathClass-rel">≠</mo><mi
+    >i</mi></math> ﬁnd that
+    <!--l. 216--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-rel">&#x003C;</mo> <mn>1</mn><mo
+            class="MathClass-punc">.</mo><mn>5</mn></math>, it is as if it is
+    announced that <!--l. 216--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >r</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-bin">∨</mo> <msub><mrow
+    ><mi
+    >o</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-bin">∨</mo> <msub><mrow
+    ><mi
+    >h</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></math>.
+    In other words, we might not gain any information. However, a series of rounds could enable agents
+    <!--l. 216--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >j</mi></math> to
+    deduce <!--l. 216--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></math>.
+    For example, let&#x2019;s say that three rounds are played, in which
+    <!--l. 216--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-rel">&#x003C;</mo> <mn>1</mn><mo
+            class="MathClass-punc">.</mo><mn>5</mn><mo
+            class="MathClass-punc">,</mo><mi
+    >γ</mi> <mo
+            class="MathClass-rel">≥</mo> <mn>0</mn><mo
+            class="MathClass-punc">.</mo><mn>9</mn><mn>3</mn><mo
+            class="MathClass-punc">,</mo><msub><mrow
+    ><mi
+    >γ</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-rel">&#x003C;</mo> <mn>1</mn><mo
+            class="MathClass-punc">.</mo><mn>0</mn><mn>6</mn></math>. This
+    sequence of announcements can be captured by: </p><table class="equation-star"><tr><td>
+
+
+    <!--l. 217--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="block" class="equation">
+    <mi
+    >M</mi><mo
+        class="MathClass-rel">⊧</mo><mrow ><mo
+        class="MathClass-open">[</mo><mrow><msub><mrow
+><mi
+>r</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+> <mo
+        class="MathClass-bin">∨</mo> <msub><mrow
+><mi
+>o</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+> <mo
+        class="MathClass-bin">∨</mo> <msub><mrow
+><mi
+>h</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+></mrow><mo
+        class="MathClass-close">]</mo></mrow><mrow ><mo
+        class="MathClass-open">[</mo><mrow><msub><mrow
+><mi
+>r</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+> <mo
+        class="MathClass-bin">∨</mo> <msub><mrow
+><mi
+>o</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+></mrow><mo
+        class="MathClass-close">]</mo></mrow><mrow ><mo
+        class="MathClass-open">[</mo><mrow><msub><mrow
+><mi
+>o</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+> <mo
+        class="MathClass-bin">∨</mo> <msub><mrow
+><mi
+>h</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+></mrow><mo
+        class="MathClass-close">]</mo></mrow><munderover accentunder="false" accent="false"><mrow
+><mo mathsize="big"
+>∧</mo>
+</mrow><mrow
+><mi
+>j</mi><mo
+        class="MathClass-rel">=</mo><mn>1</mn></mrow><mrow
+><mi
+>m</mi></mrow></munderover
+><msub><mrow
+><mi
+>K</mi></mrow><mrow
+>
+    <mi
+    >j</mi></mrow></msub
+><msub><mrow
+><mi
+>o</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+>
+</math></td></tr></table>
+    <!--l. 221--><p class="indent" >   TODO: now that we have <!--l. 221--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="inline" ><msub><mrow
+><mi
+>γ</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+></math>,
+    how does it change the dynamics of the game?
+</p>
+
+<!-- END PAGE CONTENT------------------------------------------- -->
+
+    <h2>Conclusion</h2>
+    Conclusion should go here.
 </div>
 
-<footer class="footer">
+<footer class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
         <p class="text-muted">Created by Jos van de Wolfshaar, Siebert Looije en Diederik Greveling</p>
     </div>
