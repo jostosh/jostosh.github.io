@@ -213,9 +213,9 @@ Second, suppose that $C^{(k)}_i = \mathbb{f}$. Now any player $j\neq i$ knows:
 \gamma_i &< -\frac{U^{(l_i)}_i }{U^{(w_i)}_i}\\
 \end{align*}
 
-In either case, we could consider it to be an announcement of the possibilities that are left. For example, if players $j\neq i$ find that $\gamma_i < 1.5$, it is as if it is announced that $r_i \vee o_i \vee h_i$. In other words, we might not gain any information. However, a series of rounds could enable agents $j$ to deduce $\gamma_i$. For example, let's say that three rounds are played, in which $\gamma_i < 1.5,\gamma \geq 0.93,\gamma_i < 1.06$. This sequence of announcements can be captured by:
+In either case, we could consider it to be an announcement of the possibilities that are left. For example, if players $j\neq i$ find that $\gamma_i < 1.5$, it is as if it is announced that $r_i \vee o_i \vee h_i$. In other words, we might not gain any information. However, a series of rounds could enable agents $j$ to deduce $\gamma_i$. For example, let's say that three rounds are played, in which $\gamma_i < 1.5,\gamma_i \geq 0.93,\gamma_i < 1.06$. This sequence of announcements can be captured by:
 \begin{equation*}
-M\models [r_i \vee o_i \vee h_i][r_i \vee o_i][o_i \vee h_i] \bigwedge_{j=1}^m K_j o_i
+M\models [r_i \vee o_i \vee h_i][\neg h_i][\neg r_i] \bigwedge_{j=1}^m K_j o_i
 \end{equation*}
 
 TODO: now that we have $\gamma_i$, how does it change the dynamics of the game?
