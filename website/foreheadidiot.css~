@@ -1,6 +1,8 @@
  
 /* start css.sty */
-
+td {
+    padding-right: 30px;
+}
 .cmr-5{font-size:50%;}
 .cmr-7{font-size:70%;}
 .cmmi-5{font-size:50%;font-style: italic;}
