@@ -15,10 +15,6 @@
 
 /* override some bootstrap styles screwing up the timelines css */
 
-td {
-    padding-right: 30px;
-}
-
 .vis [class*="span"] {
   min-height: 0;
   width: auto;

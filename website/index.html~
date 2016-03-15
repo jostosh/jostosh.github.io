@@ -137,7 +137,7 @@
     <button type = "button" id="graph" onclick=createGraph(true)>View graph</button>
     <button type=  "button" id="start_game" onclick=createGraph(false)>Start game</button>
     <button type ="button" id="draw_card" onclick=getCard()>Draw cards</button>
-    <button type ="button" id="allpersons" onclick=viewAllPersons()>All players</button>
+    <button type ="button" id="allpersons" onclick=viewAllPersons()>All persons</button>
     <!-- TODO: maybe expand with more buttons -->
     <button type ="button" id="person1" onclick=viewPerson(1)>Player 1</button>
     <button type ="button" id="person2" onclick=viewPerson(2)>Player 2</button>
