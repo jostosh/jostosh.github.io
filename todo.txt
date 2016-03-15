@@ -1,0 +1,15 @@
+Game
+
+    - Add playing styles to game
+    - Add announcements and knowledge to the game.
+    - 3 cards 3 players
+
+Report
+
+    - Decisions based on playng styles
+    - Conclusion
+
+Website
+
+    - Table layout
+    - Game description
