@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Sticky Footer Navbar Template for Bootstrap</title>
+    <title>Forehead Idiot Game</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -101,7 +101,8 @@
 
     <p>In order to start the game on can click on the "start game" button. The cards will then be drawn and the kripke will show all posibble states for every player.
         The "view graph" button will show all possible states when there are no cards drawn (WARNING this can take a lot of time to load depending on the number of players and cards).
-        The "Player #" buttons will display the states that the player holds for possible given the cards drawn.</p>
+        The "Player #" buttons will display the states that the player holds for possible given the cards drawn. When the "start game" button is pressed a table is generated
+    which displays the chances that the player thinks he is going to win.</p>
     <script type="text/javascript" src="js/vis.js"></script>
     <link href="vis.css" rel="stylesheet" type="text/css" />
 
@@ -187,7 +188,7 @@
             class="MathClass-open">⟨</mo><mrow><mi
     >S</mi><mo
             class="MathClass-punc">,</mo><mi
-    >π</mi><mo
+    >&pi;</mi><mo
             class="MathClass-punc">,</mo><mi
     >R</mi></mrow><mo
             class="MathClass-close">⟩</mo></mrow></math>.
@@ -208,7 +209,7 @@
     ><mn>2</mn></mrow></msub
     ><mo
             class="MathClass-punc">,</mo><mo
-            class="MathClass-op">…</mo><mo
+            class="MathClass-op">&hellip;</mo><mo
             class="MathClass-punc">,</mo><msub><mrow
     ><mi
     >s</mi></mrow><mrow
@@ -216,7 +217,7 @@
     >m</mi></mrow></msub
     ></mrow><mo
             class="MathClass-close">)</mo></mrow> <mo
-            class="MathClass-rel">∈</mo> <mi
+            class="MathClass-rel">&isin;</mo> <mi
     >S</mi></math>, where
     <!--l. 58--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
@@ -226,7 +227,7 @@
     ><mi
     >i</mi></mrow></msub
     > <mo
-            class="MathClass-rel">∈</mo> <mi
+            class="MathClass-rel">&isin;</mo> <mi
     >D</mi> <mo
             class="MathClass-rel">=</mo> <mrow ><mo
             class="MathClass-open">{</mo><mrow><mn>2</mn><mo
@@ -304,9 +305,9 @@
     >j</mi></mrow></msub
     ><mo
             class="MathClass-punc">,</mo><mspace width="1em" class="nbsp" /><mo
-            class="MathClass-op">∀</mo><mi
+            class="MathClass-op">&forall;</mo><mi
     >j</mi><mo
-            class="MathClass-rel">≠</mo><mi
+            class="MathClass-rel">&ne;</mo><mi
     >i</mi></math>. A player&#x2019;s
     card is unique: <!--l. 61--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
@@ -315,14 +316,14 @@
     >s</mi></mrow><mrow
     ><mn>1</mn></mrow></msub
     ><mo
-            class="MathClass-rel">≠</mo><msub><mrow
+            class="MathClass-rel">&ne;</mo><msub><mrow
     ><mi
     >s</mi></mrow><mrow
     ><mn>2</mn></mrow></msub
     ><mo
-            class="MathClass-rel">≠</mo><mo
+            class="MathClass-rel">&ne;</mo><mo
             class="MathClass-rel">⋯</mo><mo
-            class="MathClass-rel">≠</mo><msub><mrow
+            class="MathClass-rel">&ne;</mo><msub><mrow
     ><mi
     >s</mi></mrow><mrow
     ><mi
@@ -335,9 +336,9 @@
 ><mi
 >D</mi></mrow><mrow
 ><mi
->′</mi></mrow></msup
+>&prime;</mi></mrow></msup
 ><mo
-        class="MathClass-rel">⊆</mo> <mi
+        class="MathClass-rel">&sube;</mo> <mi
 >D</mi></math>
     with <!--l. 63--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
@@ -346,7 +347,7 @@
     ><mi
     >D</mi></mrow><mrow
     ><mi
-    >′</mi></mrow></msup
+    >&prime;</mi></mrow></msup
     ><mo
             class="MathClass-rel">|</mo> <mo
             class="MathClass-rel">=</mo> <mi
@@ -360,14 +361,14 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >m</mi> <mo
-            class="MathClass-rel">≤</mo> <mi
+            class="MathClass-rel">&le;</mo> <mi
     >n</mi></math>, then for each
     possible set of cards there will be <!--l. 63--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mrow ><mo
             class="MathClass-open">(</mo><mrow><mi
     >n</mi> <mo
-            class="MathClass-bin">−</mo> <mi
+            class="MathClass-bin">&minus;</mo> <mi
     >m</mi></mrow><mo
             class="MathClass-close">)</mo></mrow><mo
             class="MathClass-punc">!</mo></math>
@@ -397,7 +398,7 @@
         ><mrow ><mo
                 class="MathClass-open">(</mo><mrow><mi
         >n</mi> <mo
-                class="MathClass-bin">−</mo> <mi
+                class="MathClass-bin">&minus;</mo> <mi
         >m</mi></mrow><mo
                 class="MathClass-close">)</mo></mrow><mo
                 class="MathClass-punc">!</mo></mrow></mfrac>
@@ -430,7 +431,7 @@
     ><mn>3</mn></mrow></msub
     ><mo
             class="MathClass-punc">,</mo><mo
-            class="MathClass-op">…</mo><mo
+            class="MathClass-op">&hellip;</mo><mo
             class="MathClass-punc">,</mo><msub><mrow
     ><mi
     >p</mi></mrow><mrow
@@ -502,7 +503,7 @@
         <li class="itemize">We have that <!--l. 72--><math
                 xmlns="http://www.w3.org/1998/Math/MathML"
                 display="inline" ><mi
-        >π</mi><mrow ><mo
+        >&pi;</mi><mrow ><mo
                 class="MathClass-open">(</mo><mrow><mi
         >s</mi></mrow><mo
                 class="MathClass-close">)</mo></mrow><mrow ><mo
@@ -518,8 +519,8 @@
         >j</mi></mrow></msub
         ></mrow><mo
                 class="MathClass-close">)</mo></mrow> <mo
-                class="MathClass-rel">=</mo> <mo
-                class="MathClass-rel"></mo></math>
+                class="MathClass-rel">=</mo> <mi
+        >𝕥</mi></math>
             iﬀ <!--l. 72--><math
                     xmlns="http://www.w3.org/1998/Math/MathML"
                     display="inline" ><msub><mrow
@@ -533,7 +534,7 @@
             so <!--l. 72--><math
                     xmlns="http://www.w3.org/1998/Math/MathML"
                     display="inline" ><mi
-            >π</mi><mrow ><mo
+            >&pi;</mi><mrow ><mo
                     class="MathClass-open">(</mo><mrow><mi
             >s</mi></mrow><mo
                     class="MathClass-close">)</mo></mrow><mrow ><mo
@@ -550,7 +551,7 @@
             ></mrow><mo
                     class="MathClass-close">)</mo></mrow> <mo
                     class="MathClass-rel">=</mo> <mi
-            >℧</mi></math>
+            >𝕗</mi></math>
             iﬀ <!--l. 72--><math
                     xmlns="http://www.w3.org/1998/Math/MathML"
                     display="inline" ><msub><mrow
@@ -559,13 +560,13 @@
             ><mi
             >i</mi></mrow></msub
             ><mo
-                    class="MathClass-rel">≠</mo><mi
+                    class="MathClass-rel">&ne;</mo><mi
             >j</mi></math>.
         </li>
         <li class="itemize">Furthermore, we have <!--l. 73--><math
                 xmlns="http://www.w3.org/1998/Math/MathML"
                 display="inline" ><mi
-        >π</mi><mrow ><mo
+        >&pi;</mi><mrow ><mo
                 class="MathClass-open">(</mo><mrow><mi
         >s</mi></mrow><mo
                 class="MathClass-close">)</mo></mrow><mrow ><mo
@@ -576,12 +577,12 @@
         >i</mi></mrow></msub
         ></mrow><mo
                 class="MathClass-close">)</mo></mrow> <mo
-                class="MathClass-rel">=</mo> <mo
-                class="MathClass-rel"></mo></math>
+                class="MathClass-rel">=</mo> <mi
+        >𝕥</mi></math>
             and <!--l. 73--><math
                     xmlns="http://www.w3.org/1998/Math/MathML"
                     display="inline" ><mi
-            >π</mi><mrow ><mo
+            >&pi;</mi><mrow ><mo
                     class="MathClass-open">(</mo><mrow><mi
             >s</mi></mrow><mo
                     class="MathClass-close">)</mo></mrow><mrow ><mo
@@ -593,7 +594,7 @@
             ></mrow><mo
                     class="MathClass-close">)</mo></mrow> <mo
                     class="MathClass-rel">=</mo> <mi
-            >℧</mi></math>
+            >𝕗</mi></math>
             iﬀ <!--l. 73--><math
                     xmlns="http://www.w3.org/1998/Math/MathML"
                     display="inline" ><msub><mrow
@@ -612,12 +613,12 @@
                     xmlns="http://www.w3.org/1998/Math/MathML"
                     display="inline" ><mi
             >j</mi><mo
-                    class="MathClass-rel">≠</mo><mi
+                    class="MathClass-rel">&ne;</mo><mi
             >i</mi></math>.
             In other words, <!--l. 73--><math
                     xmlns="http://www.w3.org/1998/Math/MathML"
                     display="inline" ><mi
-            >π</mi><mrow ><mo
+            >&pi;</mi><mrow ><mo
                     class="MathClass-open">(</mo><mrow><mi
             >s</mi></mrow><mo
                     class="MathClass-close">)</mo></mrow><mrow ><mo
@@ -629,11 +630,11 @@
             ></mrow><mo
                     class="MathClass-close">)</mo></mrow> <mo
                     class="MathClass-rel">=</mo> <mi
-            >℧</mi></math>
+            >𝕗</mi></math>
             and <!--l. 73--><math
                     xmlns="http://www.w3.org/1998/Math/MathML"
                     display="inline" ><mi
-            >π</mi><mrow ><mo
+            >&pi;</mi><mrow ><mo
                     class="MathClass-open">(</mo><mrow><mi
             >s</mi></mrow><mo
                     class="MathClass-close">)</mo></mrow><mrow ><mo
@@ -644,13 +645,13 @@
             >i</mi></mrow></msub
             ></mrow><mo
                     class="MathClass-close">)</mo></mrow> <mo
-                    class="MathClass-rel">=</mo> <mo
-                    class="MathClass-rel"></mo></math>
+                    class="MathClass-rel">=</mo> <mi
+            >𝕥</mi></math>
             if for some <!--l. 73--><math
                     xmlns="http://www.w3.org/1998/Math/MathML"
                     display="inline" ><mi
             >j</mi><mo
-                    class="MathClass-rel">≠</mo><mi
+                    class="MathClass-rel">&ne;</mo><mi
             >i</mi></math>
             we have that <!--l. 73--><math
                     xmlns="http://www.w3.org/1998/Math/MathML"
@@ -686,7 +687,7 @@
     >i</mi></mrow></msub
     ><munderover accentunder="false" accent="false"><mrow
     ><mo mathsize="big"
-    > ∧</mo>
+    > &and;</mo>
     </mrow><mrow
     ><mi
     >j</mi><mo
@@ -706,7 +707,7 @@
     >c</mi></mrow><mrow
     ><mn>2</mn></mrow></msub
     > <mo
-            class="MathClass-bin">∧</mo><mo
+            class="MathClass-bin">&and;</mo><mo
             class="MathClass-op">¬</mo><msub><mrow
     ><mi
     >p</mi></mrow><mrow
@@ -717,9 +718,9 @@
     >c</mi></mrow><mrow
     ><mn>3</mn></mrow></msub
     > <mo
-            class="MathClass-bin">∧</mo><mo
+            class="MathClass-bin">&and;</mo><mo
             class="MathClass-rel">⋯</mo> <mo
-            class="MathClass-bin">∧</mo><mo
+            class="MathClass-bin">&and;</mo><mo
             class="MathClass-op">¬</mo><msub><mrow
     ><mi
     >p</mi></mrow><mrow
@@ -732,7 +733,7 @@
     >a</mi></mrow></msub
     ></mrow><mo
             class="MathClass-close">)</mo></mrow> <mo
-            class="MathClass-bin">∨</mo> <mrow ><mo
+            class="MathClass-bin">&or;</mo> <mrow ><mo
             class="MathClass-open">(</mo><mrow><mo
             class="MathClass-op">¬</mo><msub><mrow
     ><mi
@@ -744,7 +745,7 @@
     >c</mi></mrow><mrow
     ><mn>2</mn></mrow></msub
     > <mo
-            class="MathClass-bin">∧</mo> <msub><mrow
+            class="MathClass-bin">&and;</mo> <msub><mrow
     ><mi
     >p</mi></mrow><mrow
     ><mi
@@ -754,9 +755,9 @@
     >c</mi></mrow><mrow
     ><mn>3</mn></mrow></msub
     > <mo
-            class="MathClass-bin">∧</mo><mo
+            class="MathClass-bin">&and;</mo><mo
             class="MathClass-rel">⋯</mo> <mo
-            class="MathClass-bin">∧</mo><mo
+            class="MathClass-bin">&and;</mo><mo
             class="MathClass-op">¬</mo><msub><mrow
     ><mi
     >p</mi></mrow><mrow
@@ -769,9 +770,9 @@
     >a</mi></mrow></msub
     ></mrow><mo
             class="MathClass-close">)</mo></mrow> <mo
-            class="MathClass-bin">∨</mo><mo
+            class="MathClass-bin">&or;</mo><mo
             class="MathClass-rel">⋯</mo> <mo
-            class="MathClass-bin">∨</mo> <mrow ><mo
+            class="MathClass-bin">&or;</mo> <mrow ><mo
             class="MathClass-open">(</mo><mrow><mo
             class="MathClass-op">¬</mo><msub><mrow
     ><mi
@@ -783,7 +784,7 @@
     >c</mi></mrow><mrow
     ><mn>2</mn></mrow></msub
     > <mo
-            class="MathClass-bin">∧</mo><mo
+            class="MathClass-bin">&and;</mo><mo
             class="MathClass-op">¬</mo><msub><mrow
     ><mi
     >p</mi></mrow><mrow
@@ -794,9 +795,9 @@
     >c</mi></mrow><mrow
     ><mn>3</mn></mrow></msub
     > <mo
-            class="MathClass-bin">∧</mo><mo
+            class="MathClass-bin">&and;</mo><mo
             class="MathClass-rel">⋯</mo> <mo
-            class="MathClass-bin">∧</mo> <msub><mrow
+            class="MathClass-bin">&and;</mo> <msub><mrow
     ><mi
     >p</mi></mrow><mrow
     ><mi
@@ -831,7 +832,7 @@
             class="MathClass-rel">⊧</mo> <mfenced separators=""
                                                   open="["  close="]" ><mrow><munderover accentunder="false" accent="false"><mrow
     ><mo mathsize="big"
-    >∧</mo>
+    >&and;</mo>
     </mrow><mrow
     ><mi
     >i</mi><mo
@@ -847,11 +848,11 @@
     > <mfenced separators=""
                open="("  close=")" ><mrow><munder class="msub"><mrow
     ><mo mathsize="big"
-    >∧</mo>
+    >&and;</mo>
     </mrow><mrow
     ><mi
     >j</mi><mo
-            class="MathClass-rel">≠</mo><mi
+            class="MathClass-rel">&ne;</mo><mi
     >i</mi></mrow></munder
     ><msub><mrow
     ><mi
@@ -871,7 +872,7 @@
     ></mrow></msub
     > </mrow></mfenced> </mrow></mfenced><munderover accentunder="false" accent="false"><mrow
     ><mo mathsize="big"
-    > ∧</mo>
+    > &and;</mo>
     </mrow><mrow
     ><mi
     >i</mi><mo
@@ -887,7 +888,7 @@
         >i</mi></mrow></msub
     ><munder class="msub"><mrow
     ><mo mathsize="big"
-    > ∨</mo>
+    > &or;</mo>
     </mrow><mrow
     ><msup><mrow
     ><mi
@@ -897,7 +898,7 @@
     >i</mi></mrow><mo
             class="MathClass-close">)</mo></mrow></mrow></msup
     ><mo
-            class="MathClass-rel">∉</mo><msub><mrow
+            class="MathClass-rel">&notin;</mo><msub><mrow
     ><mrow ><mo
             class="MathClass-open">{</mo><mrow><msup><mrow
     ><mi
@@ -910,7 +911,7 @@
             class="MathClass-close">}</mo></mrow></mrow><mrow
     ><mi
     >j</mi><mo
-            class="MathClass-rel">≠</mo><mi
+            class="MathClass-rel">&ne;</mo><mi
     >i</mi></mrow></msub
     ></mrow></munder
     ><msub><mrow
@@ -943,11 +944,11 @@
 >j</mi></mrow><mo
         class="MathClass-close">)</mo></mrow></mrow></msup
 > <mo
-        class="MathClass-rel">∈</mo> <msup><mrow
+        class="MathClass-rel">&isin;</mo> <msup><mrow
 ><mi
 >D</mi></mrow><mrow
 ><mi
->′</mi></mrow></msup
+>&prime;</mi></mrow></msup
 ></math> is the
     card that player <!--l. 88--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
@@ -966,7 +967,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >n</mi> <mo
-            class="MathClass-bin">−</mo> <mi
+            class="MathClass-bin">&minus;</mo> <mi
     >m</mi> <mo
             class="MathClass-bin">+</mo> <mn>1</mn></math> alternative
     worlds. Hence there are <!--l. 88--><math
@@ -975,11 +976,11 @@
     >m</mi><mrow ><mo
             class="MathClass-open">(</mo><mrow><mi
     >n</mi> <mo
-            class="MathClass-bin">−</mo> <mi
+            class="MathClass-bin">&minus;</mo> <mi
     >m</mi> <mo
             class="MathClass-bin">+</mo> <mn>1</mn></mrow><mo
             class="MathClass-close">)</mo></mrow> <mo
-            class="MathClass-bin">−</mo> <mi
+            class="MathClass-bin">&minus;</mo> <mi
     >m</mi> <mo
             class="MathClass-bin">+</mo> <mn>1</mn></math>
     possible worlds left.
@@ -1023,7 +1024,7 @@
         ><mrow ><mo
                 class="MathClass-open">(</mo><mrow><mi
         >n</mi> <mo
-                class="MathClass-bin">−</mo> <mi
+                class="MathClass-bin">&minus;</mo> <mi
         >m</mi></mrow><mo
                 class="MathClass-close">)</mo></mrow><mo
                 class="MathClass-punc">!</mo></mrow></mfrac> <mo
@@ -1050,7 +1051,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >s</mi><mo
-            class="MathClass-rel">≠</mo><mi
+            class="MathClass-rel">&ne;</mo><mi
     >t</mi></math>, we have that at least
     two cards are changed: <!--l. 93--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
@@ -1060,7 +1061,7 @@
     ><mi
     >i</mi></mrow></msub
     ><mo
-            class="MathClass-rel">≠</mo><msub><mrow
+            class="MathClass-rel">&ne;</mo><msub><mrow
     ><mi
     >t</mi></mrow><mrow
     ><mi
@@ -1074,7 +1075,7 @@
     ><mi
     >j</mi></mrow></msub
     ><mo
-            class="MathClass-rel">≠</mo><msub><mrow
+            class="MathClass-rel">&ne;</mo><msub><mrow
     ><mi
     >t</mi></mrow><mrow
     ><mi
@@ -1086,13 +1087,13 @@
     >i</mi><mo
             class="MathClass-punc">,</mo><mi
     >j</mi> <mo
-            class="MathClass-rel">≤</mo> <mi
+            class="MathClass-rel">&le;</mo> <mi
     >m</mi></math> and
     <!--l. 93--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >i</mi><mo
-            class="MathClass-rel">≠</mo><mi
+            class="MathClass-rel">&ne;</mo><mi
     >j</mi></math>.
 </p><!--l. 95--><p class="indent" >   This implies that there are only reﬂexive relations:
     <!--l. 95--><math
@@ -1109,7 +1110,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >t</mi><mo
-            class="MathClass-rel">≠</mo><mi
+            class="MathClass-rel">&ne;</mo><mi
     >s</mi></math>,
     we require that all cards but one are the same. For any state
     <!--l. 95--><math
@@ -1185,7 +1186,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >j</mi><mo
-            class="MathClass-rel">≠</mo><mi
+            class="MathClass-rel">&ne;</mo><mi
     >i</mi></math>.
 </p><!--l. 104--><p class="noindent" >
 </p>
@@ -1193,25 +1194,25 @@
             id="x1-70002.2.1"></a>The probability of winning the game</h5>
     <!--l. 106--><p class="noindent" ><span class="paragraphHead"><a
         id="x1-80002.2.1"></a><span
-        class="cmbx-10">Estimating one&#x2019;s own odds</span></span>
+        class="ecbx-1000">Estimating one&#x2019;s own odds</span></span>
     Since there are <!--l. 107--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >n</mi> <mo
-            class="MathClass-bin">−</mo> <mi
+            class="MathClass-bin">&minus;</mo> <mi
     >m</mi></math> cards that have not
     been dealt, each player has <!--l. 107--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >n</mi> <mo
-            class="MathClass-bin">−</mo> <mi
+            class="MathClass-bin">&minus;</mo> <mi
     >m</mi> <mo
             class="MathClass-bin">+</mo> <mn>1</mn></math> possibilities
     for his own card and, consequently, <!--l. 107--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >n</mi> <mo
-            class="MathClass-bin">−</mo> <mi
+            class="MathClass-bin">&minus;</mo> <mi
     >m</mi> <mo
             class="MathClass-bin">+</mo> <mn>1</mn></math>
     possible outcomes of the game. To determine the probability for a player to win, let
@@ -1223,7 +1224,7 @@
     ><mi
     >i</mi></mrow></msub
     > <mo
-            class="MathClass-rel">⊆</mo> <mi
+            class="MathClass-rel">&sube;</mo> <mi
     >S</mi></math> be the subset of possible
     states such that <!--l. 107--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
@@ -1247,7 +1248,7 @@
             class="MathClass-rel">|</mo> <mo
             class="MathClass-rel">=</mo> <mi
     >n</mi> <mo
-            class="MathClass-bin">−</mo> <mi
+            class="MathClass-bin">&minus;</mo> <mi
     >m</mi> <mo
             class="MathClass-bin">+</mo> <mn>1</mn></math>. Now
     let <!--l. 107--><math
@@ -1266,7 +1267,7 @@
     ></mrow><mo
             class="MathClass-close">)</mo></mrow></mrow></msubsup
     > <mo
-            class="MathClass-rel">⊆</mo> <msub><mrow
+            class="MathClass-rel">&sube;</mo> <msub><mrow
     ><mi
     >T</mi></mrow><mrow
     ><mi
@@ -1276,7 +1277,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >t</mi> <mo
-            class="MathClass-rel">∈</mo> <msubsup><mrow
+            class="MathClass-rel">&isin;</mo> <msubsup><mrow
     ><mi
     >T</mi></mrow><mrow
     ><mi
@@ -1375,7 +1376,7 @@
         <mrow
         ><mi
         >n</mi> <mo
-                class="MathClass-bin">−</mo> <mi
+                class="MathClass-bin">&minus;</mo> <mi
         >m</mi> <mo
                 class="MathClass-bin">+</mo> <mn>1</mn></mrow></mfrac>
     </math></td><td class="eq-no">(2)</td></tr></table>
@@ -1399,7 +1400,7 @@
 </p>
     <!--l. 114--><p class="noindent" ><span class="paragraphHead"><a
         id="x1-90002.2.1"></a><span
-        class="cmbx-10">Estimating another player&#x2019;s odds</span></span>
+        class="ecbx-1000">Estimating another player&#x2019;s odds</span></span>
     Let <!--l. 115--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><msubsup><mrow
@@ -1416,7 +1417,7 @@
     ></mrow><mo
             class="MathClass-close">)</mo></mrow></mrow></msubsup
     > <mo
-            class="MathClass-rel">⊆</mo> <msub><mrow
+            class="MathClass-rel">&sube;</mo> <msub><mrow
     ><mi
     >T</mi></mrow><mrow
     ><mi
@@ -1426,7 +1427,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >t</mi> <mo
-            class="MathClass-rel">∈</mo> <msubsup><mrow
+            class="MathClass-rel">&isin;</mo> <msubsup><mrow
     ><mi
     >T</mi></mrow><mrow
     ><mi
@@ -1528,7 +1529,7 @@
         <mrow
         ><mi
         >n</mi> <mo
-                class="MathClass-bin">−</mo> <mi
+                class="MathClass-bin">&minus;</mo> <mi
         >m</mi> <mo
                 class="MathClass-bin">+</mo> <mn>1</mn></mrow></mfrac>
     </math></td><td class="eq-no">(3)</td></tr></table>
@@ -1538,7 +1539,7 @@
             id="x1-100002.2.2"></a>Playing strategies</h5>
     <!--l. 122--><p class="noindent" ><span class="paragraphHead"><a
         id="x1-110002.2.2"></a><span
-        class="cmbx-10">Calling a bet</span></span>
+        class="ecbx-1000">Calling a bet</span></span>
     Before we get to the optimal strategy, let us deﬁne the utility. If
     <!--l. 123--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
@@ -1654,11 +1655,11 @@
     > <mo
             class="MathClass-rel">=</mo><msub><mrow
     ><mo
-            class="MathClass-op"> ∑</mo>
+            class="MathClass-op"> &sum;</mo>
         <!--nolimits--></mrow><mrow
     ><mi
     >j</mi><mo
-            class="MathClass-rel">≠</mo><mi
+            class="MathClass-rel">&ne;</mo><mi
     >i</mi></mrow></msub
     ><msubsup><mrow
     ><mi
@@ -1690,7 +1691,7 @@
                 class="MathClass-close">)</mo></mrow></mrow></msubsup
         > <mo
             class="MathClass-rel">=</mo> <mo
-            class="MathClass-bin">−</mo><msubsup><mrow
+            class="MathClass-bin">&minus;</mo><msubsup><mrow
     ><mi
             mathvariant="bold-script">ℒ</mi></mrow><mrow
     >
@@ -1700,7 +1701,7 @@
     >k</mi></mrow></msubsup
     ><mrow ><mo
             class="MathClass-open">(</mo><mrow><mn>1</mn> <mo
-            class="MathClass-bin">−</mo><msubsup><mrow
+            class="MathClass-bin">&minus;</mo><msubsup><mrow
     ><mi
             mathvariant="bold-script">𝒫</mi></mrow><mrow
     >
@@ -1730,11 +1731,11 @@
     >k</mi></mrow><mo
             class="MathClass-close">)</mo></mrow></mrow></msubsup
     > <mo
-            class="MathClass-rel">∈</mo><mrow ><mo
-            class="MathClass-open">{</mo><mrow><mo
-            class="MathClass-rel"></mo><mo
-            class="MathClass-punc">,</mo> <mi
-    >℧</mi></mrow><mo
+            class="MathClass-rel">&isin;</mo><mrow ><mo
+            class="MathClass-open">{</mo><mrow><mi
+    >𝕥</mi><mo
+            class="MathClass-punc">,</mo><mi
+    >𝕗</mi></mrow><mo
             class="MathClass-close">}</mo></mrow></math> denote the decision
     of player <!--l. 136--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
@@ -1746,12 +1747,12 @@
     >k</mi></math>, where
     <!--l. 136--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
-            display="inline" ><mo
-            class="MathClass-rel"></mo></math> corresponds to
+            display="inline" ><mi
+    >𝕥</mi></math> corresponds to
     calling the bet and <!--l. 136--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
-    >℧</mi></math>
+    >𝕗</mi></math>
     corresponds to folding. The decision will be given by: </p><table class="equation"><tr><td> <a
         id="x1-11003r6"></a>
     <!--l. 137--><math
@@ -1770,12 +1771,12 @@
             class="MathClass-rel">=</mo>  <mfenced separators=""
                                                    open="{"  close="" ><mrow> <mtable  style="text-align:axis;"
                                                                                        equalrows="false" columnlines="none" equalcolumns="false" class="array"><mtr><mtd
-            class="array"  columnalign="left"><mo
-            class="MathClass-rel"></mo><mspace width="1em" class="quad"/></mtd><mtd
+            class="array"  columnalign="left"><mi
+    >𝕥</mi><mspace width="1em" class="quad"/></mtd><mtd
             class="array"  columnalign="left"><mstyle
             class="text"><mtext  >if </mtext></mstyle><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     ><msubsup><mrow
@@ -1806,19 +1807,19 @@
     ></mrow><mo
             class="MathClass-close">)</mo></mrow></mrow></msubsup
     > <mo
-            class="MathClass-rel">≥</mo> <mn>0</mn></mtd>
+            class="MathClass-rel">&ge;</mo> <mn>0</mn></mtd>
     </mtr><mtr><mtd
             class="array"  columnalign="left"><mi
-    >℧</mi> <mspace width="1em" class="quad"/></mtd><mtd
+    >𝕗</mi> <mspace width="1em" class="quad"/></mtd><mtd
             class="array"  columnalign="left"><mstyle
-            class="text"><mtext  >otherwise</mtext></mstyle>                  </mtd></mtr> <!--@{}l@{\quad }l@{}--></mtable>                                                                                               </mrow></mfenced>
+            class="text"><mtext  >otherwise</mtext></mstyle>                  </mtd></mtr> <!--@{}l@{\quad }l@{}--></mtable>                                                                                                </mrow></mfenced>
     </math></td><td class="eq-no">(6)</td></tr></table>
     <!--l. 145--><p class="indent" >   In equation <a
         href="#x1-11003r6">6<!--tex4ht:ref: eq:strat --></a>, <!--l. 145--><math
         xmlns="http://www.w3.org/1998/Math/MathML"
         display="inline" ><msub><mrow
 ><mi
->γ</mi></mrow><mrow
+>&gamma;</mi></mrow><mrow
 ><mi
 >i</mi></mrow></msub
 ></math>
@@ -1827,7 +1828,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     > <mo
@@ -1836,7 +1837,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     > <mo
@@ -1845,7 +1846,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     > <mo
@@ -1882,14 +1883,14 @@
         > <mo
             class="MathClass-rel">=</mo> <munderover accentunder="false" accent="false"><mrow
     ><mo mathsize="big"
-    >∑</mo>
+    >&sum;</mo>
     </mrow><mrow
     ><mi
     >j</mi><mo
             class="MathClass-rel">=</mo><mn>1</mn></mrow><mrow
     ><mi
     >i</mi><mo
-            class="MathClass-bin">−</mo><mn>1</mn></mrow></munderover
+            class="MathClass-bin">&minus;</mo><mn>1</mn></mrow></munderover
     ><msubsup><mrow
     ><mi
             mathvariant="bold-script">ℒ</mi></mrow><mrow
@@ -1903,7 +1904,7 @@
     > <mo
             class="MathClass-bin">+</mo> <munderover accentunder="false" accent="false"><mrow
     ><mo mathsize="big"
-    >∑</mo>
+    >&sum;</mo>
     </mrow><mrow
     ><mi
     >j</mi><mo
@@ -1921,12 +1922,12 @@
     ><mrow ><mo
             class="MathClass-open">(</mo><mrow><mi
     >k</mi><mo
-            class="MathClass-bin">−</mo><mn>1</mn></mrow><mo
+            class="MathClass-bin">&minus;</mo><mn>1</mn></mrow><mo
             class="MathClass-close">)</mo></mrow></mrow></msubsup
     > <mo
             class="MathClass-bin">+</mo> <munderover accentunder="false" accent="false"><mrow
     ><mo mathsize="big"
-    >∑</mo>
+    >&sum;</mo>
     </mrow><mrow
     ><mi
     >j</mi><mo
@@ -1959,7 +1960,7 @@
     >k</mi></mrow><mo
             class="MathClass-close">)</mo></mrow></mrow></msubsup
     > <mo
-            class="MathClass-bin">−</mo><msubsup><mrow
+            class="MathClass-bin">&minus;</mo><msubsup><mrow
     ><mi
             mathvariant="bold-script">ℒ</mi></mrow><mrow
     >
@@ -1968,7 +1969,7 @@
     ><mrow ><mo
             class="MathClass-open">(</mo><mrow><mi
     >k</mi><mo
-            class="MathClass-bin">−</mo><mn>1</mn></mrow><mo
+            class="MathClass-bin">&minus;</mo><mn>1</mn></mrow><mo
             class="MathClass-close">)</mo></mrow></mrow></msubsup
     ></mrow><mo
             class="MathClass-close">)</mo></mrow>
@@ -2002,8 +2003,8 @@
     >k</mi></mrow><mo
             class="MathClass-close">)</mo></mrow></mrow></msubsup
     > <mo
-            class="MathClass-rel">=</mo> <mo
-            class="MathClass-rel"></mo></math> and
+            class="MathClass-rel">=</mo> <mi
+    >𝕥</mi></math> and
     <!--l. 152--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mrow ><mo
@@ -2025,7 +2026,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     ></math> for the
@@ -2047,11 +2048,11 @@
         > <mo
             class="MathClass-rel">=</mo><munder class="msub"><mrow
     ><mo mathsize="big"
-    > ∑</mo>
+    > &sum;</mo>
     </mrow><mrow
     ><mi
     >j</mi><mo
-            class="MathClass-rel">≠</mo><mi
+            class="MathClass-rel">&ne;</mo><mi
     >i</mi></mrow></munder
     ><msubsup><mrow
     ><mi
@@ -2066,14 +2067,14 @@
     </math></td><td class="eq-no">(8)</td></tr></table>
     <!--l. 160--><p class="noindent" ><span class="paragraphHead"><a
         id="x1-120002.2.2"></a><span
-        class="cmbx-10">Raising the current bet: bluﬃng</span></span>
+        class="ecbx-1000">Raising the current bet: bluﬃng</span></span>
     A player can also decide to raise the current bet. The main reason for raising your bet is to make the
     other players decide to quit the game, or to increase the ﬁnal gain. A player now bluﬀs if, after its bluﬃng
     bet, <!--l. 161--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     ><msubsup><mrow
@@ -2159,12 +2160,12 @@
             class="MathClass-close">)</mo></mrow></mrow></msubsup
     > <mo
             class="MathClass-rel">=</mo> <mi
-    >℧</mi></math>
+    >𝕗</mi></math>
     for the players <!--l. 167--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >j</mi><mo
-            class="MathClass-rel">≠</mo><mi
+            class="MathClass-rel">&ne;</mo><mi
     >i</mi></math>.
     Hence, if a player decides to bluﬀ, he should try to ensure that
 
@@ -2188,7 +2189,7 @@
     >i</mi></mrow></msub
     > <mo
             class="MathClass-rel">=</mo> <mi
-    >℧</mi></math> for
+    >𝕗</mi></math> for
     those player&#x2019;s that have a higher probability of winning. Formally, it should make at least those players
     <!--l. 167--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
@@ -2228,7 +2229,7 @@
 </p>
     <!--l. 171--><p class="noindent" ><span class="paragraphHead"><a
         id="x1-130002.2.2"></a><span
-        class="cmbx-10">Raising the current bet: increasing the gain</span></span>
+        class="ecbx-1000">Raising the current bet: increasing the gain</span></span>
     If a player is conﬁdent of winning the round, he can decide to raise the current bet. A player should try to
     accomplish that <!--l. 172--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
@@ -2242,8 +2243,8 @@
     >k</mi></mrow><mo
             class="MathClass-close">)</mo></mrow></mrow></msubsup
     > <mo
-            class="MathClass-rel">=</mo> <mo
-            class="MathClass-rel"></mo></math>
+            class="MathClass-rel">=</mo> <mi
+    >𝕥</mi></math>
     while it should also maximize the expected gain.
 </p><!--l. 174--><p class="noindent" >
 </p>
@@ -2260,11 +2261,11 @@
 ><mi
 >P</mi></mrow><mrow
 ><mi
->′</mi></mrow></msup
+>&prime;</mi></mrow></msup
 > <mo
         class="MathClass-rel">=</mo> <mi
 >P</mi> <mo
-        class="MathClass-bin">∪</mo><msubsup><mrow
+        class="MathClass-bin">&cup;</mo><msubsup><mrow
 ><mrow ><mo
         class="MathClass-open">{</mo><mrow><msub><mrow
 ><mi
@@ -2324,7 +2325,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     > <mo
@@ -2334,7 +2335,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     > <mo
@@ -2344,7 +2345,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     > <mo
@@ -2370,7 +2371,7 @@
     ><mi
     >i</mi></mrow></msub
     > <mo
-            class="MathClass-bin">∨</mo> <msub><mrow
+            class="MathClass-bin">&or;</mo> <msub><mrow
     ><mi
     >K</mi></mrow><mrow
     ><mi
@@ -2381,7 +2382,7 @@
     ><mi
     >i</mi></mrow></msub
     > <mo
-            class="MathClass-bin">∨</mo> <msub><mrow
+            class="MathClass-bin">&or;</mo> <msub><mrow
     ><mi
     >K</mi></mrow><mrow
     ><mi
@@ -2405,7 +2406,7 @@
 >i</mi></mrow></msub
 ><munderover accentunder="false" accent="false"><mrow
 ><mo mathsize="big"
-> ∧</mo>
+> &and;</mo>
 </mrow><mrow
 ><mi
 >j</mi><mo
@@ -2421,14 +2422,14 @@
     <mi
     >j</mi></mrow></msub
 > <mo
-        class="MathClass-bin">∧</mo><mo
+        class="MathClass-bin">&and;</mo><mo
         class="MathClass-op">¬</mo><msub><mrow
 ><mi
 >o</mi></mrow><mrow
 ><mi
 >j</mi></mrow></msub
 > <mo
-        class="MathClass-bin">∧</mo><mo
+        class="MathClass-bin">&and;</mo><mo
         class="MathClass-op">¬</mo><msub><mrow
 ><mi
 >h</mi></mrow><mrow
@@ -2436,7 +2437,7 @@
 >j</mi></mrow></msub
 ></mrow><mo
         class="MathClass-close">)</mo></mrow> <mo
-        class="MathClass-bin">∨</mo> <mrow ><mo
+        class="MathClass-bin">&or;</mo> <mrow ><mo
         class="MathClass-open">(</mo><mrow><mo
         class="MathClass-op">¬</mo><msub><mrow
 ><mi
@@ -2444,13 +2445,13 @@
 ><mi
 >j</mi></mrow></msub
 > <mo
-        class="MathClass-bin">∧</mo> <msub><mrow
+        class="MathClass-bin">&and;</mo> <msub><mrow
 ><mi
 >o</mi></mrow><mrow
 ><mi
 >j</mi></mrow></msub
 > <mo
-        class="MathClass-bin">∧</mo><mo
+        class="MathClass-bin">&and;</mo><mo
         class="MathClass-op">¬</mo><msub><mrow
 ><mi
 >h</mi></mrow><mrow
@@ -2458,7 +2459,7 @@
 >j</mi></mrow></msub
 ></mrow><mo
         class="MathClass-close">)</mo></mrow> <mo
-        class="MathClass-bin">∨</mo> <mrow ><mo
+        class="MathClass-bin">&or;</mo> <mrow ><mo
         class="MathClass-open">(</mo><mrow><mo
         class="MathClass-op">¬</mo><msub><mrow
 ><mi
@@ -2466,14 +2467,14 @@
 ><mi
 >j</mi></mrow></msub
 > <mo
-        class="MathClass-bin">∧</mo><mo
+        class="MathClass-bin">&and;</mo><mo
         class="MathClass-op">¬</mo><msub><mrow
 ><mi
 >o</mi></mrow><mrow
 ><mi
 >j</mi></mrow></msub
 > <mo
-        class="MathClass-bin">∧</mo> <msub><mrow
+        class="MathClass-bin">&and;</mo> <msub><mrow
 ><mi
 >h</mi></mrow><mrow
 ><mi
@@ -2491,7 +2492,7 @@
         class="MathClass-rel">=</mo> <mn>1</mn><mo
         class="MathClass-punc">,</mo><mn>2</mn><mo
         class="MathClass-punc">,</mo><mo
-        class="MathClass-op">…</mo><mo
+        class="MathClass-op">&hellip;</mo><mo
         class="MathClass-punc">,</mo><mi
 >m</mi></math>.
 
@@ -2504,7 +2505,7 @@
     <!--l. 189--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mo
-            class="MathClass-op">∀</mo><mi
+            class="MathClass-op">&forall;</mo><mi
     >i</mi><mo
             class="MathClass-punc">,</mo><mspace width="1em" class="nbsp" /><msubsup><mrow
     ><mi
@@ -2537,9 +2538,9 @@
                 class="MathClass-close">)</mo></mrow></mrow></msubsup
         > <mo
             class="MathClass-rel">=</mo> <mo
-            class="MathClass-bin">−</mo><mrow ><mo
+            class="MathClass-bin">&minus;</mo><mrow ><mo
             class="MathClass-open">(</mo><mrow><mn>1</mn> <mo
-            class="MathClass-bin">−</mo><msubsup><mrow
+            class="MathClass-bin">&minus;</mo><msubsup><mrow
     ><mi
             mathvariant="bold-script">𝒫</mi></mrow><mrow
     >
@@ -2561,7 +2562,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     ></math>).
@@ -2573,7 +2574,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >m</mi> <mo
-            class="MathClass-bin">−</mo> <mn>1</mn></math>.
+            class="MathClass-bin">&minus;</mo> <mn>1</mn></math>.
 </p><!--l. 198--><p class="indent" >   Once we have the gain, we can compute the utility of winning a game and so we can also obtain the
     decision for each player (equation <a
             href="#x1-11003r6">6<!--tex4ht:ref: eq:strat --></a>).
@@ -2596,13 +2597,13 @@
 >k</mi></mrow><mo
         class="MathClass-close">)</mo></mrow></mrow></msubsup
 > <mo
-        class="MathClass-rel">=</mo> <mo
-        class="MathClass-rel"></mo></math>.
+        class="MathClass-rel">=</mo> <mi
+>𝕥</mi></math>.
     Now any player <!--l. 203--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >j</mi><mo
-            class="MathClass-rel">≠</mo><mi
+            class="MathClass-rel">&ne;</mo><mi
     >i</mi></math>
     knows that the threshold of 0 was exceeded. Hence each player
     <!--l. 203--><math
@@ -2619,7 +2620,7 @@
     <mtr><mtd
             columnalign="right" class="align-odd"><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     ><msubsup><mrow
@@ -2652,19 +2653,19 @@
             class="MathClass-close">)</mo></mrow></mrow></msubsup
     ></mtd>                              <mtd
             class="align-even"> <mo
-            class="MathClass-rel">≥</mo> <mn>0</mn><mspace width="2em"/></mtd>                                    <mtd
+            class="MathClass-rel">&ge;</mo> <mn>0</mn><mspace width="2em"/></mtd>                                    <mtd
             columnalign="right" class="align-label"></mtd>                              <mtd
             class="align-label">
         <mspace width="2em"/></mtd></mtr><mtr><mtd
         columnalign="right" class="align-odd"><msub><mrow
 ><mi
->γ</mi></mrow><mrow
+>&gamma;</mi></mrow><mrow
 ><mi
 >i</mi></mrow></msub
 ></mtd>                                          <mtd
         class="align-even"> <mo
-        class="MathClass-rel">≥</mo><mo
-        class="MathClass-bin">−</mo><mfrac><mrow
+        class="MathClass-rel">&ge;</mo><mo
+        class="MathClass-bin">&minus;</mo><mfrac><mrow
 ><msubsup><mrow
 ><mi
 >U</mi></mrow><mrow
@@ -2705,7 +2706,7 @@
         xmlns="http://www.w3.org/1998/Math/MathML"
         display="inline" ><msub><mrow
 ><mi
->γ</mi></mrow><mrow
+>&gamma;</mi></mrow><mrow
 ><mi
 >i</mi></mrow></msub
 ></math>
@@ -2727,12 +2728,12 @@
         class="MathClass-close">)</mo></mrow></mrow></msubsup
 > <mo
         class="MathClass-rel">=</mo> <mi
->℧</mi></math>.
+>𝕗</mi></math>.
     Now any player <!--l. 210--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >j</mi><mo
-            class="MathClass-rel">≠</mo><mi
+            class="MathClass-rel">&ne;</mo><mi
     >i</mi></math>
     knows:
 </p><!--tex4ht:inline--><!--l. 214--><math
@@ -2742,7 +2743,7 @@
     <mtr><mtd
             columnalign="right" class="align-odd"><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     ><msubsup><mrow
@@ -2781,13 +2782,13 @@
         <mspace width="2em"/></mtd></mtr><mtr><mtd
         columnalign="right" class="align-odd"><msub><mrow
 ><mi
->γ</mi></mrow><mrow
+>&gamma;</mi></mrow><mrow
 ><mi
 >i</mi></mrow></msub
 ></mtd>                                          <mtd
         class="align-even"> <mo
         class="MathClass-rel">&#x003C;</mo> <mo
-        class="MathClass-bin">−</mo><mfrac><mrow
+        class="MathClass-bin">&minus;</mo><mfrac><mrow
 ><msubsup><mrow
 ><mi
 >U</mi></mrow><mrow
@@ -2829,13 +2830,13 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><mi
     >j</mi><mo
-            class="MathClass-rel">≠</mo><mi
+            class="MathClass-rel">&ne;</mo><mi
     >i</mi></math> ﬁnd that
     <!--l. 216--><math
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     > <mo
@@ -2849,13 +2850,13 @@
     ><mi
     >i</mi></mrow></msub
     > <mo
-            class="MathClass-bin">∨</mo> <msub><mrow
+            class="MathClass-bin">&or;</mo> <msub><mrow
     ><mi
     >o</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     > <mo
-            class="MathClass-bin">∨</mo> <msub><mrow
+            class="MathClass-bin">&or;</mo> <msub><mrow
     ><mi
     >h</mi></mrow><mrow
     ><mi
@@ -2870,7 +2871,7 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     ></math>.
@@ -2879,19 +2880,23 @@
             xmlns="http://www.w3.org/1998/Math/MathML"
             display="inline" ><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     > <mo
             class="MathClass-rel">&#x003C;</mo> <mn>1</mn><mo
             class="MathClass-punc">.</mo><mn>5</mn><mo
-            class="MathClass-punc">,</mo><mi
-    >γ</mi> <mo
-            class="MathClass-rel">≥</mo> <mn>0</mn><mo
+            class="MathClass-punc">,</mo><msub><mrow
+    ><mi
+    >&gamma;</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    > <mo
+            class="MathClass-rel">&ge;</mo> <mn>0</mn><mo
             class="MathClass-punc">.</mo><mn>9</mn><mn>3</mn><mo
             class="MathClass-punc">,</mo><msub><mrow
     ><mi
-    >γ</mi></mrow><mrow
+    >&gamma;</mi></mrow><mrow
     ><mi
     >i</mi></mrow></msub
     > <mo
@@ -2912,47 +2917,37 @@
 ><mi
 >i</mi></mrow></msub
 > <mo
-        class="MathClass-bin">∨</mo> <msub><mrow
+        class="MathClass-bin">&or;</mo> <msub><mrow
 ><mi
 >o</mi></mrow><mrow
 ><mi
 >i</mi></mrow></msub
 > <mo
-        class="MathClass-bin">∨</mo> <msub><mrow
+        class="MathClass-bin">&or;</mo> <msub><mrow
 ><mi
 >h</mi></mrow><mrow
 ><mi
 >i</mi></mrow></msub
 ></mrow><mo
         class="MathClass-close">]</mo></mrow><mrow ><mo
-        class="MathClass-open">[</mo><mrow><msub><mrow
+        class="MathClass-open">[</mo><mrow><mo
+        class="MathClass-op">¬</mo><msub><mrow
+><mi
+>h</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+></mrow><mo
+        class="MathClass-close">]</mo></mrow><mrow ><mo
+        class="MathClass-open">[</mo><mrow><mo
+        class="MathClass-op">¬</mo><msub><mrow
 ><mi
 >r</mi></mrow><mrow
-><mi
->i</mi></mrow></msub
-> <mo
-        class="MathClass-bin">∨</mo> <msub><mrow
-><mi
->o</mi></mrow><mrow
-><mi
->i</mi></mrow></msub
-></mrow><mo
-        class="MathClass-close">]</mo></mrow><mrow ><mo
-        class="MathClass-open">[</mo><mrow><msub><mrow
-><mi
->o</mi></mrow><mrow
-><mi
->i</mi></mrow></msub
-> <mo
-        class="MathClass-bin">∨</mo> <msub><mrow
-><mi
->h</mi></mrow><mrow
 ><mi
 >i</mi></mrow></msub
 ></mrow><mo
         class="MathClass-close">]</mo></mrow><munderover accentunder="false" accent="false"><mrow
 ><mo mathsize="big"
->∧</mo>
+>&and;</mo>
 </mrow><mrow
 ><mi
 >j</mi><mo
@@ -2972,21 +2967,130 @@
 >i</mi></mrow></msub
 >
 </math></td></tr></table>
-    <!--l. 221--><p class="indent" >   TODO: now that we have <!--l. 221--><math
+    <!--l. 221--><p class="noindent" >
+</p>
+    <h5 class="subsubsectionHead"><span class="titlemark">2.3.3   </span> <a
+            id="x1-170002.3.3"></a>Knowing another one&#x2019;s strategy</h5>
+    <!--l. 222--><p class="noindent" >Once a player knows another player&#x2019;s strategy, it can use this to estimate its own odds based on another player&#x2019;s decision.
+    If player <!--l. 222--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >i</mi></math> calls, then
+    another player <!--l. 222--><math
+            xmlns="http://www.w3.org/1998/Math/MathML"
+            display="inline" ><mi
+    >j</mi></math>
+    knows that
+</p><!--tex4ht:inline--><!--l. 226--><math
+        xmlns="http://www.w3.org/1998/Math/MathML"
+        display="block" ><mtable
+        columnalign="left" class="align-star">
+    <mtr><mtd
+            columnalign="right" class="align-odd"><msub><mrow
+    ><mi
+    >&gamma;</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ><msubsup><mrow
+    ><mi
+    >U</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    > <mo
+            class="MathClass-bin">+</mo> <msubsup><mrow
+    ><mi
+    >U</mi></mrow><mrow
+    >
+        <mi
+        >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >l</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></mtd>                              <mtd
+            class="align-even"> <mo
+            class="MathClass-rel">&ge;</mo> <mn>0</mn><mspace width="2em"/></mtd>                                    <mtd
+            columnalign="right" class="align-label"></mtd>                              <mtd
+            class="align-label">
+        <mspace width="2em"/></mtd></mtr><mtr><mtd
+        columnalign="right" class="align-odd"><msub><mrow
+><mi
+>&gamma;</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+></mtd>                                          <mtd
+        class="align-even"> <mo
+        class="MathClass-rel">&ge;</mo><mo
+        class="MathClass-bin">&minus;</mo><mfrac><mrow
+><msubsup><mrow
+><mi
+>U</mi></mrow><mrow
+><mi
+>i</mi></mrow><mrow
+><mrow ><mo
+        class="MathClass-open">(</mo><mrow><msub><mrow
+><mi
+>l</mi></mrow><mrow
+><mi
+>i</mi></mrow></msub
+></mrow><mo
+        class="MathClass-close">)</mo></mrow></mrow></msubsup
+></mrow>
+    <mrow
+    ><msubsup><mrow
+    ><mi
+    >U</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow><mrow
+    ><mrow ><mo
+            class="MathClass-open">(</mo><mrow><msub><mrow
+    ><mi
+    >w</mi></mrow><mrow
+    ><mi
+    >i</mi></mrow></msub
+    ></mrow><mo
+            class="MathClass-close">)</mo></mrow></mrow></msubsup
+    ></mrow></mfrac><mspace width="2em"/></mtd>                              <mtd
+        columnalign="right" class="align-label"></mtd>                              <mtd
+        class="align-label">
+    <mspace width="2em"/></mtd></mtr><mtr><mtd
+        columnalign="right" class="align-odd"></mtd>                                            <mtd
+        class="align-even"><mspace width="2em"/></mtd>                                        <mtd
+        columnalign="right" class="align-label">
+</mtd></mtr></mtable></math>
+    <!--l. 228--><p class="noindent" >TODO: now that we have <!--l. 228--><math
         xmlns="http://www.w3.org/1998/Math/MathML"
         display="inline" ><msub><mrow
 ><mi
->γ</mi></mrow><mrow
+>&gamma;</mi></mrow><mrow
 ><mi
 >i</mi></mrow></msub
 ></math>,
     how does it change the dynamics of the game?
 </p>
 
-<!-- END PAGE CONTENT------------------------------------------- -->
+
+    <!-- END PAGE CONTENT------------------------------------------- -->
+
+    <h2>Future Work</h2>
+For the game simulation the simulation of player styles could be added. The game can also be modeled using public announcement logic. This could further clarify what
+    the different agents know at a certain point in the game. The game itself can also be extended by adding different rules.
 
     <h2>Conclusion</h2>
-    Conclusion should go here.
+    todo
+    <p>&nbsp;</p><p>&nbsp;</p>
 </div>
 
 <footer class="navbar navbar-default navbar-fixed-bottom">

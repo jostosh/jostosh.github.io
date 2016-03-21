@@ -70,38 +70,60 @@ function setTextToCardArea(text){
 /* Function for calculating the probabilities */
 function calculateProbability(array) {
     var matrix = [];
-    for(var i=0; i<player_value; i++) {
-        matrix[i] = [];
-        for(var j=0; j<player_value; j++) {
-            matrix[i][j] = 0;
-        }
-    }
-    for (var i=0;i<array.length;i++){
-        var node =array[i];
-        var index = 9999
-        for(var q=0; q<card_value;q++){
-            if(card_array[q]!=node[q]) {
-                index = q;
+    if(player_value==card_value){
+        var temp_highest = 0;
+        var highest_index = 0;
+        for (var i=0; i<card_value; i++){
+            if(card_array[i]>temp_highest){
+                highest_index = i;
+                temp_highest = card_array[i];
             }
         }
-        if(index==9999){
-            var temp_l =0
-            for(var l=0;l<node.length;l++){
-                if(node[temp_l]<node[l]){
-                    temp_l = l
+        for (i=0; i<card_value;i++){
+            matrix[i] = []
+            for(var j=0;j<card_value;j++){
+                if(j==highest_index){
+                    matrix[i][j] = 1
+                } else {
+                    matrix[i][j] =0
                 }
             }
-            for(q=0;q<player_value;q++){
-                matrix[q][temp_l] = matrix[q][temp_l] + (1/((card_value-player_value)+1));
+        }
+        console.log(matrix)
+    } else {
+        for(var i=0; i<player_value; i++) {
+            matrix[i] = [];
+            for(var j=0; j<player_value; j++) {
+                matrix[i][j] = 0;
             }
-        } else{
-            temp_l=0;
-            for(l=0;l<node.length;l++){
-                if(node[temp_l]<node[l]){
-                    temp_l = l
+        }
+        for (var i=0;i<array.length;i++){
+            var node =array[i];
+            var index = 9999
+            for(var q=0; q<card_value;q++){
+                if(card_array[q]!=node[q]) {
+                    index = q;
                 }
             }
-            matrix[index][temp_l] = matrix[index][temp_l] + (1/((card_value-player_value)+1));
+            if(index==9999){
+                var temp_l =0
+                for(var l=0;l<node.length;l++){
+                    if(node[temp_l]<node[l]){
+                        temp_l = l
+                    }
+                }
+                for(q=0;q<player_value;q++){
+                    matrix[q][temp_l] = matrix[q][temp_l] + (1/((card_value-player_value)+1));
+                }
+            } else{
+                temp_l=0;
+                for(l=0;l<node.length;l++){
+                    if(node[temp_l]<node[l]){
+                        temp_l = l
+                    }
+                }
+                matrix[index][temp_l] = matrix[index][temp_l] + (1/((card_value-player_value)+1));
+            }
         }
     }
     return matrix
