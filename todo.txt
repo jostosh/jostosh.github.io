@@ -6,10 +6,10 @@ Game
 
 Report
 
-    - Decisions based on playng styles
+    - Decisions based on playing styles
     - Conclusion
 
 Website
 
-    - Table layout
-    - Game description
+    - Table layout - done
+    - Game description -

@@ -112,18 +112,19 @@ function calculateProbability(array) {
 function setTextToResultArea(matrix){
     document.getElementById("resultArea").innerHTML += "";
     var String = "";
-    String += "<table> <tr> <td> </td>";
+    String += "<table class=\"table table-striped\">  <thead> <tr> <td> </td>";
+
     for (var i=1;i<player_value+1;i++){
-        String += " <td> Player " + i + "\t" + " </td> ";
+        String += " <th> Player " + i + "\t" + " </th> ";
     }
     String += "</tr>";
     for(i=0;i<player_value;i++){
 
-        String += "<tr> <td> Player" + (i+1) + "\t"  + "</td>"
+        String += "<tr> <td> <b> Player " + (i+1) + "\t"  + " </b> </td>"
         for(var j=0;j<player_value;j++){
             String += " <td> " + matrix[i][j] + " </td>" ;
         }
-        String +=  "</tr>"
+        String +=  "</thead> </tr>"
     }
     String += "</table>";
     document.getElementById("resultArea").innerHTML += String;
@@ -178,9 +179,18 @@ function getCard() {
         }
     }
     enableButton();
+
+    string = "<table class='table table-striped'> <tbody>";
+
+
     for(var i=1;i<card_array.length+1;i++){
-        setTextToCardArea("<p> Person " + i + " draw card " + card_array[i-1] + "</p>");
+        string += "<tr> <td> Person " + i + " draws card " + card_array[i-1] + "</td> </tr>";
     }
+
+    string += " </tbody> </table>"
+
+    setTextToCardArea(string)
+
     viewAllPersons()
 }
 

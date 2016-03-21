@@ -96,7 +96,12 @@
     Because of these rules, there is epistemic logic in the game. To make it a little harder you can use different types of players. You could decide to make a player that plays safer than others etc.
 
     <h2> Game Simulation </h2>
+    <p>For the simulation of this game we have chosen to not use a full deck of cards. The user can however choose a different number of cards and players in order to see how
+    the game and kripke is influenced by these two factors.</p>
 
+    <p>In order to start the game on can click on the "start game" button. The cards will then be drawn and the kripke will show all posibble states for every player.
+        The "view graph" button will show all possible states when there are no cards drawn (WARNING this can take a lot of time to load depending on the number of players and cards).
+        The "Player #" buttons will display the states that the player holds for possible given the cards drawn.</p>
     <script type="text/javascript" src="js/vis.js"></script>
     <link href="vis.css" rel="stylesheet" type="text/css" />
 
@@ -108,49 +113,64 @@
         }
     </style>
 
-    For the simulation of this game we have chosen to not use a full deck of cards. The user can however choose a different number of cards and players in order to see how
-    the game and kripke is influenced by these two factors.
+
 
     <p>
-    <div id="mynetwork"></div>
+    <div class="row">
+
+
+    <div class="col-md-10">
+        <!-- This is where the screen is drawn -->
+        <div id="mynetwork"></div>
+    </div>
     <!-- Maybe use a text field instead of a dropdown
     TODO: because of the code styling I couldnt use number 9+1 = 10,stupid mistake but maybe if have some time we can fix this
-    -->
-    <select id="dropdown">
-        <option value="34">3 players with 4 cards</option>
-        <option value="35">3 players with 5 cards</option>
-        <option value="36">3 players with 6 cards</option>
-        <option value="37">3 players with 7 cards</option>
-        <option value="38">3 players with 8 cards</option>
-        <option value="45">4 players with 5 cards</option>
-        <option value="46">4 players with 6 cards</option>
-        <option value="47">4 players with 7 cards</option>
-        <option value="48">4 players with 8 cards</option>
-        <option value="56">5 players with 6 cards</option>
-        <option value="57">5 players with 7 cards</option>
-        <option value="58">5 players with 8 cards</option>
-        <option value="67">6 players with 7 cards</option>
-        <option value="68">6 players with 8 cards</option>
-        <option value="78">7 players with 8 cards</option>
-    </select>
+     -->
 
-    <button type = "button" id="graph" onclick=createGraph(true)>View graph</button>
-    <button type=  "button" id="start_game" onclick=createGraph(false)>Start game</button>
-    <button type ="button" id="draw_card" onclick=getCard()>Draw cards</button>
-    <button type ="button" id="allpersons" onclick=viewAllPersons()>All players</button>
-    <!-- TODO: maybe expand with more buttons -->
-    <button type ="button" id="person1" onclick=viewPerson(1)>Player 1</button>
-    <button type ="button" id="person2" onclick=viewPerson(2)>Player 2</button>
-    <button type ="button" id="person3" onclick=viewPerson(3)>Player 3</button>
-    <button type= "button" id="person4" onclick=viewPerson(4)>Player 4</button>
-    <div id="cardArea">
+    <div class="col-md-2" id="cardArea">
     </div>
+
+    </div>
+
+
+        <select id="dropdown">
+            <option value="33">3 players with 3 cards</option>
+            <option value="34">3 players with 4 cards</option>
+            <option value="35">3 players with 5 cards</option>
+            <option value="36">3 players with 6 cards</option>
+            <option value="37">3 players with 7 cards</option>
+            <option value="38">3 players with 8 cards</option>
+            <option value="45">4 players with 5 cards</option>
+            <option value="46">4 players with 6 cards</option>
+            <option value="47">4 players with 7 cards</option>
+            <option value="48">4 players with 8 cards</option>
+            <option value="56">5 players with 6 cards</option>
+            <option value="57">5 players with 7 cards</option>
+            <option value="58">5 players with 8 cards</option>
+            <option value="67">6 players with 7 cards</option>
+            <option value="68">6 players with 8 cards</option>
+            <option value="78">7 players with 8 cards</option>
+        </select>
+
+        <button type = "button" id="graph" onclick=createGraph(true)>View graph</button>
+        <button type=  "button" id="start_game" onclick=createGraph(false)>Start game</button>
+        <button type ="button" id="draw_card" onclick=getCard()>Draw cards</button>
+        <button type ="button" id="allpersons" onclick=viewAllPersons()>All players</button>
+        <!-- TODO: maybe expand with more buttons -->
+        <button type ="button" id="person1" onclick=viewPerson(1)>Player 1</button>
+        <button type ="button" id="person2" onclick=viewPerson(2)>Player 2</button>
+        <button type ="button" id="person3" onclick=viewPerson(3)>Player 3</button>
+        <button type= "button" id="person4" onclick=viewPerson(4)>Player 4</button>
+
+    <!-- This is where the chance table is displayed -->
     <div id="resultArea">
     </div>
+
     </p>
     <script src="js/kripke.js"></script>
-
     <h2> Game analysis </h2>
+
+
 <!-- PAGE CONTENT----------------------------------------------- -->
     <h3 class="sectionHead"><span class="titlemark">1   </span> <a
             id="x1-10001"></a>General Kripke structure</h3>
