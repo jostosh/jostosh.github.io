@@ -4,12 +4,30 @@
 
 /* global variables */
 card_value = 0;
+
+//Number of players.
 player_value = 0;
+
+//Cards Drawn.
 card_array = [];
+
 color_array =['red', 'green', 'blue', 'orange', 'yellow']
+
 /* Boolean when the probability must be visualize, you dont want it when the whole graph is visualized */
 probability = false;
-/* run this at the start to disable the button that are not yet needed */
+
+//Probability Matrix
+var probMatrix = null;
+
+//Probabilty Matrix adjusted for play style
+var probAdjustedMatrix = null;
+
+//These values are used for determining the adjusted probabilities
+var playerStyles = [1,1.25,0.75];
+
+var callThreshold = 0.6;
+
+/* run this at the start to disable the buttons that are not yet needed */
 disableButton();
 
 /*Create the graph*/
@@ -37,6 +55,9 @@ function createGraph(viewGraph){
         getCard()
         document.getElementById("draw_card").disabled =true;
     }
+
+    //This is where the call / bluff round is started.
+    //callBlufRound();
 }
 
 /* Disable the person buttons and enable the draw card button */
@@ -66,10 +87,26 @@ function setTextToCardArea(text){
     document.getElementById("cardArea").innerHTML += text;
 }
 
+//This will calculated the adjust probability based on the playing style.
+function calculateAdjustProbability(pMatrix) {
 
+    var matrix = [];
+
+    for(var i=0; i<player_value;i++){
+        for(var j=0; j<player_value;j++){
+            if (i==j) {
+                matrix[i] = pMatrix[i][j] * playerStyles[i];
+            }
+        }
+    }
+
+    console.log(matrix)
+    return matrix;
+}
 /* Function for calculating the probabilities */
 function calculateProbability(array) {
     var matrix = [];
+    //This is the case where we have the same number of players as of cards.
     if(player_value==card_value){
         var temp_highest = 0;
         var highest_index = 0;
@@ -144,7 +181,7 @@ function setTextToResultArea(matrix){
 
         String += "<tr> <td> <b> Player " + (i+1) + "\t"  + " </b> </td>"
         for(var j=0;j<player_value;j++){
-            String += " <td> " + matrix[i][j] + " </td>" ;
+            String += " <td> " + matrix[i][j].toFixed(2) + " </td>" ;
         }
         String +=  "</thead> </tr>"
     }
@@ -214,6 +251,28 @@ function getCard() {
     setTextToCardArea(string)
 
     viewAllPersons()
+}
+
+function callBlufRound() {
+
+    //This is where we draw the player choice.
+    var string = "<table class='table table-striped'> <tbody>";
+
+    for(var k=0; k<player_value; k++) {
+
+        string += "<tr> <td> Person " + (k+1);
+
+        if (probAdjustedMatrix[k] >= callThreshold) {
+            string += " calls </td> </tr>"
+        } else {
+            string += " folds </td> </tr>";
+        }
+
+    }
+
+    string += " </tbody> </table>"
+
+    setTextToCardArea(string)
 }
 
 function viewAllPersons(){
@@ -335,10 +394,14 @@ function setEdges(result){
             }
         }
     }
+
+
     if(probability){
-        var matrix = calculateProbability(edges_temp_array)
-        setTextToResultArea(matrix)
+        probMatrix = calculateProbability(edges_temp_array)
+        probAdjustedMatrix = calculateAdjustProbability(probMatrix)
+        setTextToResultArea(probMatrix)
     }
+
     return edges_array
 }
 
