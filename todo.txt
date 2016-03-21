@@ -2,7 +2,7 @@ Game
 
     - Add playing styles to game
     - Add announcements and knowledge to the game.
-    - 3 cards 3 players
+    - 3 cards 3 players - done
 
 Report
 
