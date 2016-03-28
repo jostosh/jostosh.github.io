@@ -201,7 +201,7 @@
     <!--l. 58--><p class="noindent" >For modeling Forehead idiot we consider the structures $M =\langle S,\pi,R\rangle $.
     We consider the games for 3 players. The states are given by $\boldsymbol s = (s_1,s_2,\ldots,s_m) \in S$, where $s_i \in D = \{ 2,3,4,5,6,7,8,9,10,j,q,k,a \}$. This means that if $s_3 = 5$, then player 3 has 5 on
     his forehead. Note that $D$ is an ordered set: $2\lt 3\lt 4\lt 5\lt 6\lt 7\lt 8\lt 9\lt 10\lt j\lt q\lt k\lt a$.
-</p><!--l. 61--><p class="indent" >   Since any player can only see those cards that are on the forehead of the other players, the relations are defined as $\boldsymbol s R_i \boldsymbol t$ such that $s_j = t_j,~\forall j \neq i$. A player's card is unique: $s_1 \neq s_2 \neq \cdots \neq s_m$. Note that relations are symmetric and reflexive.
+</p><!--l. 61--><p class="indent" >   Since any player can only see those cards that are on the forehead of the other players, the relations are defined as $\boldsymbol s R_i \boldsymbol t$ such that $s_j = t_j,~\forall j \neq i$. A player's card is unique: $s_1 \neq s_2 \neq \cdots \neq s_m$. Note that relations are symmetric, transitive and reflexive.
 </p><!--l. 63--><p class="indent" >  Suppose we take a subset of the total deck $D'\subseteq D$ with $|D'|=n$. There are $n!$ different sequences of cards. If the number of players is $m\leq n$, then for each possible set of cards there will be $(n-m)!$ games with the same sequence of cards for the first $m$ cards. Hence, the total number of possible games $g$ is:
     \begin{equation}
     g=\frac{n!}{(n-m)!}
@@ -219,7 +219,7 @@
             id="x1-30001.2"></a>Theory</h4>
     <!--l. 77--><p class="noindent" >Before the cards are put on the foreheads, every player knows that every player has exactly one card. This can be captured by
     \begin{align*}
-    K_i \bigwedge_{j=1}^m \bigg((p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge \neg p_j c_a) \vee (\neg p_j c_2 \wedge p_j c_3 \wedge \cdots \wedge \neg p_j c_a) \vee \cdots \vee (\neg p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge p_j c_a) \bigg)
+    M \models C \bigwedge_{j=1}^m \bigg((p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge \neg p_j c_a) \vee (\neg p_j c_2 \wedge p_j c_3 \wedge \cdots \wedge \neg p_j c_a) \vee \cdots \vee (\neg p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge p_j c_a) \bigg)
     \end{align*}
 </p>
     <!--l. 82--><p class="noindent" >The moment that the players put the cards on their foreheads it is as if $m$ announcements are made. Every player announces that he knows what the other players' cards are (without actually saying it). This means that every player also knows his remaining possibilities.
