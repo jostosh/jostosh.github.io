@@ -31,7 +31,7 @@ var playerGamma =[];
 var playerCalls = [];
 
 //These values are used for determining the adjusted probabilities
-var playerStyles = [1,1.25,0.75,1,1.5,0.5,1.5];
+var playerStyles = [1,1.5,0.4,1,1.5,0.5,1.5];
 
 /* run this at the start to disable the buttons that are not yet needed */
 disableButton();
@@ -186,7 +186,7 @@ function setUtilityMatrixToArea(){
     String += "<table class=\"table table-striped\">  <thead> <tr> <td> </td>";
 
     for (var i=1;i<player_value+1;i++){
-        String += " <th> Player " + i + "  (" +playerStyles[i-1]+  ")\t" + " </th> ";
+        String += " <th> Player " + i + "  (&#947: " +playerStyles[i-1]+  ")\t" + " </th> ";
     }
     String += "</tr>";
     for(i=0;i<player_value;i++){
@@ -215,7 +215,7 @@ function setTextToResultArea(matrix){
     var i;
 
     for (i=1;i<player_value+1;i++){
-        String += " <th> Player " + i + "  (" +playerStyles[i-1]+  ")\t" + " </th> ";
+        String += " <th> Player " + i + "  (&#947:" +playerStyles[i-1]+  ")\t" + " </th> ";
     }
     String += "</tr>";
     for(i=0;i<player_value;i++){
@@ -234,7 +234,6 @@ function setTextToResultArea(matrix){
     document.getElementById("resultArea").innerHTML += String;
 }
 
-
 function calculateUtility(number, i){
     var gain = player_value -1;
     var utility_win = gain * number;
@@ -243,7 +242,6 @@ function calculateUtility(number, i){
     if(playerGamma[i]==null){
         playerGamma[i] =[-5,5];
     }
-
         if(playerStyles[i]*utility_win + utility_lose >= 0){
             if(!(gamma>9999)) {
                 updateUtility(gamma, true, i);
