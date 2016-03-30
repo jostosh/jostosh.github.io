@@ -310,6 +310,7 @@ function changeCard(player,card) {
         string += " </tbody> </table>"
 
         setTextToCardArea(string)
+
         enableButton();
 
         viewAllPersons();
@@ -318,10 +319,11 @@ function changeCard(player,card) {
         callBlufRound();
 
         if(!already_won){
-            checkWin()
+            checkWin();
+            alreadyWon = false;
         }
 
-        endRound();
+        setUtilityMatrixToArea();
 
     } else {
         //TODO maybe warn the person
