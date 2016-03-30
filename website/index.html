@@ -72,7 +72,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Forehead Idiot Game</a>
+            <a class="navbar-brand custom-text-h" href="#">Forehead Idiot Game</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -86,9 +86,14 @@
     <h2> Introduction </h2>
         <p>This is a website created for the MAS Project 2016.</p>
 
-        <p>For our project we analyse the forehead idiot game. In the next sections the game is described,
-        a simulation is given where the knowledge of every player is represented in a kripke model, an analyses of the game and the kripke model is given and a conclusion
-            is drawn from the analysis.</p>
+    <p> For this project we analyse the ForeHead idiot game. We would like to analyse how choices of players influence the game both in terms of chance analysis and epistemic logic.
+        What if certain players have a certain playing style? Are we able to deduct this information from playing a certain number of games. Also, if a player knows that an other player has a certain
+        playing style then does that influence the choices the player makes.
+    </p>
+
+    <p> In the next sections the game is described,
+        a simulation is given where the knowledge of every player is represented in a Kripke model, an analysis of the game and the Kripke model is given and a conclusion
+        is drawn from the analysis.</p>
 
     <h2> Game Explanation </h2>
 
@@ -118,7 +123,7 @@
     <p>For the simulation of this game we have chosen to not use a full deck of cards. The user can however choose a different number of cards and players in order to see how
     the game and kripke is influenced by these two factors.</p>
 
-    <p>In order to start the game on can click on the "start game" button. The cards will then be drawn and the kripke will show all posibble states for every player.
+    <p>In order to start the game one can click on the "start game" button. The cards will then be drawn and the Kripke model will show all possible states for every player.
         The "view graph" button will show all possible states when there are no cards drawn (WARNING this can take a lot of time to load depending on the number of players and cards).
         The "Player #" buttons will display the states that the player holds for possible given the cards drawn. When the "start game" button is pressed a table is generated
     which displays the chances that the player thinks he is going to win.</p>
@@ -176,10 +181,24 @@
         <button type=  "button" id="start_game" onclick=playTheGame(false)>Start game</button>
         <button type ="button" id="draw_card" onclick=getCard()>Draw cards</button>
         <button type ="button" id="allpersons" onclick=viewAllPersons()>All players</button>
+
+    <!-- TODO: maybe expand with more buttons -->
         <button type ="button" id="person1" onclick=viewPerson(1)>Player 1</button>
+        <select id=playerCardDropdown1  onchange=changeCard(0,this.value)>
+
+        </select>
         <button type ="button" id="person2" onclick=viewPerson(2)>Player 2</button>
+        <select id=playerCardDropdown2 onchange=changeCard(1,this.value)>
+
+        </select>
         <button type ="button" id="person3" onclick=viewPerson(3)>Player 3</button>
+        <select id=playerCardDropdown3 onchange=changeCard(2,this.value)>
+
+        </select>
         <button type= "button" id="person4" onclick=viewPerson(4)>Player 4</button>
+        <select id=playerCardDropdown4 onchange=changeCard(3,this.value)>
+
+        </select>
 
     <!-- This is where the chance table is displayed -->
     <div id="resultArea">

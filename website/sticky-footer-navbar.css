@@ -29,6 +29,15 @@ body > .container {
     margin: 20px 0;
 }
 
+.container .custom-text-h{
+    font-size: 200%;
+}
+
+.container .custom-text{
+    font-size: 150%;
+    font-weight: bold;
+}
+
 .footer > .container {
     padding-right: 15px;
     padding-left: 15px;
@@ -37,3 +46,5 @@ body > .container {
 code {
     font-size: 80%;
 }
+
+

@@ -49,12 +49,13 @@ function playTheGame(viewGraph){
     probability = false;
     /* get the first value of the drop down menu */
     player_value = parseInt(dropdown_value[0]);
-    document.getElementById("cardArea").innerHTML = "";
 
-    document.getElementById("resultArea").innerHTML = "";
+    //Empty the tables
+    emptyTables();
 
-    document.getElementById("bluffArea").innerHTML = "";
+    //Disable to appropriate buttons.
     disableButton()
+
     /*Make the graph with a array with all the number in an array */
     if(viewGraph){
         makeFullModel(range1(card_value))
@@ -70,6 +71,14 @@ function playTheGame(viewGraph){
         alreadyWon= false;
     }
     setUtilityMatrixToArea()
+}
+
+function emptyTables(){
+    document.getElementById("cardArea").innerHTML = "";
+
+    document.getElementById("resultArea").innerHTML = "";
+
+    document.getElementById("bluffArea").innerHTML = "";
 }
 
 /* Disable the person buttons and enable the draw card button */
@@ -277,11 +286,58 @@ function viewPerson(number){
 
 //This will only change one card.
 function changeCard(player,card) {
-    console.log("Changing card.");
-    card_array[player] = card;
-    enableButton();
-    viewAllPersons()
+    card_array[player] = parseInt(card);
+
+    var doubleCard = false
+
+    console.log(card_array)
+    for(i=0; i<card_array.length; i++){
+        for(j=0; j<card_array.length; j++) {
+            if (j != i && card_array[i] == card_array[j]){
+                doubleCard = true
+            }
+        }
+    }
+
+    if(!doubleCard){
+        //Empty the tables
+        emptyTables();
+
+        string = "<table class='table table-striped'> <tbody>";
+        for(var i=1;i<card_array.length+1;i++){
+            string += "<tr> <td> Person " + i + " draws card: "+card_array[i-1]+" </td> </tr>";
+        }
+        string += " </tbody> </table>"
+
+        setTextToCardArea(string)
+        enableButton();
+
+        viewAllPersons();
+
+        //This is where the call / bluff round is started.
+        callBlufRound();
+
+        if(!already_won){
+            checkWin()
+        }
+
+        endRound();
+
+    } else {
+        //TODO maybe warn the person
+    }
+
 }
+
+function removeOptions(selectbox)
+{
+    var i;
+    for(i=selectbox.options.length-1;i>=0;i--)
+    {
+        selectbox.remove(i);
+    }
+}
+
 
 /*Randomly draw a card for all players and set them to the html */
 function getCard() {
@@ -295,6 +351,7 @@ function getCard() {
             card_array.push(random_number);
         }
     }
+
     enableButton();
 
     var string = "<table class='table table-striped'> <tbody>";
@@ -302,22 +359,33 @@ function getCard() {
 
     for(var i=1;i<card_array.length+1;i++){
         string += "<tr> <td> Person " + i + " draws card: "+card_array[i-1]+" ";
+
+        removeOptions(document.getElementById("playerCardDropdown"+i+""));
         //string += "<select id=playerCardDropdown"+i+">"
         //
-        //for(var c = 2; c < card_value+2; c++){
-        //    if( c == card_array[i-1]) {
-        //        string += "<option id=\"option"+c+""+i+" \" value=" + (c-2) +" selected=\"selected\" onchange=\"changeCard("+i+","+c+")\">"+c+"</option>";
-        //    } else {
-        //        string += "<option id=\"option"+c+""+i+" \" value=" + (c-2) +" onchange=\"changeCard("+i+","+c+")\">"+c+"</option>";
-        //    }
-        //
-        //    var option = document.getElementById('option'+c+''+i+'')
-        //
-        //    option.addEventListener("change", function() {
-        //      console.log("working")
-        //    })
-        //
-        //}
+        for(var c = 2; c < card_value+2; c++){
+            if( c == card_array[i-1]) {
+                //string += "<option id=\"option"+c+""+i+" \" value=" + (c-2) +" selected=\"selected\" onchange=\"changeCard("+i+","+c+")\">"+c+"</option>";
+
+                var option = document.createElement("option");
+                option.text = c;
+                option.value = c;
+                option.selected="selected";
+                var select = document.getElementById("playerCardDropdown"+i+"");
+                select.appendChild(option);
+
+            } else {
+
+                var option = document.createElement("option");
+                option.text = c;
+                option.value = c;
+                var select = document.getElementById("playerCardDropdown"+i+"");
+                select.appendChild(option);
+
+                //string += "<option id=\"option"+c+""+i+" \" value=" + (c-2) +" onchange=\"changeCard("+i+","+c+")\">"+c+"</option>";
+            }
+
+        }
         //
         //string += "</select> </td> </tr>";
         string += "</td> </tr>";
