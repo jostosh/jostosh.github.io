@@ -176,11 +176,24 @@
         <button type=  "button" id="start_game" onclick=createGraph(false)>Start game</button>
         <button type ="button" id="draw_card" onclick=getCard()>Draw cards</button>
         <button type ="button" id="allpersons" onclick=viewAllPersons()>All players</button>
-        <!-- TODO: maybe expand with more buttons -->
+
+    <!-- TODO: maybe expand with more buttons -->
         <button type ="button" id="person1" onclick=viewPerson(1)>Player 1</button>
+        <select id=playerCardDropdown1  onchange=changeCard(0,this.value)>
+
+        </select>
         <button type ="button" id="person2" onclick=viewPerson(2)>Player 2</button>
+        <select id=playerCardDropdown2 onchange=changeCard(1,this.value)>
+
+        </select>
         <button type ="button" id="person3" onclick=viewPerson(3)>Player 3</button>
+        <select id=playerCardDropdown3 onchange=changeCard(2,this.value)>
+
+        </select>
         <button type= "button" id="person4" onclick=viewPerson(4)>Player 4</button>
+        <select id=playerCardDropdown4 onchange=changeCard(3,this.value)>
+
+        </select>
 
     <!-- This is where the chance table is displayed -->
     <div id="resultArea">
