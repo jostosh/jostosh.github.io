@@ -107,6 +107,7 @@ A more difficult scenario arises when there are $n$ cards and $m < n$ players. I
 Since there are $n-m$ cards that have not been dealt, each player has $n-m+1$ possibilities for his own card and, consequently, $n-m+1$ possible outcomes of the game. To determine the probability for a player to win, let $T_i \subseteq S$ be the subset of possible states such that $\boldsymbol s R_i \boldsymbol t$. Note that $|T_i| = n-m+1$. Now let $T^{(w_i)}_i \subseteq T_i$ be a subset of states such that for $\boldsymbol t \in T^{(w_i)}_i$ we have that $(M,\boldsymbol t) \models w_i$. The probability that player $i$ wins based on the information available is:
 \begin{equation}
 \mathcal{P}^{(w_i)}_i = \frac{|T^{(w_i)}_i|}{|T_i|} = \frac{\lvert T^{(w_i)}_i\rvert}{n-m+1}
+\label{eq:winprob}
 \end{equation}
 
 The relations are symmetric. Hence, $\mathcal{P}^{(w_i)}_i$ will be the same for all states.
@@ -166,12 +167,13 @@ The estimations can be obtained by using equations (\ref{eq:util}) through (\ref
 
 Once we have the estimated gains we can make an estimation of the other player's decisions. For bluffing we want to achieve that $C^{(k)}_j = \mathbb{f}$ for the players $j\neq i$. Hence, if a player decides to bluff, he should try to ensure that $\langle C^{(k)}_j \rangle_i = \mathbb{f}$ for those player's that have a higher probability of winning. Formally, it should make at least those players $j$ fold such that $\mathcal P^{(w_j)}_i > \mathcal P^{(w_i)}_i$. 
 
-As of now, we will not consider bluffing in full detail.
+We will consider bluffing from another perspective after we have discussed the theory about strategies in section \ref{sec:strat}.
 
 \paragraph{Raising the current bet: increasing the gain}
 If a player is confident of winning the round, he can decide to raise the current bet. A player should try to accomplish that $C^{(k)}_j = \mathbb{t}$ while it should also maximize the expected gain. 
 
 \subsection{Reasoning about strategies}
+\label{sec:strat}
 We now want to address the agents' reasoning during a game. We will start out small by simplifying the rules of the game. We will only have a single betting round. Each player can choose to either call the minimum bet of 1 coin, or fold. The player that is seated on the left side of the dealer has to put in a blind bet of 1 coin. This is to encourage other players for participating (knowing that there is at least something at stake).
 
 Let's extend our set of propositions to $\boldsymbol{P}'=\boldsymbol{P} \cup \{r_i,o_i,h_i\}_{i=1}^m$ in which $r_i$ will resemble a risky strategy for player $i$, $o_i$ will be used for optimal strategy and $h_i$ for safe or `harmless' strategy. A risky strategy will mean that $\gamma_i=1.1$, an optimal strategy will mean that $\gamma_i=1.0$ and a harmless strategy will resemble $\gamma_i=0.9$.
@@ -189,6 +191,7 @@ for $i=1,2,\ldots,m$.
 First we can compute the loss for each player of participating. This is simply the amount of coins, so $\forall i,~\mathcal{L}^{(1)}_i=1$. Thus, we can simplify the utility for losing (equation \ref{eq:loss}):
 \begin{equation}
 U^{(l_i)}_i = -(1 - \mathcal{P}^{(w_i)}_i)
+\label{eq:lossutil}
 \end{equation}
 
 At the first round, the players know nothing about each other's strategies (given by $\gamma_i$). Hence, they will play based solely on what they see by looking at the opponents' foreheads.
@@ -222,10 +225,126 @@ M\models [r_i \vee o_i \vee h_i][\neg h_i][\neg r_i] \bigwedge_{j=1}^m K_j o_i
 Once a player knows another player's strategy, it can use this to estimate its own odds based on another player's decision. If player $i$ calls, then another player $j$ knows that 
 \begin{align*}
 \gamma_i U^{(w_i)}_i + U^{(l_i)}_i &\geq 0\\
-\gamma_i &\geq -\frac{U^{(l_i)}_i }{U^{(w_i)}_i}\\
+\gamma_i U^{(w_i)}_i &\geq -U^{(l_i)}_i\\
+\gamma_i \mathcal G^{(k)}_i \mathcal P^{(w_i)}_i &\geq 1 - \mathcal{P}_i^{(w_i)} & \text{eq. (\ref{eq:lossutil}) and (\ref{eq:util})}\\
+\gamma_i \mathcal G^{(k)}_i \mathcal P^{(w_i)}_i + \mathcal{P}_i^{(w_i)} &\geq 1 \\
+\mathcal{P}_i^{(w_i)}  (\gamma_i \mathcal G^{(k)}_i + 1) &\geq 1 \\
+\mathcal{P}_i^{(w_i)} &\geq \frac{1}{\gamma_i \mathcal G^{(k)}_i + 1}\\
+\frac{\lvert T^{(w_i)}_i\rvert}{n-m+1} &\geq \frac{1}{\gamma_i \mathcal G^{(k)}_i + 1} & \text{eq. (\ref{eq:winprob})}\\
+\lvert T^{(w_i)}_i\rvert&\geq \frac{n-m+1}{\gamma_i \mathcal G^{(k)}_i + 1}\\
+\lvert T^{(w_i)}_i\rvert&\geq \frac{n-m+1}{\gamma_i (m-1) + 1} & (\mathcal G^{(k)}_i = m-1)
+\end{align*}
+By similar reasoning, if player $i$ folds, then player $j$ knows that
+\begin{align*}
+\lvert T^{(w_i)}_i\rvert&<\frac{n-m+1}{\gamma_i (m-1) + 1} 
+\end{align*}
+For simplicity, we assume that every player expects his gain to be as in equation (\ref{eq:sgain}). Hence, $\mathcal{P}_i^{(w_i)}$ will be the only unknown.
+
+If player $j$ knows such restrictions for $|T^{(w_i)}_i|$, it can go through its possible worlds. For every world, it should expand the possibilities for player $i$. It can then see whether this restriction on $|T^{(w_i)}_i|$ is satisfied by the expansion of that particular world. In essence, we need to revisit the Kripke model in which we have all possible worlds before any cards are drawn. For each $\boldsymbol s \in T_j$ (note the subscript $j$) we have to look at the states $\boldsymbol t$ such that $\boldsymbol s R_i \boldsymbol t$. Let us denote the set $\mathcal T^{\boldsymbol s}_i = \{\boldsymbol t | \boldsymbol t \in S \text{ such that } \boldsymbol s R_i \boldsymbol t \}$. For each $T^{\boldsymbol s}_i$ we count the occurrences of $w_i$. If the number of $w_i$ satisfies the restriction of $|T^{(w_i)}_i|$, then $\boldsymbol s$ is still a valid alternative for $j$. 
+
+The consequence of this in terms of public announcement logic, might be viewed as an announcement about the possibilities for the card that player $j$ is holding. If the possibilities that remain after such an announcement form a proper subset of $T_j$ (note the subscript $j$), then player $j$ can re-estimate its own utilities for winning and losing.
+
+It is difficult to describe a generic statement of such announcements, as the actual announcements depend on the number of players and cards that are in the game.
+
+\subsubsection{Bluffing}
+Now that we have established the effect of calling and folding in case of known strategies, we can more accurately analyze the consequence of bluffing. Once player $j$ knows the strategy of $i$, player $i$ knows that player $j$ knows his strategy. Hence, player $i$ could deviate from its strategy and `bluff' to make any player $j\neq i$ believe that their cards are worse than they actually are. It is important to note that bluffing is extremely risky in this game, as a player does not know his own card.
+
+If player $i$ bluffs, he attempts to set the lower bound for $|T^{(w_i)}_i|$ from $j$'s perspective higher than it actually is. A bluff is successful if the subset $T_j$ that remains is such that player $j$ decides to fold.
+
+\section{Example game}
+Let us now consider a simple game in which we apply the general theory that was outlined above. We will consider a relatively simple game. There will be 3 players and 8 cards. Before any cards are drawn the number of possible games $g$ is 
+\begin{equation}
+ g=\frac{8!}{(8-3)!}=336
+\end{equation}
+
+\subsection{First round}
+In the first round, the first player draws a 6, the second player draws a 2 and the third player draws a 5. Once these cards are drawn, we have $m(n-m+1) - m +1 = 3(8-3+1) - 3 + 1=16$, so each player has 6 alternative games.
+
+From the applet, we can see that the probabilities are $\mathcal{P}^{(w_1)}_1=\frac{2}{3}$, $\mathcal{P}^{(w_2)}_2=\frac{1}{2}$, $\mathcal{P}^{(w_3)}_3 = \frac{1}{2}$. It is interesting to see that player two can estimate its own odds of winning at $\frac{1}{2}$ while it is obvious for the other players that he is going to lose. Let us assume that $r_i$ corresponds to $\gamma_i=1.5$, $o_i$ corresponds to $\gamma_i=1$ and $h_i$ corresponds to $\gamma_i=0.4$. We will have the situation in which $\gamma_1 = 1.5$, $\gamma_2 = 1$ and $\gamma_3=.4$.
+
+We can compute the utilities of winning for each player:
+\begin{align*}
+ U^{(w_1)}_1 &= \mathcal G^{(1)}_1 \mathcal P^{(w_1)}_1 = 2 \cdot \frac{2}{3} = \frac{4}{3}\\
+ U^{(w_2)}_2 &= \mathcal G^{(1)}_2 \mathcal P^{(w_2)}_2 = 2 \cdot \frac{1}{2} = 1\\
+ U^{(w_3)}_3 &= \mathcal G^{(1)}_3 \mathcal P^{(w_3)}_3 = 2 \cdot \frac{1}{2} = 1
+\end{align*}
+And the utilities for losing:
+\begin{align*}
+ U^{(l_1)}_1 &= -\mathcal L^{(1)}_1 (1-\mathcal P^{(w_1)}_1) = -1\cdot \frac{1}{3} = -\frac{1}{3}\\
+ U^{(l_2)}_2 &= -\mathcal L^{(1)}_2 (1-\mathcal P^{(w_2)}_2) = -1\cdot \frac{1}{2} = -\frac{1}{2}\\
+ U^{(l_3)}_3 &= -\mathcal L^{(1)}_3 (1-\mathcal P^{(w_3)}_3) = -1 \cdot \frac{1}{2} = -\frac{1}{2}
 \end{align*}
 
-TODO: now that we have $\gamma_i$, how does it change the dynamics of the game?
+We will have the following:
+\begin{align*}
+\begin{array}{clll}
+ \gamma_1 U^{(w_1)}_1 + U^{(l_1)}_1 &= 1.5\cdot \frac{4}{3} - \frac{1}{3} = \frac{5}{3} &\geq 0 &\Rightarrow C^{(1)}_1 = \mathbb{t}\\
+ \gamma_2 U^{(w_2)}_2 + U^{(l_2)}_2 &= 1\cdot 1 - \frac{1}{2} = \frac{1}{2} &\geq 0 &\Rightarrow C^{(1)}_2 = \mathbb{t}\\
+ \gamma_3 U^{(w_3)}_3 + U^{(l_3)}_3 &= 0.4\cdot 1 - \frac{1}{2} = -0.1 &< 0 &\Rightarrow C^{(1)}_3 = \mathbb{f}
+\end{array}
+\end{align*}
+
+Now the round ends. Hence, each player knows $\displaystyle -\frac{U^{(l_i)}}{U^{(w_i)}_i}$ for all players:
+\begin{align*}
+ \gamma_1 &\geq -\frac{U^{(l_1)}_1}{U^{(w_1)}_1} = -\frac{-1/3}{4/3}=\frac{1}{4}\\
+ \gamma_2 &\geq -\frac{U^{(l_2)}_2}{U^{(w_2)}_2} = -\frac{-1/2}{1}=\frac{1}{2}\\
+ \gamma_3 &< -\frac{U^{(l_3)}_3}{U^{(w_3)}_3} = -\frac{-1/2}{1}=\frac{1}{2}
+\end{align*}
+Hence, it is as if it is announced that $[h_3]$ and so we have:
+\begin{equation}
+ M \models [h_3] (K_1 h_3 \wedge K_2 h_3 \wedge K_3 h_3)
+\end{equation}
+\subsection{Second round}
+In the second round, player 1 draws 2, player 2 draws 3 and player 3 draws 4. Since all players have relatively low cards, each player will have an optimistic view of the game's outcome. Player 3 is to decide first. It is clear that $\mathcal{P}^{(w_3)}_3=1$. Hence, player 3 decides to call. For player 1 and 2, this means that
+\begin{equation*}
+ |T_3^{(w_3)}| \geq \frac{n-m+1}{\gamma_3 (m-1)+1} = \frac{8-3+1}{0.4(3-1)+1} = 3\frac{1}{3}
+\end{equation*}
+Since we know that $|T_3^{(w_3)}|$ should be an integer, we have that $|T_3^{(w_3)}|\geq 4$. Note that there are $n-m+1$ alternatives for each player, so there are $8-3+1=6$ alternatives. 
+
+It is important to note that at this point $\mathcal{P}^{(w_2)}_2 = \mathcal{P}^{(w_3)}_3 = \frac{5}{6}$.
+
+\subsubsection{Updating player 1's view}
+At this point we can say that player 1 knows what the cards of player 2 and 3 are: 
+\begin{equation*}
+M' \models K_1 p_2c_3 \wedge K_1p_3c_4 
+\end{equation*}
+where $M'$ is the model that remains after the initial announcement of drawing the cards. Furthermore, he knows:
+\begin{equation*}
+ M' \models K_1(p_1 c_2 \vee p_1 c_5 \vee p_1 c_6 \vee p_1 c_7 \vee p_1 c_8 \vee p_1 c_9)
+\end{equation*}
+\begin{itemize}
+ \item If $p_1 c_2$ were true, then $|T_3^{(w_3)}| = 6$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.
+ \item If $p_1 c_5$ were true, then $|T_3^{(w_3)}| = 4$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.
+ \item If $p_1 c_6$ were true, then $|T_3^{(w_3)}| = 3$, so this situation does not satisfy the constraint of $|T_3^{(w_3)}| \geq 4$.
+ \item Obviously, this also implies that $p_1 c_7$, $p_1 c_8$, $p_1 c_9$ do not satisfy the constraint.   
+\end{itemize}
+Hence, it is as if it is announced that $[p_1 c_2 \vee p_1 c_5]$:
+\begin{equation}
+M'\models [p_1 c_2 \vee p_1 c_5] K_1 (p_1 c_2 \vee p_1 c_5)
+\end{equation}
+This means that the probability for player 1 to win can be re-estimated: $\mathcal{P}^{(w_1)}_1 = \frac{1}{2}$.
+
+\subsubsection{Updating player 2's view}
+For player 2 we can say that player he knows what the cards of player 1 and 3 are: 
+\begin{equation*}
+M' \models K_2 p_1c_2 \wedge K_1p_3c_4 
+\end{equation*}
+Furthermore, he knows:
+\begin{equation*}
+ M' \models K_2(p_2 c_3 \vee p_2 c_5 \vee p_2 c_6 \vee p_2 c_7 \vee p_2 c_8 \vee p_2 c_9)
+\end{equation*}
+\begin{itemize}
+ \item If $p_2 c_3$ were true, then $|T_3^{(w_3)}| = 6$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.
+ \item If $p_2 c_5$ were true, then $|T_3^{(w_3)}| = 4$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.
+ \item If $p_2 c_6$ were true, then $|T_3^{(w_3)}| = 3$, so this situation does not satisfy the constraint of $|T_3^{(w_3)}| \geq 4$.
+ \item Obviously, this also implies that $p_2 c_7$, $p_2 c_8$, $p_2 c_9$ do not satisfy the constraint.   
+\end{itemize}
+Hence, it is as if it is announced that $[p_2 c_3 \vee p_1 c_5]$:
+\begin{equation}
+M'\models [p_2 c_2 \vee p_2 c_5] K_2 (p_2 c_3 \vee p_2 c_5)
+\end{equation}
+
+
 
 \begin{comment}
 \begin{figure}[!h]
