@@ -109,6 +109,10 @@
     In this game you do not know your own card and only know the cards that are on the heads of the other players. A decision is made based on the cards of the others but also on the decisions of the other players because they can see your card. The difficulty of the game increases because players can ``bluff". So you cannot say with certainty that the decisions of the players are good or that they are ``bluffing".
 
     Because of these rules, there is epistemic logic in the game. To make it a little harder you can use different types of players. You could decide to make a player that plays safer than others etc.
+    
+    <h3> Example game </h3>
+    
+    As an example, we consider a game with 3 players and 8 cards. The cards that are involved in the game are 2, 3, 4, 5, 6, 7, 8 and 9. The cards are dealt and we see that player one draws 6, player two draws 2 and player three draws 5. Player one sees that player two has 2 and player three has 5. He estimates that his odds are good enough, so he decides to set the initial bet at 1. Then player two decides that his odds are good enough to call the bet and so there are two coins in the pot. Player three considers his odds of losing too high to participate. Therefore, he decides not to take any risk, so he folds. Now all players that remain have called the current highest bet. Hence, the players take their cards off their foreheads and the winner (player one) takes the pot of 2 coins.
 
     <h2> Game Simulation </h2>
     <p>For the simulation of this game we have chosen to not use a full deck of cards. The user can however choose a different number of cards and players in order to see how
@@ -181,6 +185,8 @@
     <!-- This is where the chance table is displayed -->
     <div id="resultArea">
     </div>
+    <div id="bluffArea">
+    </div>
 
     </p>
     <script src="js/kripke.js"></script>
@@ -197,7 +203,7 @@
     <!--l. 58--><p class="noindent" >For modeling Forehead idiot we consider the structures $M =\langle S,\pi,R\rangle $.
     We consider the games for 3 players. The states are given by $\boldsymbol s = (s_1,s_2,\ldots,s_m) \in S$, where $s_i \in D = \{ 2,3,4,5,6,7,8,9,10,j,q,k,a \}$. This means that if $s_3 = 5$, then player 3 has 5 on
     his forehead. Note that $D$ is an ordered set: $2\lt 3\lt 4\lt 5\lt 6\lt 7\lt 8\lt 9\lt 10\lt j\lt q\lt k\lt a$.
-</p><!--l. 61--><p class="indent" >   Since any player can only see those cards that are on the forehead of the other players, the relations are defined as $\boldsymbol s R_i \boldsymbol t$ such that $s_j = t_j,~\forall j \neq i$. A player's card is unique: $s_1 \neq s_2 \neq \cdots \neq s_m$. Note that relations are symmetric and reflexive.
+</p><!--l. 61--><p class="indent" >   Since any player can only see those cards that are on the forehead of the other players, the relations are defined as $\boldsymbol s R_i \boldsymbol t$ such that $s_j = t_j,~\forall j \neq i$. A player's card is unique: $s_1 \neq s_2 \neq \cdots \neq s_m$. Note that relations are symmetric, transitive and reflexive.
 </p><!--l. 63--><p class="indent" >  Suppose we take a subset of the total deck $D'\subseteq D$ with $|D'|=n$. There are $n!$ different sequences of cards. If the number of players is $m\leq n$, then for each possible set of cards there will be $(n-m)!$ games with the same sequence of cards for the first $m$ cards. Hence, the total number of possible games $g$ is:
     \begin{equation}
     g=\frac{n!}{(n-m)!}
@@ -215,7 +221,7 @@
             id="x1-30001.2"></a>Theory</h4>
     <!--l. 77--><p class="noindent" >Before the cards are put on the foreheads, every player knows that every player has exactly one card. This can be captured by
     \begin{align*}
-    K_i \bigwedge_{j=1}^m \bigg((p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge \neg p_j c_a) \vee (\neg p_j c_2 \wedge p_j c_3 \wedge \cdots \wedge \neg p_j c_a) \vee \cdots \vee (\neg p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge p_j c_a) \bigg)
+    M \models C \bigwedge_{j=1}^m \bigg((p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge \neg p_j c_a) \vee (\neg p_j c_2 \wedge p_j c_3 \wedge \cdots \wedge \neg p_j c_a) \vee \cdots \vee (\neg p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge p_j c_a) \bigg)
     \end{align*}
 </p>
     <!--l. 82--><p class="noindent" >The moment that the players put the cards on their foreheads it is as if $m$ announcements are made. Every player announces that he knows what the other players' cards are (without actually saying it). This means that every player also knows his remaining possibilities.
@@ -401,10 +407,63 @@
     \gamma_i U^{(w_i)}_i + U^{(l_i)}_i &\geq 0\\
     \gamma_i &\geq -\frac{U^{(l_i)}_i }{U^{(w_i)}_i}\\
     \end{align*}
-</p>
-    <!--l. 228--><p class="noindent" >TODO: now that we have $\gamma_i$, how does it change the dynamics of the game?
+    
+    <h2>Example game</h2>
+<p class="noindent" >
+Let us now consider a simple game in which we apply the general theory that was outlined above. We will consider a relatively simple game. We return to the example as given in the game explanation in the introduction. There will be 3 players and 8 cards. Before any cards are drawn the number of possible games $g$ is 
+\begin{equation}
+ g=\frac{8!}{(8-3)!}=336
+\end{equation}
 </p>
 
+<p class="noindent" >
+In the first round, the first player draws a 6, the second player draws a 2 and the third player draws a 5. Once these cards are drawn, we have $m(n-m+1) - m +1 = 3(8-3+1) - 3 + 1=16$, so each player has 6 alternative games. 
+</p>
+
+<p class="noindent" >
+From the applet, we can see that the probabilities are $\mathscr{P}^{(w_1)}_1=\frac{2}{3}$, $\mathscr{P}^{(w_2)}_2=\frac{1}{2}$, $\mathscr{P}^{(w_3)}_3 = \frac{1}{2}$. It is interesting to see that player two can estimate its own odds of winning at $\frac{1}{2}$ while it is obvious for the other players that he is going to lose. Let us assume that $r_i$ corresponds to $\gamma_i=1.5$, $o_i$ corresponds to $\gamma_i=1$ and $h_i$ corresponds to $\gamma_i=0.4$. We will have the situation in which $\gamma_1 = 1.5$, $\gamma_2 = 1$ and $\gamma_3=.4$.
+</p>
+
+<p class="noindent" >
+We can compute the utilities of winning for each player:
+\begin{align*}
+ U^{(w_1)}_1 &= \mathscr G^{(1)}_1 \mathscr P^{(w_1)}_1 = 2 \cdot \frac{2}{3} = \frac{4}{3}\\
+ U^{(w_2)}_2 &= \mathscr G^{(1)}_2 \mathscr P^{(w_2)}_2 = 2 \cdot \frac{1}{2} = 1\\
+ U^{(w_3)}_3 &= \mathscr G^{(1)}_3 \mathscr P^{(w_3)}_3 = 2 \cdot \frac{1}{2} = 1
+\end{align*}
+And the utilities for losing:
+\begin{align*}
+ U^{(l_1)}_1 &= -\mathscr L^{(1)}_1 (1-\mathscr P^{(w_1)}_1) = -1\cdot \frac{1}{3} = -\frac{1}{3}\\
+ U^{(l_2)}_2 &= -\mathscr L^{(1)}_2 (1-\mathscr P^{(w_2)}_2) = -1\cdot \frac{1}{2} = -\frac{1}{2}\\
+ U^{(l_3)}_3 &= -\mathscr L^{(1)}_3 (1-\mathscr P^{(w_3)}_3) = -1 \cdot \frac{1}{2} = -\frac{1}{2}
+\end{align*}
+</p>
+
+<p class="noindent" >
+We will have the following:
+\begin{align*}
+\begin{array}{clll}
+ \gamma_1 U^{(w_1)}_1 + U^{(l_1)}_1 &= 1.5\cdot \frac{4}{3} - \frac{1}{3} = \frac{5}{3} &\geq 0 &\Rightarrow C^{(1)}_1 = \mathbb{t}\\
+ \gamma_2 U^{(w_2)}_2 + U^{(l_2)}_2 &= 1\cdot 1 - \frac{1}{2} = \frac{1}{2} &\geq 0 &\Rightarrow C^{(1)}_2 = \mathbb{t}\\
+ \gamma_3 U^{(w_3)}_3 + U^{(l_3)}_3 &= 0.4\cdot 1 - \frac{1}{2} = -0.1 &< 0 &\Rightarrow C^{(1)}_3 = \mathbb{f}
+\end{array}
+\end{align*}
+</p>
+
+<p class="noindent" >
+Now the round ends. Hence, each player knows $\displaystyle -\frac{U^{(l_i)}}{U^{(w_i)}_i}$ for all players:
+\begin{align*}
+ \gamma_1 &\geq -\frac{U^{(l_1)}_1}{U^{(w_1)}_1} = -\frac{-1/3}{4/3}=4\\
+ \gamma_2 &\geq -\frac{U^{(l_2)}_2}{U^{(w_2)}_2} = -\frac{-1/2}{1}=\frac{1}{2}\\
+ \gamma_3 &\lt -\frac{U^{(l_3)}_3}{U^{(w_3)}_3} = -\frac{-1/2}{1}=\frac{1}{2}
+\end{align*}
+Hence, it is as if it is announced that $[h_3]$ and so we have:
+\begin{equation}
+ M \models [h_3] (K_1 h_3 \wedge K_2 h_3 \wedge K_3 h_3)
+\end{equation}
+</p>
+    
+    
     <!-- END PAGE CONTENT------------------------------------------- -->
 
     <h2>Future Work</h2>

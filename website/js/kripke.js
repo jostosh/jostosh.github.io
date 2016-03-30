@@ -19,11 +19,18 @@ probability = false;
 //Probability Matrix
 var probMatrix = null;
 
+var already_won = false;
+
+var bluffMatrix = null;
+
 //Probabilty Matrix adjusted for play style
 var probAdjustedMatrix = null;
 
+//Array to keep track if the player has called or not
+var player_calls = null;
+
 //These values are used for determining the adjusted probabilities
-var playerStyles = [1,1.25,0.75];
+var playerStyles = [1,1.25,0.75,1,1.5,0.5,1.5];
 
 var callThreshold = 0.6;
 
@@ -47,6 +54,8 @@ function createGraph(viewGraph){
     document.getElementById("cardArea").innerHTML = "";
 
     document.getElementById("resultArea").innerHTML = "";
+
+    document.getElementById("bluffArea").innerHTML = "";
     disableButton()
     /*Make the graph with a array with all the number in an array */
     if(viewGraph){
@@ -57,7 +66,11 @@ function createGraph(viewGraph){
     }
 
     //This is where the call / bluff round is started.
-    //callBlufRound();
+    callBlufRound();
+    if(!already_won){
+        checkWin()
+    }
+    endRound();
 }
 
 /* Disable the person buttons and enable the draw card button */
@@ -87,6 +100,60 @@ function setTextToCardArea(text){
     document.getElementById("cardArea").innerHTML += text;
 }
 
+function endRound(){
+    if(already_won){
+        if(bluffMatrix==null){
+             bluffMatrix = calculateBluffProbability()
+        } else {
+             bluffMatrix = updateBluffProbability(bluffMatrix);
+        }
+        setBluffMatrixToArea(bluffMatrix)
+    }
+}
+
+function updateBluffProbability(bluffMatrix){
+    for(var i=0;i<player_value;i++){
+        for(var j=0;j<player_value;j++){
+            if(i!=j){
+                if(player_calls[j]==0 &&  ((callThreshold/probMatrix[j][j])<bluffMatrix[i][j][1])) {
+                    bluffMatrix[i][j][1] = (callThreshold / probMatrix[j][j]);
+                }
+                else if(player_calls[j]==1 && ((callThreshold/probMatrix[j][j])>bluffMatrix[i][j][0])){
+                        bluffMatrix[i][j][0] = (callThreshold/probMatrix[j][j]);
+                    }
+                }
+            }
+        }
+    return bluffMatrix
+    }
+
+
+function calculateBluffProbability(){
+    var bluffMatrix = [];
+    for(var i=0;i<player_value;i++){
+        bluffMatrix[i] = [];
+        for(var j=0;j<player_value;j++){
+            if(i!=j){
+                bluffMatrix[i][j] = [0,100];
+                if(player_calls[j] == 0){
+                    if(probMatrix[j][j]==0){
+                        bluffMatrix[i][j][1] = 100
+                    } else {
+                         bluffMatrix[i][j][1] = callThreshold/probMatrix[j][j]
+                    }
+                } else {
+                    if(probMatrix[j][j]==0){
+                        bluffMatrix[i][j][0] = 0
+                    } else {
+                        bluffMatrix[i][j][0] = callThreshold/probMatrix[j][j]
+                    }
+                }
+            }
+        }
+    }
+    return bluffMatrix
+}
+
 //This will calculated the adjust probability based on the playing style.
 function calculateAdjustProbability(pMatrix) {
 
@@ -100,7 +167,6 @@ function calculateAdjustProbability(pMatrix) {
         }
     }
 
-    console.log(matrix)
     return matrix;
 }
 /* Function for calculating the probabilities */
@@ -167,6 +233,31 @@ function calculateProbability(array) {
 }
 
 
+function setBluffMatrixToArea(matrix){
+    document.getElementById("bluffArea").innerHTML += "";
+    var String = "";
+    String += "<table class=\"table table-striped\">  <thead> <tr> <td> </td>";
+
+    for (var i=1;i<player_value+1;i++){
+        String += " <th> Player " + i + "  (" +playerStyles[i-1]+  ")\t" + " </th> ";
+    }
+    String += "</tr>";
+    for(i=0;i<player_value;i++){
+
+        String += "<tr> <td> <b> Player " + (i+1) + "\t"  + " </b> </td>"
+        for(var j=0;j<player_value;j++){
+            if(i==j){
+                String += " <td> " + "    " + " </td>" ;
+            } else {
+                String += " <td> (" + matrix[i][j][0].toFixed(2) +")   (" + matrix[i][j][1].toFixed(2)+ ") </td>" ;
+            }
+        }
+        String +=  "</thead> </tr>"
+    }
+    String += "</table>";
+    document.getElementById("bluffArea").innerHTML += String;
+}
+
 /* Set the text to the html */
 function setTextToResultArea(matrix){
     document.getElementById("resultArea").innerHTML += "";
@@ -174,14 +265,18 @@ function setTextToResultArea(matrix){
     String += "<table class=\"table table-striped\">  <thead> <tr> <td> </td>";
 
     for (var i=1;i<player_value+1;i++){
-        String += " <th> Player " + i + "\t" + " </th> ";
+        String += " <th> Player " + i + "  (" +playerStyles[i-1]+  ")\t" + " </th> ";
     }
     String += "</tr>";
     for(i=0;i<player_value;i++){
 
         String += "<tr> <td> <b> Player " + (i+1) + "\t"  + " </b> </td>"
         for(var j=0;j<player_value;j++){
-            String += " <td> " + matrix[i][j].toFixed(2) + " </td>" ;
+            if(i==j){
+                String += " <td> " + matrix[i][j].toFixed(2)+  "     (" + (matrix[i][j].toFixed(2)*playerStyles[i]) + ") </td>" ;
+            } else {
+                String += " <td> " + matrix[i][j].toFixed(2) + " </td>" ;
+            }
         }
         String +=  "</thead> </tr>"
     }
@@ -280,25 +375,50 @@ function getCard() {
     viewAllPersons()
 }
 
-function callBlufRound() {
+function checkWin(){
+    var index = 0;
+    var counter = 0;
+    for (var k=0;k<player_value;k++){
+        if(player_calls[k]==1){
+           index = k;
+            counter++;
+        }
+    }
+    if(counter==1){
+        var string = "<table class='table table-striped'> <tbody>";
+        string += "<tr> <td> Person " + (index+1);
+        string += " wins </td> </tr>";
+        string += " </tbody> </table>"
+        setTextToCardArea(string)
+        already_won = true
+    }
+}
 
+
+function callBlufRound() {
     //This is where we draw the player choice.
     var string = "<table class='table table-striped'> <tbody>";
-
+    var count_loses = 0
+    player_calls =[]
     for(var k=0; k<player_value; k++) {
 
         string += "<tr> <td> Person " + (k+1);
 
         if (probAdjustedMatrix[k] >= callThreshold) {
+            player_calls[k] = 1;
             string += " calls </td> </tr>"
         } else {
-            string += " folds </td> </tr>";
+            if(count_loses==player_value-1){
+                string += " wins </td> </tr>";
+                already_won = true;
+            } else {
+                count_loses = count_loses + 1;
+                string += " folds </td> </tr>";
+                player_calls[k] =0;
+            }
         }
-
     }
-
     string += " </tbody> </table>"
-
     setTextToCardArea(string)
 }
 
@@ -318,7 +438,6 @@ function viewAllPersons(){
 }
 
 /*Generate recursive all possible cases for all cards and person */
-/*TODO: I think this is the bottleneck why the program is slow */
 function allPossibleCases(arr) {
     if (arr.length == 1) {
         return arr[0];
