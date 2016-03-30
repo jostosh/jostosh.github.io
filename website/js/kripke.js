@@ -303,13 +303,13 @@ function changeCard(player,card) {
         //Empty the tables
         emptyTables();
 
-        string = "<table class='table table-striped'> <tbody>";
+        var string = "<table class='table table-striped'> <tbody>";
         for(var i=1;i<card_array.length+1;i++){
             string += "<tr> <td> Person " + i + " draws card: "+card_array[i-1]+" </td> </tr>";
         }
         string += " </tbody> </table>"
 
-        setTextToCardArea(string)
+        document.getElementById("cardArea").innerHTML += string;
 
         enableButton();
 
