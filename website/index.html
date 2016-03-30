@@ -125,8 +125,13 @@
 
     <p>In order to start the game one can click on the "start game" button. The cards will then be drawn and the Kripke model will show all possible states for every player.
         The "view graph" button will show all possible states when there are no cards drawn (WARNING this can take a lot of time to load depending on the number of players and cards).
-        The "Player #" buttons will display the states that the player holds for possible given the cards drawn. When the "start game" button is pressed a table is generated
-    which displays the chances that the player thinks he is going to win.</p>
+        The "Player #" buttons will display the states that the player holds for possible given the cards drawn. With the options next to the "Player #"  buttons, you can choice your own cards
+        for each player. The game will <b>not</b> start if two or more players has the same card number.
+        When the "start game" button is pressed a table is generated
+    which displays the chances that the player thinks he is going to win. The value next to the player displays the predefined $\gamma$ for each player.  The second number is the chance that the player will call, it is calculated and defined by the equations \ref{eq:util}, \ref{eq:loss} and \ref{eq:strat}.
+        In the second table are the $\gamma_i$ boundaries displayed, that the player thinks about the other players. The
+        first value is the lower boundary of the $\gamma_i$ that is calculated by the formula \ref{eq:qamma_other} and the second value is the higher boundary of the $\gamma_i$ calculated by the formula \ref{eq:qamma_other2}.
+    </p>
     <script type="text/javascript" src="js/vis.js"></script>
     <link href="vis.css" rel="stylesheet" type="text/css" />
 
@@ -400,16 +405,16 @@
     cards the decision of each opponent was based on. It is as if each player gets to know the utility of all
     other players during the round that just ended.
 </p><!--l. 203--><p class="indent" >   First, suppose that $C^{(k)}_i = \mathbb{t}$. Now any player $j\neq i$ knows that the threshold of 0 was exceeded. Hence each player $j$ knows
-    \begin{align*}
+    \begin{align}
     \gamma_i U^{(w_i)}_i + U^{(l_i)}_i &\geq 0\\
-    \gamma_i &\geq -\frac{U^{(l_i)}_i }{U^{(w_i)}_i}\\
-    \end{align*}
+    \gamma_i &\geq -\frac{U^{(l_i)}_i }{U^{(w_i)}_i}\label{eq:qamma_other}
+    \end{align}
     So the lower bound of $\gamma_i$ from $j$'s perspective is increased.
 </p><!--l. 210--><p class="indent" >   Second, suppose that $C^{(k)}_i = \mathbb{f}$. Now any player $j\neq i$ knows:
-    \begin{align*}
+    \begin{align}
     \gamma_i U^{(w_i)}_i + U^{(l_i)}_i &\lt 0\\
-    \gamma_i &\lt -\frac{U^{(l_i)}_i }{U^{(w_i)}_i}\\
-    \end{align*}
+    \gamma_i &\lt -\frac{U^{(l_i)}_i }{U^{(w_i)}_i}\label{eq:qamma_other2}
+    \end{align}
 </p>
     <!--l. 216--><p class="noindent" >In either case, we could consider it to be an announcement of the possibilities that are left. For example, if players $j\neq i$ find that $\gamma_i \lt 1.5$, it is as if it is announced that $r_i \vee o_i \vee h_i$. In other words, we might not gain any information. However, a series of rounds could enable agents $j$ to deduce $\gamma_i$. For example, let's say that three rounds are played, in which $\gamma_i \lt 1.5,\gamma_i \geq 0.93,\gamma_i \lt 1.06$. This sequence of announcements can be captured by:
     \begin{equation*}
