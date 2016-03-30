@@ -225,6 +225,14 @@ function viewPerson(number){
     makeGraph(result)
 }
 
+//This will only change one card.
+function changeCard(player,card) {
+    console.log("Changing card.");
+    card_array[player] = card;
+    enableButton();
+    viewAllPersons()
+}
+
 /*Randomly draw a card for all players and set them to the html */
 function getCard() {
     document.getElementById("cardArea").innerHTML = "";
@@ -243,7 +251,26 @@ function getCard() {
 
 
     for(var i=1;i<card_array.length+1;i++){
-        string += "<tr> <td> Person " + i + " draws card " + card_array[i-1] + "</td> </tr>";
+        string += "<tr> <td> Person " + i + " draws card: "+card_array[i-1]+" ";
+        //string += "<select id=playerCardDropdown"+i+">"
+        //
+        //for(var c = 2; c < card_value+2; c++){
+        //    if( c == card_array[i-1]) {
+        //        string += "<option id=\"option"+c+""+i+" \" value=" + (c-2) +" selected=\"selected\" onchange=\"changeCard("+i+","+c+")\">"+c+"</option>";
+        //    } else {
+        //        string += "<option id=\"option"+c+""+i+" \" value=" + (c-2) +" onchange=\"changeCard("+i+","+c+")\">"+c+"</option>";
+        //    }
+        //
+        //    var option = document.getElementById('option'+c+''+i+'')
+        //
+        //    option.addEventListener("change", function() {
+        //      console.log("working")
+        //    })
+        //
+        //}
+        //
+        //string += "</select> </td> </tr>";
+        string += "</td> </tr>";
     }
 
     string += " </tbody> </table>"
