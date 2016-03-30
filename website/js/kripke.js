@@ -1,21 +1,22 @@
 /**
- * Created by diederik on 13-3-16.
+ * Created by diederik and Siebert and Jos on 13-3-16.
+ *
  */
 
 /* global variables */
 //Number of cards
-card_value = 0;
+var card_value = 0;
 
 //Number of players.
-player_value = 0;
+var player_value = 0;
 
 //Cards Drawn.
-card_array = [];
+var card_array = [];
 
-color_array =['red', 'green', 'blue', 'orange', 'yellow']
+var color_array =['red', 'green', 'blue', 'orange', 'yellow'];
 
 /* Boolean when the probability must be visualize, you dont want it when the whole graph is visualized */
-probability = false;
+var probability = false;
 
 //Probability Matrix
 var probMatrix = null;
@@ -46,7 +47,9 @@ function playTheGame(viewGraph){
 
     /* get the second value of the drop down menu */
     card_value = parseInt(dropdown_value[1]);
+
     probability = false;
+
     /* get the first value of the drop down menu */
     player_value = parseInt(dropdown_value[0]);
 
@@ -54,20 +57,20 @@ function playTheGame(viewGraph){
     emptyTables();
 
     //Disable to appropriate buttons.
-    disableButton()
+    disableButton();
 
     /*Make the graph with a array with all the number in an array */
     if(viewGraph){
-        makeFullModel(range1(card_value))
+        makeFullModel(range1(card_value));
     } else {
-        getCard()
+        getCard();
         document.getElementById("draw_card").disabled =true;
     }
 
     //This is where the call / bluff round is started.
     callBlufRound();
     if(!alreadyWon){
-        checkWin()
+        checkWin();
         alreadyWon= false;
     }
     setUtilityMatrixToArea()
@@ -108,15 +111,18 @@ function calculateProbability(array) {
     if(player_value==card_value){
         var temp_highest = 0;
         var highest_index = 0;
-        for (var i=0; i<card_value; i++){
+        var i, j = 0;
+
+        for (i=0; i<card_value; i++){
             if(card_array[i]>temp_highest){
                 highest_index = i;
                 temp_highest = card_array[i];
             }
         }
+
         for (i=0; i<card_value;i++){
-            matrix[i] = []
-            for(var j=0;j<card_value;j++){
+            matrix[i] = [];
+            for(j=0;j<card_value;j++){
                 if(j==highest_index){
                     matrix[i][j] = 1
                 } else {
@@ -125,22 +131,22 @@ function calculateProbability(array) {
             }
         }
     } else {
-        for(var i=0; i<player_value; i++) {
+        for(i=0; i<player_value; i++) {
             matrix[i] = [];
-            for(var j=0; j<player_value; j++) {
+            for(j=0; j<player_value; j++) {
                 matrix[i][j] = 0;
             }
         }
-        for (var i=0;i<array.length;i++){
+        for (i=0;i<array.length;i++){
             var node =array[i];
-            var index = 9999
+            var index = 9999;
             for(var q=0; q<card_value;q++){
                 if(card_array[q]!=node[q]) {
                     index = q;
                 }
             }
             if(index==9999){
-                var temp_l =0
+                var temp_l =0;
                 for(var l=0;l<node.length;l++){
                     if(node[temp_l]<node[l]){
                         temp_l = l
@@ -175,7 +181,7 @@ function setUtilityMatrixToArea(){
     String += "</tr>";
     for(i=0;i<player_value;i++){
 
-        String += "<tr> <td> <b> Player " + (i+1) + "\t"  + " </b> </td>"
+        String += "<tr> <td> <b> Player " + (i+1) + "\t"  + " </b> </td>";
         for(var j=0;j<player_value;j++){
             if(i==j){
                 String += " <td> " + "    " + " </td>" ;
@@ -195,13 +201,16 @@ function setTextToResultArea(matrix){
     var String = "";
     String += "<table class=\"table table-striped\">  <thead> <tr> <td> </td>";
 
-    for (var i=1;i<player_value+1;i++){
+
+    var i;
+
+    for (i=1;i<player_value+1;i++){
         String += " <th> Player " + i + "  (" +playerStyles[i-1]+  ")\t" + " </th> ";
     }
     String += "</tr>";
     for(i=0;i<player_value;i++){
 
-        String += "<tr> <td> <b> Player " + (i+1) + "\t"  + " </b> </td>"
+        String += "<tr> <td> <b> Player " + (i+1) + "\t"  + " </b> </td>";
         for(var j=0;j<player_value;j++){
             if(i==j){
                 String += " <td> " + matrix[i][j].toFixed(2)+  "     (" + calculateUtility(matrix[i][j],i).toFixed(2) + ") </td>" ;
@@ -220,7 +229,7 @@ function calculateUtility(number, i){
     var gain = player_value -1;
     var utility_win = gain * number;
     var utility_lose = -(1-number);
-    var gamma = -(utility_lose/utility_win)
+    var gamma = -(utility_lose/utility_win);
     if(playerGamma[i]==null){
         playerGamma[i] =[-5,5];
     }
@@ -239,11 +248,11 @@ function calculateUtility(number, i){
 }
 
 function updateUtility(gamma, call, i){
-    console.log(playerGamma[i] + "  "  + call + "   " + gamma)
+    console.log(playerGamma[i] + "  "  + call + "   " + gamma);
     if(call && playerGamma[i][0]<gamma){
-        playerGamma[i][0] = gamma
+        playerGamma[i][0] = gamma;
     } else if(!(call) && playerGamma[i][1]>gamma){
-        playerGamma[i][1] = gamma
+        playerGamma[i][1] = gamma;
     }
 }
 
@@ -252,7 +261,9 @@ function updateUtility(gamma, call, i){
 function possibleCases(person_number){
     var array = [];
 
-    for(var i=2; i<card_value+2;i++){
+    var i,j = 0;
+
+    for(i=2; i<card_value+2;i++){
         var already_in = false;
         for(var k=0; k<player_value;k++){
             if(i==card_array[k] && k!=person_number-1){
@@ -265,7 +276,7 @@ function possibleCases(person_number){
             temp_card_array[person_number-1] = i;
             var string = "";
 
-            for(var j=0;j<player_value;j++) {
+            for(j=0;j<player_value;j++) {
                 string = string + temp_card_array[j];
             }
 
@@ -288,13 +299,13 @@ function viewPerson(number){
 function changeCard(player,card) {
     card_array[player] = parseInt(card);
 
-    var doubleCard = false
+    var doubleCard = false;
+    var i, j;
 
-    console.log(card_array)
     for(i=0; i<card_array.length; i++){
         for(j=0; j<card_array.length; j++) {
             if (j != i && card_array[i] == card_array[j]){
-                doubleCard = true
+                doubleCard = true;
             }
         }
     }
@@ -303,11 +314,13 @@ function changeCard(player,card) {
         //Empty the tables
         emptyTables();
 
+
+
         var string = "<table class='table table-striped'> <tbody>";
-        for(var i=1;i<card_array.length+1;i++){
+        for(i=1;i<card_array.length+1;i++){
             string += "<tr> <td> Person " + i + " draws card: "+card_array[i-1]+" </td> </tr>";
         }
-        string += " </tbody> </table>"
+        string += " </tbody> </table>";
 
         document.getElementById("cardArea").innerHTML += string;
 
@@ -334,6 +347,7 @@ function changeCard(player,card) {
 function removeOptions(selectbox)
 {
     var i;
+
     for(i=selectbox.options.length-1;i>=0;i--)
     {
         selectbox.remove(i);
@@ -344,7 +358,7 @@ function removeOptions(selectbox)
 /*Randomly draw a card for all players and set them to the html */
 function getCard() {
     document.getElementById("cardArea").innerHTML = "";
-    card_array =[]
+    card_array =[];
     var counter = 0;
     while (counter != player_value) {
         var random_number = Math.floor(Math.random() * card_value) + 2;
@@ -358,30 +372,33 @@ function getCard() {
 
     var string = "<table class='table table-striped'> <tbody>";
 
+    var i;
 
-    for(var i=1;i<card_array.length+1;i++){
+    for(i=1;i<card_array.length+1;i++){
         string += "<tr> <td> Person " + i + " draws card: "+card_array[i-1]+" ";
 
         removeOptions(document.getElementById("playerCardDropdown"+i+""));
         //string += "<select id=playerCardDropdown"+i+">"
         //
+
+        var select = document.getElementById("playerCardDropdown"+i+"");
+
         for(var c = 2; c < card_value+2; c++){
+
+            var option = document.createElement("option");
+
             if( c == card_array[i-1]) {
                 //string += "<option id=\"option"+c+""+i+" \" value=" + (c-2) +" selected=\"selected\" onchange=\"changeCard("+i+","+c+")\">"+c+"</option>";
 
-                var option = document.createElement("option");
                 option.text = c;
                 option.value = c;
                 option.selected="selected";
-                var select = document.getElementById("playerCardDropdown"+i+"");
                 select.appendChild(option);
 
             } else {
 
-                var option = document.createElement("option");
                 option.text = c;
                 option.value = c;
-                var select = document.getElementById("playerCardDropdown"+i+"");
                 select.appendChild(option);
 
                 //string += "<option id=\"option"+c+""+i+" \" value=" + (c-2) +" onchange=\"changeCard("+i+","+c+")\">"+c+"</option>";
@@ -393,7 +410,7 @@ function getCard() {
         string += "</td> </tr>";
     }
 
-    string += " </tbody> </table>"
+    string += " </tbody> </table>";
 
     document.getElementById("cardArea").innerHTML += string;
     viewAllPersons()
@@ -412,7 +429,7 @@ function checkWin(){
         var string = "<table class='table table-striped'> <tbody>";
         string += "<tr> <td> Person " + (index+1);
         string += " wins </td> </tr>";
-        string += " </tbody> </table>"
+        string += " </tbody> </table>";
         document.getElementById("cardArea").innerHTML += string;
         alreadyWon = true
     }
@@ -422,7 +439,7 @@ function checkWin(){
 function callBlufRound() {
     //This is where we draw the player choice.
     var string = "<table class='table table-striped'> <tbody>";
-    var count_loses = 0
+    var count_loses = 0;
     for(var k=0; k<player_value; k++) {
 
         string += "<tr> <td> Person " + (k+1);
@@ -439,14 +456,17 @@ function callBlufRound() {
             }
         }
     }
-    string += " </tbody> </table>"
+    string += " </tbody> </table>";
     document.getElementById("cardArea").innerHTML += string;
 }
 
 function viewAllPersons(){
     document.getElementById("resultArea").innerHTML = "";
-    var array_possible = []
-    for(var i=1;i<player_value+1;i++) {
+    var array_possible = [];
+
+    var i;
+
+    for(i=1;i<player_value+1;i++) {
         var temp_array = possibleCases(i);
         for(var j=0;j<temp_array.length;j++){
             if (!(contains.call(array_possible, temp_array[j]))) {
@@ -488,7 +508,7 @@ function allPossibleCases(arr) {
 function range1(number){
     var array_number =[];
     for (var i=2;i<number+2;i++){
-        array_number.push(i)
+        array_number.push(i);
     }
     return array_number;
 }
@@ -563,7 +583,7 @@ function setEdges(result){
     }
 
     if(probability){
-        probMatrix = calculateProbability(edges_temp_array)
+        probMatrix = calculateProbability(edges_temp_array);
         setTextToResultArea(probMatrix)
     }
 
@@ -576,7 +596,7 @@ function makeGraph(result){
     var nodes = new vis.DataSet(nodes_array);
 
     // create an array with edges
-    var edges_array =  setEdges(result)
+    var edges_array =  setEdges(result);
 
     var edges = new vis.DataSet(edges_array);
     // create a network
@@ -590,7 +610,8 @@ function makeGraph(result){
             improvedLayout:false
         }
     };
-    var network = new vis.Network(container, data, options);
+
+    new vis.Network(container, data, options);
 }
 
 /*Make the big graph, where are all possibles cases can be modelled */
