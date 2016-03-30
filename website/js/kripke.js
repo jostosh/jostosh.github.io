@@ -64,6 +64,7 @@ function playTheGame(viewGraph){
         makeFullModel(range1(card_value));
     } else {
         getCard();
+        determineKnowledge();
         document.getElementById("draw_card").disabled =true;
     }
 
@@ -337,6 +338,8 @@ function changeCard(player,card) {
 
         viewAllPersons();
 
+        determineKnowledge();
+
         //This is where the call / bluff round is started.
         callBlufRound();
 
@@ -363,6 +366,79 @@ function removeOptions(selectbox)
     }
 }
 
+/**
+ * This will determien the knowledge for every player.
+ */
+function determineKnowledge() {
+    document.getElementById("knowledgeArea").innerHTML = "";
+
+    var string = "<table id='knowledgetable' class='table table-striped'> <tbody>";
+
+    var i;
+
+    for(i=1;i<card_array.length+1;i++){
+        string += "<tr> <td> Person " + i + ":";
+        string += "\\begin{align*}";
+        string += "M \\models K_" + i + "(";
+
+        //Run through all the other players.,
+        for(var c = 1; c < card_array.length+1; c++){
+
+            if( c != i) {
+                string += "p_" + c + "c_" + card_array[c-1];
+            }
+
+            //Check if we are at the last element or if the last element
+            //TODO Haha this should be refactored
+            if((c==i &&  c < card_array.length && c != 1) || ( c != i && c < card_array.length && c+1 != i)) {
+                string += " \\land "
+            }
+
+
+        }
+
+
+        if(card_value != player_value) {
+            string += ") \\land K_" + i + "(";
+
+            var placed = false;
+            //Run through all the other players.,
+            for (c = 2; c < card_value + 2; c++) {
+
+
+                if (card_array.indexOf(c) == -1 || card_array[i-1] == c) {
+
+                    if (placed) {
+                        string += " \\lor "
+                        placed = false;
+                    }
+
+                    string += "p_" + i + "c_" + c;
+                    placed = true;
+                }
+
+            }
+
+            string += ")";
+        } else {
+            string +=  " \\land p_" + i + "c_" + card_array[i-1] + ")"
+        }
+
+        //string += "\\left[ \\bigwedge_{i=1}^m K_i \\left(\\bigwedge_{j\\neq i} p_j c_{u^{(j)}} \\right) \\right] \\bigwedge_{i=1}^m \\left( K_i \\bigvee_{u^{(i)} \\notin \\{ u^{(j)} \\}_{j\\neq i}} p_i c_{u^{(i)}} \\right)";
+        string += "\\end{align*}";
+        string += "</td> </tr>";
+    }
+
+    string += " </tbody> </table>";
+
+    //Add the table to the card area
+    document.getElementById("knowledgeArea").innerHTML += string;
+
+    //Reload Mathjax
+    //TODO this is very scary and wrong.
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"knowledgeArea"]);
+
+}
 
 /*Randomly draw a card for all players and set them to the html */
 function getCard() {
@@ -422,7 +498,7 @@ function getCard() {
     //Add the table to the card area
     document.getElementById("cardArea").innerHTML += string;
 
-    viewAllPersons()
+    viewAllPersons();
 }
 
 function checkWin(){
