@@ -76,6 +76,9 @@ function playTheGame(viewGraph){
     setUtilityMatrixToArea()
 }
 
+/**
+ * This will empty the tables.
+ */
 function emptyTables(){
     document.getElementById("cardArea").innerHTML = "";
 
@@ -84,7 +87,9 @@ function emptyTables(){
     document.getElementById("bluffArea").innerHTML = "";
 }
 
-/* Disable the person buttons and enable the draw card button */
+/**
+ *  Disable the person buttons and enable the draw card button
+ */
 function disableButton(){
     document.getElementById("draw_card").disabled =false;
     document.getElementById("graph").disabled =false;
@@ -94,7 +99,9 @@ function disableButton(){
     document.getElementById("person4").disabled = true;
 }
 
-/* Enable the person buttons */
+/**
+ *  Enable the person buttons
+ */
 function enableButton(){
     document.getElementById("person1").disabled = false;
     document.getElementById("person2").disabled = false;
@@ -104,7 +111,9 @@ function enableButton(){
     }
 }
 
-/* Function for calculating the probabilities */
+/**
+ *  Function for calculating the probabilities
+ */
 function calculateProbability(array) {
     var matrix = [];
     //This is the case where we have the same number of players as of cards.
@@ -379,16 +388,16 @@ function getCard() {
 
         removeOptions(document.getElementById("playerCardDropdown"+i+""));
         //string += "<select id=playerCardDropdown"+i+">"
-        //
 
+        //Every Option for the card select shoudl be set.
         var select = document.getElementById("playerCardDropdown"+i+"");
 
+        //Run through all the cards, when a card is the same as thecard that the player holds, that will be the selected option.
         for(var c = 2; c < card_value+2; c++){
 
             var option = document.createElement("option");
 
             if( c == card_array[i-1]) {
-                //string += "<option id=\"option"+c+""+i+" \" value=" + (c-2) +" selected=\"selected\" onchange=\"changeCard("+i+","+c+")\">"+c+"</option>";
 
                 option.text = c;
                 option.value = c;
@@ -401,18 +410,18 @@ function getCard() {
                 option.value = c;
                 select.appendChild(option);
 
-                //string += "<option id=\"option"+c+""+i+" \" value=" + (c-2) +" onchange=\"changeCard("+i+","+c+")\">"+c+"</option>";
             }
 
         }
-        //
-        //string += "</select> </td> </tr>";
+
         string += "</td> </tr>";
     }
 
     string += " </tbody> </table>";
 
+    //Add the table to the card area
     document.getElementById("cardArea").innerHTML += string;
+
     viewAllPersons()
 }
 
