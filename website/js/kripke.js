@@ -51,12 +51,13 @@ function createGraph(viewGraph){
     probability = false;
     /* get the first value of the drop down menu */
     player_value = parseInt(dropdown_value[0]);
-    document.getElementById("cardArea").innerHTML = "";
 
-    document.getElementById("resultArea").innerHTML = "";
+    //Empty the tables
+    emptyTables();
 
-    document.getElementById("bluffArea").innerHTML = "";
+    //Disable to appropriate buttons.
     disableButton()
+
     /*Make the graph with a array with all the number in an array */
     if(viewGraph){
         makeFullModel(range1(card_value))
@@ -67,10 +68,20 @@ function createGraph(viewGraph){
 
     //This is where the call / bluff round is started.
     callBlufRound();
+
     if(!already_won){
         checkWin()
     }
+
     endRound();
+}
+
+function emptyTables(){
+    document.getElementById("cardArea").innerHTML = "";
+
+    document.getElementById("resultArea").innerHTML = "";
+
+    document.getElementById("bluffArea").innerHTML = "";
 }
 
 /* Disable the person buttons and enable the draw card button */
@@ -336,8 +347,29 @@ function changeCard(player,card) {
     }
 
     if(!doubleCard){
+        //Empty the tables
+        emptyTables();
+
+        string = "<table class='table table-striped'> <tbody>";
+        for(var i=1;i<card_array.length+1;i++){
+            string += "<tr> <td> Person " + i + " draws card: "+card_array[i-1]+" </td> </tr>";
+        }
+        string += " </tbody> </table>"
+
+        setTextToCardArea(string)
         enableButton();
-        viewAllPersons()
+
+        viewAllPersons();
+
+        //This is where the call / bluff round is started.
+        callBlufRound();
+
+        if(!already_won){
+            checkWin()
+        }
+
+        endRound();
+
     } else {
         //TODO maybe warn the person
     }
@@ -366,6 +398,7 @@ function getCard() {
             card_array.push(random_number);
         }
     }
+
     enableButton();
 
     string = "<table class='table table-striped'> <tbody>";
