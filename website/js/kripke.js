@@ -318,7 +318,7 @@ function changeCard(player,card) {
         //This is where the call / bluff round is started.
         callBlufRound();
 
-        if(!already_won){
+        if(!alreadyWon){
             checkWin();
             alreadyWon = false;
         }
