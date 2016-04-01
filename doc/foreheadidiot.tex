@@ -295,6 +295,8 @@ Hence, it is as if it is announced that $[h_3]$ and so we have:
  M \models [h_3] (K_1 h_3 \wedge K_2 h_3 \wedge K_3 h_3)
 \end{equation}
 \subsection{Second round}
+We will now demonstrate how the other player's can use the strategy of player 3 to re-estimate their own probabilities based on the decision of player 3.
+
 In the second round, player 1 draws 2, player 2 draws 3 and player 3 draws 4. Since all players have relatively low cards, each player will have an optimistic view of the game's outcome. Player 3 is to decide first. It is clear that $\mathcal{P}^{(w_3)}_3=1$. Hence, player 3 decides to call. For player 1 and 2, this means that
 \begin{equation*}
  |T_3^{(w_3)}| \geq \frac{n-m+1}{\gamma_3 (m-1)+1} = \frac{8-3+1}{0.4(3-1)+1} = 3\frac{1}{3}
@@ -319,9 +321,9 @@ where $M'$ is the model that remains after the initial announcement of drawing t
  \item Obviously, this also implies that $p_1 c_7$, $p_1 c_8$, $p_1 c_9$ do not satisfy the constraint.   
 \end{itemize}
 Hence, it is as if it is announced that $[p_1 c_2 \vee p_1 c_5]$:
-\begin{equation}
+\begin{equation*}
 M'\models [p_1 c_2 \vee p_1 c_5] K_1 (p_1 c_2 \vee p_1 c_5)
-\end{equation}
+\end{equation*}
 This means that the probability for player 1 to win can be re-estimated: $\mathcal{P}^{(w_1)}_1 = \frac{1}{2}$.
 
 \subsubsection{Updating player 2's view}
@@ -340,10 +342,54 @@ Furthermore, he knows:
  \item Obviously, this also implies that $p_2 c_7$, $p_2 c_8$, $p_2 c_9$ do not satisfy the constraint.   
 \end{itemize}
 Hence, it is as if it is announced that $[p_2 c_3 \vee p_1 c_5]$:
-\begin{equation}
+\begin{equation*}
 M'\models [p_2 c_2 \vee p_2 c_5] K_2 (p_2 c_3 \vee p_2 c_5)
-\end{equation}
+\end{equation*}
+This means that the probability for player 2 to win can be re-estimated:$\mathcal{P}^{(w_2)}_2 = \frac{1}{2}$.
 
+This round solely intended to demonstrate the consequence of a player's decision in case their strategy is known.
+
+\subsection{Third round}
+In another round we will have the situation in which player 1 receives the card 9, player 2 receives 2 and player 3 receives 6. For simplicity, we will assume that player 3 starts this round as well. It is obvious that $\mathcal{P}^{(w_3)}_3 = 0$. Player 3 feels like luck is on his side and decides to bluff. He know can make use of the fact that other players know his strategy: $M \models K_3 K_1 h_3 \wedge K_3 K_2 h_3$. Let's see whether this bluff is successful or not!
+\subsubsection{Updating player 1's view}
+For player 1 we have that:
+\begin{equation}
+ M'\models K_1 p_2 c_2 \wedge K_1 p_3 c_6
+\end{equation}
+Furthermore, he nows:
+\begin{equation*}
+M'\models K_1(p_1 c_3 \vee p_1 c_4 \vee p_1 c_5 \vee p_1 c_7 \vee p_1 c_8 \vee p_1 c_9
+\end{equation*}
+Similar to what happened in the previous round, we have that $|T_3^{(w_3)}| \geq 4$.
+\begin{itemize}
+ \item If $p_1 c_3$ were true, then $|T_3^{(w_3)}| = 6$, so this situation satisfies the constraint.
+ \item If $p_1 c_4$ were true, then $|T_3^{(w_3)}| = 5$, so this situation satisfies the constraint.
+ \item If $p_1 c_5$ were true, then $|T_3^{(w_3)}| = 4$, so this situation is also satisfied by the constraint.
+ \item If $p_1 c_7$ were true, then $|T_3^{(w_3)}| = 2$, so this situation is not satisfied by the constraint.
+ \item Obviously, $p_1 c_8$ and $p_1 c_9$ will not satisfy the constraint either. 
+\end{itemize}
+Hence, if player 1 believes player 3 to play according to his strategy and utilities, he would falsely assume that he can only hold 3, 4 or 5.
+
+Unfortunately, we cannot express this neatly with public announcement logic, since everything that is announced must be true.
+
+Nevertheless, let us assume that player 1 thinks that only 3, 4 and 5 are valid alternatives for his own card. This means that $\mathcal{P}^{(w_1)}_1 = 0$. Hence, the bluff is successful: player 1 folds.
+
+\subsubsection{Updating player 2's view}
+Player 2 has the following knowledge:
+\begin{equation*}
+ M'\models K_2 p_1 c_9 \wedge K_2 p_3 c_6
+\end{equation*}
+Moreover, he knows:
+\begin{equation*}
+M'\models K_2(p_2 c_2 \vee p_2 c_3 \vee p_2 c_4 \vee p_2 c_5 \vee p_2 c_7 \vee p_2 c_8
+\end{equation*}
+
+For player 2 it is obvious that player 3 bluffs. Hence, he knows that it is inappropriate to apply the derivations for determining $|T_3^{(w_3)}|$. Therefore, it is not wise to update anything based on his bluffing call. 
+
+Nevertheless, he knows that his gain will be equal to his loss (if he plays there will be just two coins in the pot). Note that $\gamma_2 = 1$. Hence the probability for him to win should be at least $0.5$ to participate. This is not the case, and so he decides to fold as well, leaving no gain nor loss for player 3. 
+
+\subsection{Discussion}
+It is interesting to see that from such a simple game situation it is difficult to apply our theory in practice. It is based on a lot of assumptions that may fail to be useful in practice. 
 
 
 \begin{comment}
