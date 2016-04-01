@@ -31,7 +31,7 @@ var playerGamma =[];
 var playerCalls = [];
 
 //These values are used for determining the adjusted probabilities
-var playerStyles = [1,1.25,0.75,1,1.5,0.5,1.5];
+var playerStyles = [1,1.5,0.4,1,1.5,0.5,1.5];
 
 /* run this at the start to disable the buttons that are not yet needed */
 disableButton();
@@ -64,6 +64,7 @@ function playTheGame(viewGraph){
         makeFullModel(range1(card_value));
     } else {
         getCard();
+        determineKnowledge();
         document.getElementById("draw_card").disabled =true;
     }
 
@@ -76,6 +77,9 @@ function playTheGame(viewGraph){
     setUtilityMatrixToArea()
 }
 
+/**
+ * This will empty the tables.
+ */
 function emptyTables(){
     document.getElementById("cardArea").innerHTML = "";
 
@@ -84,7 +88,9 @@ function emptyTables(){
     document.getElementById("bluffArea").innerHTML = "";
 }
 
-/* Disable the person buttons and enable the draw card button */
+/**
+ *  Disable the person buttons and enable the draw card button
+ */
 function disableButton(){
     document.getElementById("draw_card").disabled =false;
     document.getElementById("graph").disabled =false;
@@ -94,7 +100,9 @@ function disableButton(){
     document.getElementById("person4").disabled = true;
 }
 
-/* Enable the person buttons */
+/**
+ *  Enable the person buttons
+ */
 function enableButton(){
     document.getElementById("person1").disabled = false;
     document.getElementById("person2").disabled = false;
@@ -104,7 +112,9 @@ function enableButton(){
     }
 }
 
-/* Function for calculating the probabilities */
+/**
+ *  Function for calculating the probabilities
+ */
 function calculateProbability(array) {
     var matrix = [];
     //This is the case where we have the same number of players as of cards.
@@ -176,7 +186,7 @@ function setUtilityMatrixToArea(){
     String += "<table class=\"table table-striped\">  <thead> <tr> <td> </td>";
 
     for (var i=1;i<player_value+1;i++){
-        String += " <th> Player " + i + "  (" +playerStyles[i-1]+  ")\t" + " </th> ";
+        String += " <th> Player " + i + "  (&#947: " +playerStyles[i-1]+  ")\t" + " </th> ";
     }
     String += "</tr>";
     for(i=0;i<player_value;i++){
@@ -205,7 +215,7 @@ function setTextToResultArea(matrix){
     var i;
 
     for (i=1;i<player_value+1;i++){
-        String += " <th> Player " + i + "  (" +playerStyles[i-1]+  ")\t" + " </th> ";
+        String += " <th> Player " + i + "  (&#947:" +playerStyles[i-1]+  ")\t" + " </th> ";
     }
     String += "</tr>";
     for(i=0;i<player_value;i++){
@@ -224,7 +234,6 @@ function setTextToResultArea(matrix){
     document.getElementById("resultArea").innerHTML += String;
 }
 
-
 function calculateUtility(number, i){
     var gain = player_value -1;
     var utility_win = gain * number;
@@ -233,7 +242,6 @@ function calculateUtility(number, i){
     if(playerGamma[i]==null){
         playerGamma[i] =[-5,5];
     }
-
         if(playerStyles[i]*utility_win + utility_lose >= 0){
             if(!(gamma>9999)) {
                 updateUtility(gamma, true, i);
@@ -328,6 +336,8 @@ function changeCard(player,card) {
 
         viewAllPersons();
 
+        determineKnowledge();
+
         //This is where the call / bluff round is started.
         callBlufRound();
 
@@ -354,6 +364,79 @@ function removeOptions(selectbox)
     }
 }
 
+/**
+ * This will determien the knowledge for every player.
+ */
+function determineKnowledge() {
+    document.getElementById("knowledgeArea").innerHTML = "";
+
+    var string = "<table id='knowledgetable' class='table table-striped'> <tbody>";
+
+    var i;
+
+    for(i=1;i<card_array.length+1;i++){
+        string += "<tr> <td> Person " + i + ":";
+        string += "\\begin{align*}";
+        string += "M \\models K_" + i + "(";
+
+        //Run through all the other players.,
+        for(var c = 1; c < card_array.length+1; c++){
+
+            if( c != i) {
+                string += "p_" + c + "c_" + card_array[c-1];
+            }
+
+            //Check if we are at the last element or if the last element
+            //TODO Haha this should be refactored
+            if((c==i &&  c < card_array.length && c != 1) || ( c != i && c < card_array.length && c+1 != i)) {
+                string += " \\land "
+            }
+
+
+        }
+
+
+        if(card_value != player_value) {
+            string += ") \\land K_" + i + "(";
+
+            var placed = false;
+            //Run through all the other players.,
+            for (c = 2; c < card_value + 2; c++) {
+
+
+                if (card_array.indexOf(c) == -1 || card_array[i-1] == c) {
+
+                    if (placed) {
+                        string += " \\lor "
+                        placed = false;
+                    }
+
+                    string += "p_" + i + "c_" + c;
+                    placed = true;
+                }
+
+            }
+
+            string += ")";
+        } else {
+            string +=  " \\land p_" + i + "c_" + card_array[i-1] + ")"
+        }
+
+        //string += "\\left[ \\bigwedge_{i=1}^m K_i \\left(\\bigwedge_{j\\neq i} p_j c_{u^{(j)}} \\right) \\right] \\bigwedge_{i=1}^m \\left( K_i \\bigvee_{u^{(i)} \\notin \\{ u^{(j)} \\}_{j\\neq i}} p_i c_{u^{(i)}} \\right)";
+        string += "\\end{align*}";
+        string += "</td> </tr>";
+    }
+
+    string += " </tbody> </table>";
+
+    //Add the table to the card area
+    document.getElementById("knowledgeArea").innerHTML += string;
+
+    //Reload Mathjax
+    //TODO this is very scary and wrong.
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"knowledgeArea"]);
+
+}
 
 /*Randomly draw a card for all players and set them to the html */
 function getCard() {
@@ -379,16 +462,16 @@ function getCard() {
 
         removeOptions(document.getElementById("playerCardDropdown"+i+""));
         //string += "<select id=playerCardDropdown"+i+">"
-        //
 
+        //Every Option for the card select shoudl be set.
         var select = document.getElementById("playerCardDropdown"+i+"");
 
+        //Run through all the cards, when a card is the same as thecard that the player holds, that will be the selected option.
         for(var c = 2; c < card_value+2; c++){
 
             var option = document.createElement("option");
 
             if( c == card_array[i-1]) {
-                //string += "<option id=\"option"+c+""+i+" \" value=" + (c-2) +" selected=\"selected\" onchange=\"changeCard("+i+","+c+")\">"+c+"</option>";
 
                 option.text = c;
                 option.value = c;
@@ -401,19 +484,19 @@ function getCard() {
                 option.value = c;
                 select.appendChild(option);
 
-                //string += "<option id=\"option"+c+""+i+" \" value=" + (c-2) +" onchange=\"changeCard("+i+","+c+")\">"+c+"</option>";
             }
 
         }
-        //
-        //string += "</select> </td> </tr>";
+
         string += "</td> </tr>";
     }
 
     string += " </tbody> </table>";
 
+    //Add the table to the card area
     document.getElementById("cardArea").innerHTML += string;
-    viewAllPersons()
+
+    viewAllPersons();
 }
 
 function checkWin(){
