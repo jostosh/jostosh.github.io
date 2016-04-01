@@ -228,7 +228,7 @@
 </p>
     <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a
             id="x1-20001.1"></a>Kripke model</h4>
-    <!--l. 58--><p class="noindent" >For modeling Forehead idiot we consider the structures $M =\langle S,\pi,R\rangle $. The states are given by $\boldsymbol s = (s_1,s_2,\ldots,s_m) \in S$, where $s_i \in D = \{ 2,3,4,5,6,7,8,9,10,j,q,k,a \}$. This means that if $s_3 = 5$, then player 3 has 5 on
+    <!--l. 58--><p class="noindent" >For modeling Forehead idiot we consider the structures $\mathscr M =\langle S,\pi,R\rangle $. The states are given by $\boldsymbol s = (s_1,s_2,\ldots,s_m) \in S$, where $s_i \in D = \{ 2,3,4,5,6,7,8,9,10,j,q,k,a \}$. This means that if $s_3 = 5$, then player 3 has 5 on
     his forehead. Note that $D$ is an ordered set: $2\lt 3\lt 4\lt 5\lt 6\lt 7\lt 8\lt 9\lt 10\lt j\lt q\lt k\lt a$.
 </p><!--l. 61--><p class="indent" >   Since any player can only see those cards that are on the forehead of the other players, the relations are defined as $\boldsymbol s R_i \boldsymbol t$ such that $s_j = t_j,~\forall j \neq i$. A player's card is unique: $s_1 \neq s_2 \neq \cdots \neq s_m$. Note that relations are symmetric, transitive and reflexive.
 </p><!--l. 63--><p class="indent" >  Suppose we take a subset of the total deck $D'\subseteq D$ with $|D'|=n$. There are $n!$ different sequences of cards. If the number of players is $m\leq n$, then for each possible set of cards there will be $(n-m)!$ games with the same sequence of cards for the first $m$ cards. Hence, the total number of possible games $g$ is:
@@ -252,13 +252,13 @@ Note that we assume that all players are perfectly reasoning agents and that the
             id="x1-30001.2"></a>Theory</h4>
     <!--l. 77--><p class="noindent" >Before the cards are put on the foreheads, every player knows that every player has exactly one card. This can be captured by
     \begin{align*}
-    M \models C \bigwedge_{j=1}^m \bigg((p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge \neg p_j c_a) \vee (\neg p_j c_2 \wedge p_j c_3 \wedge \cdots \wedge \neg p_j c_a) \vee \cdots \vee (\neg p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge p_j c_a) \bigg)
+    \mathscr M \models C \bigwedge_{j=1}^m \bigg((p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge \neg p_j c_a) \vee (\neg p_j c_2 \wedge p_j c_3 \wedge \cdots \wedge \neg p_j c_a) \vee \cdots \vee (\neg p_j c_2 \wedge \neg p_j c_3 \wedge \cdots \wedge p_j c_a) \bigg)
     \end{align*}
 </p>
     <!--l. 82--><p class="noindent" >The moment that the players put the cards on their foreheads it is as if $m$ announcements are made. Every player announces that he knows what the other players' cards are (without actually saying it). This means that every player also knows his remaining possibilities.
 </p><!--l. 84--><p class="indent" >   In the most general case, we could express this as follows:
     \begin{align*}
-    M \models \left[ \bigwedge_{i=1}^m K_i \left(\bigwedge_{j\neq i} p_j c_{u^{(j)}} \right) \right] \bigwedge_{i=1}^m \left( K_i \bigvee_{u^{(i)} \notin \{ u^{(j)} \}_{j\neq i}} p_i c_{u^{(i)}} \right)
+    \mathscr M \models \left[ \bigwedge_{i=1}^m M_i \left(\bigwedge_{j\neq i} p_j c_{u^{(j)}} \right) \right] \bigwedge_{i=1}^m \left( M_i \bigvee_{u^{(i)} \notin \{ u^{(j)} \}_{j\neq i}} p_i c_{u^{(i)}} \right)
     \end{align*}
     where $u^{(j)} \in D'$ is the card that player $j$ is holding. This greatly reduces the number of possible worlds. In fact, if there are $n$ cards and $m$ players, we have that each player has $n-m+1$ alternative worlds. Hence there are $m(n-m+1) - m +1$ possible worlds left.
 </p><!--l. 91--><p class="noindent" >
@@ -284,24 +284,24 @@ Note that we assume that all players are perfectly reasoning agents and that the
 </p><!--l. 97--><p class="indent" >   Therefore, once a player sees the other players&#x2019; cards, he will know his own card, since there is only
     one state to go to. Hence, each player knows whether he wins or loses. In terms of public announcement logic this means that:
     \begin{align*} 
-    M \models \left[ \bigwedge_{i=1}^m K_i \left(\bigwedge_{j\neq i} p_j c_{u^{(j)}} \right) \right] C \bigwedge_{i=1}^m p_i c_{u^{(i)}}
+    \mathscr M \models \left[ \bigwedge_{i=1}^m M_i \left(\bigwedge_{j\neq i} p_j c_{u^{(j)}} \right) \right] C \bigwedge_{i=1}^m p_i c_{u^{(i)}}
     \end{align*}
-    
+    In other words, this announcement shrinks the model to a single state.
 </p><!--l. 99-->
     <p class="indent">
     As an example, suppose that we have 3 players with only three cards. Player 1 receives a 2, player 2 receives a 3 and player 3 receives a 4. Note that at the beginning we already know that 
     \begin{equation*}
-    M \models C \bigwedge^m_{j=1} \bigg( (p_j c_2 \wedge \neg p_j c_3 \wedge \neg p_j c_4) \vee (\neg p_j c_2 \wedge p_j c_3 \wedge \neg p_j c_4) \vee (\neg p_j c_2 \wedge \neg p_j c_3 \wedge p_j c_4) \bigg) 
+    \mathscr M \models C \bigwedge^m_{j=1} \bigg( (p_j c_2 \wedge \neg p_j c_3 \wedge \neg p_j c_4) \vee (\neg p_j c_2 \wedge p_j c_3 \wedge \neg p_j c_4) \vee (\neg p_j c_2 \wedge \neg p_j c_3 \wedge p_j c_4) \bigg) 
     \end{equation*}
     We can also express the reasoning of each agent once he knows the other cards:
     \begin{align*}
-    M &\models K_1 \big((p_2 c_3 \wedge p_3 c_4) \rightarrow p_1 c_2 \big)\\
-    M &\models K_2 \big((p_1 c_2 \wedge p_3 c_4) \rightarrow p_2 c_3 \big)\\
-    M &\models K_3 \big((p_1 c_2 \wedge p_2 c_3) \rightarrow p_3 c_4 \big)
+    \mathscr M &\models K_1 \big((p_2 c_3 \wedge p_3 c_4) \rightarrow p_1 c_2 \big)\\
+    \mathscr M &\models K_2 \big((p_1 c_2 \wedge p_3 c_4) \rightarrow p_2 c_3 \big)\\
+    \mathscr M &\models K_3 \big((p_1 c_2 \wedge p_2 c_3) \rightarrow p_3 c_4 \big)
     \end{align*}
     This will mean that 
     \begin{align*} 
-    M \models \left[K_1 (p_2 c_3 \wedge p_3 c_4) \wedge K_2 (p_1 c_2 \wedge p_3 c_4) \wedge K_3 (p_1 c_2 \wedge p_2 c_3) \right] C (p_1 c_2 \wedge p_2 c_3 \wedge p_3 c_4)
+    \mathscr M \models \left[M_1 (p_2 c_3 \wedge p_3 c_4) \wedge M_2 (p_1 c_2 \wedge p_3 c_4) \wedge M_3 (p_1 c_2 \wedge p_2 c_3) \right] C (p_1 c_2 \wedge p_2 c_3 \wedge p_3 c_4)
     \end{align*}
     
     From a game theoretic point of view, this scenario is not particularly interesting. The next section will address a much more interesting situation where there are less players than the amount of cards in the deck.
@@ -410,8 +410,8 @@ Note that we assume that all players are perfectly reasoning agents and that the
 </p><!--l. 177--><p class="indent" >   Let's extend our set of propositions to $\boldsymbol{P}'=\boldsymbol{P} \cup \{r_i,o_i,h_i\}_{i=1}^m$ in which $r_i$ will resemble a risky strategy for player $i$, $o_i$ will be used for optimal strategy and $h_i$ for safe or `harmless' strategy. A risky strategy will mean that $\gamma_i=1.1$, an optimal strategy will mean that $\gamma_i=1.0$ and a harmless strategy will resemble $\gamma_i=0.9$.
 </p><!--l. 179--><p class="indent" >  Note that we have:
     \begin{align*}
-    M &\models K_i r_i \vee K_i o_i \vee K_i h_i\\
-    M &\models C \bigwedge_{j=1}^m\bigg( (r_j \wedge \neg o_j \wedge \neg h_j ) \vee
+    \mathscr M &\models K_i r_i \vee K_i o_i \vee K_i h_i\\
+    \mathscr M &\models C \bigwedge_{j=1}^m\bigg( (r_j \wedge \neg o_j \wedge \neg h_j ) \vee
     (\neg r_j \wedge o_j \wedge \neg h_j) \vee
     (\neg r_j \wedge \neg o_j \wedge h_j)\bigg)
     \end{align*}
@@ -449,7 +449,7 @@ Note that we assume that all players are perfectly reasoning agents and that the
 </p>
     <!--l. 216--><p class="noindent" >In either case, we could consider it to be an announcement of the possibilities that are left. For example, if players $j\neq i$ find that $\gamma_i \lt 1.5$, it is as if it is announced that $r_i \vee o_i \vee h_i$. In other words, we might not gain any information. However, a series of rounds could enable agents $j$ to deduce $\gamma_i$. For example, let's say that three rounds are played, in which $\gamma_i \lt 1.5,\gamma_i \geq 0.93,\gamma_i \lt 1.06$. This sequence of announcements can be captured by:
     \begin{equation*}
-    M\models [r_i \vee o_i \vee h_i][\neg h_i][\neg r_i] \bigwedge_{j=1}^m K_j o_i
+    \mathscr M \models [r_i \vee o_i \vee h_i][\neg h_i][\neg r_i] \bigwedge_{j=1}^m K_j o_i
     \end{equation*}
 </p>
     <!--l. 221--><p class="noindent" >
@@ -550,7 +550,7 @@ Now the round ends. Hence, each player knows $\displaystyle -\frac{U^{(l_i)}}{U^
 \end{align*}
 Hence, it is as if it is announced that $[h_3]$ and so we have:
 \begin{equation}
- M \models [h_3] (K_1 h_3 \wedge K_2 h_3 \wedge K_3 h_3)
+ \mathscr M \models [h_3] (K_1 h_3 \wedge K_2 h_3 \wedge K_3 h_3)
 \end{equation}
 </p>
 
@@ -575,11 +575,11 @@ It is important to note that at this point $\mathscr{P}^{(w_2)}_2 = \mathscr{P}^
 <p class="indent">
 At this point we can say that player 1 knows what the cards of player 2 and 3 are: 
 \begin{equation*}
-M' \models K_1 p_2c_3 \wedge K_1p_3c_4 
+\mathscr M' \models K_1 p_2c_3 \wedge K_1p_3c_4 
 \end{equation*}
-where $M'$ is the model that remains after the initial announcement of drawing the cards. Furthermore, he knows:
+where $\mathscr M'$ is the model that remains after the initial announcement of drawing the cards. Furthermore, he knows:
 \begin{equation*}
- M' \models K_1(p_1 c_2 \vee p_1 c_5 \vee p_1 c_6 \vee p_1 c_7 \vee p_1 c_8 \vee p_1 c_9)
+ \mathscr M' \models K_1(p_1 c_2 \vee p_1 c_5 \vee p_1 c_6 \vee p_1 c_7 \vee p_1 c_8 \vee p_1 c_9)
 \end{equation*}
 <ul class="itemize1">
   <li class="itemize">If $p_1 c_2$ were true, then $|T_3^{(w_3)}| = 6$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.
@@ -592,7 +592,7 @@ where $M'$ is the model that remains after the initial announcement of drawing t
 </ul>
 Hence, it is as if it is announced that $[p_1 c_2 \vee p_1 c_5]$:
 \begin{equation*}
-M'\models [p_1 c_2 \vee p_1 c_5] K_1 (p_1 c_2 \vee p_1 c_5)
+\mathscr M' \models [p_1 c_2 \vee p_1 c_5] K_1 (p_1 c_2 \vee p_1 c_5)
 \end{equation*}
 This means that the probability for player 1 to win can be re-estimated: $\mathscr{P}^{(w_1)}_1 = \frac{1}{2}$.
 </p>
@@ -601,11 +601,11 @@ This means that the probability for player 1 to win can be re-estimated: $\maths
 <p class="indent">
 For player 2 we can say that player he knows what the cards of player 1 and 3 are: 
 \begin{equation*}
-M' \models K_2 p_1c_2 \wedge K_1p_3c_4 
+\mathscr M' \models K_2 p_1c_2 \wedge K_1p_3c_4 
 \end{equation*}
 Furthermore, he knows:
 \begin{equation*}
- M' \models K_2(p_2 c_3 \vee p_2 c_5 \vee p_2 c_6 \vee p_2 c_7 \vee p_2 c_8 \vee p_2 c_9)
+ \mathscr M' \models K_2(p_2 c_3 \vee p_2 c_5 \vee p_2 c_6 \vee p_2 c_7 \vee p_2 c_8 \vee p_2 c_9)
 \end{equation*}
 <ul class="itemize1">
   <li class="itemize">If $p_2 c_3$ were true, then $|T_3^{(w_3)}| = 6$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.
@@ -618,7 +618,7 @@ Furthermore, he knows:
 </ul>
 Hence, it is as if it is announced that $[p_2 c_3 \vee p_1 c_5]$:
 \begin{equation*}
-M'\models [p_2 c_2 \vee p_2 c_5] K_2 (p_2 c_3 \vee p_2 c_5)
+\mathscr M' \models [p_2 c_2 \vee p_2 c_5] K_2 (p_2 c_3 \vee p_2 c_5)
 \end{equation*}
 This means that the probability for player 2 to win can be re-estimated: $\mathscr{P}^{(w_2)}_2 = \frac{1}{2}$.
 </p>
@@ -629,18 +629,18 @@ This round was solely intended to demonstrate the consequence of a player's deci
 
 <h4>Third round</h4>
 <p class="indent">
-In another round we will have the situation in which player 1 receives the card 9, player 2 receives 2 and player 3 receives 6. For simplicity, we will assume that player 3 starts this round as well. It is obvious that $\mathscr{P}^{(w_3)}_3 = 0$. Player 3 feels like luck is on his side and decides to bluff. He can make use of the fact that the other players know his strategy: $M' \models K_3 K_1 h_3 \wedge K_3 K_2 h_3$. Let's see whether this bluff is successful or not!
+In another round we will have the situation in which player 1 receives the card 9, player 2 receives 2 and player 3 receives 6. For simplicity, we will assume that player 3 starts this round as well. It is obvious that $\mathscr{P}^{(w_3)}_3 = 0$. Player 3 feels like luck is on his side and decides to bluff. He can make use of the fact that the other players know his strategy: $\mathscr M' \models K_3 K_1 h_3 \wedge K_3 K_2 h_3$. Let's see whether this bluff is successful or not!
 </p>
 
 <h5>Updating player 1's view</h5>
 <p class="indent">
 For player 1 we have that:
 \begin{equation}
- M'\models K_1 p_2 c_2 \wedge K_1 p_3 c_6
+ \mathscr M' \models K_1 p_2 c_2 \wedge K_1 p_3 c_6
 \end{equation}
 Furthermore, he nows:
 \begin{equation*}
-M'\models K_1(p_1 c_3 \vee p_1 c_4 \vee p_1 c_5 \vee p_1 c_7 \vee p_1 c_8 \vee p_1 c_9)
+\mathscr M' \models K_1(p_1 c_3 \vee p_1 c_4 \vee p_1 c_5 \vee p_1 c_7 \vee p_1 c_8 \vee p_1 c_9)
 \end{equation*}
 Similar to what happened in the previous round, we have that $|T_3^{(w_3)}| \geq 4$.
 <ul class="itemize1">
@@ -669,11 +669,11 @@ Nevertheless, let us assume that player 1 thinks that only 3, 4 and 5 are valid 
 <p class="indent">
 Player 2 has the following knowledge:
 \begin{equation*}
- M'\models K_2 p_1 c_9 \wedge K_2 p_3 c_6
+ \mathscr M' \models K_2 p_1 c_9 \wedge K_2 p_3 c_6
 \end{equation*}
 Moreover, he knows:
 \begin{equation*}
-M'\models K_2(p_2 c_2 \vee p_2 c_3 \vee p_2 c_4 \vee p_2 c_5 \vee p_2 c_7 \vee p_2 c_8)
+\mathscr M' \models K_2(p_2 c_2 \vee p_2 c_3 \vee p_2 c_4 \vee p_2 c_5 \vee p_2 c_7 \vee p_2 c_8)
 \end{equation*}
 </p>
 
