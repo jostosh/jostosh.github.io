@@ -257,7 +257,7 @@ Note that we assume that all players are perfectly reasoning agents and that the
     <!--l. 82--><p class="noindent" >The moment that the players put the cards on their foreheads it is as if $m$ announcements are made. Every player announces that he knows what the other players' cards are (without actually saying it). This means that every player also knows his remaining possibilities.
 </p><!--l. 84--><p class="indent" >   In the most general case, we could express this as follows:
     \begin{align*}
-    \mathscr M \models \left[ \bigwedge_{i=1}^m M_i \left(\bigwedge_{j\neq i} p_j c_{u^{(j)}} \right) \right] \bigwedge_{i=1}^m \left( M_i \bigvee_{u^{(i)} \notin \{ u^{(j)} \}_{j\neq i}} p_i c_{u^{(i)}} \right)
+    \mathscr M \models \left[ \bigvee_{i=1}^m K_i \left(\bigwedge_{j\neq i} p_j c_{u^{(j)}} \right) \right] \bigvee_{i=1}^m \left( M_i \bigvee_{u^{(i)} \notin \{ u^{(j)} \}_{j\neq i}} p_i c_{u^{(i)}} \right)
     \end{align*}
     where $u^{(j)} \in D'$ is the card that player $j$ is holding. This greatly reduces the number of possible worlds. In fact, if there are $n$ cards and $m$ players, we have that each player has $n-m+1$ alternative worlds. Hence there are $m(n-m+1) - m +1$ possible worlds left.
 </p><!--l. 91--><p class="noindent" >
@@ -283,7 +283,7 @@ Note that we assume that all players are perfectly reasoning agents and that the
 </p><!--l. 97--><p class="indent" >   Therefore, once a player sees the other players&#x2019; cards, he will know his own card, since there is only
     one state to go to. Hence, each player knows whether he wins or loses. In terms of public announcement logic this means that:
     \begin{align*} 
-    \mathscr M \models \left[ \bigwedge_{i=1}^m M_i \left(\bigwedge_{j\neq i} p_j c_{u^{(j)}} \right) \right] C \bigwedge_{i=1}^m p_i c_{u^{(i)}}
+    \mathscr M \models \left[ \bigvee_{i=1}^m K_i \left(\bigwedge_{j\neq i} p_j c_{u^{(j)}} \right) \right] C \bigwedge_{i=1}^m p_i c_{u^{(i)}}
     \end{align*}
     In other words, this announcement shrinks the model to a single state.
 </p><!--l. 99-->
@@ -300,7 +300,7 @@ Note that we assume that all players are perfectly reasoning agents and that the
     \end{align*}
     This will mean that 
     \begin{align*} 
-    \mathscr M \models \left[M_1 (p_2 c_3 \wedge p_3 c_4) \wedge M_2 (p_1 c_2 \wedge p_3 c_4) \wedge M_3 (p_1 c_2 \wedge p_2 c_3) \right] C (p_1 c_2 \wedge p_2 c_3 \wedge p_3 c_4)
+    \mathscr M \models \left[K_1 (p_2 c_3 \wedge p_3 c_4) \vee K_2 (p_1 c_2 \wedge p_3 c_4) \vee K_3 (p_1 c_2 \wedge p_2 c_3) \right] C (p_1 c_2 \wedge p_2 c_3 \wedge p_3 c_4)
     \end{align*}
     
     From a game theoretic point of view, this scenario is not particularly interesting. The next section will address a much more interesting situation where there are less players than the amount of cards in the deck.
@@ -448,7 +448,7 @@ Note that we assume that all players are perfectly reasoning agents and that the
 </p>
     <!--l. 216--><p class="noindent" >In either case, we could consider it to be an announcement of the possibilities that are left. For example, if players $j\neq i$ find that $\gamma_i \lt 1.5$, it is as if it is announced that $r_i \vee o_i \vee h_i$. In other words, we might not gain any information. However, a series of rounds could enable agents $j$ to deduce $\gamma_i$. For example, let's say that three rounds are played, in which $\gamma_i \lt 1.5,\gamma_i \geq 0.93,\gamma_i \lt 1.06$. This sequence of announcements can be captured by:
     \begin{equation*}
-    \mathscr M \models [r_i \vee o_i \vee h_i][\neg h_i][\neg r_i] \bigwedge_{j=1}^m K_j o_i
+    \mathscr M \models [r_i \vee o_i \vee h_i][\neg h_i][\neg r_i] C o_i
     \end{equation*}
 </p>
     <!--l. 221--><p class="noindent" >
@@ -549,7 +549,7 @@ Now the round ends. Hence, each player knows $\displaystyle -\frac{U^{(l_i)}}{U^
 \end{align*}
 Hence, it is as if it is announced that $[h_3]$ and so we have:
 \begin{equation}
- \mathscr M \models [h_3] (K_1 h_3 \wedge K_2 h_3 \wedge K_3 h_3)
+ \mathscr M \models [h_3] C h_3
 \end{equation}
 </p>
 
@@ -657,7 +657,10 @@ Hence, if player 1 believes player 3 to play according to his strategy and utili
 </p>
 
 <p class="indent">
-Unfortunately, we cannot express this neatly with public announcement logic, since everything that is announced must be true for all agents.
+Unfortunately, we cannot express this neatly with public announcement logic, since everything that is announced must be true for all agents. However, we could express the reasoning of agent 1 as follows:
+\begin{align*}
+\mathscr M \models K_1 ((p_2 c_2 \wedge p_3 c_6 \wedge (p_1 c_3 \vee p_1 c_4 \vee p_1 c_5)) \rightarrow l_1)
+\end{align*}
 </p>
 
 <p class="indent">
@@ -686,7 +689,7 @@ Nevertheless, he knows that his gain will be equal to his loss (if he plays ther
 
 <h4>Discussion</h4>
 <p class="indent">
-It is interesting to see that from such a simple game situation it is difficult to apply our theory in practice. It is based on a lot of assumptions that may fail to be useful in practice. 
+It is interesting to see that from such a simple game situation it is difficult to apply our theory in practice. It is based on a lot of assumptions that may fail to be useful in practice. In the section below, we propose a number of extensions to our approach that might enable us to analyze these games more elegantly. Perhaps we can increase the complexity of the game even more in that case.
 </p>
     
     <!-- END PAGE CONTENT------------------------------------------- -->
@@ -702,7 +705,7 @@ T(\varphi | R_i, \boldsymbol s) = \frac{| \{\boldsymbol t | \boldsymbol t \in S 
 At this point, we had to simplify the problem by discretizing the strategies $\gamma_i$ into three possibilities. We could make our analysis more advanced if we would allow continuous values for our strategies. That means that we require continuous propositions. This is similar to fuzzy logic, but not with a restriction on the range of values. We can extend the model further by introducing new operators for expressing e.g. upper bounds and lower bounds for these propositions.
 </p>
 <p class="indent">
-If we use public announcement logic and view a player's decision as a truth statement about the possibilities for the cards that remain (once their strategy is known), we fail to express the effect of bluffing, as we cannot look at it as being a truth statement. However, we could introduce some other process that is more specific than announcements. We can call this a 'claim'. A claim is a transformation of a Kripke model that does not affect the states, but it affects the relations $R_i$. Intuitively, this means that an agent $i$ might claim $\varphi$ to be true for another agent $j$. If $j$ believes $i$ is telling the truth, then $i$'s accessibilities will only be directed to states that satisfy $\varphi$. In that case we can describe a successful bluff as a claim.
+If we use public announcement logic and view a player's decision as a truth statement about the possibilities for the cards that remain (once their strategy is known), we fail to express the effect of bluffing, as we cannot look at it as being a truth statement. However, we could introduce some other process that is more specific than announcements. We can call this a 'claim'. A claim would be a transformation of a Kripke model that does not affect the states, but it affects the relations $R_i$. Intuitively, this means that an agent $i$ might claim $\varphi$ to be true for another agent $j$. If $j$ believes $i$ is telling the truth, then $i$'s accessibilities will only be directed to states that satisfy $\varphi$. In that case we can describe a successful bluff as a claim.
 </p>
 <p class="indent">
 For the game simulation the simulation of player styles could be added. The game can also be modeled using public announcement logic. This could further clarify what the different agents know at a certain point in the game. The game itself can also be extended by adding different rules.
