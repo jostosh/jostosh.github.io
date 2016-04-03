@@ -322,8 +322,6 @@ function changeCard(player,card) {
         //Empty the tables
         emptyTables();
 
-
-
         var string = "<table class='table table-striped'> <tbody>";
         for(i=1;i<card_array.length+1;i++){
             string += "<tr> <td> Person " + i + " draws card: "+card_array[i-1]+" </td> </tr>";
