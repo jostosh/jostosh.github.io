@@ -173,7 +173,7 @@
     </div>
 
 
-        <select id="dropdown">
+        <select id="dropdown" onchange=playTheGame(false)>
             <option value="33">3 players with 3 cards</option>
             <option value="34">3 players with 4 cards</option>
             <option value="35">3 players with 5 cards</option>
@@ -193,7 +193,6 @@
         </select>
 
         <button type = "button" id="graph" onclick=playTheGame(true)>View graph</button>
-        <button type=  "button" id="start_game" onclick=playTheGame(false)>Start game</button>
         <button type ="button" id="draw_card" onclick=getCard()>Draw cards</button>
         <button type ="button" id="allpersons" onclick=viewAllPersons()>All players</button>
 

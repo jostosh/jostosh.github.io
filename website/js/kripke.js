@@ -360,6 +360,7 @@ function removeOptions(selectbox)
 
     for(i=selectbox.options.length-1;i>=0;i--)
     {
+        console.log("selectbox:" + selectbox)
         selectbox.remove(i);
     }
 }
@@ -459,35 +460,35 @@ function getCard() {
 
     for(i=1;i<card_array.length+1;i++){
         string += "<tr> <td> Person " + i + " draws card: "+card_array[i-1]+" ";
+        if(i<5){
+            removeOptions(document.getElementById("playerCardDropdown"+i+""));
+            //string += "<select id=playerCardDropdown"+i+">"
 
-        removeOptions(document.getElementById("playerCardDropdown"+i+""));
-        //string += "<select id=playerCardDropdown"+i+">"
+            //Every Option for the card select shoudl be set.
+            var select = document.getElementById("playerCardDropdown"+i+"");
 
-        //Every Option for the card select shoudl be set.
-        var select = document.getElementById("playerCardDropdown"+i+"");
+            //Run through all the cards, when a card is the same as thecard that the player holds, that will be the selected option.
+            for(var c = 2; c < card_value+2; c++){
 
-        //Run through all the cards, when a card is the same as thecard that the player holds, that will be the selected option.
-        for(var c = 2; c < card_value+2; c++){
+                var option = document.createElement("option");
 
-            var option = document.createElement("option");
+                if( c == card_array[i-1]) {
 
-            if( c == card_array[i-1]) {
+                    option.text = c;
+                    option.value = c;
+                    option.selected="selected";
+                    select.appendChild(option);
 
-                option.text = c;
-                option.value = c;
-                option.selected="selected";
-                select.appendChild(option);
+                } else {
 
-            } else {
+                    option.text = c;
+                    option.value = c;
+                    select.appendChild(option);
 
-                option.text = c;
-                option.value = c;
-                select.appendChild(option);
+                }
 
             }
-
         }
-
         string += "</td> </tr>";
     }
 
