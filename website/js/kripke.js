@@ -65,7 +65,6 @@ function playTheGame(viewGraph){
     } else {
         getCard();
         determineKnowledge();
-        document.getElementById("draw_card").disabled =true;
     }
 
     //This is where the call / bluff round is started.
@@ -92,7 +91,7 @@ function emptyTables(){
  *  Disable the person buttons and enable the draw card button
  */
 function disableButton(){
-    document.getElementById("draw_card").disabled =false;
+    document.getElementById("next_round").disabled =true;
     document.getElementById("graph").disabled =false;
     document.getElementById("person1").disabled = true;
     document.getElementById("person2").disabled = true;
@@ -110,6 +109,8 @@ function enableButton(){
     if(player_value==4){
         document.getElementById("person4").disabled = false;
     }
+
+    document.getElementById("next_round").disabled =false;
 }
 
 /**

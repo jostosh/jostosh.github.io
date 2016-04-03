@@ -133,11 +133,19 @@
     <p class="indent">For the simulation of this game we have chosen to not use a full deck of cards. The user can specify the number of cards and players in order to see how
     the game and Kripke model is influenced by these two factors.</p>
 
-    <p class="indent">In order to start the game one can click on the "start game" button. The cards will then be drawn and the Kripke model will show all possible states for every player.
+    <p class="indent">The game will start automatically when the page is loaded. The cards will be drawn and the Kripke model will show all possible states for every player.
         The "view graph" button will show all possible states when there are no cards drawn (WARNING this can take a lot of time to load depending on the number of players and cards).
+
         The "Player #" buttons will display the states that the player holds possible given the currently drawn cards. With the options next to the "Player #"  buttons, you can choose your own cards
         for each player. The game will <b>not</b> start if two or more players have the same card number.
-        When the "start game" button is pressed, a table is generated
+
+        The dropdown menu on the left of the buttons is used for selecting the number of players and cards. When selected a new game will automatically be started.
+    </p>
+    <p class="indent">
+
+        The results of the game are shown at the left of the Kripke model. These tables indicate which cards the player has drawn, what action the player takes and which player wins.
+
+        Underneath the Kripke model the different worlds $M$ are generated for every player. A table is generated
     which displays the chances that the player thinks he is going to win. The value next to the player displays the predefined $\gamma$ for each player.  The second number is the chance that the player will call, it is calculated and defined by the equations \ref{eq:util}, \ref{eq:loss} and \ref{eq:strat}.
         The second table displays the $\gamma_i$ boundaries that each player believes to apply to the other players. The
         first value is the lower boundary of the $\gamma_i$ that is calculated by using equation (\ref{eq:qamma_other}) and the second value is the higher boundary of the $\gamma_i$ calculated by using equation (\ref{eq:qamma_other2}).
@@ -193,7 +201,7 @@
         </select>
 
         <button type = "button" id="graph" onclick=playTheGame(true)>View graph</button>
-        <button type ="button" id="draw_card" onclick=getCard()>Draw cards</button>
+        <button type ="button" id="next_round" onclick=playTheGame(false)>Next round</button>
         <button type ="button" id="allpersons" onclick=viewAllPersons()>All players</button>
 
     <!-- TODO: maybe expand with more buttons -->
