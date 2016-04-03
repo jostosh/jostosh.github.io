@@ -377,9 +377,9 @@ Note that we assume that all players are perfectly reasoning agents and that the
     \label{eq:loss}
     \end{equation}
 </p>
-    <!--l. 136--><p class="indent" >   Now we can define a player's strategy for calling any bet as follows. Let $C_i^{(k)} \in \{\mathbb t, \mathbb f\}$ denote the decision of player $i$ at round $k$, where $\mathbb t$ corresponds to calling the bet and $\mathbb f$ corresponds to folding. The decision will be given by:
+    <!--l. 136--><p class="indent" >   Now we can define a player's strategy for calling any bet as follows. Let $\mathscr C_i^{(k)} \in \{\mathbb t, \mathbb f\}$ denote the decision of player $i$ at round $k$, where $\mathbb t$ corresponds to calling the bet and $\mathbb f$ corresponds to folding. The decision will be given by:
     \begin{equation}
-    C_i^{(k)}  =
+    \mathscr C_i^{(k)}  =
     \begin{cases}
     \mathbb t & \text{if } \gamma_i U^{(w_i)}_i + U^{(l_i)}_i \geq 0\\
     \mathbb f & \text{otherwise}
@@ -389,10 +389,10 @@ Note that we assume that all players are perfectly reasoning agents and that the
     In equation \ref{eq:strat}, $\gamma_i$ will characterize the player's characteristic strategy. If $\gamma_i = 1$, the player has an optimal strategy. If $\gamma_i > 1$ the player exhibits a risky strategy. If $\gamma_i < 1$ the player exhibits a safe strategy.
 </p><!--l. 147--><p class="indent" >   We can also decide to make the gain $\mathscr G^{(k)}_i$ a bit more specific:
     \begin{equation}
-    \mathscr G^{(k)}_i = \sum_{j=1}^{i-1} \mathscr L^{(k)}_j +  \sum_{j=i+1}^m \mathscr L^{(k-1)}_j +  \sum_{j=i+1}^m \{ C^{(k)}_j\} (\mathscr L^{(k)}_j - \mathscr L^{(k-1)}_j)
+    \mathscr G^{(k)}_i = \sum_{j=1}^{i-1} \mathscr L^{(k)}_j +  \sum_{j=i+1}^m \mathscr L^{(k-1)}_j +  \sum_{j=i+1}^m \{ \mathscr C^{(k)}_j\} (\mathscr L^{(k)}_j - \mathscr L^{(k-1)}_j)
     \label{eq:gain}
     \end{equation}
-    where we have the bet of all players that have already called the current bet, the bet of all players that still have to call the current bet and the bets that those players are going to place this round. In this equation $\{C^{(k)}_j\} = 1$ if $C^{(k)}_j=\mathbb{t}$ and $\{C^{(k)}_j\} = 0$ otherwise. This equation is mainly provided to give a formal description of a gain estimation that is based on whether people call or not. It is important to note that this equation assumes that player 1 starts with betting. If another player would start, we would have to rewrite the indices for the sums.
+    where we have the bet of all players that have already called the current bet, the bet of all players that still have to call the current bet and the bets that those players are going to place this round. In this equation $\{\mathscr C^{(k)}_j\} = 1$ if $\mathscr C^{(k)}_j=\mathbb{t}$ and $\{\mathscr C^{(k)}_j\} = 0$ otherwise. This equation is mainly provided to give a formal description of a gain estimation that is based on whether people call or not. It is important to note that this equation assumes that player 1 starts with betting. If another player would start, we would have to rewrite the indices for the sums.
 </p><!--l. 154--><p class="indent" >   It is interesting to see if we can let the players deduce the value of $\gamma_i$ for the other players. Until then, it seems reasonable to simplify equation (\ref{eq:gain}) to:
     \begin{equation}
     \mathscr{G}^{(k)}_i = \sum_{j\neq i} \mathscr L^{(k)}_j
@@ -405,13 +405,13 @@ Note that we assume that all players are perfectly reasoning agents and that the
     A player can also decide to raise the current bet. The main reason for raising your bet is to make the other players decide to quit the game, or to increase the final gain. A player now bluffs if, after its bluffing bet, $\gamma_i U^{(w)}_i + U^{(l)}_i \lt 0$.
 </p><!--l. 163--><p class="indent" >   Based on the information that is available, a player can estimate the utilities of other players. Hence, it can make its own estimations of the other players' gains: $\langle \mathscr G^{(k)}_j \rangle_i$, which is the estimated gain for player $j$ from player $i$'s point of view.
 </p><!--l. 165--><p class="indent" >   The estimations can be obtained by using equations (\ref{eq:util}) through (\ref{eq:sgain}), but now we will start with some estimated probability $\mathscr P^{w_j}_i$, from equation (\ref{eq:prob}).
-</p><!--l. 167--><p class="indent" >   Once we have the estimated gains we can make an estimation of the other player's decisions. For bluffing we want to achieve that $C^{(k)}_j = \mathbb{f}$ for the players $j\neq i$. Hence, if a player decides to bluff, he should try to ensure that $\langle C^{(k)}_j \rangle_i = \mathbb{f}$ for those player's that have a higher probability of winning. Formally, it should make at least those players $j$ fold such that $\mathscr P^{(w_j)}_i \gt \mathscr P^{(w_i)}_i$.
+</p><!--l. 167--><p class="indent" >   Once we have the estimated gains we can make an estimation of the other player's decisions. For bluffing we want to achieve that $\mathscr C^{(k)}_j = \mathbb{f}$ for the players $j\neq i$. Hence, if a player decides to bluff, he should try to ensure that $\langle \mathscr  C^{(k)}_j \rangle_i = \mathbb{f}$ for those player's that have a higher probability of winning. Formally, it should make at least those players $j$ fold such that $\mathscr P^{(w_j)}_i \gt \mathscr P^{(w_i)}_i$.
 </p><!--l. 169--><p class="indent" >  We will return to bluffing in a later section.
 </p>
     <!--l. 171--><p class="noindent" ><span class="paragraphHead"><a
         id="x1-130002.2.2"></a><span
         class="ecbx-1000">Raising the current bet: increasing the gain</span></span>
-    If a player is confident of winning the round, he can decide to raise the current bet. A player should try to accomplish that $C^{(k)}_j = \mathbb{t}$ while it should also maximize the expected gain.
+    If a player is confident of winning the round, he can decide to raise the current bet. A player should try to accomplish that $\mathscr C^{(k)}_j = \mathbb{t}$ while it should also maximize the expected gain.
 </p><!--l. 174--><p class="noindent" >
 </p>
     <h4 class="subsectionHead"><span class="titlemark">2.3   </span> <a
@@ -449,13 +449,13 @@ Note that we assume that all players are perfectly reasoning agents and that the
     <!--l. 201--><p class="noindent" >At the end of a round, the players are allowed to see their own cards. Hence they now know on which
     cards the decision of each opponent was based on. It is as if each player gets to know the utility of all
     other players during the round that just ended.
-</p><!--l. 203--><p class="indent" >   First, suppose that $C^{(k)}_i = \mathbb{t}$. Now any player $j\neq i$ knows that the threshold of 0 was exceeded. Hence each player $j$ knows
+</p><!--l. 203--><p class="indent" >   First, suppose that $\mathscr C^{(k)}_i = \mathbb{t}$. Now any player $j\neq i$ knows that the threshold of 0 was exceeded. Hence each player $j$ knows
     \begin{align}
     \gamma_i U^{(w_i)}_i + U^{(l_i)}_i &\geq 0\\
     \gamma_i &\geq -\frac{U^{(l_i)}_i }{U^{(w_i)}_i}\label{eq:qamma_other}
     \end{align}
     So the lower bound of $\gamma_i$ from $j$'s perspective is increased.
-</p><!--l. 210--><p class="indent" >   Second, suppose that $C^{(k)}_i = \mathbb{f}$. Now any player $j\neq i$ knows:
+</p><!--l. 210--><p class="indent" >   Second, suppose that $\mathscr C^{(k)}_i = \mathbb{f}$. Now any player $j\neq i$ knows:
     \begin{align}
     \gamma_i U^{(w_i)}_i + U^{(l_i)}_i &\lt 0\\
     \gamma_i &\lt -\frac{U^{(l_i)}_i }{U^{(w_i)}_i}\label{eq:qamma_other2}
@@ -548,9 +548,9 @@ And the utilities for losing:
 We will have the following:
 \begin{align*}
 \begin{array}{clll}
- \gamma_1 U^{(w_1)}_1 + U^{(l_1)}_1 &= 1.5\cdot \frac{4}{3} - \frac{1}{3} = \frac{5}{3} &\geq 0 &\Rightarrow C^{(1)}_1 = \mathbb{t}\\
- \gamma_2 U^{(w_2)}_2 + U^{(l_2)}_2 &= 1\cdot 1 - \frac{1}{2} = \frac{1}{2} &\geq 0 &\Rightarrow C^{(1)}_2 = \mathbb{t}\\
- \gamma_3 U^{(w_3)}_3 + U^{(l_3)}_3 &= 0.4\cdot 1 - \frac{1}{2} = -0.1 &< 0 &\Rightarrow C^{(1)}_3 = \mathbb{f}
+ \gamma_1 U^{(w_1)}_1 + U^{(l_1)}_1 &= 1.5\cdot \frac{4}{3} - \frac{1}{3} = \frac{5}{3} &\geq 0 &\Rightarrow \mathscr  C^{(1)}_1 = \mathbb{t}\\
+ \gamma_2 U^{(w_2)}_2 + U^{(l_2)}_2 &= 1\cdot 1 - \frac{1}{2} = \frac{1}{2} &\geq 0 &\Rightarrow \mathscr C^{(1)}_2 = \mathbb{t}\\
+ \gamma_3 U^{(w_3)}_3 + U^{(l_3)}_3 &= 0.4\cdot 1 - \frac{1}{2} = -0.1 &< 0 &\Rightarrow \mathscr C^{(1)}_3 = \mathbb{f}
 \end{array}
 \end{align*}
 </p>
