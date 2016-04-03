@@ -458,10 +458,14 @@ function getCard() {
 
     var i;
 
+    //Remove all the options from the card lists
+    for (i=1; i<5; i++) {
+        removeOptions(document.getElementById("playerCardDropdown"+i+""));
+    }
+
     for(i=1;i<card_array.length+1;i++){
         string += "<tr> <td> Person " + i + " draws card: "+card_array[i-1]+" ";
-        if(i<5){
-            removeOptions(document.getElementById("playerCardDropdown"+i+""));
+        if(i<7){
             //string += "<select id=playerCardDropdown"+i+">"
 
             //Every Option for the card select shoudl be set.
