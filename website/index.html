@@ -587,13 +587,13 @@ It is important to note that at this point $\mathscr{P}^{(w_2)}_2 = \mathscr{P}^
 
 <h5>Updating player 1's view</h5>
 <p class="indent">
-At this point we can say that player 1 knows what the cards of player 2 and 3 are: 
+At this point we can say that player 1 in the actual state $\boldsymbol s$ knows what the cards of player 2 and 3 are: 
 \begin{equation*}
-\mathscr M' \models K_1 p_2c_3 \wedge K_1p_3c_4 
+(\mathscr M', \boldsymbol s) \models K_1 p_2c_3 \wedge K_1p_3c_4 
 \end{equation*}
 where $\mathscr M'$ is the model that remains after the initial announcement of drawing the cards and $[h_3]$. Furthermore, he knows:
 \begin{equation*}
- \mathscr M' \models K_1(p_1 c_2 \vee p_1 c_5 \vee p_1 c_6 \vee p_1 c_7 \vee p_1 c_8 \vee p_1 c_9)
+(\mathscr M', \boldsymbol s) \models K_1(p_1 c_2 \vee p_1 c_5 \vee p_1 c_6 \vee p_1 c_7 \vee p_1 c_8 \vee p_1 c_9)
 \end{equation*}
 <ul class="itemize1">
   <li class="itemize">If $p_1 c_2$ were true, then $|\mathscr T_3^{(w_3)}| = 6$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.
@@ -606,7 +606,7 @@ where $\mathscr M'$ is the model that remains after the initial announcement of 
 </ul>
 Hence, it is as if it is announced that $[p_1 c_2 \vee p_1 c_5]$:
 \begin{equation*}
-\mathscr M' \models [p_1 c_2 \vee p_1 c_5] K_1 (p_1 c_2 \vee p_1 c_5)
+(\mathscr M', \boldsymbol s) \models [p_1 c_2 \vee p_1 c_5] K_1 (p_1 c_2 \vee p_1 c_5)
 \end{equation*}
 This means that the probability for player 1 to win can be re-estimated: $\mathscr{P}^{(w_1)}_1 = \frac{1}{2}$.
 </p>
@@ -615,11 +615,11 @@ This means that the probability for player 1 to win can be re-estimated: $\maths
 <p class="indent">
 For player 2 we can say that player he knows what the cards of player 1 and 3 are: 
 \begin{equation*}
-\mathscr M' \models K_2 p_1c_2 \wedge K_1p_3c_4 
+(\mathscr M', \boldsymbol s) \models K_2 p_1c_2 \wedge K_1p_3c_4 
 \end{equation*}
 Furthermore, he knows:
 \begin{equation*}
- \mathscr M' \models K_2(p_2 c_3 \vee p_2 c_5 \vee p_2 c_6 \vee p_2 c_7 \vee p_2 c_8 \vee p_2 c_9)
+ (\mathscr M', \boldsymbol s) \models K_2(p_2 c_3 \vee p_2 c_5 \vee p_2 c_6 \vee p_2 c_7 \vee p_2 c_8 \vee p_2 c_9)
 \end{equation*}
 <ul class="itemize1">
   <li class="itemize">If $p_2 c_3$ were true, then $|\mathscr T_3^{(w_3)}| = 6$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.
@@ -632,7 +632,7 @@ Furthermore, he knows:
 </ul>
 Hence, it is as if it is announced that $[p_2 c_3 \vee p_1 c_5]$:
 \begin{equation*}
-\mathscr M' \models [p_2 c_2 \vee p_2 c_5] K_2 (p_2 c_3 \vee p_2 c_5)
+(\mathscr M', \boldsymbol s) \models [p_2 c_2 \vee p_2 c_5] K_2 (p_2 c_3 \vee p_2 c_5)
 \end{equation*}
 This means that the probability for player 2 to win can be re-estimated: $\mathscr{P}^{(w_2)}_2 = \frac{1}{2}$.
 </p>
@@ -648,13 +648,13 @@ In another round we will have the situation in which player 1 receives the card 
 
 <h5>Updating player 1's view</h5>
 <p class="indent">
-For player 1 we have that:
+For player 1 in the actual state $\boldsymbol s$ we have that:
 \begin{equation}
- \mathscr M' \models K_1 p_2 c_2 \wedge K_1 p_3 c_6
+ (\mathscr M', \boldsymbol s) \models K_1 p_2 c_2 \wedge K_1 p_3 c_6
 \end{equation}
 Furthermore, he nows:
 \begin{equation*}
-\mathscr M' \models K_1(p_1 c_3 \vee p_1 c_4 \vee p_1 c_5 \vee p_1 c_7 \vee p_1 c_8 \vee p_1 c_9)
+(\mathscr M', \boldsymbol s) \models K_1(p_1 c_3 \vee p_1 c_4 \vee p_1 c_5 \vee p_1 c_7 \vee p_1 c_8 \vee p_1 c_9)
 \end{equation*}
 Similar to what happened in the previous round, we have that $|T_3^{(w_3)}| \geq 4$.
 <ul class="itemize1">
@@ -686,11 +686,11 @@ Nevertheless, let us assume that player 1 thinks that only 3, 4 and 5 are valid 
 <p class="indent">
 Player 2 has the following knowledge:
 \begin{equation*}
- \mathscr M' \models K_2 p_1 c_9 \wedge K_2 p_3 c_6
+ (\mathscr M', \boldsymbol s) \models K_2 p_1 c_9 \wedge K_2 p_3 c_6
 \end{equation*}
 Moreover, he knows:
 \begin{equation*}
-\mathscr M' \models K_2(p_2 c_2 \vee p_2 c_3 \vee p_2 c_4 \vee p_2 c_5 \vee p_2 c_7 \vee p_2 c_8)
+(\mathscr M', \boldsymbol s) \models K_2(p_2 c_2 \vee p_2 c_3 \vee p_2 c_4 \vee p_2 c_5 \vee p_2 c_7 \vee p_2 c_8)
 \end{equation*}
 </p>
 
