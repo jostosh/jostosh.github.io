@@ -87,7 +87,7 @@
         <p class="noindent">This website is created for the final project of the Multi Agent Systems course in the academic year of 2015/2016. </p>
 
     <p class="indent"> For this project we analyze the Forehead Idiot game. We would like to analyze how choices of players influence the game both in terms of chance analysis and epistemic logic.
-        What if certain players have a certain playing style? Are we able to deduct this information from playing a certain number of games. Also, if a player knows that an other player has a certain
+        What if certain players have a certain playing style? Are we able to deduct this information from playing a certain number of games. Also, if a player knows that another player has a certain
         playing style, then does that influence the choices the player makes? If so, how?
     </p>
 
@@ -140,6 +140,8 @@
         for each player. The game will <b>not</b> start if two or more players have the same card number.
 
         The dropdown menu on the left of the buttons is used for selecting the number of players and cards. When selected a new game will automatically be started.
+
+        If the "next round" button is pressed, the cards will be redrawn and a new round is played.
     </p>
     <p class="indent">
 
@@ -247,7 +249,7 @@
             id="x1-20001.1"></a>Kripke model</h4>
     <!--l. 58--><p class="noindent" >For modeling Forehead idiot we consider the structures $\mathscr M =\langle S,\pi,R\rangle $. The states are given by $\boldsymbol s = (s_1,s_2,\ldots,s_m) \in S$, where $s_i \in D = \{ 2,3,4,5,6,7,8,9,10,j,q,k,a \}$. This means that if $s_3 = 5$, then player 3 has 5 on
     his forehead. Note that $D$ is an ordered set: $2\lt 3\lt 4\lt 5\lt 6\lt 7\lt 8\lt 9\lt 10\lt j\lt q\lt k\lt a$.
-</p><!--l. 61--><p class="indent" >   Since any player can only see those cards that are on the forehead of the other players, the relations are defined as $\boldsymbol s R_i \boldsymbol t$ such that $s_j = t_j,~\forall j \neq i$. A player's card is unique: $s_1 \neq s_2 \neq \cdots \neq s_m$. Note that relations are symmetric, transitive and reflexive.
+</p><!--l. 61--><p class="indent" >   Since any player can only see the cards that are on the forehead of the other players, the relations are defined as $\boldsymbol s R_i \boldsymbol t$ such that $s_j = t_j,~\forall j \neq i$. A player's card is unique: $s_1 \neq s_2 \neq \cdots \neq s_m$. Note that relations are symmetric, transitive and reflexive.
 </p><!--l. 63--><p class="indent" >  Suppose we take a subset of the total deck $D'\subseteq D$ with $|D'|=n$. There are $n!$ different sequences of cards. If the number of players is $m\leq n$, then for each possible set of cards there will be $(n-m)!$ games with the same sequence of cards for the first $m$ cards. Hence, the total number of possible games $g$ is:
     \begin{equation}
     g=\frac{n!}{(n-m)!}
@@ -418,7 +420,7 @@ Note that we assume that all players are perfectly reasoning agents and that the
     A player can also decide to raise the current bet. The main reason for raising your bet is to make the other players decide to quit the game, or to increase the final gain. A player now bluffs if, after its bluffing bet, $\gamma_i U^{(w)}_i + U^{(l)}_i \lt 0$.
 </p><!--l. 163--><p class="indent" >   Based on the information that is available, a player can estimate the utilities of other players. Hence, it can make its own estimations of the other players' gains: $\langle \mathscr G^{(k)}_j \rangle_i$, which is the estimated gain for player $j$ from player $i$'s point of view.
 </p><!--l. 165--><p class="indent" >   The estimations can be obtained by using equations (\ref{eq:util}) through (\ref{eq:sgain}), but now we will start with some estimated probability $\mathscr P^{w_j}_i$, from equation (\ref{eq:prob}).
-</p><!--l. 167--><p class="indent" >   Once we have the estimated gains we can make an estimation of the other player's decisions. For bluffing we want to achieve that $\mathscr C^{(k)}_j = \mathbb{f}$ for the players $j\neq i$. Hence, if a player decides to bluff, he should try to ensure that $\langle \mathscr  C^{(k)}_j \rangle_i = \mathbb{f}$ for those player's that have a higher probability of winning. Formally, it should make at least those players $j$ fold such that $\mathscr P^{(w_j)}_i \gt \mathscr P^{(w_i)}_i$.
+</p><!--l. 167--><p class="indent" >   Once we have the estimated gains we can make an estimation of the other player's decisions. For bluffing we want to achieve that $\mathscr C^{(k)}_j = \mathbb{f}$ for the players $j\neq i$. Hence, if a player decides to bluff, he should try to ensure that $\langle \mathscr  C^{(k)}_j \rangle_i = \mathbb{f}$ for those players that have a higher probability of winning. Formally, it should make at least those players $j$ fold such that $\mathscr P^{(w_j)}_i \gt \mathscr P^{(w_i)}_i$.
 </p><!--l. 169--><p class="indent" >  We will return to bluffing in a later section.
 </p>
     <!--l. 171--><p class="noindent" ><span class="paragraphHead"><a
@@ -503,7 +505,7 @@ For simplicity, we assume that every player expects his gain to be as in equatio
     </p>
     
     <p class="indent">
-    If player $j$ knows such restrictions for $|T^{(w_i)}_i|$, it can go through its possible worlds. For every world, it should expand the possibilities for player $i$. It can then see whether this restriction on $|T^{(w_i)}_i|$ is satisfied by the expansion of that particular world. In essence, we need to revisit the Kripke model in which we have all possible worlds before any cards are drawn. For each $\boldsymbol s \in T_j$ (note the subscript $j$) we have to look at the states $\boldsymbol t$ such that $\boldsymbol s R_i \boldsymbol t$. Let us denote the set $\mathscr T^{\boldsymbol s}_i = \{\boldsymbol t | \boldsymbol t \in S \text{ such that } \boldsymbol s R_i \boldsymbol t \}$. For each $\mathscr T^{\boldsymbol s}_i$ we count the occurrences of $w_i$. If the number of $w_i$ satisfies the restriction of $|T^{(w_i)}_i|$, then $\boldsymbol s$ is still a valid alternative for $j$. 
+    If player $j$ knows such restrictions for $|T^{(w_i)}_i|$, it can go through its possible worlds. For every world, it should expand the possibilities for player $i$. It can then see whether this restriction on $|T^{(w_i)}_i|$ is satisfied by the expansion of that particular world. In essence, we need to revisit the Kripke model in which we have all possible worlds before any cards are drawn. For each $\boldsymbol s \in T_j$ (note the subscript $j$) we have to look at the states $\boldsymbol t$ such that $\boldsymbol s R_i \boldsymbol t$. Let us denote the set $\mathscr T^{\boldsymbol s}_i = \{\boldsymbol t | \boldsymbol t \in S \text{ such that } \boldsymbol s R_i \boldsymbol t \}$. For each $\mathscr T^{\boldsymbol s}_i$ we count the occurrences of $w_i$. If the number of $w_i$ satisfies the restriction of $|T^{(w_i)}_i|$, then $\boldsymbol s$ is still a valid alternative for $j$.
     </p>
     
     <p class="indent">
@@ -665,7 +667,7 @@ For player 1 in the actual state $\boldsymbol s$ we have that:
 \begin{equation}
  (\mathscr M', \boldsymbol s) \models K_1 p_2 c_2 \wedge K_1 p_3 c_6
 \end{equation}
-Furthermore, he nows:
+Furthermore, he knows:
 \begin{equation*}
 (\mathscr M', \boldsymbol s) \models K_1(p_1 c_3 \vee p_1 c_4 \vee p_1 c_5 \vee p_1 c_7 \vee p_1 c_8 \vee p_1 c_9)
 \end{equation*}
@@ -724,7 +726,7 @@ It is interesting to see that from such a simple game situation it is difficult 
 
     <h2>Future Work</h2>
 <p class="indent">
-In future work, we might proceed by revisiting the logic system in which we analyze the game. We are reasoning about the likeliness of events by counting occurances of propositions in a set of worlds. Hence, we are dealing with continuous values for probabilities and such. We might then introduce an operator $T(\varphi | R_i, \boldsymbol s)$ that maps a proposition to a probability of that proposition to occur. It would be defined as follows:
+In future work, we might proceed by revisiting the logic system in which we analyze the game. We are reasoning about the likeliness of events by counting occurrences of propositions in a set of worlds. Hence, we are dealing with continuous values for probabilities and such. We might then introduce an operator $T(\varphi | R_i, \boldsymbol s)$ that maps a proposition to a probability of that proposition to occur. It would be defined as follows:
 \begin{equation}
 T(\varphi | R_i, \boldsymbol s) = \frac{| \{\boldsymbol t | \boldsymbol t \in S \text{ and } \boldsymbol s R_i \boldsymbol t \text{ and } (M,\boldsymbol t) \models \varphi \}|}{| \{\boldsymbol t | \boldsymbol t \in S \text{ and } \boldsymbol s R_i \boldsymbol t  \}| }
 \end{equation}
@@ -735,6 +737,9 @@ At this point, we had to simplify the problem by discretizing the strategies $\g
 <p class="indent">
 If we use public announcement logic and view a player's decision as a truth statement about the possibilities for the cards that remain (once their strategy is known), we fail to express the effect of bluffing, as we cannot look at it as being a truth statement. However, we could introduce some other process that is more specific than announcements. We can call this a 'claim'. A claim would be a transformation of a Kripke model that does not affect the states, but it affects the relations $R_i$. Intuitively, this means that an agent $i$ might claim $\varphi$ to be true for another agent $j$. If $j$ believes $i$ is telling the truth, then $i$'s accessibilities will only be directed to states that satisfy $\varphi$. In that case we can describe a successful bluff as a claim.
 </p>
+    <p class="indent">
+        It would also be quite interesting to analyze what kind of knowledge others have about me and how they would reason about me.
+    </p>
 <p class="indent">
 For the game simulation the simulation of player styles could be added. The game can also be modeled using public announcement logic. This could further clarify what the different agents know at a certain point in the game. The game itself can also be extended by adding different rules.
 </p>
