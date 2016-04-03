@@ -84,53 +84,63 @@
 <div class="container">
 
     <h2> Introduction </h2>
-        <p class="indent">This is a website created for the MAS Project 2016.</p>
+        <p class="noindent">This website is created for the final project of the Multi Agent Systems course in the academic year of 2015/2016. </p>
 
-    <p class="indent"> For this project we analyse the ForeHead idiot game. We would like to analyse how choices of players influence the game both in terms of chance analysis and epistemic logic.
+    <p class="indent"> For this project we analyze the Forehead Idiot game. We would like to analyze how choices of players influence the game both in terms of chance analysis and epistemic logic.
         What if certain players have a certain playing style? Are we able to deduct this information from playing a certain number of games. Also, if a player knows that an other player has a certain
-        playing style then does that influence the choices the player makes.
+        playing style, then does that influence the choices the player makes? If so, how?
     </p>
 
-    <p class="indent"> In the next sections the game is described,
-        a simulation is given where the knowledge of every player is represented in a Kripke model, an analysis of the game and the Kripke model is given and a conclusion
-        is drawn from the analysis.</p>
+    <p class="indent"> The next sections will briefly describe the game's rules. Then, a simulation is given where the knowledge of every player is represented in a Kripke model. We will then continue with an epistemic analysis of the game by defining a Kripke structure and formalizing the player's reasoning and strategies. We will apply our general theory to an example game.
+    </p>
 
     <h2> Game Explanation </h2>
 
-    Forehead idiot is a card game that is known as a ``bluff" game. The game is played with a standard Anglo-American deck of 52 cards. Before the start of the game every player gets a standard value of coins to play with. The goal for a player is to maximize the coins that he possesses. The ranks of cards are 2-3-4-5-6-7-8-9-10-J-Q-K-A in ascending order, which implies that A is the highest card.
+    Forehead Isdiot is a card game that is known as a "bluff" game. The game is played with a standard Anglo-American deck of 52 cards. Before the start of the game every player gets a standard value of coins to play with. The goal for a player is to maximize the coins that he possesses. The ranks of the cards are 2-3-4-5-6-7-8-9-10-J-Q-K-A in ascending order, which implies that A is the highest card.
 
     <h4> Playing a round </h4>
-    At the beginning of a round, each player receives a card. A player is not allowed to see his own card. All the players push or stick their card on their foreheads. All players are required to put a minimum amount of coins in the pot before the betting begins.
-
+    <p class="noindent">
+    At the beginning of a round, each player receives a card. A player is not allowed to see his own card. All players push or stick their card on their foreheads. 
+    </p>
+    <p class="indent">
     The player left of the dealer starts the round. At any turn, a player can decide to either call, fold, or raise the current bet. Calling means that the player agrees with the current highest bet, while raising means that the player raises the highest bet. Folding means refusing to agree to the current bet. Folding means that the player loses his current bet and the round automatically.
-
+    </p>
+    <p class="indent">
     If all remaining players refuse to raise and if they have called the current highest bet, the round ends. The player with the highest card wins the pot. If all players but one decide to fold, the remaining player wins. If only one player is able to raise the bet any further, the round also ends (the others have gone all-in). In case of a tie between cards, the pot is divided among the winners.
-
+    </p>
+    <p class="indent">
     For example: the first player makes a bet, the second player will call the bet since he thinks he has a chance to win based on the cards the other people have. The third player folds because he thinks that his card is lower than that of the other players.
-
+    </p>
 
     <h4> Strategies </h4>
-
-    In this game you do not know your own card and only know the cards that are on the heads of the other players. A decision is made based on the cards of the others but also on the decisions of the other players because they can see your card. The difficulty of the game increases because players can ``bluff". So you cannot say with certainty that the decisions of the players are good or that they are ``bluffing".
-
-    Because of these rules, there is epistemic logic in the game. To make it a little harder you can use different types of players. You could decide to make a player that plays safer than others etc.
+    <p class="indent">
+    In this game you do not know your own card and only know the cards that are on the heads of the other players. A decision is made based on the cards of the others but also on the decisions of the other players because they can see your card. The difficulty of the game increases because players can "bluff". So you cannot say with certainty that the decisions of the players are good or that they are "bluffing".
+    </p>
+    <p class="indent">
+    Because of these rules, there is epistemic logic in the game. To make the modeling of the game somewhat more advanced you could use different types of players. You could e.g. decide to make a player that plays safer than others etc.
+    </p>
     
     <h4> Example game </h4>
-    
+    <p>
     As an example, we consider a game with 3 players and 8 cards. The cards that are involved in the game are 2, 3, 4, 5, 6, 7, 8 and 9. The cards are dealt and we see that player one draws 6, player two draws 2 and player three draws 5. Player one sees that player two has 2 and player three has 5. He estimates that his odds are good enough, so he decides to set the initial bet at 1. Then player two decides that his odds are good enough to call the bet and so there are two coins in the pot. Player three considers his odds of losing too high to participate. Therefore, he decides not to take any risk, so he folds. Now all players that remain have called the current highest bet. Hence, the players take their cards off their foreheads and the winner (player one) takes the pot of 2 coins.
-
+    </p>
+    
+    <p>
+    After we have given the general epistemic analysis of the game we will revisit this example.
+    </p
+    
     <h2> Game Simulation </h2>
-    <p class="indent">For the simulation of this game we have chosen to not use a full deck of cards. The user can however choose a different number of cards and players in order to see how
-    the game and kripke is influenced by these two factors.</p>
+    <p class="indent">For the simulation of this game we have chosen to not use a full deck of cards. The user can specify the number of cards and players in order to see how
+    the game and Kripke model is influenced by these two factors.</p>
 
     <p class="indent">In order to start the game one can click on the "start game" button. The cards will then be drawn and the Kripke model will show all possible states for every player.
         The "view graph" button will show all possible states when there are no cards drawn (WARNING this can take a lot of time to load depending on the number of players and cards).
-        The "Player #" buttons will display the states that the player holds for possible given the cards drawn. With the options next to the "Player #"  buttons, you can choice your own cards
-        for each player. The game will <b>not</b> start if two or more players has the same card number.
-        When the "start game" button is pressed a table is generated
+        The "Player #" buttons will display the states that the player holds possible given the currently drawn cards. With the options next to the "Player #"  buttons, you can choose your own cards
+        for each player. The game will <b>not</b> start if two or more players have the same card number.
+        When the "start game" button is pressed, a table is generated
     which displays the chances that the player thinks he is going to win. The value next to the player displays the predefined $\gamma$ for each player.  The second number is the chance that the player will call, it is calculated and defined by the equations \ref{eq:util}, \ref{eq:loss} and \ref{eq:strat}.
-        In the second table are the $\gamma_i$ boundaries displayed, that the player thinks about the other players. The
-        first value is the lower boundary of the $\gamma_i$ that is calculated by the formula \ref{eq:qamma_other} and the second value is the higher boundary of the $\gamma_i$ calculated by the formula \ref{eq:qamma_other2}.
+        The second table displays the $\gamma_i$ boundaries that each player believes to apply to the other players. The
+        first value is the lower boundary of the $\gamma_i$ that is calculated by using equation (\ref{eq:qamma_other}) and the second value is the higher boundary of the $\gamma_i$ calculated by using equation (\ref{eq:qamma_other2}).
     </p>
     <script type="text/javascript" src="js/vis.js"></script>
     <link href="vis.css" rel="stylesheet" type="text/css" />
@@ -256,12 +266,17 @@ Note that we assume that all players are perfectly reasoning agents and that the
     \end{align*}
 </p>
     <!--l. 82--><p class="noindent" >The moment that the players put the cards on their foreheads it is as if $m$ announcements are made. Every player announces that he knows what the other players' cards are (without actually saying it). This means that every player also knows his remaining possibilities.
-</p><!--l. 84--><p class="indent" >   In the most general case, we could express this as follows:
+</p><!--l. 84--><p class="indent" >   In the most general case, we could express the initial draw of the cards as follows:
     \begin{align*}
     \mathscr M \models \left[ \bigvee_{i=1}^m K_i \left(\bigwedge_{j\neq i} p_j c_{u^{(j)}} \right) \right] \bigvee_{i=1}^m \left( M_i \bigvee_{u^{(i)} \notin \{ u^{(j)} \}_{j\neq i}} p_i c_{u^{(i)}} \right)
     \end{align*}
     where $u^{(j)} \in D'$ is the card that player $j$ is holding. This greatly reduces the number of possible worlds. In fact, if there are $n$ cards and $m$ players, we have that each player has $n-m+1$ alternative worlds. Hence there are $m(n-m+1) - m +1$ possible worlds left.
-</p><!--l. 91--><p class="noindent" >
+</p><!--l. 91-->
+<p>
+    Now let $\boldsymbol s$ be the actual state of the game. In this state every player knows all the cards from the other players:
+    \begin{align*}
+    (\mathscr M, \boldsymbol s) \models \bigwedge_{i=1}^m K_i \left( \bigwedge_{j\neq i} p_jc_{u^{(j)}} \right)
+    \end{align*}
 </p>
     <h4 class="sectionHead"><span class="titlemark">2   </span> <a
             id="x1-40002"></a>Game analysis</h4>
@@ -320,7 +335,7 @@ Note that we assume that all players are perfectly reasoning agents and that the
                 class="MathClass-rel">&#x003C;</mo> <mi
         >n</mi></math>
         players</h4>
-    <!--l. 102--><p class="noindent" >A more difficult scenario arises when there are $n$ cards and $m < n$ players. In this case there are relations $\boldsymbol s R_i \boldsymbol t$ for those pairs of $\boldsymbol s$ and $\boldsymbol t$ such that $s_j = t_j$ for all $j\neq i$.
+    <!--l. 102--><p class="noindent" >A more difficult scenario arises when there are $n$ cards and $m < n$ players. Let $\boldsymbol s$ be the actual state after the cards are dealt. In this case there are relations $\boldsymbol s R_i \boldsymbol t$ for those pairs of $\boldsymbol s$ and $\boldsymbol t$ such that $s_j = t_j$ for all $j\neq i$.
 </p><!--l. 104--><p class="noindent" >
 </p>
     <h5 class="subsubsectionHead"><span class="titlemark">2.2.1   </span> <a
@@ -392,7 +407,7 @@ Note that we assume that all players are perfectly reasoning agents and that the
 </p><!--l. 163--><p class="indent" >   Based on the information that is available, a player can estimate the utilities of other players. Hence, it can make its own estimations of the other players' gains: $\langle \mathscr G^{(k)}_j \rangle_i$, which is the estimated gain for player $j$ from player $i$'s point of view.
 </p><!--l. 165--><p class="indent" >   The estimations can be obtained by using equations (\ref{eq:util}) through (\ref{eq:sgain}), but now we will start with some estimated probability $\mathscr P^{w_j}_i$, from equation (\ref{eq:prob}).
 </p><!--l. 167--><p class="indent" >   Once we have the estimated gains we can make an estimation of the other player's decisions. For bluffing we want to achieve that $C^{(k)}_j = \mathbb{f}$ for the players $j\neq i$. Hence, if a player decides to bluff, he should try to ensure that $\langle C^{(k)}_j \rangle_i = \mathbb{f}$ for those player's that have a higher probability of winning. Formally, it should make at least those players $j$ fold such that $\mathscr P^{(w_j)}_i \gt \mathscr P^{(w_i)}_i$.
-</p><!--l. 169--><p class="indent" >   As of now, we will not consider bluﬃng in full detail.
+</p><!--l. 169--><p class="indent" >  We will return to bluffing in a later section.
 </p>
     <!--l. 171--><p class="noindent" ><span class="paragraphHead"><a
         id="x1-130002.2.2"></a><span
@@ -495,7 +510,7 @@ For simplicity, we assume that every player expects his gain to be as in equatio
     Now that we have established the effect of calling and folding in case of known strategies, we can more accurately analyze the consequence of bluffing. Once player $j$ knows the strategy of $i$, player $i$ knows that player $j$ knows his strategy. Hence, player $i$ could deviate from its strategy and `bluff' to make any player $j\neq i$ believe that their cards are worse than they actually are. It is important to note that bluffing is extremely risky in this game, as a player does not know his own card.
 </p>
 <p class="indent">
-  If player $i$ bluffs, he attempts to set the lower bound for $|T^{(w_i)}_i|$ from $j$'s perspective higher than it actually is. A bluff is successful if the subset $T_j$ that remains is such that player $j$ decides to fold.
+  If player $i$ bluffs, he attempts to set the lower bound for $|T^{(w_i)}_i|$ from $j$'s perspective higher than it actually is. A bluff is successful if the plausible subset $T_j$ that remains is such that player $j$ decides to fold.
 </p>
     
     <h2>Example game</h2>
@@ -577,15 +592,15 @@ At this point we can say that player 1 knows what the cards of player 2 and 3 ar
 \begin{equation*}
 \mathscr M' \models K_1 p_2c_3 \wedge K_1p_3c_4 
 \end{equation*}
-where $\mathscr M'$ is the model that remains after the initial announcement of drawing the cards. Furthermore, he knows:
+where $\mathscr M'$ is the model that remains after the initial announcement of drawing the cards and $[h_3]$. Furthermore, he knows:
 \begin{equation*}
  \mathscr M' \models K_1(p_1 c_2 \vee p_1 c_5 \vee p_1 c_6 \vee p_1 c_7 \vee p_1 c_8 \vee p_1 c_9)
 \end{equation*}
 <ul class="itemize1">
-  <li class="itemize">If $p_1 c_2$ were true, then $|T_3^{(w_3)}| = 6$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.
+  <li class="itemize">If $p_1 c_2$ were true, then $|\mathscr T_3^{(w_3)}| = 6$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.
   </li>
-  <li class="itemize">If $p_1 c_5$ were true, then $|T_3^{(w_3)}| = 4$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.</li>
-  <li class="itemize">If $p_1 c_6$ were true, then $|T_3^{(w_3)}| = 3$, so this situation does not satisfy the constraint of $|T_3^{(w_3)}| \geq 4$.
+  <li class="itemize">If $p_1 c_5$ were true, then $|\mathscr T_3^{(w_3)}| = 4$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.</li>
+  <li class="itemize">If $p_1 c_6$ were true, then $|\mathscr T_3^{(w_3)}| = 3$, so this situation does not satisfy the constraint of $|T_3^{(w_3)}| \geq 4$.
   </li>
   <li class="itemize">Obviously, this also implies that $p_1 c_7$, $p_1 c_8$, $p_1 c_9$ do not satisfy the constraint. 
   </li>
@@ -608,10 +623,10 @@ Furthermore, he knows:
  \mathscr M' \models K_2(p_2 c_3 \vee p_2 c_5 \vee p_2 c_6 \vee p_2 c_7 \vee p_2 c_8 \vee p_2 c_9)
 \end{equation*}
 <ul class="itemize1">
-  <li class="itemize">If $p_2 c_3$ were true, then $|T_3^{(w_3)}| = 6$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.
+  <li class="itemize">If $p_2 c_3$ were true, then $|\mathscr T_3^{(w_3)}| = 6$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.
   </li>
-  <li class="itemize">If $p_2 c_5$ were true, then $|T_3^{(w_3)}| = 4$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.</li>
-  <li class="itemize">If $p_2 c_6$ were true, then $|T_3^{(w_3)}| = 3$, so this situation does not satisfy the constraint of $|T_3^{(w_3)}| \geq 4$.
+  <li class="itemize">If $p_2 c_5$ were true, then $|\mathscr T_3^{(w_3)}| = 4$, so this situation satisfies the constraint of $|T_3^{(w_3)}| \geq 4$.</li>
+  <li class="itemize">If $p_2 c_6$ were true, then $|\mathscr T_3^{(w_3)}| = 3$, so this situation does not satisfy the constraint of $|T_3^{(w_3)}| \geq 4$.
   </li>
   <li class="itemize">Obviously, this also implies that $p_2 c_7$, $p_2 c_8$, $p_2 c_9$ do not satisfy the constraint. 
   </li>
@@ -629,7 +644,7 @@ This round was solely intended to demonstrate the consequence of a player's deci
 
 <h4>Third round</h4>
 <p class="indent">
-In another round we will have the situation in which player 1 receives the card 9, player 2 receives 2 and player 3 receives 6. For simplicity, we will assume that player 3 starts this round as well. It is obvious that $\mathscr{P}^{(w_3)}_3 = 0$. Player 3 feels like luck is on his side and decides to bluff. He can make use of the fact that the other players know his strategy: $\mathscr M' \models K_3 K_1 h_3 \wedge K_3 K_2 h_3$. Let's see whether this bluff is successful or not!
+In another round we will have the situation in which player 1 receives the card 9, player 2 receives 2 and player 3 receives 6. For demonstrational purposes, we will assume that player 3 starts this round as well. It is obvious that $\mathscr{P}^{(w_3)}_3 = 0$. Player 3 feels like luck is on his side and decides to bluff. He can make use of the fact that the other players know his strategy: $\mathscr M' \models K_3 K_1 h_3 \wedge K_3 K_2 h_3$. Let's see whether this bluff is successful or not!
 </p>
 
 <h5>Updating player 1's view</h5>
@@ -644,12 +659,12 @@ Furthermore, he nows:
 \end{equation*}
 Similar to what happened in the previous round, we have that $|T_3^{(w_3)}| \geq 4$.
 <ul class="itemize1">
-  <li class="itemize">If $p_1 c_3$ were true, then $|T_3^{(w_3)}| = 6$, so this situation satisfies the constraint.
+  <li class="itemize">If $p_1 c_3$ were true, then $|\mathscr T_3^{(w_3)}| = 6$, so this situation satisfies the constraint.
   </li>
-  <li class="itemize">If $p_1 c_4$ were true, then $|T_3^{(w_3)}| = 5$, so this situation satisfies the constraint.</li>
-  <li class="itemize">If $p_1 c_5$ were true, then $|T_3^{(w_3)}| = 4$, so this situation is also satisfied by the constraint.
+  <li class="itemize">If $p_1 c_4$ were true, then $|\mathscr T_3^{(w_3)}| = 5$, so this situation satisfies the constraint.</li>
+  <li class="itemize">If $p_1 c_5$ were true, then $|\mathscr T_3^{(w_3)}| = 4$, so this situation is also satisfied by the constraint.
   </li>
-  <li class="itemize">If $p_1 c_7$ were true, then $|T_3^{(w_3)}| = 2$, so this situation is not satisfied by the constraint.
+  <li class="itemize">If $p_1 c_7$ were true, then $|\mathscr T_3^{(w_3)}| = 2$, so this situation is not satisfied by the constraint.
   </li>
   <li class="itemize">Obviously, $p_1 c_8$ and $p_1 c_9$ will not satisfy the constraint either.
   </li>
@@ -697,7 +712,7 @@ It is interesting to see that from such a simple game situation it is difficult 
 
     <h2>Future Work</h2>
 <p class="indent">
-In future work, we might proceed by revisiting the logic system in which we analyze the game. As we are reasoning about the likeliness of events by counting occurances of propositions in a set of worlds. Hence, we are dealing with continuous values for probabilities and such. We might then introduce an operator $T(\varphi | R_i, \boldsymbol s)$ that maps a proposition to a probability of that proposition to occur. It would be defined as follows:
+In future work, we might proceed by revisiting the logic system in which we analyze the game. We are reasoning about the likeliness of events by counting occurances of propositions in a set of worlds. Hence, we are dealing with continuous values for probabilities and such. We might then introduce an operator $T(\varphi | R_i, \boldsymbol s)$ that maps a proposition to a probability of that proposition to occur. It would be defined as follows:
 \begin{equation}
 T(\varphi | R_i, \boldsymbol s) = \frac{| \{\boldsymbol t | \boldsymbol t \in S \text{ and } \boldsymbol s R_i \boldsymbol t \text{ and } (M,\boldsymbol t) \models \varphi \}|}{| \{\boldsymbol t | \boldsymbol t \in S \text{ and } \boldsymbol s R_i \boldsymbol t  \}| }
 \end{equation}
