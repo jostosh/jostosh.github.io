@@ -114,7 +114,7 @@
 
     <h4> Strategies </h4>
     <p class="indent">
-    In this game you do not know your own card and only know the cards that are on the heads of the other players. A decision is made based on the cards of the others but also on the decisions of the other players because they can see your card. The difficulty of the game increases because players can "bluff". So you cannot say with certainty that the decisions of the players are good or that they are "bluffing".
+    In this game you do not know your own card and you only know the cards that are on the heads of the other players. A decision is made based on the cards of the others but also on the decisions of the other players because they can see your card. The difficulty of the game increases because players can "bluff". So you cannot say with certainty that the decisions of the players are good or that they are "bluffing".
     </p>
     <p class="indent">
     Because of these rules, there is epistemic logic in the game. To make the modeling of the game somewhat more advanced you could use different types of players. You could e.g. decide to make a player that plays safer than others etc.
@@ -640,9 +640,9 @@ Furthermore, he knows:
   <li class="itemize">Obviously, this also implies that $p_2 c_7$, $p_2 c_8$, $p_2 c_9$ do not satisfy the constraint. 
   </li>
 </ul>
-Hence, it is as if it is announced that $[p_2 c_3 \vee p_1 c_5]$:
+Hence, it is as if it is announced that $[p_2 c_3 \vee p_2 c_5]$:
 \begin{equation*}
-(\mathscr M', \boldsymbol s) \models [p_2 c_2 \vee p_2 c_5] K_2 (p_2 c_3 \vee p_2 c_5)
+(\mathscr M', \boldsymbol s) \models [p_2 c_3 \vee p_2 c_5] K_2 (p_2 c_3 \vee p_2 c_5)
 \end{equation*}
 This means that the probability for player 2 to win can be re-estimated: $\mathscr{P}^{(w_2)}_2 = \frac{1}{2}$.
 </p>
@@ -730,7 +730,7 @@ T(\varphi | R_i, \boldsymbol s) = \frac{| \{\boldsymbol t | \boldsymbol t \in S 
 At this point, we had to simplify the problem by discretizing the strategies $\gamma_i$ into three possibilities. We could make our analysis more advanced if we would allow continuous values for our strategies. That means that we require continuous propositions. This is similar to fuzzy logic, but not with a restriction on the range of values. We can extend the model further by introducing new operators for expressing e.g. upper bounds and lower bounds for these propositions.
 </p>
 <p class="indent">
-If we use public announcement logic and view a player's decision as a truth statement about the possibilities for the cards that remain (once their strategy is known), we fail to express the effect of bluffing, as we cannot look at it as being a truth statement. However, we could introduce some other process that is more specific than announcements. We can call this a 'claim'. A claim would be a transformation of a Kripke model that does not affect the states, but it affects the relations $R_i$. Intuitively, this means that an agent $i$ might claim $\varphi$ to be true for another agent $j$. If $j$ believes $i$ is telling the truth, then $i$'s accessibilities will only be directed to states that satisfy $\varphi$. In that case we can describe a successful bluff as a claim.
+If we use public announcement logic and view a player's decision as a truth statement about the possibilities for the cards that remain (once their strategy is known), we fail to express the effect of bluffing, as we cannot look at it as being a truth statement. However, we could introduce some other process that is more specific than announcements. We can call this a 'claim'. A claim would be a transformation of a Kripke model that does not affect the states, but it affects the relations $R_i$. Intuitively, this means that an agent $i$ might claim $\varphi$ to be true for another agent $j$. If $j$ believes $i$ is telling the truth, then $j$'s accessibilities will only be directed to states that satisfy $\varphi$. In that case we can describe a successful bluff as a claim.
 </p>
     <p class="indent">
         It would also be quite interesting to analyze what kind of knowledge others have about me and how they would reason about me.
