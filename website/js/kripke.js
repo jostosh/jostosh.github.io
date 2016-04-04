@@ -464,7 +464,7 @@ function getCard() {
 
     for(i=1;i<card_array.length+1;i++){
         string += "<tr> <td> Person " + i + " draws card: "+card_array[i-1]+" ";
-        if(i<7){
+        if(i<5){
             //string += "<select id=playerCardDropdown"+i+">"
 
             //Every Option for the card select shoudl be set.
