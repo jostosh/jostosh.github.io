@@ -127,7 +127,7 @@
     
     <p>
     After we have given the general epistemic analysis of the game we will revisit this example.
-    </p
+    </p>
     
     <h2> Game Simulation </h2>
     <p class="indent">For the simulation of this game we have chosen to not use a full deck of cards. The user can specify the number of cards and players in order to see how
@@ -173,9 +173,6 @@
         <!-- This is where the screen is drawn -->
         <div id="mynetwork"></div>
     </div>
-    <!-- Maybe use a text field instead of a dropdown
-    TODO: because of the code styling I couldnt use number 9+1 = 10,stupid mistake but maybe if have some time we can fix this
-     -->
 
     <div class="col-md-2" id="cardArea">
     </div>
@@ -183,7 +180,7 @@
     </div>
 
 
-        <select id="dropdown" onchange=playTheGame(false)>
+        <select id="dropdown" onchange=playTheGame(false,true)>
             <option value="33">3 players with 3 cards</option>
             <option value="34">3 players with 4 cards</option>
             <option value="35">3 players with 5 cards</option>
@@ -202,11 +199,9 @@
             <option value="78">7 players with 8 cards</option>
         </select>
 
-        <button type = "button" id="graph" onclick=playTheGame(true)>View graph</button>
-        <button type ="button" id="next_round" onclick=playTheGame(false)>Next round</button>
+        <button type = "button" id="graph" onclick=playTheGame(true,true)>View graph</button>
+        <button type ="button" id="next_round" onclick=playTheGame(false,false)>Next round</button>
         <button type ="button" id="allpersons" onclick=viewAllPersons()>All players</button>
-
-    <!-- TODO: maybe expand with more buttons -->
         <button type ="button" id="person1" onclick=viewPerson(1)>Player 1</button>
         <select id=playerCardDropdown1  onchange=changeCard(0,this.value)>
 

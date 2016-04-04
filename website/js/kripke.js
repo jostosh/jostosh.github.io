@@ -37,7 +37,8 @@ var playerStyles = [1,1.5,0.4,1,1.5,0.5,1.5];
 disableButton();
 
 /*Create the graph*/
-function playTheGame(viewGraph){
+function playTheGame(viewGraph, clearUtility){
+
     var options = document.getElementById("dropdown");
     var dropdown_value = options.options[options.selectedIndex].value;
     /* Control statement*/
@@ -49,6 +50,9 @@ function playTheGame(viewGraph){
     card_value = parseInt(dropdown_value[1]);
 
     probability = false;
+
+    if(clearUtility)
+        playerGamma = [];
 
     /* get the first value of the drop down menu */
     player_value = parseInt(dropdown_value[0]);
@@ -180,7 +184,7 @@ function calculateProbability(array) {
     return matrix
 }
 
-
+/* Set utilities to html */
 function setUtilityMatrixToArea(){
     document.getElementById("bluffArea").innerHTML += "";
     var String = "";
@@ -234,7 +238,7 @@ function setTextToResultArea(matrix){
     String += "</table>";
     document.getElementById("resultArea").innerHTML += String;
 }
-
+/* Calculate the utility */
 function calculateUtility(number, i){
     var gain = player_value -1;
     var utility_win = gain * number;
@@ -365,7 +369,7 @@ function removeOptions(selectbox)
 }
 
 /**
- * This will determien the knowledge for every player.
+ * This will determine the knowledge for every player.
  */
 function determineKnowledge() {
     document.getElementById("knowledgeArea").innerHTML = "";
@@ -387,7 +391,6 @@ function determineKnowledge() {
             }
 
             //Check if we are at the last element or if the last element
-            //TODO Haha this should be refactored
             if((c==i &&  c < card_array.length && c != 1) || ( c != i && c < card_array.length && c+1 != i)) {
                 string += " \\land "
             }
