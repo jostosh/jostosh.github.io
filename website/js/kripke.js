@@ -381,7 +381,7 @@ function determineKnowledge() {
     for(i=1;i<card_array.length+1;i++){
         string += "<tr> <td> Person " + i + ":";
         string += "\\begin{align*}";
-        string += "M \\models K_" + i + "(";
+        string += "(M,s) \\models K_" + i + "(";
 
         //Run through all the other players.,
         for(var c = 1; c < card_array.length+1; c++){
