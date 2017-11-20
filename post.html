@@ -128,6 +128,7 @@
           <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
           <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
           <form name="commentForm" id="contactForm" method="POST" action="https://api.staticman.net/v2/entry/jostosh/jostosh.github.io/master/comments" novalidate>
+            <input name="options[redirect]" type="hidden" value="https://jostosh.github.io/">
             <input name="options[slug]" type="hidden" value="{{ page.slug }}">
             <div class="control-group">
               <div class="form-group floating-label-form-group controls">
