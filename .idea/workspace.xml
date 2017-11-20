@@ -2,140 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc924d8d-1f76-44fe-8bab-8d760a854a35" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/about-bg.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/contact-bg.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/home-bg.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/post-bg.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/post-sample-image.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/fonts/FontAwesome.otf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/fonts/fontawesome-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/fonts/fontawesome-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/fonts/fontawesome-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/fonts/fontawesome-webfont.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/about.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/contact.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/clean-blog.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/clean-blog.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gulpfile.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/clean-blog.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/clean-blog.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/contact_me.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/jqBootstrapValidation.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mail/contact_me.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/post.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scss/_bootstrap-overrides.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scss/_contact.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scss/_footer.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scss/_global.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scss/_masthead.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scss/_mixins.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scss/_navbar.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scss/_post.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scss/_variables.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scss/clean-blog.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/bootstrap/css/bootstrap-grid.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/bootstrap/css/bootstrap-grid.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/bootstrap/css/bootstrap-reboot.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/bootstrap/css/bootstrap-reboot.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/bootstrap/css/bootstrap.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/bootstrap/css/bootstrap.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/bootstrap/js/bootstrap.bundle.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/bootstrap/js/bootstrap.bundle.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/bootstrap/js/bootstrap.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/bootstrap/js/bootstrap.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/css/font-awesome.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/css/font-awesome.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/fonts/fontawesome-webfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/less/animated.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/less/bordered-pulled.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/less/core.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/less/fixed-width.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/less/font-awesome.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/less/icons.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/less/larger.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/less/list.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/less/mixins.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/less/path.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/less/rotated-flipped.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/less/screen-reader.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/less/stacked.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/less/variables.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/scss/_animated.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/scss/_bordered-pulled.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/scss/_core.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/scss/_fixed-width.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/scss/_icons.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/scss/_larger.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/scss/_list.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/scss/_mixins.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/scss/_path.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/scss/_rotated-flipped.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/scss/_screen-reader.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/scss/_stacked.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/scss/_variables.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/font-awesome/scss/font-awesome.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/jquery/jquery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/jquery/jquery.min.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/foreheadidiot.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/foreheadidiot.tex" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/ht5mjlatex.cfg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/javascript/kripkemodel/kripke.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/javascript/kripkemodel/kripkemodel.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/javascript/kripkemodel/vis.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/javascript/kripkemodel/vis.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/beamercolorthememetropolis.sty" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/beamerfontthememetropolis.sty" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/beamerinnerthememetropolis.sty" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/beamerouterthememetropolis.sty" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/beamerthememetropolis.sty" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/demo.bib" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/demo.tex" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/im/back.eps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/im/clubs_10.eps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/im/clubs_2.eps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/im/clubs_3.eps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/im/clubs_4.eps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/im/clubs_5.eps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/im/clubs_6.eps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/im/clubs_7.eps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/im/clubs_8.eps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/im/clubs_9.eps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/im/clubs_J.eps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/im/clubs_K.eps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/im/clubs_Q.eps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/im/clubs_a.eps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/pgfplotsthemetol.sty" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/presentaten_lineout.synctex.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/presentaten_lineout.tex" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/presentation.nav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/presentation.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/presentation.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/presentation.snm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/presentation.synctex.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/presentation.tex" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/presentation.toc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presentation/presentation.vrb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/todo.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/website/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/website/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/website/.idea/kriplemodel.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/website/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/website/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/website/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/website/foreheadidiot.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/website/foreheadidiot.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/website/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/website/js/kripke.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/website/js/vis.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/website/sticky-footer-navbar.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/website/vis.css" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -152,11 +19,45 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="75" column="16" lean-forward="true" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
+            <state relative-caret-position="400">
+              <caret line="75" column="16" lean-forward="false" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
               <folding>
                 <element signature="n#style#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1511200682151" expanded="false" signature="4508:4514" ph="→" />
+                <marker date="1511200682151" expanded="false" signature="5813:5819" ph="©" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/post.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="130" column="91" lean-forward="false" selection-start-line="130" selection-start-column="91" selection-end-line="130" selection-end-column="91" />
+              <folding>
+                <marker date="1511201949722" expanded="false" signature="10358:10364" ph="©" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="staticman.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/staticman.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="638">
+              <caret line="67" column="10" lean-forward="false" selection-start-line="67" selection-start-column="10" selection-end-line="67" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contact.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/contact.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="604">
+              <caret line="115" column="0" lean-forward="true" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -164,7 +65,7 @@
       <file leaf-file-name="clean-blog.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/clean-blog.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
+            <state relative-caret-position="-8">
               <caret line="222" column="21" lean-forward="false" selection-start-line="222" selection-start-column="21" selection-end-line="222" selection-end-column="21" />
               <folding />
             </state>
@@ -174,7 +75,7 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node_modules/jquery/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
+            <state relative-caret-position="-10">
               <caret line="19" column="3" lean-forward="false" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
               <folding />
             </state>
@@ -197,6 +98,7 @@
       <find>right</find>
       <find>home</find>
       <find>home-bg</find>
+      <find>contact_me</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -211,6 +113,8 @@
         <option value="$PROJECT_DIR$/simpleblog/startbootstrap-clean-blog/css/clean-blog.min.css" />
         <option value="$PROJECT_DIR$/simpleblog/startbootstrap-clean-blog/css/clean-blog.css" />
         <option value="$PROJECT_DIR$/simpleblog/startbootstrap-clean-blog/index.html" />
+        <option value="$PROJECT_DIR$/staticman.yml" />
+        <option value="$PROJECT_DIR$/post.html" />
       </list>
     </option>
   </component>
@@ -250,6 +154,11 @@
             <path>
               <item name="jostosh.github.io" type="b2602c69:ProjectViewProjectNode" />
               <item name="jostosh.github.io" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jostosh.github.io" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jostosh.github.io" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="jostosh.github.io" type="b2602c69:ProjectViewProjectNode" />
@@ -310,13 +219,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5788000" />
+    <option name="totallyTimeSpent" value="7672000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1408" height="1056" extended-state="4" />
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18110795" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13746631" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -328,6 +237,8 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18110795" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -347,7 +258,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/node_modules/jquery/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
+        <state relative-caret-position="-10">
           <caret line="19" column="3" lean-forward="false" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
           <folding />
         </state>
@@ -395,7 +306,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/clean-blog.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
+        <state relative-caret-position="-8">
           <caret line="222" column="21" lean-forward="false" selection-start-line="222" selection-start-column="21" selection-end-line="222" selection-end-column="21" />
           <folding />
         </state>
@@ -403,10 +314,91 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="75" column="16" lean-forward="true" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
+        <state relative-caret-position="508">
+          <caret line="75" column="16" lean-forward="false" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
           <folding>
             <element signature="n#style#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1511200682151" expanded="false" signature="4508:4514" ph="→" />
+            <marker date="1511200682151" expanded="false" signature="5813:5819" ph="©" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contact.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="604">
+          <caret line="115" column="0" lean-forward="true" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/posts/capsnet.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="140" column="0" lean-forward="true" selection-start-line="140" selection-start-column="0" selection-end-line="180" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/jquery/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-10">
+          <caret line="19" column="3" lean-forward="false" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mas/website/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jquery_tut/test.html" />
+    <entry file="file://$PROJECT_DIR$/bootstrap_tut/tut.html" />
+    <entry file="file://$PROJECT_DIR$/mdbootstrap_tut/MDB Free/index.html" />
+    <entry file="file://$PROJECT_DIR$/css/clean-blog.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="3507" lean-forward="false" selection-start-line="4" selection-start-column="3507" selection-end-line="4" selection-end-column="3507" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/clean-blog.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="222" column="21" lean-forward="false" selection-start-line="222" selection-start-column="21" selection-end-line="222" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/staticman.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="67" column="10" lean-forward="false" selection-start-line="67" selection-start-column="10" selection-end-line="67" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/post.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="130" column="91" lean-forward="false" selection-start-line="130" selection-start-column="91" selection-end-line="130" selection-end-column="91" />
+          <folding>
+            <marker date="1511201949722" expanded="false" signature="10358:10364" ph="©" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="75" column="16" lean-forward="false" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
+          <folding>
+            <element signature="n#style#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1511200682151" expanded="false" signature="4508:4514" ph="→" />
+            <marker date="1511200682151" expanded="false" signature="5813:5819" ph="©" />
           </folding>
         </state>
       </provider>
