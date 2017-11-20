@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Jos van de Wolfshaar - Blog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="../css/clean-blog.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="../index.html">Start Bootstrap</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../cv.html">Sample Post</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('../img/capsule.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-md-10 mx-auto">
+                <div class="post-heading">
+                    <h1>Capsule Networks</h1>
+                    <h2 class="subheading">Neural networks with high-dimensional building blocks.</h2>
+                    <span class="meta">Posted
+                on November 20, 2017</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-md-10 mx-auto">
+                <h2>
+                    A quick welcoming note
+                </h2>
+                <p>
+                    This shall be the first of many posts on various concepts in ML. I really like working with neural networks because they are brain-inspired, they can be used for many different tasks and they can deal with high-dimensional inputs. The current momentum within the academic community on deep learning is so incredibly encouraging that I cannot resist reading and reimplementing papers from time to time.
+                </p>
+
+                <h2>
+                    Capsule Networks
+                </h2>
+                <p>
+                    In this post I will be looking at an interesting paper that was recently made available <a href="https://arxiv.org/abs/1710.09829">on Arxiv</a>. This paper is co-authored by Geoffry Hinton, a leading expert in the field of neural networks and deep learning who is currently employed at Google, Toronto. His recent paper on capsule networks has made a serious impression on the community:
+                    <a class="twitter-timeline"  href="https://twitter.com/hashtag/capsulenetworks" data-widget-id="932593261428035584">#capsulenetworks Tweets</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </p>
+
+                <h2>
+                    What is a capsule?
+                </h2>
+                <p>
+                    Before we get to capsules, we will revisit a few terminological primers for neural networks. Usually, we say that the perceptrons in our neural networks represent features. For example, in image classification with deep convolutional neural networks, the neurons in the last few hidden layers typically represent abstract concepts, such as 'I see two eyes' and the 'the creature has two legs'. This interpretation is of course a case of anthropomorphism to a certain extent. Nevertheless, it helps to get an intuitive understanding of what neural networks do when they interpret high-dimensional data. The presence of a certain feature in an image is reflected by a nonzero value of the corresponding hidden neuron. Again, with a healthy dosis of anthropomorphism, we could say that the greater the neuron's activity, the more `confident' the neuron is of observing the feature.
+                </p>
+
+                <p>
+                    Hinton and his team rethought the common approach of using perceptrons to build neural networks. Instead, they advocate the use of capsules. A single capsule is just a group of neurons. Just like regular neurons, capsules reside in layers. The numeric properties of neurons such as preactivations and output are represented by scalars. In contrast and perhaps not surprisingly, the same properties of capsules are represented by vectors. A single capsule now represents the presence of a feature in an image. In the paper, the word `entity' is used to indicate the same thing as I do when I speak of a feature.
+                </p>
+
+                <p>
+                    In classification, the class of a data instance can be seen as a special kind of entity. In most deep neural networks, class membership is encoded in the output layer as a set of probabilities. This is accomplished by a softmax layer that contains exactly one neuron per output class. In capsule networks, the presence of a class is encoded by a capsule. More specifically, the length of the activity vector of a capsule encodes the degree of confidence towards the presence of the class entity.
+                </p>
+
+                <p>
+                    This means that capsule networks no longer use a softmax operator to obtain their output distribution. As far as I understand, capsule networks have no explicit notion of class probabilities.
+                </p>
+
+                <h2>
+                    The activation of a capsule
+                </h2>
+
+                <p>
+                    Capsules have two ways of encoding information: length and direction. To be able to interpret the length of a capsule as a probability, it must be `squashed' so that it is always between 0 and 1. This is accomplished with a squashing nonlinearity:
+                    $$\boldsymbol v_j = {\|\boldsymbol s_j\|^2 \over 1 + \|\boldsymbol s_j\|^2}{\boldsymbol s_j \over \| \boldsymbol s_j \|}.$$
+                </p>
+
+                <h2>
+                    Multiple capsule layers
+                </h2>
+
+                <p>
+                    Apart from the output layer, hidden layers might also be built up out of capsules. These capsules will represent simpler entities than class labels, e.g. pose, deformation, texture etc.
+                </p>
+
+                <p>
+                    How to go from one capsule layer to another? In regular MLPs, the activation of a whole layer is represented as a vector. In capsule networks, the activation of a single vector is represented as a vector. While ordinary MLPs can suffice with a single matrix-vector product to compute the preactivation of the next layer $l+1$, capsule layers need such a product for each pair of capsules between the two layers $(\boldsymbol v_i^{(l)}, \boldsymbol v_j^{(l+1)})$, where $l$ and $l+1$ are layer indices and $i$ and $j$ are capsule indices.
+                </p>
+
+                <p>
+                    Following the terminology in the paper, the results of these matrix-vector products are seen as predictions of the output of the capsules in layer $l+1$. The predictions are linearly combined using coupling coefficients to form the current output. Initially, the coupling coefficients are equal and sum to 1. To compute a single forward pass in the network, the coefficients are re-estimated a few times by a process referred to as dynamic routing. This promotes the coupling coefficients between a capsule in $l$ to another in $l+1$ whenever the activity is predicted well. The degree to which these activities agree is determined through an inner product of the actual output and the prediction. As far as I understand, the routing mechanism more-or-less simplifies the interaction between the two layers by inhibiting many matrix-vector products and only promoting a few through a softmax procedure, similar to attention mechanisms as found in machine translation models using RNNs. After a few iterations of dynamic routing, these coupling coefficients converge to a situation where one could regard the higher level entities in $l+1$ to be encoded by only a few lower level entities in layer $l$. To really understand what's going on, I suggest you have a look at section 2 in the paper.
+                </p>
+
+
+                <blockquote class="blockquote">The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.</blockquote>
+
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<hr>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Jos van de Wolfshaar</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="../js/clean-blog.min.js"></script>
+
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] },
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
+  }
+});
+</script>
+
+
+</body>
+
+</html>
