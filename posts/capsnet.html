@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Jos van de Wolfshaar - Blog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="../css/clean-blog.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="../index.html">Home</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fa fa-bars"></i>
+        </button>
+        <!--
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../about.html">CV</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>-->
+    </div>
+</nav>
+
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('../img/capsule.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-md-10 mx-auto">
+                <div class="post-heading">
+                    <h1>Capsule Networks</h1>
+                    <h2 class="subheading">Neural networks with high-dimensional building blocks.</h2>
+                    <span class="meta">Posted
+                on November 23, 2017</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-md-10 mx-auto">
+                <h2>
+                    A quick welcoming note
+                </h2>
+                <p>
+                    This shall be the first of many posts on various concepts in ML. I really like working with neural networks because they are brain-inspired, they can be used for many different tasks and they can deal with high-dimensional inputs. The current momentum within the academic community on deep learning is so incredibly encouraging that I cannot resist reading and reimplementing papers from time to time.
+                </p>
+
+                <h2>
+                    Capsule Networks
+                </h2>
+                <p>
+                    In this post I will be looking at an interesting paper that was recently made available <a href="https://arxiv.org/abs/1710.09829">on Arxiv</a>. This paper is co-authored by Geoffry Hinton, a leading expert in the field of neural networks and deep learning who is currently employed at Google, Toronto. His recent paper on capsule networks has made a serious impression on the community:
+                    <a class="twitter-timeline"  href="https://twitter.com/hashtag/capsulenetworks" data-widget-id="932593261428035584">#capsulenetworks Tweets</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </p>
+
+                <h2>
+                    What is a capsule?
+                </h2>
+                <p>
+                    Before we get to capsules, we will revisit a few terminological primers for neural networks. Usually, we say that the perceptrons in our neural networks represent features. For example, in image classification with deep convolutional neural networks, the neurons in the last few hidden layers typically represent abstract concepts, such as 'I see two eyes' and the 'the creature has two legs'. This interpretation is of course a bit anthropomorphistic. Nevertheless, it helps to get an intuitive understanding of what neural networks do when they interpret high-dimensional data. The presence of a certain feature in an image is reflected by a nonzero value of the corresponding hidden neuron. Again, with a healthy dose of anthropomorphism, we could say that the greater the neuron's activity, the more `confident' the neuron is of observing the feature.
+                </p>
+
+                <p>
+                    Hinton and his team rethought the common approach of using perceptrons to build neural networks. Instead, they advocate the use of capsules. A single capsule is just a group of neurons. Just like regular neurons, capsules reside in layers. The numeric properties of neurons such as preactivations and outputs are represented by scalars. In contrast and perhaps not surprisingly, the same properties of capsules are represented by vectors. A single capsule now represents the presence of a feature in an image. In the paper, the word `entity' is used to indicate the same thing as what I refer to as a feature.
+                </p>
+
+                <p>
+                    In classification, the class of a data instance can be seen as a special kind of entity. In most deep neural networks, class membership is encoded in the output layer as a set of probabilities. This is accomplished by a softmax layer that contains exactly one neuron per output class. In capsule networks, the presence of a class is encoded by a capsule. More specifically, the length of the activity vector of a capsule encodes the degree of confidence towards the presence of the class entity.
+                </p>
+
+                <p>
+                    This means that capsule networks no longer use a softmax operator to obtain their output distribution. As far as I understand, capsule networks have no explicit notion of class probabilities. They rather encode entities, meaning that multiple entities can be present at the same time, which is exactly the property the authors use to separate the two overlapping digits in section 6 of the paper.
+                </p>
+
+                <h2>
+                    The activation of a capsule
+                </h2>
+
+                <p>
+                    Capsules have two ways of encoding information: length and direction. To be able to interpret the length of a capsule as a probability, it must be `squashed' so that it is always between 0 and 1. This is accomplished with a squashing nonlinearity:
+                    $$\boldsymbol v_j = {\|\boldsymbol s_j\|^2 \over 1 + \|\boldsymbol s_j\|^2}{\boldsymbol s_j \over \| \boldsymbol s_j \|}.$$
+                </p>
+
+                <h2>
+                    Multiple capsule layers
+                </h2>
+
+                <p>
+                    Apart from the output layer, hidden layers might also be built up out of capsules. These capsules will represent simpler entities than class labels, e.g. pose, deformation, texture etc.
+                </p>
+
+                <p>
+                    How to go from one capsule layer to another? In regular MLPs, the activation of a whole layer is represented as a vector. In capsule networks, the activation of a single capsule is represented as a vector. While ordinary MLPs can suffice with a single matrix-vector product to compute the preactivation of the next layer $l+1$, capsule layers need such a product for each pair of capsules between the two layers $(\boldsymbol v_i^{(l)}, \boldsymbol v_j^{(l+1)})$, where $l$ and $l+1$ are layer indices and $i$ and $j$ are capsule indices.
+                </p>
+
+                <p>
+                    Following the terminology in the paper, the results of these matrix-vector products are seen as predictions of the output of the capsules in layer $l+1$. The predictions are linearly combined using coupling coefficients to form the current output. Initially, the coupling coefficients are equal and sum to 1. To compute a single forward pass in the network, the coefficients are re-estimated a few times by a process referred to as dynamic routing. This promotes the coupling coefficients between a capsule in $l$ to another in $l+1$ whenever the activity is predicted well. The degree to which these activities agree is determined through an inner product of the actual output and the prediction. As far as I understand, the routing mechanism more-or-less simplifies the interaction between the two layers by inhibiting many matrix-vector products and only promoting a few through a softmax procedure, similar to attention mechanisms as found in machine translation models using RNNs. After a few iterations of dynamic routing, these coupling coefficients converge to a situation where one could regard the higher level entities in $l+1$ to be encoded by only a few lower level entities in layer $l$. To really understand what's going on, I suggest you have a look at section 2 in the paper.
+                </p>
+
+                <h2>
+                    Implementation in TensorFlow
+                </h2>
+                <p>
+                    Perhaps a new kind of neural network is best explained by looking at a possible implementation. But first, let's have a look at the architecture we need to implement. We will be looking at the MNIST dataset. If you want to skip the explanations here and you just wanna get the code, see <a href=""></a>
+                </p>
+                <h3>
+                    Architecture
+                </h3>
+                <p>
+                    We will have to combine 3 layers:
+                </p>
+                    <ul>
+                <li>A regular convolutional layer with ReLU activations, stride 1, $9\times 9$ kernels and 256 filters </li>
+                <li>A convolutional capsule layer with activations as described above, stride 2, $9\times 9$ kernels and 32 capsules per spatial output with a dimensionality of 8.</li>
+                <li>A fully connected capsule layer with activations as described above, 10 capsules with a dimensionality of 16.</li>
+            </ul>
+                <h4>
+                    Inputs and the first layer
+                </h4>
+                <p>
+                Nowadays, TensorFlow is already shipped with predefined layers, let's save ourselves some time then.
+                </p>
+                <pre><code class="python">
+import tensorflow as tf
+x = tf.placeholder(tf.float32, [None, 28, 28, 1])
+labels = tf.placeholder(tf.int64, [None])
+images = tf.reshape(x, (-1, 28, 28, 1))
+conv1_out = tf.layers.conv2d(images, 256, 9, activation=tf.nn.relu)
+                </code></pre>
+<p>
+    So we've set up our first convolutional layer and the placeholders that will contain externally provided labels and images.
+
+</p>
+                <h4>
+                    Primary capsule layer
+                </h4>
+                <p>
+                Good, now the interesting part. The first capsule layer is referred to as the primary capsule layer. It performs a convolution operation followed by the squashing nonlinearity as discussed above. We'll implement the layer as a function. In my implementation, I ended up with the following:
+</p>
+                <pre><code class="python">
+def primary_caps(x, kernel_size, strides, capsules, dim, name="PrimaryCaps"):
+    preactivation = tf.layers.conv2d(
+        x, capsules * dim, kernel_size, strides=strides,
+        activation=tf.identity, name=name
+    )
+    _, h, w, _ = preactivation.shape.as_list()
+    out = tf.reshape(preactivation, (-1, h * w * capsules, dim))
+    return squash(out)
+                </code></pre>
+                <p>
+                    Let's break this down. The first statement to compute the preactivation seems obvious, but there is something peculiar going on. Note that we have put <code>capsules * dim</code> as the number of filters. This is because each capsule in this layer will have its vector along the depth dimension of the convolutional output volume. The width and height dimensions are only indices for capsules that focus on different parts of the input. Rather than computing '<code class>capsules</code>' convolutions separately, we do everything with a single convolution Op, which is simply more efficient.
+                </p>
+                <p>
+                    The next statement is where we determine the spatial dimensions (the height and the width) of the output volume. The number of capsules in this would then be <code>h * w * capsules</code>. We can use this to reshape the output so that the new tensor has a shape of <code>[batch_size, n_capsules, capsule_dimension]</code>. We'll create a squashing function that assumes that the capsule elements are indexed on the last axis.
+                </p>
+
+                <h4>
+                    Squashing function
+                </h4>
+                <p>
+                    Our squashing function is straightforward given the equation as given in the paper.
+                </p>
+                <pre><code class="python">
+def squash(s_j):
+    squared_norms = tf.reduce_sum(tf.square(s_j), axis=-1, keep_dims=True)
+    scale = squared_norms / (1 + squared_norms) / tf.sqrt(squared_norms + 1e-8)
+    return s_j * scale
+                </code></pre>
+                <p>
+                    In the first statement, we compute the squared norms along the last axis of the incoming tensor. This works fine with our <code>primary caps</code> implementation as shown above, where we have reshaped the tensor so that the capsule's elements are indexed on the last axis. The second statement is a simply a translation from the earlier equation to code. Just to ensure numerical stability in case of small vectors, we add a nonzero constant to the denominator on the right.
+                </p>
+                <h4>
+                    Digit capsule layer
+                </h4>
+                <p>
+                    Building the next layer is the most difficult challenge of this reimplementation. In this layer, we have 10 capsules with dimensionality 16, one capsule for each digit. The main difficulty is in the computation of all predicted capsule vectors. In the paper, they express this as follows:
+                    $$ \hat{\boldsymbol u}_{j|i} = \boldsymbol W_{ij} \boldsymbol u_i, $$
+                    where the $i$ index corresponds to the capsules in the primary capsule layer and the $j$ index corresponds to capsules in the digit capsule layer. This means that we need <code>n_primary_capsules * n_digit_capsules</code> matrices. It's probably a good idea to have a weight tensor with rank 4, with shape <code>[n_primary_caps, n_digit_caps, dim_primary_caps, dim_digit_caps]</code>.
+                </p>
+                    <p>
+                I have spent some time thinking of what might be the most efficient way of computing so many matrix vector products with TensorFlow. TensorFlow's <code>matmul</code> operator is intended for (batched) matrix multiplication. At first sight, our tensors $\boldsymbol W_{ij}$ and $\boldsymbol u_i$ don't have the right dimensions to do anything like that. However, I came up with some reshape-hacking that does the trick. Note that the result of a matrix multiplication would be a series of vectors. Each of these vectors would be the predicted activation of a digit capsule. So for a single batch, we would be able to compute the activations of all samples for a single index pair $(i, j)$ by having a matrix with <code>batch_size</code> columns and <code>dim_primary_caps</code> rows. This would be premultiplied by a matrix with <code>dim_digit_caps</code> rows and <code>dim_primary_caps</code> columns:
+                        $$ \boldsymbol W_{ij} \left[\begin{array}{cccc} \boldsymbol u^{(1)}_i & \boldsymbol u^{(2)}_i & \cdots & \boldsymbol u^{(n)}_i \end{array}\right], $$
+                        where the superscripts are the batch indices.
+                    </p>
+                <p>
+                    Now it is easy to do the same thing for all $j$ and a single $i$. We can just use a block matrix where the individual matrices for all $j$ are stacked:
+                    $$ \left[\begin{array}{c} \boldsymbol W_{i1}\\ \boldsymbol W_{i2} \\ \vdots \\ \boldsymbol W_{im} \end{array}\right] \left[\begin{array}{cccc} \boldsymbol u^{(1)}_i & \boldsymbol u^{(2)}_i & \cdots & \boldsymbol u^{(n)}_i \end{array}\right], $$
+                    so that the result of the matrix vector product will contain the predicted activations for all $j$, but only a single $i$. I can hear you say it: what to do with the <code>n_primary_caps</code> dimension? Well, this dimension is both in the weight tensor, as well as in the primary caps output tensor. This can now be our 'batch' dimension for the <code>matmul</code> operator. This is how the above translates to code:
+                </p>
+                <pre><code class="python">
+def digit_caps(incoming, n_capsules, dim, name="DigitCaps", neuron_axis=-1, capsule_axis=-2, routing_iters=3):
+    in_shape = incoming.shape.as_list()
+    n_in_capsules = in_shape[capsule_axis]
+    dim_in_capsules = in_shape[neuron_axis]
+    W_ij = tf.get_variable("weights", shape=[n_in_capsules, n_capsules * dim, dim_in_capsules],
+                           initializer=glorot_uniform())
+    u_i = tf.transpose(incoming, (1, 2, 0))
+    u_hat = tf.matmul(W_ij, u_i)
+    u_hat = tf.reshape(tf.transpose(u_hat, (2, 0, 1)), (-1, n_in_capsules, n_capsules, dim))
+                </code></pre>
+                <h5>
+                    Dynamic routing
+                </h5>
+                <p>
+                    Now that we have our $\hat{\boldsymbol u}$ tensor, we can perform dynamic routing. This is simply a matter of translating the pseudo-code in the paper to Python code, so that the <code>digit_caps</code> function can be implemented as follows:
+                </p>
+                <pre><code class="python">
+def digit_caps(incoming, n_capsules, dim, name="DigitCaps", neuron_axis=-1, capsule_axis=-2, routing_iters=3):
+    with tf.variable_scope(name):
+        in_shape = incoming.shape.as_list()
+        n_in_capsules = in_shape[capsule_axis]
+        dim_in_capsules = in_shape[neuron_axis]
+        W_ij = tf.get_variable("weights", shape=[n_in_capsules, n_capsules * dim, dim_in_capsules],
+                               initializer=glorot_uniform())
+        u_i = tf.transpose(incoming, (1, 2, 0))
+        u_hat = tf.matmul(W_ij, u_i)
+        u_hat = tf.reshape(tf.transpose(u_hat, (2, 0, 1)), (-1, n_in_capsules, n_capsules, dim))
+
+        def capsule_out(b_ij):
+            c_ij = tf.nn.softmax(b_ij, dim=2)
+            s_j = tf.reduce_sum(tf.reshape(c_ij, (-1, n_in_capsules, n_capsules, 1)) * u_hat, axis=1)
+            v_j = squash(s_j)
+            return v_j
+
+        def routing_iteration(iter, b_ij):
+            v_j = capsule_out(b_ij)
+            a_ij = tf.reduce_sum(tf.expand_dims(v_j, axis=1) * u_hat, axis=3)
+            b_ij = tf.reshape(b_ij + a_ij, (-1, n_in_capsules, n_capsules))
+            return [iter + 1, b_ij]
+
+        i = tf.constant(0)
+        routing_result = tf.while_loop(
+            lambda i, b_ij: tf.less(i, routing_iters),
+            routing_iteration,
+            [i, tf.zeros(tf.stack([tf.shape(incoming)[0], n_in_capsules, n_capsules]))]
+        )
+        v_j = capsule_out(routing_result[1])
+
+    return v_j
+                </code></pre>
+                <p>
+                    A relatively uncommmon operator in this piece of code is the <code>while_loop</code>, which takes a looping condition, a function to execute in a single iteration and the initial values for the loop. The values given here are the index and the logits $b_{ij}$ as in the paper. Note that these arguments are passed to both the condition function as well as the loop body function.
+                </p>
+                <h2>
+                    Rounding up
+                </h2>
+                <p>
+                    The full implementation is available in this <a href="https://github.com/jostosh/capsnet">repository</a>. Thanks for reading this and I hope you enjoyed! I am currently working on a commenting system so that you can ask questions right here soon. If you feel you can't wait, hit me at <code>jos dot vandewolfshaar at gmail dot com.</code>
+                </p>
+            </div>
+        </div>
+    </div>
+</article>
+
+<hr>
+
+<!--
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <h2>Comments</h2>
+            <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+            <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+            <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+
+<!--
+            <form name="commentForm" id="contactForm" method="POST" action="https://api.staticman.net/v2/entry/jostosh/jostosh.github.io/master" novalidate>
+                <input name="options[slug]" type="hidden" value="{{ page.slug }}">
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Name</label>
+                        <input type="text" class="form-control" placeholder="Name" id="name" name="fields[name]" required data-validation-required-message="Please enter your name.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Email Address</label>
+                        <input type="email" class="form-control" placeholder="Email Address" id="email" name="fields[email]" required data-validation-required-message="Please enter your email address.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Message</label>
+                        <textarea rows="5" class="form-control" placeholder="Message" id="message" name="fields[message]" required data-validation-required-message="Please enter a message."></textarea>
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <br>
+                <div id="success"></div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <a href="https://www.linkedin.com/in/jos-van-de-wolfshaar-75950768/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://github.com/jostosh">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Jos van de Wolfshaar</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="../js/clean-blog.min.js"></script>
+
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" }, extensions: ["AMSmath.js", "AMSsymbols.js"] },
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    processEscapes: true
+  }
+});
+</script>
+
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+
+</html>
