@@ -154,11 +154,15 @@
                 Nowadays, TensorFlow is already shipped with predefined layers, let's save ourselves some time then.
                 </p>
                 <pre><code class="python">
-import tensorflow as tf
+# Define placeholders
 x = tf.placeholder(tf.float32, [None, 28, 28, 1])
 labels = tf.placeholder(tf.int64, [None])
-images = tf.reshape(x, (-1, 28, 28, 1))
-conv1_out = tf.layers.conv2d(images, 256, 9, activation=tf.nn.relu)
+
+# Define capsule network
+conv1_out = tf.layers.conv2d(x, 256, 9, activation=tf.nn.relu)
+pc = primary_caps(conv1_out, kernel_size=9, strides=(2, 2), capsules=32, dim=8)
+v_j = digit_caps(pc, n_digit_caps=10, dim_digit_caps=16)
+digit_norms = tf.norm(v_j, axis=-1)
                 </code></pre>
 <p>
     So we've set up our first convolutional layer and the placeholders that will contain externally provided labels and images.
@@ -172,12 +176,13 @@ conv1_out = tf.layers.conv2d(images, 256, 9, activation=tf.nn.relu)
 </p>
                 <pre><code class="python">
 def primary_caps(x, kernel_size, strides, capsules, dim, name="PrimaryCaps"):
+    """ Primary capsule layer. Linear convolution with reshaping to account for capsules. """
     preactivation = tf.layers.conv2d(
-        x, capsules * dim, kernel_size, strides=strides,
-        activation=tf.identity, name=name
+        x, capsules * dim, kernel_size, strides=strides, activation=tf.identity, name=name,
+        kernel_initializer=ConcatInitializer('glorot_uniform', axis=3, splits=capsules)
     )
-    _, h, w, _ = preactivation.shape.as_list()
-    out = tf.reshape(preactivation, (-1, h * w * capsules, dim))
+    _, w, h, _ = preactivation.shape.as_list()
+    out = tf.reshape(preactivation, (-1, w * h * capsules, dim))
     return squash(out)
                 </code></pre>
                 <p>
@@ -195,9 +200,9 @@ def primary_caps(x, kernel_size, strides, capsules, dim, name="PrimaryCaps"):
                 </p>
                 <pre><code class="python">
 def squash(s_j):
+    """ Squashing function as given in the paper """
     squared_norms = tf.reduce_sum(tf.square(s_j), axis=-1, keep_dims=True)
-    scale = squared_norms / (1 + squared_norms) / tf.sqrt(squared_norms + 1e-8)
-    return s_j * scale
+    return s_j * squared_norms / (1 + squared_norms) / tf.sqrt(squared_norms + 1e-8)
                 </code></pre>
                 <p>
                     In the first statement, we compute the squared norms along the last axis of the incoming tensor. This works fine with our <code>primary caps</code> implementation as shown above, where we have reshaped the tensor so that the capsule's elements are indexed on the last axis. The second statement is a simply a translation from the earlier equation to code. Just to ensure numerical stability in case of small vectors, we add a nonzero constant to the denominator on the right.
