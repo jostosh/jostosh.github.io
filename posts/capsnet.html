@@ -58,7 +58,7 @@
                     <h1>Capsule Networks</h1>
                     <h2 class="subheading">Neural networks with high-dimensional building blocks.</h2>
                     <span class="meta">Posted
-                on November 23, 2017</span>
+                on November 23, 2017. Latest edit: December 2, 2017.</span>
                 </div>
             </div>
         </div>
@@ -221,15 +221,31 @@ def squash(s_j):
                     so that the result of the matrix vector product will contain the predicted activations for all $j$, but only a single $i$. I can hear you say it: what to do with the <code>n_primary_caps</code> dimension? Well, this dimension is both in the weight tensor, as well as in the primary caps output tensor. This can now be our 'batch' dimension for the <code>matmul</code> operator. This is how the above translates to code:
                 </p>
                 <pre><code class="python">
-def digit_caps(incoming, n_capsules, dim, name="DigitCaps", neuron_axis=-1, capsule_axis=-2, routing_iters=3):
-    in_shape = incoming.shape.as_list()
-    n_in_capsules = in_shape[capsule_axis]
-    dim_in_capsules = in_shape[neuron_axis]
-    W_ij = tf.get_variable("weights", shape=[n_in_capsules, n_capsules * dim, dim_in_capsules],
-                           initializer=glorot_uniform())
-    u_i = tf.transpose(incoming, (1, 2, 0))
-    u_hat = tf.matmul(W_ij, u_i)
-    u_hat = tf.reshape(tf.transpose(u_hat, (2, 0, 1)), (-1, n_in_capsules, n_capsules, dim))
+# Get number of capsules and dimensionality of previous layer
+in_shape = incoming.shape.as_list()
+n_primary_caps = in_shape[capsule_axis]
+dim_primary_caps = in_shape[neuron_axis]
+# Initialize all weight matrices
+W_ij = tf.get_variable(
+    "weights",
+    shape=[n_primary_caps, n_digit_caps * dim_digit_caps, dim_primary_caps],
+    initializer=glorot_uniform()
+)
+# Initialize routing logits, the leading axis with size 1 is added for
+# convenience.
+b_ij = tf.get_variable(
+    "logits",
+    shape=[1, n_primary_caps, n_digit_caps],
+    initializer=tf.zeros_initializer(),
+    trainable=args.logits_trainable
+)
+# Reshape and transpose hacking
+u_i = tf.transpose(incoming, (1, 2, 0))
+u_hat = tf.matmul(W_ij, u_i)
+u_hat = tf.reshape(
+    tf.transpose(u_hat, (2, 0, 1)),
+    (-1, n_primary_caps, n_digit_caps, dim_digit_caps)
+)
                 </code></pre>
                 <h5>
                     Dynamic routing
@@ -238,42 +254,86 @@ def digit_caps(incoming, n_capsules, dim, name="DigitCaps", neuron_axis=-1, caps
                     Now that we have our $\hat{\boldsymbol u}$ tensor, we can perform dynamic routing. This is simply a matter of translating the pseudo-code in the paper to Python code, so that the <code>digit_caps</code> function can be implemented as follows:
                 </p>
                 <pre><code class="python">
-def digit_caps(incoming, n_capsules, dim, name="DigitCaps", neuron_axis=-1, capsule_axis=-2, routing_iters=3):
+def digit_caps(
+    incoming, n_digit_caps, dim_digit_caps, name="DigitCaps",
+    neuron_axis=-1, capsule_axis=-2, routing_iters=3
+):
+    """ Digit capsule layer """
     with tf.variable_scope(name):
+        # Get number of capsules and dimensionality of previous layer
         in_shape = incoming.shape.as_list()
-        n_in_capsules = in_shape[capsule_axis]
-        dim_in_capsules = in_shape[neuron_axis]
-        W_ij = tf.get_variable("weights", shape=[n_in_capsules, n_capsules * dim, dim_in_capsules],
-                               initializer=glorot_uniform())
+        n_primary_caps = in_shape[capsule_axis]
+        dim_primary_caps = in_shape[neuron_axis]
+        # Initialize all weight matrices
+        W_ij = tf.get_variable(
+            "weights",
+            shape=[n_primary_caps, n_digit_caps * dim_digit_caps, dim_primary_caps],
+            initializer=glorot_uniform()
+        )
+        # Initialize routing logits, the leading axis with size 1 is added for
+        # convenience.
+        b_ij = tf.get_variable(
+            "logits",
+            shape=[1, n_primary_caps, n_digit_caps],
+            initializer=tf.zeros_initializer(),
+            trainable=args.logits_trainable
+        )
+        # Reshape and transpose hacking
         u_i = tf.transpose(incoming, (1, 2, 0))
         u_hat = tf.matmul(W_ij, u_i)
-        u_hat = tf.reshape(tf.transpose(u_hat, (2, 0, 1)), (-1, n_in_capsules, n_capsules, dim))
+        u_hat = tf.reshape(
+            tf.transpose(u_hat, (2, 0, 1)),
+            (-1, n_primary_caps, n_digit_caps, dim_digit_caps)
+        )
 
         def capsule_out(b_ij):
+            """ Given the logits b_ij, computes the output of this layer. """
             c_ij = tf.nn.softmax(b_ij, dim=2)
-            s_j = tf.reduce_sum(tf.reshape(c_ij, (-1, n_in_capsules, n_capsules, 1)) * u_hat, axis=1)
+            s_j = tf.reduce_sum(
+                tf.reshape(c_ij, (-1, n_primary_caps, n_digit_caps, 1)) * u_hat,
+                axis=1
+            )
             v_j = squash(s_j)
             return v_j
 
-        def routing_iteration(iter, b_ij):
-            v_j = capsule_out(b_ij)
+        def routing_iteration(iter, logits):
+            """
+            Given a set of logits, computes the new logits using the definition
+            of routing from the paper.
+            """
+            v_j = capsule_out(logits)
             a_ij = tf.reduce_sum(tf.expand_dims(v_j, axis=1) * u_hat, axis=3)
-            b_ij = tf.reshape(b_ij + a_ij, (-1, n_in_capsules, n_capsules))
-            return [iter + 1, b_ij]
+            logits = tf.reshape(logits + a_ij, (-1, n_primary_caps, n_digit_caps))
+            return [iter + 1, logits]
 
+        # Compute routing
         i = tf.constant(0)
         routing_result = tf.while_loop(
-            lambda i, b_ij: tf.less(i, routing_iters),
+            lambda i, logits: tf.less(i, routing_iters),
             routing_iteration,
-            [i, tf.zeros(tf.stack([tf.shape(incoming)[0], n_in_capsules, n_capsules]))]
+            [i, tf.tile(b_ij, tf.stack([tf.shape(incoming)[0], 1, 1]))]
         )
+        # Second element of the result contains our final logits
         v_j = capsule_out(routing_result[1])
 
     return v_j
                 </code></pre>
                 <p>
-                    A relatively uncommmon operator in this piece of code is the <code>while_loop</code>, which takes a looping condition, a function to execute in a single iteration and the initial values for the loop. The values given here are the index and the logits $b_{ij}$ as in the paper. Note that these arguments are passed to both the condition function as well as the loop body function.
+                    A relatively uncommon operator in this piece of code is the <code>while_loop</code>, which takes a looping condition, a function to execute in a single iteration and the initial values for the loop. The values given here are the index and the logits $b_{ij}$ as in the paper. Note that these arguments are passed to both the condition function as well as the loop body function.
                 </p>
+                <h2>
+                    Results
+                </h2>
+                <p>
+                    I thought it would be nice to look at trainable logits vs. constant logits. A comparison can be seen in the graph below. Note that this is only after a single training run, so we cannot reliably conclude anything from this yet. The accuracy seems to be convincingly high.
+
+                <div>
+                    <a href="https://plot.ly/~jostosh/1/?share_key=QkOrfTwcJZYHBnYtCRXrLE" target="_blank" title="Plot 1" style="display: block; text-align: center;"><img src="https://plot.ly/~jostosh/1.png?share_key=QkOrfTwcJZYHBnYtCRXrLE" alt="Plot 1" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
+                    <script data-plotly="jostosh:1" sharekey-plotly="QkOrfTwcJZYHBnYtCRXrLE" src="https://plot.ly/embed.js" async></script>
+                </div>
+
+                </p>
+
                 <h2>
                     Rounding up
                 </h2>
