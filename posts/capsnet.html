@@ -116,7 +116,7 @@
                     Capsules have two ways of encoding information: length and direction. To be able to interpret the length of a capsule as a probability, it must be `squashed' so that the length is always between 0 and 1. This is accomplished with a squashing nonlinearity:
                     $$\boldsymbol v_j = {\|\boldsymbol s_j\|^2 \over 1 + \|\boldsymbol s_j\|^2}{\boldsymbol s_j \over \| \boldsymbol s_j \|},$$
 
-                which squashes short vectors to near-zero length and long vectors to vectors with unit length.
+                which squashes short vectors to near-zero length and long vectors to unit length.
                 </p>
 
                 <h2>
