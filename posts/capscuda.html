@@ -603,7 +603,8 @@ def _capsule_prediction_grad(op, grad):
     """ Computes gradient for capsule prediction operation """
     return op_module.capsule_prediction_grad(grad, op.inputs[0], op.inputs[1])
                 </code></pre>
-                Now we can just use <code>tf.gradients</code> after which the computation graph for the gradient should include our gradient op. Awesome!
+                <p>
+                Now we can just use <code>tf.gradients</code> after which the computation graph for the gradient should include our gradient op. Awesome!</p>
                 <h3>
                     Testing the gradients
                 </h3>
