@@ -55,10 +55,10 @@
         <div class="row">
             <div class="col-lg-10 col-md-10 mx-auto">
                 <div class="post-heading">
-                    <h1>TensorFlow custom Op with CUDA</h1>
-                    <h2 class="subheading">A first look at GPU programming for TensorFlow.</h2>
+                    <h1>Cuda, TensorFlow and capsule networks</h1>
+                    <h2 class="subheading">A complete demonstration of developing a custom TensorFlow Op with GPU support.</h2>
                     <span class="meta">Posted
-                on November 23, 2017. Latest edit: December 15, 2017.</span>
+                on February 11, 2017. </span>
                 </div>
             </div>
         </div>
@@ -71,13 +71,16 @@
         <div class="row">
             <div class="col-lg-10 col-md-10 mx-auto">
                 <h2>
-                    CUDA, TensorFlow and Capsule Networks
+                    Introduction
                 </h2>
                 <p>
-                    Recently I've spent some time on CUDA programming and implementing custom Ops for TensorFlow. As an exercise, I decided to take a shot at implementing a custom Op for one of the operations in capsule networks that would normally require some <a href="capsnet.html">reshape hacking</a> or at least a <a href="https://github.com/Sarasra/models/tree/master/research/capsules">couple of intermediate TensorFlow Ops</a>. If you're not familiar with Capsule Networks, have a look at <a href="">the article</a> or my <a href="capsnet.html">previous post</a>.
+                    Recently I've spent some time on CUDA programming and implementing custom Ops for TensorFlow. As an exercise, I decided to take a shot at implementing a custom Op for one of the operations in capsule networks that would normally require some <a href="capsnet.html">reshape hacking</a> or at least a <a href="https://github.com/Sarasra/models/tree/master/research/capsules">couple of intermediate TensorFlow Ops</a>. If you're not familiar with Capsule Networks, have a look at <a href="">the article</a> or my <a href="capsnet.html">previous post</a>. The open-sourced capsule network code by the original authors   can be found <a href="https://github.com/Sarasra/models/tree/master/research/capsules">here</a>.
+                </p>
+                <p>
+                    Many of the concepts that are covered in this post (CUDA, TensorFlow custom Ops, gradient testing) can be learned by going through their corresponding documentation, but I always think it is enlightening when to see all of these elements together. This is the main motivation behind my blog post: showcasing the development of a custom TensorFlow Op with CUDA from start to end. So let's commence.
                 </p>
                 <h2>
-                Capsule matrix multiplication
+                Capsule prediction
                 </h2>
                 <p>
                 The operation of interest in this blog post is the one that computes:
@@ -122,13 +125,13 @@ REGISTER_OP("CapsulePrediction")
     return Status::OK();
 });
 </code></pre>
-                For now, I have defined this so that we could later specify different TensorFlow kernels for different <code>dtype</code>s by adding the <code>"..: T"</code> specification. Other than that, the code implements a shape function that is given by the lambda function which first ensures <code>ctx-&gt;input(0)</code> (the input $\boldsymbol u_i$) and <code>ctx-&gt;input(1)</code> (the weights $\boldsymbol W_{ij}$) have the correct rank. Then we determine the dimensions of the output tensor which we can obtain from the input tensors. The dimension of the Op's output is <code>[batch_size, in_caps, out_caps, out_dim]</code>, so we take <code>batch_size</code> and <code>in_caps</code> from the $\boldsymbol u_i$ tensor and <code>out_caps</code> and <code>out_dim</code> from the $W_{ij}$ tensor.
+                For now, I have defined this so that we could later specify different TensorFlow kernels for different <code>dtype</code>s by adding the <code>"..: T"</code> specification. Other than that, the code implements a shape function that is given by the lambda function which first ensures <code>ctx-&gt;input(0)</code> (the input $\boldsymbol u_i$) and <code>ctx-&gt;input(1)</code> (the weights $\boldsymbol W_{ij}$) have the correct rank. Then, we determine the dimensions of the output tensor which we can obtain from the input tensors. The dimension of the Op's output is <code>[batch_size, in_caps, out_caps, out_dim]</code>, so we take <code>batch_size</code> and <code>in_caps</code> from the $\boldsymbol u_i$ tensor and <code>out_caps</code> and <code>out_dim</code> from the $W_{ij}$ tensor.
                 </p>
                 <h3>
                     Forward capsule prediction
                 </h3>
                 <p>
-                    Now, let's look at the Op's 'kernel'. A 'kernel' is the TensorFlow terminology for the device-specific implementation of an Op. When defining a custom kernel, it should inherit from TensorFlow's <code>OpKernel</code> and it should implement the <code>Compute</code> method:
+                    Now, let's look at the Op's <b>kernel</b>. A kernel is the TensorFlow terminology for the device-specific implementation of an Op. When defining a custom kernel, it should inherit from TensorFlow's <code>OpKernel</code> and it shall  implement the <code>Compute</code> method:
                     <pre><code class="cpp">
 class CapsulePredictionOp : public OpKernel
 {
@@ -160,7 +163,7 @@ class CapsulePredictionOp : public OpKernel
   }
 };
             </code></pre>
-            In the implementation above we haven't done anything with CUDA yet, but we'll get there so don't worry. The code merely initializes the output shape from the input shapes and allocates the memory. The <code>OpKernelContext</code> object that is provided as a parameter makes sure to allocate the memory on the currently used device. In our case, this will be the GPU. Then we obtain the <code>Eigen</code> tensors through the <code>tensor</code> method and pass them on the the <code>launch</code> function, where the actual magic happens.
+            In the implementation above we haven't done anything with CUDA yet, but we'll get there so don't worry. The code merely initializes the output shape from the input shapes and allocates the memory. The <code>OpKernelContext</code> object that is provided as a parameter makes sure to allocate the memory on the currently used device. In our case, this will be the GPU. Then, we obtain the <code>Eigen</code> tensors through the <code>tensor</code> method and pass them on the the <code>launch</code> function, where the actual magic happens.
                 </p>
                 <h3>
                 Launching the kernel
@@ -215,7 +218,7 @@ const int64 x_d0 = in_caps * in_dim;
 const int64 o_d0 = in_caps * out_caps * out_dim;
                 </code></pre>
                 <p>
-                Awesome, so we can simply get these using the dimensions we determined already. The code tells us that <code>w_d0</code> is just the product of <code>out_caps</code>, <code>out_dim</code> and <code>in_dim</code>. So if we want to jump from one index $\mathsf{W}_{\mathbf{i},j,k,l}$ to $\mathsf{W}_{\mathbf{i+1},j,k,l}$ we should add <code>w_d0</code> to the one-dimensional index. The same goes for index $j$ and <code>w_d1</code> as you might already expect. If you're familiar with Matlab, then it might help to remind you of the <code>ind2sub</code> function that concerns the very same thing.
+                Awesome, so we can simply get these using the dimensions we determined already. The code tells us that <code>w_d0</code> is just the product of <code>out_caps</code>, <code>out_dim</code> and <code>in_dim</code>. So if we want to jump from one index $\mathsf{W}_{\mathbf{i},j,k,l}$ to $\mathsf{W}_{\mathbf{i+1},j,k,l}$ we should add <code>w_d0</code> to the one-dimensional index. The same goes for index $j$ and <code>w_d1</code> as you might already expect. If you're familiar with Matlab, then it maybe helps to remind you of the <code>ind2sub</code> function that concerns the very same thing.
                 </p>
                 <p>
                     The actual CUDA kernel launch is given at the bottom of the function and repeated here:
@@ -239,7 +242,7 @@ capsulePredictionKernel
                     All <b>blocks</b> that are assigned to a call can be run in parallel. If you launch a kernel with <code>N</code> blocks, then you could think of it as running <code>N</code> separate instances of the kernel function. That's pretty convenient! The <code>nvcc</code> compiler will make sure that the kernel function has access to the exact block index, so that the specific block-instance of the kernel knows which parts of the incoming arrays it should process.
                 </p>
                 <p>
-                    A block can contain multiple <b>threads</b> itself. Threads are just an additional layer of parallelism, so they run in parallel. Why another layer of parallelism, you ask? Well, threads can do things that blocks cannot. Threads can share their memory which is typically useful when you want to use the same value of some input array in the same block multiple times. The shared memory access is much faster and it is one of the many ways you might optimize your final CUDA implementation.
+                    A block can contain multiple <b>threads</b> itself. Threads are just an additional layer of parallelism, so they run in parallel. Why another layer of parallelism, you ask? Well, threads can do things that blocks cannot. Threads can share their memory which is typically useful when you want to use the same value of some input array in the same block multiple times. The shared memory access is much faster and it is one of the many ways you can optimize your final CUDA implementation.
                 </p>
                 <h3>
                     The CUDA kernel
@@ -279,14 +282,14 @@ __global__ void capsulePredictionKernel(
 }
                 </code></pre>
                 <p>
-                The first thing you might notice is the <code>__global__</code> qualifier that precedes the function definition. This is what the <code>nvcc</code> compiler uses to make the function available <i>globally</i>, meaning that it can be launched from CPU. The arguments inherit their names from the <code>launch</code> function so they should not cause too much confusion. The <code>CUDA_1D_KERNEL_LOOP</code> is a macro defined in <code>tensorflow/core/util/cuda_kernel_helper.h</code>. It replaces this line of code with:
+                The first thing you might notice is the <code>__global__</code> qualifier that precedes the function definition. This is what the <code>nvcc</code> compiler uses to make the function available <i>globally</i>, meaning that it can be launched from CPU, or 'host' code in CUDA terminology. The function's arguments inherit their names from the <code>launch</code> function so they should not cause too much confusion. The <code>CUDA_1D_KERNEL_LOOP</code> is a macro defined in <code>tensorflow/core/util/cuda_kernel_helper.h</code>. It replaces this line of code with:
                 </p>
                 <pre><code class="cpp">
 for (int i = blockIdx.x * blockDim.x + threadIdx.x; i &lt; output_size;
      i += blockDim.x * gridDim.x)
             </code></pre>
                 <p>
-                    This macro enforces us to think in a very convenient abstract way: it gives us some index <code>i</code> that correspond to the i-th element of the output array <code>out</code>. Now all we have to do is figure out what the indices are of our additional arrays <code>in</code> and <code>weights</code>. In order to do that, we determine the batch index <code>b</code>, the input capsule index <code>ci</code>, the output capsule index <code>cj</code> and the out capsule element index <code>e_out</code>:
+                    The CUDA kernel launch together with this TensorFlow macro forces us to think in a abstract yet convenient way: it gives us some index <code>i</code> that correspond to the i-th element of the output array <code>out</code>. Different block/thread instantiations of this kernel will get their own values for <code>i</code>. Now all we have to do is figure out what the indices are of our additional arrays <code>in</code> and <code>weights</code>. In order to do that, we determine the batch index <code>b</code>, the input capsule index <code>ci</code>, the output capsule index <code>cj</code> and the out capsule element index <code>e_out</code>:
                 </p>
                 <pre><code>
 // So here we have out[b,ci,cj,e]
@@ -307,7 +310,7 @@ int64 w_idx  = ci * w_d0 + cj * w_d1 + e_out * w_d2;
 Again, we use the already provided memory sizes for each of the axes to get our one-dimensional indices. These are the indices for the <i>first input capsule element</i> of (i) input capsule <code>ci</code> at batch index <code>b</code> and (ii) the weights of the input capsule <code>ci</code>, the output capsule <code>cj</code> and the output capsule element <code>e_out</code>.
                 </p>
                 <p>
-                    We assume that the last axis of both <code>in</code> and <code>W</code> are the input capsule elements. This means that they are consequent in memory and it is therefore straightforward to construct the loop that goes over the individual input capsule elements:
+                    We assume that the last axis of both <code>in</code> and <code>W</code> are the input capsule elements. This means that they are subsequent in memory and it is therefore straightforward to construct the loop that goes over the individual input capsule elements:
                 </p>
                 <pre><code class="cpp">
 // Initialize result
@@ -322,189 +325,355 @@ out[i] = result;
                 <p>
                     The <code>ldg</code> function is a <a href="https://stackoverflow.com/questions/26603188/what-is-the-difference-between-ldg-intrinsic-and-a-normal-execution">Read-Only Data Cache Load Function</a>. It just receives a pointer to the actual element to read. Remember that we are computing matrix-vector products, which are just sets of inner products. A potential improvement here is to use <i>shared memory</i> since a single input capsule value is used many times, but we will leave out further optimization for now.
                 </p>
-                <p>
-                    It is worth noting that this post assumes prior knowledge of TensorFlow and its most common operators. I should also add that it is really intended as supplementary material. There are quite some concepts and observations that I do not discuss here, but which you can easily acquaint by reading <a href="https://arxiv.org/abs/1710.09829">the article</a>.
-                </p>
 
-                <h2>
-                    What is a capsule?
-                </h2>
-                <p>
-                    Before we get to capsules, we will revisit a few terminological primers for neural networks. Usually, we say that the perceptrons in our neural networks represent features. For example, in image classification with deep convolutional neural networks, the neurons in the last few hidden layers typically represent abstract concepts, such as 'I see two eyes' and the 'the creature has two legs'. This interpretation is of course a bit anthropomorphistic. Nevertheless, it helps to get an intuitive understanding of what neural networks do when they interpret high-dimensional data. The presence of a certain feature in an image is reflected by a nonzero value of the corresponding hidden neuron. Again, with a healthy dose of anthropomorphism, we could say that the greater the neuron's activity, the more `confident' the neuron is of observing the feature.
-                </p>
-
-                <p>
-                    Hinton and his team rethought the common approach of using perceptrons to build neural networks. Instead, they advocate the use of capsules. A single capsule is just a group of neurons. Just like regular neurons, capsules reside in layers. The numeric properties of neurons such as preactivations and outputs are represented by scalars. In contrast and perhaps not surprisingly, the same properties of capsules are represented by vectors. A single capsule now represents the presence of a feature in an image. In the paper, the word `entity' is used to indicate the same thing as what I refer to as a feature.
-                </p>
-
-                <p>
-                    In classification, the class of a data instance can be seen as a special kind of entity. In most deep neural networks, class membership is encoded in the output layer as a set of probabilities. This is accomplished by a softmax layer that contains exactly one neuron per output class. In capsule networks, the presence of a class is encoded by a capsule. More specifically, the length of the activity vector of a capsule encodes the degree of confidence towards the presence of the class entity.
-                </p>
-
-                <p>
-                    This means that capsule networks no longer use a softmax operator to obtain their output distribution. As far as I understand, capsule networks have no explicit notion of class probabilities. They rather encode entities, meaning that multiple entities can be present at the same time, which is exactly the property the authors use to separate the two overlapping digits in section 6 of the paper.
-                </p>
-
-                <h2>
-                    The activation of a capsule
-                </h2>
-
-                <p>
-                    Capsules have two ways of encoding information: length and direction. To be able to interpret the length of a capsule as a probability, it must be `squashed' so that the length is always between 0 and 1. This is accomplished with a squashing nonlinearity:
-                    $$\boldsymbol v_j = {\|\boldsymbol s_j\|^2 \over 1 + \|\boldsymbol s_j\|^2}{\boldsymbol s_j \over \| \boldsymbol s_j \|},$$
-
-                which squashes short vectors to near-zero length and long vectors to unit length.
-                </p>
-
-                <h2>
-                    Multiple capsule layers
-                </h2>
-
-                <p>
-                    Apart from the output layer, hidden layers might also be built up out of capsules. These capsules will represent simpler entities than class labels, e.g. pose, deformation, texture etc.
-                </p>
-
-                <p>
-                    How to go from one capsule layer to another? In regular MLPs, the activation of a whole layer is represented as a vector. In capsule networks, the activation of a single capsule is represented as a vector. While ordinary MLPs can suffice with a single matrix-vector product to compute the preactivation of the next layer $l+1$, capsule layers need such a product for each pair of capsules between the two layers $(\boldsymbol v_i^{(l)}, \boldsymbol v_j^{(l+1)})$, where $l$ and $l+1$ are layer indices and $i$ and $j$ are capsule indices.
-                </p>
-
-                <p>
-                    Following the terminology in the paper, the results of these matrix-vector products are seen as predictions of the output of the capsules in layer $l+1$. The predictions are linearly combined using coupling coefficients to form the current output. Initially, the coupling coefficients are equal and sum to 1. To compute a single forward pass in the network, the coefficients are re-estimated a few times by a process referred to as dynamic routing. This promotes the coupling coefficients between a capsule in $l$ to another in $l+1$ whenever the activity is predicted well. The degree to which these activities agree is determined through an inner product of the actual output and the prediction. As far as I understand, the routing mechanism more-or-less simplifies the interaction between the two layers by inhibiting many matrix-vector products and only promoting a few through a softmax procedure, similar to attention mechanisms as found in machine translation models using RNNs. After a few iterations of dynamic routing, these coupling coefficients converge to a situation where one could regard the higher level entities in $l+1$ to be encoded by only a few lower level entities in layer $l$. To really understand what's going on, I suggest you have a look at section 2 in the paper.
-                </p>
-
-                <h2>
-                    Implementation in TensorFlow
-                </h2>
-                <p>
-                    Perhaps a new kind of neural network is best explained by looking at a possible implementation. But first, let's have a look at the architecture we need to implement. We will be looking at the MNIST dataset. If you want to skip the explanations here and you just wanna get the code, see <a href="https://www.github.com/jostosh/capsnet">the repository</a>.
-                </p>
                 <h3>
-                    Architecture
+                    Testing
                 </h3>
                 <p>
-                    We will have to combine 3 layers:
-                </p>
-                    <ul>
-                <li>A regular convolutional layer with ReLU activations, stride 1, $9\times 9$ kernels and 256 filters </li>
-                <li>A convolutional capsule layer with activations as described above, stride 2, $9\times 9$ kernels and 32 capsules per spatial output with a dimensionality of 8.</li>
-                <li>A fully connected capsule layer with activations as described above, 10 capsules with a dimensionality of 16.</li>
-            </ul>
-                <h4>
-                    Inputs and the first layer
-                </h4>
-                <p>
-                Nowadays, TensorFlow is already shipped with predefined layers, let's save ourselves some time then.
+                    I want this post to be an end-to-end showcase of the development of a TensorFlow custom Op for GPU. This includes <b>testing</b> the Op. Here's the forward computation with <code>numpy</code>:
                 </p>
                 <pre><code class="python">
-# Define placeholders
-x = tf.placeholder(tf.float32, [None, 28, 28, 1])
-labels = tf.placeholder(tf.int64, [None])
+import tensorflow as tf
+from ops.capsuleprediction import capsule_prediction
+import numpy as np
+from parameterized import parameterized
+import itertools
 
-# Define capsule network
-conv1_out = tf.layers.conv2d(x, 256, 9, activation=tf.nn.relu)
-pc = primary_caps(conv1_out, kernel_size=9, strides=(2, 2), capsules=32, dim=8)
-v_j = digit_caps(pc, n_digit_caps=10, dim_digit_caps=16)
-digit_norms = tf.norm(v_j, axis=-1)
-                </code></pre>
-<p>
-    So we've set up our first convolutional layer and the placeholders that will contain externally provided labels and images.
 
-</p>
-                <h4>
-                    Primary capsule layer
-                </h4>
-                <p>
-                Good, now the interesting part. The first capsule layer is referred to as the primary capsule layer. It performs a convolution operation followed by the squashing nonlinearity as discussed above. We'll implement the layer as a function. In my implementation, I ended up with the following:
-</p>
-                <pre><code class="python">
-def primary_caps(x, kernel_size, strides, capsules, dim, name="PrimaryCaps"):
-    """ Primary capsule layer. Linear convolution with reshaping to account for capsules. """
-    preactivation = tf.layers.conv2d(
-        x, capsules * dim, kernel_size, strides=strides, activation=tf.identity, name=name,
-        kernel_initializer=ConcatInitializer('glorot_uniform', axis=3, splits=capsules)
-    )
-    _, w, h, _ = preactivation.shape.as_list()
-    out = tf.reshape(preactivation, (-1, w * h * capsules, dim))
-    return squash(out)
+class CapsulePredictionOpTest(tf.test.TestCase):
+
+    @staticmethod
+    def _numpy_capsule_prediction(x, weights):
+        """ Generate the output for x and weights with numpy """
+        batch_size, in_caps, in_dim = x.shape
+        _, out_caps, out_dim, _ = weights.shape
+
+        out_shape = (batch_size, in_caps, out_caps, out_dim)
+        out = np.zeros(out_shape)
+
+        for b in range(batch_size):
+            for i in range(in_caps):
+                for j in range(out_caps):
+                    for c in range(out_dim):
+                        out[b, i, j, c] = np.dot(x[b, i], weights[i, j, c])
+        return out
                 </code></pre>
                 <p>
-                    Let's break this down. The first statement to compute the preactivation seems obvious, but there is something peculiar going on. Note that we have put <code>capsules * dim</code> as the number of filters. This is because each capsule in this layer will have its vector along the depth dimension of the convolutional output volume. The width and height dimensions are only indices for capsules that focus on different parts of the input. Rather than computing '<code class>capsules</code>' convolutions separately, we do everything with a single convolution Op, which is simply more efficient.
+                    The file <code>ops/capsuleprediction.py</code> contains the <code>capsule_prediction</code> that actually loads the Op from the shared library file after being compiled. The function above should be straightforward to interpret: we loop over batch, in capsules, out capsules and out capsule elements and compute a dot product for each combination in the output. We'll use this to verify the forward computation of the Op. Another thing to note is the <code>tf.test.TestCase</code> class which we inherit from. It provides some utility functions for testing with TensorFlow.
                 </p>
                 <p>
-                    The next statement is where we determine the spatial dimensions (the height and the width) of the output volume. The number of capsules in this would then be <code>h * w * capsules</code>. We can use this to reshape the output so that the new tensor has a shape of <code>[batch_size, n_capsules, capsule_dimension]</code>. We'll create a squashing function that assumes that the capsule elements are indexed on the last axis.
+                    Now let's look at the test for the forward capsule prediction:
+                </p>
+                <pre><code class="python">
+@parameterized.expand([
+    (batch_size, in_caps, out_caps, in_dim, out_dim) for
+    batch_size, in_caps, out_caps, in_dim, out_dim in
+    itertools.product([4, 8], [4, 8], [4, 8], [4, 8], [4, 8])
+])
+def test_capsule_prediction_op(self, batch_size, in_caps, out_caps, in_dim,
+                               out_dim):
+    """ Tests the forward capsmatmul op """
+    x = np.random.rand(batch_size, in_caps, in_dim)
+    weights = np.random.rand(in_caps, out_caps, out_dim, in_dim)
+
+    truth = self._numpy_capsule_prediction(x, weights)
+    with self.test_session() as sess:
+        x_ph = tf.placeholder(tf.float32, x.shape)
+        w_ph = tf.placeholder(tf.float32, weights.shape)
+
+        ret = capsule_prediction(x_ph, w_ph)
+        out = sess.run(ret, {x_ph: x, w_ph: weights})
+    self.assertAllClose(truth, out)
+                </code></pre>
+                <p>
+                    I've used quite a few tricks in here. First, the <code>parameterized</code> decorator offers a way to invoke the test with different parameters where each test should succeed on its own and will be considered as a separate test by <code>pytest</code>. If it fails, the provided input will also be displayed in the test logs so in my experience, using it really speeds up the debugging if needed. The <code>parameterized.expand</code> decorator expects a list of tuples. Each tuple will be unpacked as positional function parameters. We can easily generate many tuples to vary the dimension sizes by using <code>itertools.product</code> which takes the Cartesian product of all of its arguments.
+                </p>
+                <p>
+                    The <code>x</code> and <code>weights</code> arrays are initialized randomly. The TensorFlow graph that we build is simple: it only holds two placeholders and the <code>capsule_prediction</code> Op. The returned value should be the same as that of the <code>_numpy_capsule_prediction</code> function. Let's run the tests:
+                </p>
+                <img src="../img/test.jpg" class="img-rounded" alt="Test output capsule prediction">
+                <p>
+                    A nice feature of <code>pytest</code> is that you can add the <code>-k</code> flag to select a specific set of tests. Hooray, all tests passed!
+                </p>
+                <h2>
+                    The backward capsule prediction
+                </h2>
+                <p>
+                    Next up is the backward computation. We you'll notice that we have visited most of the coming concepts already. We already looked at methods to compute the correct indices for one-dimensional arrays by dimension sizes, we wrote a CUDA kernel, we registered our Op and we set up our tests. Therefore, I will speed things up a bit from here on. The only thing that is in our way is the exact definition of the <b>gradient</b>. It helps to consider a normal dense layer first:
+                    $$ \boldsymbol z = W \boldsymbol x. $$
+                Given the gradients of a loss function $\mathcal L$ with respect to $\boldsymbol z$, we should be able get the gradients of $\boldsymbol x$ and $W$:
+                    $$ \frac{\partial L}{\partial x_i}  = \frac{\partial L}{\partial \boldsymbol z} \frac{\partial \boldsymbol z}{\partial x_i} = \vec{\boldsymbol w_i} \boldsymbol z' $$,
+                    where $\vec{\boldsymbol w_i}$ is the i-th row vector and $\boldsymbol z'$ is the vector holding the local gradients of the output. If this is the result for $i$, then the whole gradient for $\boldsymbol x$ can be computed by:
+                    $$ \frac{\partial L}{\partial \boldsymbol x} = W^\top \boldsymbol z'. $$
+                    To do the same for our capsule prediction operation we just have to replace $\boldsymbol z'$ with $\hat{\boldsymbol u}_{j|i}'$ and $W$ with $W_{ij}$.
+                </p>
+                <p>
+                What about the gradient for a specific weight? Well, this is perhaps even easier:
+                $$ \frac{\partial \mathcal L}{\partial w_{rc}} = x_r z'_c.$$
+                So the matrix holding the gradients becomes an outer product:
+                $$ \frac{\partial \mathcal L}{\partial W} = \boldsymbol x \boldsymbol (z')^\top. $$
+                    Intuitively, this tells us to just pick the two neurons that are connected between these two layers and multiply the local gradient of the output neuron with the input neuron. This means that we can do the same for the capsule prediction layer. The only difference is the dimensionality of the tensors involved.
+                </p>
+                <h3>
+                    The gradient OpKernel
+                </h3>
+                <p>
+                    I won't bother you with the details anymore. Take it or leave it:
+                </p>
+                <pre><code class="cpp">
+class CapsulePredictionGradOp : public OpKernel
+{
+ public:
+  explicit CapsulePredictionGradOp(OpKernelConstruction* ctx) : OpKernel(ctx) { }
+
+  void Compute(OpKernelContext* ctx) override
+  {
+    // Get the input tensors
+    const Tensor& grad = ctx-&gt;input(0);
+    const Tensor& input = ctx-&gt;input(1);
+    const Tensor& weights = ctx-&gt;input(2);
+
+    // Get the shapes so that we can allocate outputs
+    const TensorShape& input_shape(input.shape());
+    const TensorShape& weights_shape(weights.shape());
+
+    // Allocate outputs
+    Tensor* grad_input = nullptr;
+    Tensor* grad_weights = nullptr;
+    OP_REQUIRES_OK(ctx, ctx-&gt;allocate_output(0, input_shape, &grad_input));
+    OP_REQUIRES_OK(ctx, ctx-&gt;allocate_output(1, weights_shape, &grad_weights));
+
+    // Get the Eigen tensors and pass them on to the launch function
+    auto input_tensor         = input.tensor&lt;float, 3&gt;();
+    auto weights_tensor       = weights.tensor&lt;float, 4&gt;();
+    auto grad_tensor          = grad.tensor&lt;float, 4&gt;();
+    auto grad_input_tensor    = grad_input-&gt;tensor&lt;float, 3&gt;();
+    auto grad_weights_tensor  = grad_weights-&gt;tensor&lt;float, 4&gt;();
+    launchCapsulePredictionGrad(
+      ctx-&gt;eigen_device&lt;GPUDevice&gt;(), input_tensor, weights_tensor, grad_tensor,
+      grad_input_tensor, grad_weights_tensor
+    );
+  }
+};
+                </code></pre>
+                <p>
+                    Nothing truly new here. An important difference is that we now have to allocate two output tensors: one for the weight gradient and one for the input gradient. The shapes of a tensor's gradient is identical to the shape of the tensor itself. Thus finding the shape for the allocated tensors is a piece of cake. Let's check out the <code>launchCapsulePredictionGrad</code> function:
+                </p>
+                <pre><code>
+void launchCapsulePredictionGrad(
+  const GPUDevice& d,
+  typename TTypes&lt;float, 3&gt;::ConstTensor input,
+  typename TTypes&lt;float, 4&gt;::ConstTensor weights,
+  typename TTypes&lt;float, 4&gt;::ConstTensor grad,
+  typename TTypes&lt;float, 3&gt;::Tensor grad_input,
+  typename TTypes&lt;float, 4&gt;::Tensor grad_weights)
+{
+  const int64 batch_size  = input.dimension(0);
+  const int64 in_caps     = input.dimension(1);
+  const int64 in_dim      = input.dimension(2);
+  const int64 out_dim     = weights.dimension(2);
+  const int64 out_caps    = weights.dimension(1);
+
+  // Size first dim
+  const int64 w_d0 = out_caps * out_dim * in_dim;
+  const int64 x_d0 = in_caps * in_dim;
+  const int64 o_d0 = in_caps * out_caps * out_dim;
+
+  // Second dim
+  const int64 w_d1 = out_dim * in_dim;
+  const int64 x_d1 = in_dim;
+  const int64 o_d1 = out_caps * out_dim;
+
+  // Third dim
+  const int64 w_d2 = in_dim;
+  const int64 o_d2 = out_dim;
+
+  // Launch input gradient kernel
+  CudaLaunchConfig config = GetCudaLaunchConfig(grad_input.size(), d);
+  capsulePredictionInputGradKernel
+    &lt;&lt;&lt;config.block_count, config.thread_per_block, 0, d.stream()&gt;&gt;&gt;(
+      grad.data(), weights.data(), grad_input.data(),
+      w_d0, x_d0, x_d1, o_d0, o_d1, out_caps, out_dim, in_dim,
+      grad_input.size());
+
+  // Launch weight gradient kernel
+  config = GetCudaLaunchConfig(grad_weights.size(), d);
+  capsulePredictionWeightsGradKernel
+    &lt;&lt;&lt;config.block_count, config.thread_per_block, 0, d.stream()&gt;&gt;&gt;(
+      grad.data(), input.data(), grad_weights.data(), batch_size,
+      grad_weights.size(), w_d0, w_d1, w_d2, x_d0, x_d1, o_d0, o_d1, o_d2);
+}
+                </code></pre>
+                Again, we see a similar code structure. We obtain the dimensions, we determine the memory sizes and finally we launch not one, but two kernels.
+                <p>
+                    Glad you're still there! Now it gets a bit more complicated. Behold the input gradient CUDA kernel:
+                <pre><code class="cpp">
+__global__ void capsulePredictionInputGradKernel(
+  const float* grad, const float* weights, float* grad_input,
+  const int64 w_d0,
+  const int64 x_d0, const int64 x_d1,
+  const int64 o_d0, const int64 o_d1,
+  const int64 out_caps,
+  const int64 out_dim,
+  const int64 in_dim,
+  const int64 output_size)
+{
+  CUDA_1D_KERNEL_LOOP(i, output_size)
+  {
+    // So here we have in_grad[b,ci,e]
+    const int64 b     = i / x_d0;
+    const int64 ci    = (i % x_d0) / x_d1;
+    const int64 e_in  = i % x_d1;
+
+    // Then, we can have a look at computing the array indices for in and W
+    int64 w_idx       = ci * w_d0 + e_in;
+    int64 grad_idx    = b * o_d0 + ci * o_d1;
+
+    // Initialize result
+    float result      = 0.0;
+    // Iterate over cj and e_out, we already have the other indices
+    for (int cj = 0; cj < out_caps; ++cj)
+    {
+      for (int e_out = 0; e_out < out_dim; ++e_out)
+      {
+        // Next element of grad can be found by incrementing grad_idx
+        result  += ldg(grad + grad_idx++) * ldg(weights + w_idx);
+        // Next element of weights can be found by going to the next output
+        // capsule element, meaning that we add in_dim to w_idx
+        w_idx   += in_dim;
+      }
+    }
+    // Write the result
+    grad_input[i] = result;
+  }
+}
+                </code></pre>
+                <p>
+                    I have added quite some comments to the code to make it more readable. Similar to our previous CUDA kernel, this one determines the axis indices that matter: <code>b</code>, <code>ci</code> and <code>e_in</code>. These are then used to compute the one-dimensional indices for <code>w</code> and <code>grad</code> (the output gradient). A single input neuron is not just used for one matrix vector product, but it is involved for all prediction matrices $W_{ij},j\in\{1,\ldots,\#\text{output capsules}\}$. Therefore, we require two loops, one dealing with the output capsules and another one that deals with the individual capsule elements. Rather than just incrementing the index for our weights, we must now skip to the next output capsule in the inner loop. This means that we should add <code>in_dim</code> to the index on each iteration.
+                </p>
+                <p>
+                    The weight gradient CUDA kernel implementation is:
+                </p>
+                <pre><code class="cpp">
+__global__ void capsulePredictionWeightsGradKernel(
+  const float* grad, const float* input, float* grad_weights,
+  const int64 batch_size, const int64 output_size,
+  const int64 w_d0, const int64 w_d1, const int64 w_d2,
+  const int64 x_d0, const int64 x_d1,
+  const int64 o_d0, const int64 o_d1, const int64 o_d2
+)
+{
+  CUDA_1D_KERNEL_LOOP(i, output_size)
+  {
+    // So here we have w[ci,cj,e_out,e_in]
+    const int64 ci    = i / w_d0;
+    const int64 cj    = (i % w_d0) / w_d1;
+    const int64 e_out = (i % w_d1) / w_d2;
+    const int64 e_in  = i % w_d2;
+
+    // Then, we can have a look at computing the array indices for
+    // in and grad
+    int64 input_idx   = ci * x_d1 + e_in;               // (b == 0)
+    int64 grad_idx    = ci * o_d1 + cj * o_d2 + e_out;  // (b == 0)
+
+    // Initilize result
+    float result      = 0.0;
+    // We only iterate over b, since we have the other indices already
+    for (int64 b = 0; b < batch_size; b++)
+    {
+      result += ldg(grad + grad_idx) * ldg(input + input_idx);
+      // Next elements can be found by jumping to the next batch
+      input_idx += x_d0;
+      grad_idx  += o_d0;
+    }
+    grad_weights[i] = result;
+  }
+}
+                </code></pre>
+                <p>
+                    The same tricks apply here again: we compute the tensor axis indices, we compute the one-dimensional indices and we loop over the required elements to obtain our output. What I didn't mention before is that we have the sum the gradients for each weight over all samples in the batch. Given the memory size for the input and output tensors along the 0-th axis, this is a straightforward thing to do.
                 </p>
 
-                <h4>
-                    Squashing function
-                </h4>
                 <p>
-                    Our squashing function is straightforward given the equation as given in the paper.
+                    Before our gradient implementation nicely integrates with TensorFlow, we have to register it as being the gradient of our <code>CapsulePrediction</code> Op:
                 </p>
                 <pre><code class="python">
-def squash(s_j):
-    """ Squashing function as given in the paper """
-    squared_norms = tf.reduce_sum(tf.square(s_j), axis=-1, keep_dims=True)
-    return s_j * squared_norms / (1 + squared_norms) / tf.sqrt(squared_norms + 1e-8)
+@ops.RegisterGradient("CapsulePrediction")
+def _capsule_prediction_grad(op, grad):
+    """ Computes gradient for capsule prediction operation """
+    return op_module.capsule_prediction_grad(grad, op.inputs[0], op.inputs[1])
+                </code></pre>
+                Now we can just use <code>tf.gradients</code> after which the computation graph for the gradient should include our gradient op. Awesome!
+                <h3>
+                    Testing the gradients
+                </h3>
+                <p>
+                We have arrived at one of the last stages: testing the gradient. This really sounds harder than it is. TensorFlow already has a gradient testing utility, and we'll use it here. We add the following method to our <code>CapsulePredictionOpTest</code> class:
+                </p>
+                <pre><code class="python">
+@parameterized.expand([
+    (batch_size, in_caps, out_caps, in_dim, out_dim) for
+    batch_size, in_caps, out_caps, in_dim, out_dim in
+    itertools.product([4, 8], [4, 8], [4, 8], [4, 8], [4, 8])
+])
+def test_capsule_prediction_weights_grad(self, batch_size, in_caps, out_caps,
+                                         in_dim, out_dim):
+    """ Tests gradient of output w.r.t. weights """
+    x = np.random.rand(batch_size, in_caps, in_dim)
+    weights = np.random.rand(in_caps, out_caps, out_dim, in_dim)
+    out_shape = (batch_size, in_caps, out_caps, out_dim)
+
+    with self.test_session():
+        x_ph = tf.placeholder(tf.float32, x.shape)
+        w_ph = tf.placeholder(tf.float32, weights.shape)
+        fd = {x_ph: x, w_ph: weights}
+
+        caps_out = capsule_prediction(x_ph, w_ph)
+        grad_w = tf.test.compute_gradient(
+            w_ph, weights.shape, caps_out, out_shape, extra_feed_dict=fd
+        )
+
+    self.assertAllClose(grad_w[0], grad_w[1], atol=1e-3, rtol=1e-3)
+
+@parameterized.expand([
+    (batch_size, in_caps, out_caps, in_dim, out_dim) for
+    batch_size, in_caps, out_caps, in_dim, out_dim in
+    itertools.product([4, 8], [4, 8], [4, 8], [4, 8], [4, 8])
+])
+def test_capsule_prediction_input_grad(self, batch_size, in_caps, out_caps,
+                                       in_dim, out_dim):
+    """ Tests gradient of output w.r.t. x """
+    x = np.random.rand(batch_size, in_caps, in_dim)
+    weights = np.random.rand(in_caps, out_caps, out_dim, in_dim)
+    out_shape = (batch_size, in_caps, out_caps, out_dim)
+
+    with self.test_session():
+        x_ph = tf.placeholder(tf.float32, x.shape)
+        w_ph = tf.placeholder(tf.float32, weights.shape)
+        fd = {x_ph: x, w_ph: weights}
+        caps_out = capsule_prediction(x_ph, w_ph)
+        grad_x = tf.test.compute_gradient(
+            x_ph, x.shape, caps_out, out_shape, extra_feed_dict=fd
+        )
+
+    self.assertAllClose(grad_x[0], grad_x[1], atol=1e-3, rtol=1e-3)
                 </code></pre>
                 <p>
-                    In the first statement, we compute the squared norms along the last axis of the incoming tensor. This works fine with our <code>primary caps</code> implementation as shown above, where we have reshaped the tensor so that the capsule's elements are indexed on the last axis. The second statement is a simply a translation from the earlier equation to code. Just to ensure numerical stability in case of small vectors, we add a nonzero constant to the denominator on the right.
+                The <code>tf.test.compute_gradient</code> function determines the 'theoretical' and numerical gradient respectively. The numerical gradient is computed by finite differences whereas the theoretical gradient is computed by our Op's registered gradient. They should be the nearly equal, so we assert they are close by using the <code>assertAllClose</code> function that is inherited from <code>tf.test.TestCase</code>. Here is the resulting output:
                 </p>
-                <h4>
-                    Digit capsule layer
-                </h4>
+                <img src="../img/test2.jpg" class="img-rounded" alt="Test output capsule prediction">
                 <p>
-                    Building the next layer is the most difficult challenge of this reimplementation. In this layer, we have 10 capsules with dimensionality 16, one capsule for each digit. The main difficulty is in the computation of all predicted capsule vectors. In the paper, they express this as follows:
-                    $$ \hat{\boldsymbol u}_{j|i} = \boldsymbol W_{ij} \boldsymbol u_i, $$
-                    where the $i$ index corresponds to the capsules in the primary capsule layer and the $j$ index corresponds to capsules in the digit capsule layer. This means that we need <code>n_primary_capsules * n_digit_capsules</code> matrices. It's probably a good idea to have a weight tensor with rank 4, with shape <code>[n_primary_caps, n_digit_caps, dim_primary_caps, dim_digit_caps]</code>.
+                    Whoa! It's alive!
                 </p>
-                    <p>
-                I have spent some time thinking of what might be the most efficient way of computing so many matrix vector products with TensorFlow. TensorFlow's <code>matmul</code> operator is intended for (batched) matrix multiplication. At first sight, our tensors $\boldsymbol W_{ij}$ and $\boldsymbol u_i$ don't have the right dimensions to do anything like that. However, I came up with some reshape-hacking that does the trick. Note that the result of a matrix multiplication would be a series of vectors. Each of these vectors would be the predicted activation of a digit capsule. So for a single batch, we would be able to compute the activations of all samples for a single index pair $(i, j)$ by having a matrix with <code>batch_size</code> columns and <code>dim_primary_caps</code> rows. This would be premultiplied by a matrix with <code>dim_digit_caps</code> rows and <code>dim_primary_caps</code> columns:
-                        $$ \boldsymbol W_{ij} \left[\begin{array}{cccc} \boldsymbol u^{(1)}_i & \boldsymbol u^{(2)}_i & \cdots & \boldsymbol u^{(n)}_i \end{array}\right], $$
-                        where the superscripts are the batch indices.
-                    </p>
+                <h3>
+                    Running it on MNIST classification
+                </h3>
                 <p>
-                    Now it is easy to do the same thing for all $j$ and a single $i$. We can just use a block matrix where the individual matrices for all $j$ are stacked:
-                    $$ \left[\begin{array}{c} \boldsymbol W_{i1}\\ \boldsymbol W_{i2} \\ \vdots \\ \boldsymbol W_{im} \end{array}\right] \left[\begin{array}{cccc} \boldsymbol u^{(1)}_i & \boldsymbol u^{(2)}_i & \cdots & \boldsymbol u^{(n)}_i \end{array}\right], $$
-                    so that the result of the matrix vector product will contain the predicted activations for all $j$, but only a single $i$. I can hear you say it: what to do with the <code>n_primary_caps</code> dimension? Well, this dimension is both in the weight tensor, as well as in the primary caps output tensor. This can now be our 'batch' dimension for the <code>matmul</code> operator. This is how the above translates to code:
+                    In my <a href="capsnet.html"></a>, I have already discussed a capsule network for MNIST classification. We can now insert our <code>capsule_prediction</code> function in the code:
                 </p>
                 <pre><code class="python">
-# Get number of capsules and dimensionality of previous layer
-in_shape = incoming.shape.as_list()
-n_primary_caps = in_shape[capsule_axis]
-dim_primary_caps = in_shape[neuron_axis]
-# Initialize all weight matrices
-W_ij = tf.get_variable(
-    "weights",
-    shape=[n_primary_caps, n_digit_caps * dim_digit_caps, dim_primary_caps],
-    initializer=glorot_uniform()
-)
-# Initialize routing logits, the leading axis with size 1 is added for
-# convenience.
-b_ij = tf.get_variable(
-    "logits",
-    shape=[1, n_primary_caps, n_digit_caps],
-    initializer=tf.zeros_initializer(),
-    trainable=args.logits_trainable
-)
-# Reshape and transpose hacking
-u_i = tf.transpose(incoming, (1, 2, 0))
-u_hat = tf.matmul(W_ij, u_i)
-u_hat = tf.reshape(
-    tf.transpose(u_hat, (2, 0, 1)),
-    (-1, n_primary_caps, n_digit_caps, dim_digit_caps)
-)
-                </code></pre>
-                <h5>
-                    Dynamic routing
-                </h5>
-                <p>
-                    Now that we have our $\hat{\boldsymbol u}$ tensor, we can perform dynamic routing. This is simply a matter of translating the pseudo-code in the paper to Python code, so that the <code>digit_caps</code> function can be implemented as follows:
-                </p>
-                <pre><code class="python">
-def digit_caps(
-    incoming, n_digit_caps, dim_digit_caps, name="DigitCaps",
-    neuron_axis=-1, capsule_axis=-2, routing_iters=3
-):
+def digit_caps(incoming, n_digit_caps, dim_digit_caps, name="DigitCaps", neuron_axis=-1,
+               capsule_axis=-2, routing_iters=3):
     """ Digit capsule layer """
     with tf.variable_scope(name):
         # Get number of capsules and dimensionality of previous layer
@@ -512,41 +681,42 @@ def digit_caps(
         n_primary_caps = in_shape[capsule_axis]
         dim_primary_caps = in_shape[neuron_axis]
         # Initialize all weight matrices
+        w_shape = [n_primary_caps, n_digit_caps, dim_digit_caps, dim_primary_caps] \
+            if args.custom_op else [n_primary_caps, n_digit_caps * dim_digit_caps, dim_primary_caps]
+
         W_ij = tf.get_variable(
-            "weights",
-            shape=[n_primary_caps, n_digit_caps * dim_digit_caps, dim_primary_caps],
-            initializer=glorot_uniform()
+            "weights", shape=w_shape,
+            initializer=tf.keras.initializers.glorot_uniform()
         )
-        # Initialize routing logits, the leading axis with size 1 is added for
-        # convenience.
+        # Initialize routing logits, the leading axis with size 1 is added for convenience.
         b_ij = tf.get_variable(
-            "logits",
-            shape=[1, n_primary_caps, n_digit_caps],
-            initializer=tf.zeros_initializer(),
+            "logits", shape=[1, n_primary_caps, n_digit_caps], initializer=tf.zeros_initializer(),
             trainable=args.logits_trainable
         )
-        # Reshape and transpose hacking
-        u_i = tf.transpose(incoming, (1, 2, 0))
-        u_hat = tf.matmul(W_ij, u_i)
-        u_hat = tf.reshape(
-            tf.transpose(u_hat, (2, 0, 1)),
-            (-1, n_primary_caps, n_digit_caps, dim_digit_caps)
-        )
+        if args.custom_op:
+            # Custom op
+            u_hat = capsule_prediction(incoming, W_ij)
+        else:
+            # Reshape and transpose hacking
+            u_i = tf.transpose(incoming, (1, 2, 0))
+            u_hat = tf.matmul(W_ij, u_i)
+            u_hat = tf.reshape(
+                tf.transpose(u_hat, (2, 0, 1)), (-1, n_primary_caps, n_digit_caps, dim_digit_caps)
+            )
 
         def capsule_out(b_ij):
             """ Given the logits b_ij, computes the output of this layer. """
-            c_ij = tf.nn.softmax(b_ij, dim=2)
+            c_ij = tf.nn.softmax(b_ij, axis=2)
             s_j = tf.reduce_sum(
-                tf.reshape(c_ij, (-1, n_primary_caps, n_digit_caps, 1)) * u_hat,
-                axis=1
+                tf.reshape(c_ij, (-1, n_primary_caps, n_digit_caps, 1)) * u_hat, axis=1
             )
             v_j = squash(s_j)
             return v_j
 
         def routing_iteration(iter, logits):
             """
-            Given a set of logits, computes the new logits using the definition
-            of routing from the paper.
+            Given a set of logits, computes the new logits using the routing definition from the
+            paper.
             """
             v_j = capsule_out(logits)
             a_ij = tf.reduce_sum(tf.expand_dims(v_j, axis=1) * u_hat, axis=3)
@@ -566,26 +736,7 @@ def digit_caps(
     return v_j
                 </code></pre>
                 <p>
-                    A relatively uncommon operator in this piece of code is the <code>while_loop</code>, which takes a looping condition, a function to execute in a single iteration and the initial values for the loop. The values given here are the index and the logits $b_{ij}$ as in the paper. Note that these arguments are passed to both the condition function as well as the loop body function.
-                </p>
-                <h2>
-                    Results
-                </h2>
-                <p>
-                    I thought it would be nice to look at trainable logits vs. constant logits. A comparison can be seen in the graph below. Note that this is only after a single training run, so we cannot reliably conclude anything from this yet. The accuracy seems to be convincingly high.
-
-                <div>
-                    <a href="https://plot.ly/~jostosh/1/?share_key=QkOrfTwcJZYHBnYtCRXrLE" target="_blank" title="Plot 1" style="display: block; text-align: center;"><img src="https://plot.ly/~jostosh/1.png?share_key=QkOrfTwcJZYHBnYtCRXrLE" alt="Plot 1" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
-                    <script data-plotly="jostosh:1" sharekey-plotly="QkOrfTwcJZYHBnYtCRXrLE" src="https://plot.ly/embed.js" async></script>
-                </div>
-
-                </p>
-
-                <h2>
-                    Rounding up
-                </h2>
-                <p>
-                    The full implementation is available in this <a href="https://github.com/jostosh/capsnet">repository</a>. Thanks for reading this and I hope you enjoyed! I am currently working on a commenting system so that you can ask questions right here soon. If you feel you can't wait, hit me at <code>jos dot vandewolfshaar at gmail dot com.</code>
+                So what about performance? Well, it turns out that training with the custom op runs somewhat slower than training with the transpose and reshape hacking. As I've stated before, the code could be optimized even more. Perhaps this will be on a next blog post. Anyway, thanks for staying around till the end and I would love to hear suggestions and feedback!
                 </p>
             </div>
         </div>
