@@ -85,7 +85,7 @@
                 <p>
                 The operation of interest in this blog post is the one that computes:
     $$ \hat{\boldsymbol u}_{j|i} = \boldsymbol W_{ij} \boldsymbol u_i, $$
-                where $\hat{\boldsymbol u}_{j|i}$ is the activation vector of capsule $j$ as 'predicted' by capsule $i$ through the matrix vector multiplication $\boldsymbol W_{ij} \boldsymbol u_i$. The matrix $\boldsymbol W_{ij}$ is of shape <code>[out_dim, in_dim]</code> and the vector $\boldsymbol u_i$ denotes the output vector of capsule $i$. A single capsule layer computes this for all pairs $i,j$ and for all samples in a batch. Hence, the tensors <code>W_ij</code> and <code>u_i</code> are actually of shape <code>[batch_size, in_caps, in_dim]</code> and <code>[in_caps, out_caps, out_dim, in_dim]</code> respectively. This means that we will build an op that just takes in these two tensors and computes an output tensor <code>u_hat_ji</code> of shape <code>[batch_size, in_caps, out_caps, out_dim]</code>. In other words, for all batch indices <code>[0,1,...,batch_size-1]</code> and for all combinations of in capsules <code>[0,1,...,in_caps-1]</code> and out capsules <code>[0,1,...,out_caps-1]</code> we have to compute a matrix-vector product.
+                where $\hat{\boldsymbol u}_{j|i}$ is the activation vector of capsule $j$ as 'predicted' by capsule $i$ through the matrix-vector multiplication $\boldsymbol W_{ij} \boldsymbol u_i$. The matrix $\boldsymbol W_{ij}$ is of shape <code>[out_dim, in_dim]</code> and the vector $\boldsymbol u_i$ denotes the output vector of capsule $i$. A single capsule layer computes this for all pairs $i,j$ and for all samples in a batch. Hence, the tensors <code>W_ij</code> and <code>u_i</code> are actually of shape <code>[batch_size, in_caps, in_dim]</code> and <code>[in_caps, out_caps, out_dim, in_dim]</code> respectively. This means that we will build an op that just takes in these two tensors and computes an output tensor <code>u_hat_ji</code> of shape <code>[batch_size, in_caps, out_caps, out_dim]</code>. In other words, for all batch indices <code>[0,1,...,batch_size-1]</code> and for all combinations of in capsules <code>[0,1,...,in_caps-1]</code> and out capsules <code>[0,1,...,out_caps-1]</code> we have to compute a matrix-vector product.
                 </p>
 
                 <h2>
@@ -158,21 +158,21 @@ class CapsulePredictionOp : public OpKernel
     auto input_tensor   = input.tensor&lt;float, 3&gt;();
     auto weights_tensor = weights.tensor&lt;float, 4&gt;();
     auto output_tensor  = output-&gt;tensor&lt;float, 4&gt;();
-    launch(ctx-&gt;eigen_device<GPUDevice>(), input_tensor, weights_tensor,
+    launchCapsulePrediction(ctx-&gt;eigen_device<GPUDevice>(), input_tensor, weights_tensor,
       output_tensor);
   }
 };
             </code></pre>
-            In the implementation above we haven't done anything with CUDA yet, but we'll get there so don't worry. The code merely initializes the output shape from the input shapes and allocates the memory. The <code>OpKernelContext</code> object that is provided as a parameter makes sure to allocate the memory on the currently used device. In our case, this will be the GPU. Then, we obtain the <code>Eigen</code> tensors through the <code>tensor</code> method and pass them on to our <code>launch</code> function, where the actual magic happens.
+            In the implementation above we haven't done anything with CUDA yet, but we'll get there so don't worry. The code merely initializes the output shape from the input shapes and allocates the memory. The <code>OpKernelContext</code> object that is provided as a parameter makes sure to allocate the memory on the currently used device. In our case, this will be the GPU. Then, we obtain the <code>Eigen</code> tensors through the <code>tensor</code> method and pass them on to our <code>launchCapsulePrediction</code> function, where the actual magic happens.
                 </p>
                 <h3>
                 Launching the kernel
                 </h3>
                 <p>
-                    Our <code>launch</code> function literally (at least in CUDA terminology) launches code on the GPU. Perhaps a little confusing, but CUDA refers to functions that run code on the 'device' as <i>kernels</i>. In TensorFlow terminology, a kernel is not necessarily a GPU implementation, while in CUDA terminology it is. Let's not get too wrapped up in terminology and just get to the code:
+                    Our <code>launchCapsulePrediction</code> function literally (at least in CUDA terminology) launches code on the GPU. Perhaps a little confusing, but CUDA refers to functions that run code on the 'device' as <i>kernels</i>. In TensorFlow terminology, a kernel is not necessarily a GPU implementation, while in CUDA terminology it is. Let's not get too wrapped up in terminology and just get to the code:
                 </p>
                 <pre><code class="cpp">
-void launch(
+void launchCapsulePrediction(
   const GPUDevice& d,
   typename TTypes&lt;float, 3&gt;::ConstTensor x,
   typename TTypes&lt;float, 4&gt;::ConstTensor weights,
@@ -209,7 +209,7 @@ void launch(
 }
                 </code></pre>
                 <p>
-The <code>TTypes</code> templates that you can see in the function arguments and the <code>int64</code> types are defined in the <code>tensorflow</code> namespace. The next part on the dimensions should be pretty self-explanatory. Because we are passing our tensor data as one-dimensional arrays to the actual CUDA kernel, we need to figure out what the memory sizes are for each dimension and each kernel. Note that when I say 'memory sizes', I just refer to the number of floats for each axis and not the byte size. Let's consider the memory sizes of the first axis of each tensor:
+The <code>TTypes</code> templates that you can see in the function arguments and the <code>int64</code> types are defined in the <code>tensorflow</code> namespace. The next part about the dimensions should be pretty self-explanatory. Because we are passing our tensor data as one-dimensional arrays to the actual CUDA kernel, we need to figure out what the memory sizes are for each dimension and each kernel. Note that when I say 'memory sizes', I just refer to the number of floats for each axis and not the byte size. Let's consider the memory sizes of the first axis of each tensor:
                 </p>
                 <pre><code class="cpp">
 // Size first dim
@@ -233,13 +233,13 @@ capsulePredictionKernel
   in_dim, out.size());
                 </code></pre>
                 <p>
-                Both statements involve quite a few new concepts. The first statement uses a <code>GetCudaLaunchConfig</code> instance as a way to determine the number of <b>blocks</b> and the number of <b>threads</b> per block. It is provided in the TensorFlow header <code>tensorflow/core/util/cuda_kernel_helper.h</code>. You should definitely check out that file in case you are working on your own Op! The <code>cudaPredictionKernel</code> is the function that uses CUDA parallelism on the GPU. It is launched by using the triple-fold delimiters: <code>&lt;&lt;&lt;config.block_count, config.thread_per_block, 0, d.stream()&gt;&gt;&gt;</code>. When you launch a kernel, you must specify the number of blocks and threads per block, as is done here. The zero on the third position is not relevant for now and it should most likely be zero if you were to implement your own kernels. The CUDA stream <code>d.stream()</code> can be thought of as a pipeline of GPU instructions. Whenever you add your kernel to the stream, the stream will make sure the kernel ends before the next kernel on the stream is called. If you want to do two independent tasks in parallel, you could use two streams and launch one task on each.
+                Both statements involve quite a few new concepts. The first statement uses a <code>GetCudaLaunchConfig</code> instance as a way to determine the number of <b>blocks</b> and the number of <b>threads</b> per block. It is provided in the TensorFlow header <code>tensorflow/core/util/cuda_kernel_helper.h</code>. You should definitely check out that file in case you are working on your own Op! The <code>capsulePredictionKernel</code> is the function that uses CUDA parallelism on the GPU. It is launched by using the triple-fold delimiters: <code>&lt;&lt;&lt;config.block_count, config.thread_per_block, 0, d.stream()&gt;&gt;&gt;</code>. When you launch a kernel, you must specify the number of blocks and threads per block, as is done here. The zero on the third position is not relevant for now and it should most likely be zero if you were to implement your own kernels. The CUDA stream <code>d.stream()</code> can be thought of as a pipeline of GPU instructions. Whenever you add your kernel to the stream, the stream will make sure the kernel ends before the next kernel on the stream is called. If you want to do two independent tasks in parallel, you could use two streams and launch one task on each.
                 </p>
                 <h3>
                     Threads and blocks
                 </h3>
                 <p>
-                    All <b>blocks</b> that are assigned to a call can be run in parallel. If you launch a kernel with <code>N</code> blocks, then you could think of it as running <code>N</code> separate instances of the kernel function. That's pretty convenient! The <code>nvcc</code> compiler will make sure that the kernel function has access to the exact block index, so that the specific block-instance of the kernel knows which parts of the incoming arrays it should process.
+                    All <b>blocks</b> that are assigned to a call can be run in parallel. If you launch a kernel with <code>N</code> blocks, then you could think of it as running <code>N</code> separate instances of the kernel function. That's pretty convenient! The <code>nvcc</code> compiler will make sure that the kernel function has access to the exact block index so that the specific block-instance of the kernel knows which parts of the incoming arrays it should process.
                 </p>
                 <p>
                     A block can contain multiple <b>threads</b> itself. Threads are just an additional layer of parallelism, so they run in parallel. Why another layer of parallelism, you ask? Well, threads can do things that blocks cannot. Threads can share their memory which is typically useful when you want to use the same value of some input array in the same block multiple times. The shared memory access is much faster and it is one of the many ways you can optimize your final CUDA implementation. Here is a schematic illustration of the two parallel layers:
@@ -284,14 +284,14 @@ __global__ void capsulePredictionKernel(
 }
                 </code></pre>
                 <p>
-                The first thing you might notice is the <code>__global__</code> qualifier that precedes the function definition. This is what the <code>nvcc</code> compiler uses to make the function available <i>globally</i>, meaning that it can be launched from CPU, or 'host' code in CUDA terminology. The function's arguments inherit their names from the <code>launch</code> function so they should not cause too much confusion. The <code>CUDA_1D_KERNEL_LOOP</code> is a macro defined in <code>tensorflow/core/util/cuda_kernel_helper.h</code>. It replaces this line of code with:
+                The first thing you might notice is the <code>__global__</code> qualifier that precedes the function definition. This is what the <code>nvcc</code> compiler uses to make the function available <i>globally</i>, meaning that it can be launched from CPU, or 'host' code in CUDA terminology. The function's arguments inherit their names from the <code>launchCapsulePrediction</code> function so they should not cause too much confusion. The <code>CUDA_1D_KERNEL_LOOP</code> is a macro defined in <code>tensorflow/core/util/cuda_kernel_helper.h</code>. It replaces this line of code with:
                 </p>
                 <pre><code class="cpp">
 for (int i = blockIdx.x * blockDim.x + threadIdx.x; i &lt; output_size;
      i += blockDim.x * gridDim.x)
             </code></pre>
                 <p>
-                    The CUDA kernel launch together with this TensorFlow macro forces us to think in a abstract yet convenient way: it gives us some index <code>i</code> that correspond to the i-th element of the output array <code>out</code>. Different block/thread instantiations of this kernel will get their own values for <code>i</code>. Now all we have to do is figure out what the indices are of our additional arrays <code>in</code> and <code>weights</code>. In order to do that, we determine the batch index <code>b</code>, the input capsule index <code>ci</code>, the output capsule index <code>cj</code> and the out capsule element index <code>e_out</code>:
+                    The CUDA kernel launch together with this TensorFlow macro forces us to think in an abstract yet convenient way: it gives us some index <code>i</code> that correspond to the i-th element of the output array <code>out</code>. Different block/thread instantiations of this kernel will get their own values for <code>i</code>. Now all we have to do is figure out what the indices are of our additional arrays <code>in</code> and <code>weights</code>. In order to do that, we determine the batch index <code>b</code>, the input capsule index <code>ci</code>, the output capsule index <code>cj</code> and the out capsule element index <code>e_out</code>:
                 </p>
                 <pre><code>
 // So here we have out[b,ci,cj,e]
@@ -309,10 +309,10 @@ int64 in_idx = b * x_d0 + ci * x_d1;
 int64 w_idx  = ci * w_d0 + cj * w_d1 + e_out * w_d2;
             </code></pre>
                 <p>
-Again, we use the already provided memory sizes for each of the axes to get our one-dimensional indices. These are the indices for the <i>first input capsule element</i> of (i) input capsule <code>ci</code> at batch index <code>b</code> and (ii) the weights of the input capsule <code>ci</code>, the output capsule <code>cj</code> and the output capsule element <code>e_out</code>. If you're familiar with Matlab, then perhaps it helps to remind you of the <code>ind2sub</code> function that concerns the very same thing.
+Again, we use the already provided memory sizes for each of the axes to get our one-dimensional indices. These are the indices for the <i>first input capsule element</i> of (i) input capsule <code>ci</code> at batch index <code>b</code> and (ii) the weights of the input capsule <code>ci</code>, the output capsule <code>cj</code> and the output capsule element <code>e_out</code>. If you're familiar with Matlab, then perhaps it helps to remind you of the <code>sub2ind</code> function that concerns the very same thing.
                 </p>
                 <p>
-                    We assume that the last axis of both <code>in</code> and <code>W</code> are the input capsule elements. This means that they are subsequent in memory and it is therefore straightforward to construct the loop that goes over the individual input capsule elements:
+                    We assume that the last axis of both <code>in</code> and <code>W</code> corresponds to the input capsule elements. This means that they are subsequent in memory and it is therefore straightforward to construct the loop that goes over the individual input capsule elements:
                 </p>
                 <pre><code class="cpp">
 // Initialize result
@@ -403,14 +403,14 @@ def test_capsule_prediction_op(self, batch_size, in_caps, out_caps, in_dim,
                 <p>
                     Next up is the backward computation. We you'll notice that we have visited most of the coming concepts already. We already looked at methods to compute the correct indices for one-dimensional arrays by dimension sizes, we wrote a CUDA kernel, we registered our Op and we set up our tests. Therefore, I will speed things up a bit from here on. The only thing that is in our way is the exact definition of the <b>gradient</b>. It helps to consider a normal dense layer first:
                     $$ \boldsymbol z = W \boldsymbol x. $$
-                Given the gradients of a loss function $\mathcal L$ with respect to $\boldsymbol z$, we should be able get the gradients of $\boldsymbol x$ and $W$:
-                    $$ \frac{\partial L}{\partial x_i}  = \frac{\partial L}{\partial \boldsymbol z} \frac{\partial \boldsymbol z}{\partial x_i} = \vec{\boldsymbol w_i} \boldsymbol z' $$,
+                Given the gradients of a loss function $\mathcal L$ with respect to $\boldsymbol z$, we should be able to get the gradients of $\boldsymbol x$ and $W$:
+                    $$ \frac{\partial L}{\partial x_i}  = \frac{\partial L}{\partial \boldsymbol z} \frac{\partial \boldsymbol z}{\partial x_i} = \vec{\boldsymbol w_i} \boldsymbol z', $$
                     where $\vec{\boldsymbol w_i}$ is the i-th row vector and $\boldsymbol z'$ is the vector holding the local gradients of the output. If this is the result for $i$, then the whole gradient for $\boldsymbol x$ can be computed by:
                     $$ \frac{\partial L}{\partial \boldsymbol x} = W^\top \boldsymbol z'. $$
                     To do the same for our capsule prediction operation we just have to replace $\boldsymbol z'$ with $\hat{\boldsymbol u}_{j|i}'$ and $W$ with $W_{ij}$.
                 </p>
                 <p>
-                What about the gradient for a specific weight? Well, this is perhaps even easier:
+                What about the gradient of a specific weight? Well, this is perhaps even easier:
                 $$ \frac{\partial \mathcal L}{\partial w_{rc}} = x_r z'_c.$$
                 So the matrix holding the gradients becomes an outer product:
                 $$ \frac{\partial \mathcal L}{\partial W} = \boldsymbol x \boldsymbol (z')^\top. $$
@@ -459,7 +459,7 @@ class CapsulePredictionGradOp : public OpKernel
 };
                 </code></pre>
                 <p>
-                    Nothing truly new here. An important difference is that we now have to allocate two output tensors: one for the weight gradient and one for the input gradient. The shapes of a tensor's gradient is identical to the shape of the tensor itself. Thus finding the shape for the allocated tensors is a piece of cake. Let's check out the <code>launchCapsulePredictionGrad</code> function:
+                    Nothing truly new here. An important difference is that we now have to allocate two output tensors: one for the weight gradient and one for the input gradient. The shape of a tensor's gradient is identical to the shape of the tensor itself. Thus finding the shape for the allocated tensors is a piece of cake. Let's check out the <code>launchCapsulePredictionGrad</code> function:
                 </p>
                 <pre><code>
 void launchCapsulePredictionGrad(
@@ -506,7 +506,7 @@ void launchCapsulePredictionGrad(
       grad_weights.size(), w_d0, w_d1, w_d2, x_d0, x_d1, o_d0, o_d1, o_d2);
 }
                 </code></pre>
-                Again, we see a similar code structure. We obtain the dimensions, we determine the memory sizes and finally we launch not one, but two kernels.
+                Again, we see a similar code structure. We obtain the dimensions, we determine the memory sizes and finally, we launch not one, but two kernels.
                 <p>
                     Glad you're still there! Now it gets a bit more complicated. Behold the input gradient CUDA kernel:
                 <pre><code class="cpp">
@@ -551,7 +551,7 @@ __global__ void capsulePredictionInputGradKernel(
 }
                 </code></pre>
                 <p>
-                    I have added quite some comments to the code to make it more readable. Similar to our previous CUDA kernel, this one determines the axis indices that matter: <code>b</code>, <code>ci</code> and <code>e_in</code>. These are then used to compute the one-dimensional indices for <code>w</code> and <code>grad</code> (the output gradient). A single input neuron is not just used for one matrix vector product, but it is involved for all prediction matrices $W_{ij},j\in\{1,\ldots,\#\text{output capsules}\}$. Therefore, we require two loops, one dealing with the output capsules and another one that deals with the individual capsule elements. Rather than just incrementing the index for our weights, we must now skip to the next output capsule in the inner loop. This means that we should add <code>in_dim</code> to the index on each iteration.
+                    I have added quite some comments to the code to make it more readable. Similar to our previous CUDA kernel, this one determines the axis indices that matter: <code>b</code>, <code>ci</code> and <code>e_in</code>. These are then used to compute the one-dimensional indices for <code>w</code> and <code>grad</code> (the output gradient). A single input neuron is not just used for one matrix-vector product, but it is involved for all prediction matrices $W_{ij},j\in\{1,\ldots,\#\text{output capsules}\}$. Therefore, we require two loops, one dealing with the output capsules and another one that deals with the individual capsule elements. Rather than just incrementing the index for our weights, we must now skip to the next output capsule in the inner loop. This means that we should add <code>in_dim</code> to the index on each iteration.
                 </p>
                 <p>
                     The weight gradient CUDA kernel implementation is:
@@ -675,8 +675,8 @@ def test_capsule_prediction_input_grad(self, batch_size, in_caps, out_caps,
                     In my <a href="capsnet.html">previous blog post</a>, I have already discussed a capsule network for MNIST classification. We can now insert our <code>capsule_prediction</code> function in the code:
                 </p>
                 <pre><code class="python">
-def digit_caps(incoming, n_digit_caps, dim_digit_caps, name="DigitCaps", neuron_axis=-1,
-               capsule_axis=-2, routing_iters=3):
+def digit_caps(incoming, n_digit_caps, dim_digit_caps, name="DigitCaps",
+               neuron_axis=-1, capsule_axis=-2, routing_iters=3):
     """ Digit capsule layer """
     with tf.variable_scope(name):
         # Get number of capsules and dimensionality of previous layer
@@ -684,17 +684,19 @@ def digit_caps(incoming, n_digit_caps, dim_digit_caps, name="DigitCaps", neuron_
         n_primary_caps = in_shape[capsule_axis]
         dim_primary_caps = in_shape[neuron_axis]
         # Initialize all weight matrices
-        w_shape = [n_primary_caps, n_digit_caps, dim_digit_caps, dim_primary_caps] \
-            if args.custom_op else [n_primary_caps, n_digit_caps * dim_digit_caps, dim_primary_caps]
+        w_shape = [n_primary_caps, n_digit_caps, dim_digit_caps, dim_primary_caps]\
+            if args.custom_op \
+            else [n_primary_caps, n_digit_caps * dim_digit_caps, dim_primary_caps]
 
         W_ij = tf.get_variable(
             "weights", shape=w_shape,
             initializer=tf.keras.initializers.glorot_uniform()
         )
-        # Initialize routing logits, the leading axis with size 1 is added for convenience.
+        # Initialize routing logits, the leading axis with size 1 is added for
+        # convenience.
         b_ij = tf.get_variable(
-            "logits", shape=[1, n_primary_caps, n_digit_caps], initializer=tf.zeros_initializer(),
-            trainable=args.logits_trainable
+            "logits", shape=[1, n_primary_caps, n_digit_caps],
+            initializer=tf.zeros_initializer(), trainable=args.logits_trainable
         )
         if args.custom_op:
             # Custom op
@@ -704,22 +706,24 @@ def digit_caps(incoming, n_digit_caps, dim_digit_caps, name="DigitCaps", neuron_
             u_i = tf.transpose(incoming, (1, 2, 0))
             u_hat = tf.matmul(W_ij, u_i)
             u_hat = tf.reshape(
-                tf.transpose(u_hat, (2, 0, 1)), (-1, n_primary_caps, n_digit_caps, dim_digit_caps)
+                tf.transpose(u_hat, (2, 0, 1)),
+                (-1, n_primary_caps, n_digit_caps, dim_digit_caps)
             )
 
         def capsule_out(b_ij):
             """ Given the logits b_ij, computes the output of this layer. """
             c_ij = tf.nn.softmax(b_ij, axis=2)
             s_j = tf.reduce_sum(
-                tf.reshape(c_ij, (-1, n_primary_caps, n_digit_caps, 1)) * u_hat, axis=1
+                tf.reshape(c_ij, (-1, n_primary_caps, n_digit_caps, 1)) * u_hat,
+                axis=1
             )
             v_j = squash(s_j)
             return v_j
 
         def routing_iteration(iter, logits):
             """
-            Given a set of logits, computes the new logits using the routing definition from the
-            paper.
+            Given a set of logits, computes the new logits using the routing
+            definition from the paper.
             """
             v_j = capsule_out(logits)
             a_ij = tf.reduce_sum(tf.expand_dims(v_j, axis=1) * u_hat, axis=3)
