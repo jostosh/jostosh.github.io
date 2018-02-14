@@ -74,10 +74,10 @@
                     Introduction
                 </h2>
                 <p>
-                    Recently I've spent some time on CUDA programming and implementing custom Ops for TensorFlow. As an exercise, I decided to take a shot at implementing a custom Op for one of the operations in capsule networks that would normally require some <a href="capsnet.html">reshape hacking</a> or at least a <a href="https://github.com/Sarasra/models/tree/master/research/capsules">couple of intermediate TensorFlow Ops</a>. If you're not familiar with Capsule Networks, have a look at <a href="">the article</a> or my <a href="capsnet.html">previous post</a>. The open-sourced capsule network code by the original authors can be found <a href="https://github.com/Sarasra/models/tree/master/research/capsules">here</a>. The code that we discuss in this blog post is hosted in the <a href="https://github.com/jostosh/capsnet">same repository</a> as the code of my previous blog post.
+                    Recently I've spent some time on CUDA programming and implementing custom Ops for TensorFlow. As an exercise, I decided to take a shot at implementing a custom Op for one of the operations in capsule networks that would normally require some <a href="capsnet.html">reshape hacking</a> or at least a <a href="https://github.com/Sarasra/models/tree/master/research/capsules">couple of intermediate TensorFlow Ops</a>. If you're not familiar with Capsule Networks, have a look at <a href="">the article</a> or my <a href="capsnet.html">previous post</a>. The open-sourced capsule network code by the original authors can be found <a href="https://github.com/Sarasra/models/tree/master/research/capsules">here</a>. The code that we discuss in this blog post can be found <a href="https://github.com/jostosh/capsnet">here</a>.
                 </p>
                 <p>
-                    Many of the concepts that are covered in this post (CUDA, TensorFlow custom Ops, gradient testing) can be learned by going through the documentation, but I always think it is enlightening to see how such separate elements come together. This is the main motivation behind my blog post: showcasing the development of a custom TensorFlow Op with CUDA from start to end. So let's commence.
+                    Many of the concepts that are covered in this post (CUDA, TensorFlow custom Ops, gradient testing) can be learned by going through their corresponding documentations, but I always think it is enlightening to see how such separate elements come together. This is the main motivation behind my blog post: showcasing the development of a custom TensorFlow Op with CUDA from start to end. So let's commence.
                 </p>
                 <h2>
                 Capsule prediction
@@ -401,7 +401,7 @@ def test_capsule_prediction_op(self, batch_size, in_caps, out_caps, in_dim,
                     The backward capsule prediction
                 </h2>
                 <p>
-                    Next up is the backward computation. We you'll notice that we have visited most of the coming concepts already. We already looked at methods to compute the correct indices for one-dimensional arrays by dimension sizes, we wrote a CUDA kernel, we registered our Op and we set up our tests. Therefore, I will speed things up a bit from here on. The only thing that is in our way is the exact definition of the <b>gradient</b>. It helps to consider a normal dense layer first:
+                    Next up is the backward computation. You'll notice that we have visited most of the coming concepts already. We already looked at methods to compute the correct indices for one-dimensional arrays by dimension sizes, we wrote a CUDA kernel, we registered our Op and we set up our tests. Therefore, I will speed things up a bit from here on. The only thing that is in our way is the exact definition of the <b>gradient</b>. It helps to consider a normal dense layer first:
                     $$ \boldsymbol z = W \boldsymbol x. $$
                 Given the gradients of a loss function $\mathcal L$ with respect to $\boldsymbol z$, we should be able to get the gradients of $\boldsymbol x$ and $W$:
                     $$ \frac{\partial L}{\partial x_i}  = \frac{\partial L}{\partial \boldsymbol z} \frac{\partial \boldsymbol z}{\partial x_i} = \vec{\boldsymbol w_i} \boldsymbol z', $$
