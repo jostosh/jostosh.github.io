@@ -58,7 +58,7 @@
                     <h1>Cuda, TensorFlow and capsule networks</h1>
                     <h2 class="subheading">A complete demonstration of developing a custom TensorFlow Op with GPU support.</h2>
                     <span class="meta">Posted
-                on February 11, 2018. </span>
+                on February 11, 2018. Latest edit: March 1, 2018</span>
                 </div>
             </div>
         </div>
@@ -74,10 +74,13 @@
                     Introduction
                 </h2>
                 <p>
-                    Recently I've spent some time on CUDA programming and implementing custom Ops for TensorFlow. As an exercise, I decided to take a shot at implementing a custom Op for one of the operations in capsule networks that would normally require some <a href="capsnet.html">reshape hacking</a> or at least a <a href="https://github.com/Sarasra/models/tree/master/research/capsules">couple of intermediate TensorFlow Ops</a>. If you're not familiar with Capsule Networks, have a look at <a href="">the article</a> or my <a href="capsnet.html">previous post</a>. The open-sourced capsule network code by the original authors can be found <a href="https://github.com/Sarasra/models/tree/master/research/capsules">here</a>. The code that we discuss in this blog post can be found <a href="https://github.com/jostosh/capsnet">here</a>.
+                    Recently I've spent some time on CUDA programming and implementing custom Ops for TensorFlow. As an exercise, I decided to take a shot at implementing a custom Op for one of the operations in capsule networks that would normally require some <a href="capsnet.html">reshape hacking</a> or at least a <a href="https://github.com/Sarasra/models/tree/master/research/capsules">couple of intermediate TensorFlow Ops</a>. If you're not familiar with Capsule Networks, have a look at <a href="https://arxiv.org/abs/1710.09829">the article</a> or my <a href="capsnet.html">previous post</a>. The open-sourced capsule network code by the original authors can be found <a href="https://github.com/Sarasra/models/tree/master/research/capsules">here</a>. The code that we discuss in this blog post can be found <a href="https://github.com/jostosh/capsnet">here</a>.
                 </p>
                 <p>
                     Many of the concepts that are covered in this post (CUDA, TensorFlow custom Ops, gradient testing) can be learned by going through their corresponding documentations, but I always think it is enlightening to see how such separate elements come together. This is the main motivation behind my blog post: showcasing the development of a custom TensorFlow Op with CUDA from start to end. So let's commence.
+                </p>
+                <p>
+                    <b>EDIT</b> There also exists a <a href="https://www.jqr.com/article/000055">Chinese translation</a> of this post by Jakukyo Friel.
                 </p>
                 <h2>
                 Capsule prediction
@@ -413,7 +416,7 @@ def test_capsule_prediction_op(self, batch_size, in_caps, out_caps, in_dim,
                 What about the gradient of a specific weight? Well, this is perhaps even easier:
                 $$ \frac{\partial \mathcal L}{\partial w_{rc}} = x_r z'_c.$$
                 So the matrix holding the gradients becomes an outer product:
-                $$ \frac{\partial \mathcal L}{\partial W} = \boldsymbol x \boldsymbol (z')^\top. $$
+                $$ \frac{\partial \mathcal L}{\partial W} = \boldsymbol x (\boldsymbol z')^\top. $$
                     Intuitively, this tells us to just pick the two neurons that are connected between these two layers and multiply the local gradient of the output neuron with the input neuron. This means that we can do the same for the capsule prediction layer. The only difference is the dimensionality of the tensors involved.
                 </p>
                 <h3>
@@ -593,7 +596,7 @@ __global__ void capsulePredictionWeightsGradKernel(
 }
                 </code></pre>
                 <p>
-                    The same tricks apply here again: we compute the tensor axis indices, we compute the one-dimensional indices and we loop over the required elements to obtain our output. What I didn't mention before is that we have the sum the gradients for each weight over all samples in the batch. Given the memory size for the input and output tensors along the 0-th axis, this is a straightforward thing to do.
+                    The same tricks apply here again: we compute the tensor axis indices, we compute the one-dimensional indices and we loop over the required elements to obtain our output. What I didn't mention before is that we have to sum the gradients for each weight over all samples in the batch. Given the memory size for the input and output tensors along the 0-th axis, this is a straightforward thing to do.
                 </p>
 
                 <p>
