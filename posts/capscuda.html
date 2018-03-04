@@ -407,16 +407,16 @@ def test_capsule_prediction_op(self, batch_size, in_caps, out_caps, in_dim,
                     Next up is the backward computation. You'll notice that we have visited most of the coming concepts already. We already looked at methods to compute the correct indices for one-dimensional arrays by dimension sizes, we wrote a CUDA kernel, we registered our Op and we set up our tests. Therefore, I will speed things up a bit from here on. The only thing that is in our way is the exact definition of the <b>gradient</b>. It helps to consider a normal dense layer first:
                     $$ \boldsymbol z = W \boldsymbol x. $$
                 Given the gradients of a loss function $\mathcal L$ with respect to $\boldsymbol z$, we should be able to get the gradients of $\boldsymbol x$ and $W$:
-                    $$ \frac{\partial L}{\partial x_i}  = \frac{\partial L}{\partial \boldsymbol z} \frac{\partial \boldsymbol z}{\partial x_i} = \vec{\boldsymbol w_i} \boldsymbol z', $$
+                    $$ \frac{d L}{d x_i}  = \frac{d L}{d \boldsymbol z} \frac{d \boldsymbol z}{d x_i} = \vec{\boldsymbol w_i} \boldsymbol z', $$
                     where $\vec{\boldsymbol w_i}$ is the i-th row vector and $\boldsymbol z'$ is the vector holding the local gradients of the output. If this is the result for $i$, then the whole gradient for $\boldsymbol x$ can be computed by:
-                    $$ \frac{\partial L}{\partial \boldsymbol x} = W^\top \boldsymbol z'. $$
+                    $$ \frac{d L}{d \boldsymbol x} = W^\top \boldsymbol z'. $$
                     To do the same for our capsule prediction operation we just have to replace $\boldsymbol z'$ with $\hat{\boldsymbol u}_{j|i}'$ and $W$ with $W_{ij}$.
                 </p>
                 <p>
                 What about the gradient of a specific weight? Well, this is perhaps even easier:
-                $$ \frac{\partial \mathcal L}{\partial w_{rc}} = x_r z'_c.$$
+                $$ \frac{d \mathcal L}{d w_{rc}} = x_r z'_c.$$
                 So the matrix holding the gradients becomes an outer product:
-                $$ \frac{\partial \mathcal L}{\partial W} = \boldsymbol x (\boldsymbol z')^\top. $$
+                $$ \frac{d \mathcal L}{d W} = \boldsymbol x (\boldsymbol z')^\top. $$
                     Intuitively, this tells us to just pick the two neurons that are connected between these two layers and multiply the local gradient of the output neuron with the input neuron. This means that we can do the same for the capsule prediction layer. The only difference is the dimensionality of the tensors involved.
                 </p>
                 <h3>
