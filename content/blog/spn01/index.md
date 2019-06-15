@@ -1,7 +1,7 @@
 ---
 title: Sum-Product Networks
 date: "2019-06-11T22:12:03.284Z"
-description: A basic introduction that aiming to transfer and compare some of the concepts from neural networks to theory of Sum-Product Networks. 
+description: A basic introduction to Sum-Product Networks that aims to transfer and compare some of the concepts from neural networks to the theory of these relatively unknown probabilistic models. 
 ---
 
 Sum-Product Networks (SPNs) are probabilistic graphical models (PGMs) that have been around for several years, with arguably a limited amount of attention from the machine learning community. I believe this is due to several things. First, the daunting success of advanced deep neural networks like convolutional neural networks and recurrent neural networks overruled much of the alternative methods that may seem inferior at first sight. Second, SPNs are nontrivial to implement in a tensorized fashion (especially when compared to CNNs or RNNs). Third, SPNs come with a rich terminology and a strict probabilistic interpretation that might seem less intuitive than 'cells that fire together wire together'. This series of posts aims at addressing these issues to varying extent by going through some basic intuitions behind SPNs, showing how to implement SPNs in a tensorized fashion and finally, looking at a hands-on example of SPNs for generative and discriminative learning on image datasets.
