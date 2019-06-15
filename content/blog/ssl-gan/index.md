@@ -95,7 +95,7 @@ def prepare_input_pipeline(flags_obj):
 
 Next up is to define the discriminator network. I have deviated quite a bit from the architecture in the [paper](https://arxiv.org/abs/1805.08957). I’m going to play safe here and just use Keras layers to construct the model. Actually, this enables us to very conveniently reuse all weights for different input tensors, which will prove to be useful later on. In short, the discriminator’s architecture uses 3 convolutions with $5\times 5$ kernels and strides of $2\times 2$, $2 \times 2$ and $1 \times 1$ respectively. Each convolution is followed by a leaky ReLU activation and a dropout layer with a dropout rate of 0.3. The flattened output of this stack of convolutions will be used as the _feature_ layer.
 
-The feature layer can be used for a [feature matching loss](https://arxiv.org/abs/1606.03498) (rather than a sigmoid cross-entropy loss as in vanilla GANs), which has proven to yield a more reliable training process. The part of the network up to this feature layer is defined in `_define_tail` in the snippet below. The `_define_head` method defines the rest of the network. The 'head' of the network introduces only one additional fully connected layer with 10 outputs, that correspond to the logits of the class labels. Other than that, there are some methods to make the interface of a `Discriminator` instance behave similar to that of a `tf.keras.models.Sequential` instance.
+The feature layer can be used for a [feature matching loss](https://arxiv.org/abs/1606.03498) (rather than a sigmoid cross-entropy loss as in vanilla GANs), which has proven to yield a more reliable training process. The part of the network up to this feature layer is defined in `_define_tail` in the snippet below. The `_define_head` method defines the rest of the network. The 'head' of the network introduces only one additional fully connected layer with 10 outputs, that correspond to the logits of the class labels. Other than that, there are some methods to make the interface of a `Discriminator` similar to that of `tf.keras.models.Sequential`.
 
 ```python
 class Discriminator:
@@ -281,7 +281,7 @@ with tf.name_scope("DiscriminatorLoss"):
 ```
 ## Optimizing The Discriminator
 
-Let's setup the operations for actually updating the parameters of the discriminator. We will just reside to the `Adam` optimizer. While tweaking the parameters before I wrote this post, I figured I might slow down the discriminator by setting its learning rate at 0.1 times that of the generator. After that my results got much better, so I decided to leave it there for now. Notice also that we can very easily select the subset of variables corresponding to the discriminator by exploiting the encapsulation offered by Keras.
+Let's set up the operations for actually updating the parameters of the discriminator. We will just reside to the `Adam` optimizer. While tweaking the parameters before I wrote this post, I figured I might slow down the discriminator by setting its learning rate at 0.1 times that of the generator. After that, my results got much better, so I decided to leave it there for now. Notice also that we can very easily select the subset of variables corresponding to the discriminator by exploiting the encapsulation offered by Keras.
 ```python
 # Configure discriminator training ops
 with tf.name_scope("Train") as train_scope:

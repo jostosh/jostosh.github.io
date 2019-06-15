@@ -41,8 +41,8 @@
     "styled-components": "^4.3.1"
   },
   "devDependencies": {
-    "prettier": "^1.17.1",
-    "gh-pages": "^2.0.1"
+    "gh-pages": "^2.0.1",
+    "prettier": "^1.17.1"
   },
   "keywords": [
     "gatsby"

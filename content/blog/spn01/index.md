@@ -4,7 +4,7 @@ date: "2019-06-11T22:12:03.284Z"
 description: A basic introduction that aiming to transfer and compare some of the concepts from neural networks to theory of Sum-Product Networks. 
 ---
 
-Sum-Product Networks (SPNs) are probabilistic graphical models (PGMs) that have been around for several years, with arguably a limited amount of attention from the machine learning community. I believe this is due to several things. First, the daunting success of advanced deep neural networks like convolutional neural networks and recurrent neural networks overruled much of the alternative methods that may seem inferior at first sight. Second, SPNs are nontrivial to implement in a tensorized fashion (especially when compared to CNNs or RNNs). Third, SPNs come with a rich terminology and a strict probabilistic interpretation that might seem less intuitive then 'cells that fire together wire together'. This series of posts aims at addressing these issues to varying extent by going through some basic intuitions behind SPNs, showing how to implement SPNs in a tensorized fashion and finally, looking at a hands-on example of SPNs for generative and discriminative learning on image datasets.
+Sum-Product Networks (SPNs) are probabilistic graphical models (PGMs) that have been around for several years, with arguably a limited amount of attention from the machine learning community. I believe this is due to several things. First, the daunting success of advanced deep neural networks like convolutional neural networks and recurrent neural networks overruled much of the alternative methods that may seem inferior at first sight. Second, SPNs are nontrivial to implement in a tensorized fashion (especially when compared to CNNs or RNNs). Third, SPNs come with a rich terminology and a strict probabilistic interpretation that might seem less intuitive than 'cells that fire together wire together'. This series of posts aims at addressing these issues to varying extent by going through some basic intuitions behind SPNs, showing how to implement SPNs in a tensorized fashion and finally, looking at a hands-on example of SPNs for generative and discriminative learning on image datasets.
 
 Quite some time ago, I joined a project where we worked on a library with 'tensorized' implementations of SPNs, known as libspn. The library leverages the flexibility and power of TensorFlow to bring SPNs to the broader ML audience. Although by now it is something I need to pursue in my spare time, I like working on it since it sets some unique engineering challenges. I'll explain the complexity of this challenge over the next few posts.
 
@@ -62,7 +62,7 @@ An SPN that violates _completeness_ is the one below:
 ![Figure 2: Incomplete SPN. Note that the two children have different scopes.](incomplete.png)
 
 ## Computing Joint Probabilities
-What about the third requirement? Well, if we have an SPN defined over more than one variable, we should _join scopes_ to eventually obtain a root node that computes the _joint probability_ over the variables contained in those scopes. Remember that scopes are joined by a parent nodes that obtains the _union_ of the scopes of its children. The third requirement describes under which conditions we can join scopes in a valid SPN. It is also known as the _decomposability_ property. It might not be the first time you've heard that when computing the joint probability over two independent variables, you can simply _multiply_ the individual probabilities, e.g. 
+What about the third requirement? Well, if we have an SPN defined over more than one variable, we should _join scopes_ to eventually obtain a root node that computes the _joint probability_ over the variables contained in those scopes. Remember that scopes are joined by a parent node that obtains the _union_ of the scopes of its children. The third requirement describes under which conditions we can join scopes in a valid SPN. It is also known as the _decomposability_ property. It might not be the first time you've heard that when computing the joint probability over two independent variables, you can simply _multiply_ the individual probabilities, e.g. 
 $$
 p(x,y) = p(x)p(y)
 $$
@@ -93,7 +93,7 @@ $$
 
 Where $[\Phi]$ is the network polynomial obtained from $\Phi$ after normalizing the weights for each sum.
 
-**From hereon, assume that our SPNs are normalized, so that the SPN computes a _'normalized'_ probability distribution.** Otherwise, all of our inferences would require about twice as many computations. If you want to understand why, it's best to consult ([Poon and Domingos, 2011](https://arxiv.org/abs/1202.3732)).
+**From here on, assume that our SPNs are normalized, so that the SPN computes a _'normalized'_ probability distribution.** Otherwise, all of our inferences would require about twice as many computations. If you want to understand why, it's best to consult ([Poon and Domingos, 2011](https://arxiv.org/abs/1202.3732)).
 
 Clearly, the SPN in Figure 2 is a bit more sophisticated than the one in Figure 1. First of all, it is multi-layered. The first layer on top of the leaves consists of products of which the children have pairwise disjoint scopes (requirement 3). The scopes of the 4 products are identical (namely $\{\boldsymbol X_1, \boldsymbol X_2\}$). Consequently, we can combine those probabilities with a sum node at the top of the SPN (the root). To compute the probability of a particular assignment of indicators, we replace the indicators that are included with one and those that are excluded with zero:
 
@@ -114,7 +114,7 @@ $$
 p(\{X_1,X_2,\bar{X_2}\}) = w_1 1\cdot 1 + w_2 \cdot 1 \cdot 1 + w_3 \cdot 0 \cdot 0 + w_4 = w_1 + w_2
 $$
 
-#### An Non-Decomposable SPN
+#### A Non-Decomposable SPN
 Below is an example of a simple SPN that is not decomposable. The root has two children with the same scope.
 
 ![Figure 4: An SPN that is non-decomposable. Note that the root has two children with the same scope, while there should be no overlap in their scopes.](not_decomposable.png) 
@@ -134,7 +134,7 @@ Note that the architecture in the SPNs above is arbitrary (as long as they are d
 Despite the constraints on the exact architecture of these networks, SPNs can also be framed as _convolutional architectures_ or _recurrent architectures_. This is, however, outside the scope of this post. Stay tuned though... 
 
 ## Wrapping Up
-If you're coming from a background that with the main focus on neural networks or other main-stream machine learning approaches, the amount of theory and terminology coming at you in this post might seem a bit overwhelming at first. I'll try and show in the next two posts that it's nevertheless feasible to create implementations of SPNs that feel similar to the _Keras_ style of stacking layers in an object oriented fashion, even though we have to take care of constraints like decomposability and completeness. 
+If you're coming from a background that with the main focus on neural networks or other main-stream machine learning approaches, the amount of theory and terminology coming at you in this post might seem a bit overwhelming at first. I'll try and show in the next two posts that it's nevertheless feasible to create implementations of SPNs that feel similar to the _Keras_ style of stacking layers in an object-oriented fashion, even though we have to take care of constraints like decomposability and completeness. 
 
 At least remember the following things:
 

@@ -38,7 +38,7 @@ function Bio() {
               }}
             />
             <p>
-              Written by <strong>{author}</strong>, Machine Learning practicioner living and working in Amsterdam.
+              Written by <strong>{author}</strong>, Machine Learning practitioner living and working in Amsterdam.
               {` `}
             </p>
           </div>
