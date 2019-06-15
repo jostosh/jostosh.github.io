@@ -3,6 +3,7 @@ module.exports = {
     title: `Machine Learning Blog - JvdW`,
     author: `Jos van de Wolfshaar`,
     description: `A blog discussing various topic in Machine Learning.`,
+    siteUrl: "https://jostosh.github.io",
     social: {
       twitter: `josvdwolfshaar`,
     },
