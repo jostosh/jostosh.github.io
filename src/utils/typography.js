@@ -18,6 +18,7 @@ lincoln.overrideThemeStyles = () => {
     'a': {
       textDecoration: `none`,
       textShadow: 'none',
+      borderBottom: `1px solid #ff8c00`,
       backgroundImage: "none",
       color: "#C35C00"
     },

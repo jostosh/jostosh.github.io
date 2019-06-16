@@ -1,43 +1,48 @@
 ---
-title: Sum-Product Networks
+title: "Tensor-Based Sum-Product Networks: Part I"
 date: "2019-06-11T22:12:03.284Z"
-description: A basic introduction to Sum-Product Networks that aims to transfer and compare some of the concepts from neural networks to the theory of these relatively unknown probabilistic models. 
+description: An introduction to Sum-Product Networks. First of a series of post on these relatively unknown probabilistic models. 
 ---
 
 Sum-Product Networks (SPNs) are probabilistic graphical models (PGMs) that have been around for several years, with arguably a limited amount of attention from the machine learning community. I believe this is due to several things. First, the daunting success of advanced deep neural networks like convolutional neural networks and recurrent neural networks overruled much of the alternative methods that may seem inferior at first sight. Second, SPNs are nontrivial to implement in a tensorized fashion (especially when compared to CNNs or RNNs). Third, SPNs come with a rich terminology and a strict probabilistic interpretation that might seem less intuitive than 'cells that fire together wire together'. This series of posts aims at addressing these issues to varying extent by going through some basic intuitions behind SPNs, showing how to implement SPNs in a tensorized fashion and finally, looking at a hands-on example of SPNs for generative and discriminative learning on image datasets.
 
-Quite some time ago, I joined a project where we worked on a library with 'tensorized' implementations of SPNs, known as libspn. The library leverages the flexibility and power of TensorFlow to bring SPNs to the broader ML audience. Although by now it is something I need to pursue in my spare time, I like working on it since it sets some unique engineering challenges. I'll explain the complexity of this challenge over the next few posts.
+Quite some time ago, I joined a project where we worked on a library with 'tensorized' implementations of SPNs, known as [libspn](https://www.libspn.org/). The library leverages the flexibility and power of TensorFlow to bring SPNs to the broader ML audience. Although by now it is something I need to pursue in my spare time, I like working on it since it sets some unique engineering challenges. I'll explain the complexity of this challenge over the next few posts.
 
 This series of posts assumes basic knowledge of set theory, probability theory, neural networks and 'tensor-based' programming and computing.
 
 ## What Can SPNs Be Used For?
-SPNs can be used for tasks like image completion, localization for robotics, classification and can be trained to tackle either unsupervised or supervised or semi-supervised problems. Depending on the task and whether we want the SPN to optimize for generative or discriminative abilities, we can train the SPN with expectation maximization (EM), gradient descent (GD), extended Baum-Welch (EBW) and more algorithms. In some cases, SPNs are trained for generative and discriminative abilities simultaneously. Being fully probabilistic models, they naturally deal with incomplete data. SPNs are PGMs designed with efficiency in mind. They can perform exact joint, conditional or marginal inferences very efficiently. 
+SPNs can be used for tasks such as image completion ([Poon and Domingos, 2011](https://arxiv.org/abs/1202.3732)), semantic mapping for robotics ([Zheng et al., 2018](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewPaper/16923)) and classification ([Gens and Domingos, 2012](https://papers.nips.cc/paper/4516-discriminative-learning-of-sum-product-networks.pdf)) and can be trained to tackle either unsupervised or supervised or semi-supervised problems. Depending on the task and whether we want the SPN to optimize for generative or discriminative abilities, we can train the SPN with expectation maximization (EM), gradient descent (GD) and more algorithms. 
 
-## Sum-Product Networks: An Intro
-Since SPNs are probabilistic graphical models (PGMs) they resemble a probability distribution (either continuous or discrete). Implementation-wise, this means that our computation takes in random variables on one side and spits out probabilities on another side. Note that this is qualitatively different from multi-layer perceptrons (MLPs). For MLPs the output might be framed probabilistically, such as the softmax output for classification:
+In some cases, SPNs are trained for generative and discriminative abilities simultaneously. Being fully probabilistic models, they naturally deal with incomplete data. SPNs are PGMs designed with efficiency in mind. They can perform exact joint, conditional or marginal inferences very efficiently. 
+
+This post is introducing the first bits of what is there to know about SPNs. Although the community around it is currently relatively small, there are many ideas explored already. Have a look at this [awesome SPN repo](https://github.com/arranger1044/awesome-spn) to see what's out there.
+
+## Sum-Product Networks And Neural Networks
+Since SPNs are probabilistic graphical models (PGMs), they resemble a probability distribution (either continuous or discrete). Implementation-wise, this means that our computation takes in random variables on one side and spits out probabilities on another side. Note that this is qualitatively different from multi-layer perceptrons (MLPs). For MLPs the output might be framed probabilistically, such as the softmax output for classification:
 $$
 p(y_i \mid \boldsymbol X) = \frac{\exp(\boldsymbol w_i^T \boldsymbol h)}{\sum_k \exp(\boldsymbol w_k ^T \boldsymbol h)}
 $$
+<figcaption>Equation 1: Softmax output of an MLP.</figcaption>
 
 Nevertheless, the inputs (often image pixels) are just raw numbers fed to the network, without any explicit probabilistic interpretation. Also, all intermediate layers in an MLP lack a direct probabilistic interpretation.
 
-Since SPNs are recursive tree-like structures, non-root nodes are roots of sub-SPNs with a probabilistic interpretation similar to the full SPN. In fact, often SPNs are thought of as hierarchical probabilistic models. In other words, the interpretation of nodes in SPNs differs significantly from hidden neurons in an MLP!
+Since SPNs are recursive tree-like structures, non-root nodes are roots of sub-SPNs with a probabilistic interpretation similar to the full SPN. In fact, often SPNs are thought of as _hierarchical probabilistic models_. In other words, the interpretation of nodes in SPNs differs significantly from hidden neurons in an MLP!
 
-## A Shift In Terminology
+### A Shift In Terminology
 
-How SPNs differ from MLPs: 
+More specifically, SPNs differ from MLPs in the following ways: 
 
 - _Inputs_ are called _leaves_;
 - _Neurons_ are called _nodes_;
 - Each leaf node belongs to a single random variable. There can be multiple leaf nodes per random variable. For continuous variables, the leaves that correspond to a variable are the variable's _components_. For discrete categorical variables, the leaves that belong to a variable are the variable's _indicators_ (i.e. $[X_1=0, X_1=1, \ldots]$).
-- A set of variables is called a _scope_. Leaf nodes have scopes of exactly one variable e.g. $\{X_1\}$ or $\{X_2\}$. For a non-leaf node, the scope of the node corresponds to the union of the scopes of its children. If a parent node has two children with scopes $\{X_i\}$ and $\{X_j\}$, then that parent has the scope $\{X_i, X_j\}$
-The node at the top of the tree-structure is called the root.
+- A set of variables is called a _scope_. Leaf nodes have scopes of exactly one variable e.g. $\{\boldsymbol X_1\}$ or $\{\boldsymbol X_2\}$. For a non-leaf node, the scope of the node corresponds to the union of the scopes of its children. If a parent node has two children with scopes $\{\boldsymbol X_i\}$ and $\{\boldsymbol X_j\}$, then that parent has the scope $\{\boldsymbol X_i, X_j\}$
+- The node at the top of the tree-structure is called the _root_. The value of the root in a single upward pass of the SPN (usually) holds the _joint probability_ of all variables at the leaves of the SPN. 
 
 In other words, SPNs are directed acyclic graphs with a tree-like structure.
-The leaves of an SPN are random variables $\boldsymbol X = [X_1, X_2, \ldots, X_N]$. Additionally, each operation in an SPN must preserve the ability to interpret the computed values as probabilities. This means that the value of every node in the forward pass computes a probability. As a result, a high degree of interpretability comes for free with SPNs.
+The leaves of an SPN are _indicators_ (or _components_) of random variables. Additionally, each operation in an SPN must preserve the ability to interpret the computed values as probabilities. This means that the value of every node in the forward pass computes a probability. As a result, a high degree of interpretability comes for free with SPNs!
 
-## Guaranteeing a Probabilistic Interpretation
-So exactly how do we make sure that any node at any layer in an SPN computes an exact probability? In the original SPN paper ([Poon and Domingo's, 2011](https://arxiv.org/abs/1202.3732)), this is more formally defined as preserving the property of _validity_ throughout the SPN. Valid SPNs efficiently and accurately model a joint probability. For a  thorough treatment of validity, I suggest you read the original paper [1] and have a look at Poupart's excellent lectures ([first](https://www.youtube.com/watch?v=eF0APeEIJNw) and [second](https://www.youtube.com/watch?v=9-1YE_N-lnw)) on SPNs. For the purpose of these blog posts, we mostly care about _how_ we create valid SPNs. Valid SPNs can be created by
+## Guaranteeing A Probabilistic Interpretation
+So exactly how do we make sure that any node at any layer in an SPN computes an exact probability? In the original SPN paper ([Poon and Domingos, 2011](https://arxiv.org/abs/1202.3732)), this is more formally defined as preserving the property of _validity_ throughout the SPN. Valid SPNs efficiently and accurately model a joint probability. For a  thorough treatment of validity, I suggest you read [Poon and Domingos (2011)](https://arxiv.org/abs/1202.3732)) and have a look at Poupart's excellent lectures ([first](https://www.youtube.com/watch?v=eF0APeEIJNw) and [second](https://www.youtube.com/watch?v=9-1YE_N-lnw)) on SPNs. For the purpose of these blog posts, we mostly care about _how_ we create valid SPNs. Valid SPNs can be created by
 
 1. Restricting ourselves to (i) non-negative weighted sums and (ii) products for propagating probabilities upward;
 2. Ensuring that _scopes_ children of a sum node are _identical_;
@@ -45,16 +50,17 @@ So exactly how do we make sure that any node at any layer in an SPN computes an 
 
 Let's look at the restriction of non-negative weighted sums first and products first. A non-negative weighted sum of probabilities occurs in many probabilistic (graphical) models. Usually, the non-negative weights correspond to _prior probabilities_ of the children of the sum. Note that to interpret the weights as probabilities we not only require them to be non-negative but we also must also ensure that they sum up to exactly one, i.e. $\sum_i w_{ij} = 1$.
 
-## A Mixture of Gaussians as an SPN
+## A Mixture Of Gaussians As An SPN
 A common scenario is to have a mixture of Gaussians to model a single random variable:
 $$
 p(x) = \sum_k \underbrace{p(x \mid z=k)}_{\text{Component: } \mathcal N(\mu, \sigma^2)} \underbrace{p(z=k)}_{\text{Prior (a scalar)}}
 $$
+<figcaption>Equation 2: Gaussian mixture.</figcaption>
 
 Sum nodes in SPNs compute probabilities in the same way, but the 'components' can be either (i) leaf nodes or (ii) sub-SPNs. The equation above is equivalent to the extremely simple SPN below (when replacing $z$ with $X_1$):
 ![Figure 1: Gaussian Mixture as an SPN. The three leaf nodes correspond to the Gaussian components.](spn_gmixture.png)
 
-Note that in the SPN above, we compute a sum over elements that consider the same singular set of variables, namely $\{\boldsymbol X_1\}$. The leaf nodes correspond to the Gaussian components while the edges correspond to the non-negative weights. The value of the root corresponds to $p(x)$ in Equation 1.
+Note that in the SPN above, we compute a sum over elements that consider the same singular set of variables, namely $\{\boldsymbol X_1\}$. The leaf nodes correspond to the Gaussian components while the edges correspond to the non-negative weights. The value of the root corresponds to $p(x)$ in Equation 2.
 
 In SPN terminology, a set of variables is called a scope. Leaf nodes have scopes of exactly one variable e.g. $\{\boldsymbol X_1\}$ or $\{\boldsymbol X_2\}$. Note that the SPN in Figure 1 satisfies at least requirements 1 and 2 for a valid SPN, provided we have non-negative weights. The second requirement of having identical scopes for the sum's children is also known as the completeness property. The SPN in Figure 1 does not include products, so we don't really care about the third requirement. Hence, all boxes are ticked and this SPN is valid!
 
@@ -66,6 +72,7 @@ What about the third requirement? Well, if we have an SPN defined over more than
 $$
 p(x,y) = p(x)p(y)
 $$
+<figcaption>Equation 3: The 'product' rule for computing the joint probability of two independent variables.</figcaption>
 Sum-product networks compute joint probabilities in the same way: they multiply several probabilities to obtain a new joint probability.
 
 Consider the following SPN:
@@ -77,6 +84,7 @@ The SPN above computes the following _network polynomial_:
 $$
 \Phi(X_1, \bar{X_2}, X_1, \bar{X_2}) = w_1 X_1 X_2 + w_2 X_1 \bar{X_2} + w_3 \bar{X_1} X_2 + w_4 \bar{X_1} \bar{X_2} 
 $$
+<figcaption>Equation 4: The network polynomial of the SPN in Figure 3.</figcaption>
 
 What in the world is a network polynomial? This is the definition from the paper by ([Poon and Domingos, 2011](https://arxiv.org/abs/1202.3732)):
 >  Let $\Phi(x) \geq 0$ be an unnormalized probability distribution. The network polynomial
@@ -90,6 +98,7 @@ other words:
 $$
 \sum_x [\Phi](x) = 1 \Rightarrow [\Phi](x) = p(x)
 $$
+<figcaption>Equation 5: The network polynomial of a normalized SPN computes a (marginal) probability directly.</figcaption>
 
 Where $[\Phi]$ is the network polynomial obtained from $\Phi$ after normalizing the weights for each sum.
 
@@ -100,19 +109,23 @@ Clearly, the SPN in Figure 2 is a bit more sophisticated than the one in Figure 
 $$
 p(\{X_1, X_2\}) = w_1 \cdot 1 \cdot 1 + w_2 \cdot 0 \cdot 1 + w_3 \cdot 0 \cdot 1 + w_4 \cdot 0 \cdot 0 = w_1
 $$
+<figcaption>Equation 6: Evaluation the network polynomial when we now that both variables are 'true'.</figcaption>
 
 Or, alternatively:
 
 $$
 p(\{\bar{X_1}, X_2\}) = w_1 \cdot 0 \cdot 1 + w_2 \cdot 0 \cdot 0 + w_3 \cdot 1 \cdot 1 + w_4 \cdot 1 \cdot 0 = w_3
 $$
+<figcaption>Equation 7: Evaluation the network polynomial when we now that the first variable is 'false' and the second is 'true'.</figcaption>
 
 If one of the two variables is unknown, we can easily _marginalize out_ this variable by setting both its indicators to 1. If $\boldsymbol X_2$ is unknown, we can
 compute the probability of observing $X_1$ at all as follows:
 
 $$
-p(\{X_1,X_2,\bar{X_2}\}) = w_1 1\cdot 1 + w_2 \cdot 1 \cdot 1 + w_3 \cdot 0 \cdot 0 + w_4 = w_1 + w_2
+p(\{X_1,X_2,\bar{X_2}\}) = w_1 1\cdot 1 + w_2 \cdot 1 \cdot 1 + w_3 \cdot 0 \cdot 1 + w_4 \cdot 0 \cdot 1 = w_1 + w_2
 $$
+<figcaption>Equation 8: Evaluation the network polynomial when we now that the first variable is 'true' and we have no evidence to support either 'true' or 'false' for the second variable, so we marginalize it out by setting both indicators to 1.</figcaption>
+
 
 #### A Non-Decomposable SPN
 Below is an example of a simple SPN that is not decomposable. The root has two children with the same scope.
@@ -134,7 +147,7 @@ Note that the architecture in the SPNs above is arbitrary (as long as they are d
 Despite the constraints on the exact architecture of these networks, SPNs can also be framed as _convolutional architectures_ or _recurrent architectures_. This is, however, outside the scope of this post. Stay tuned though... 
 
 ## Wrapping Up
-If you're coming from a background that with the main focus on neural networks or other main-stream machine learning approaches, the amount of theory and terminology coming at you in this post might seem a bit overwhelming at first. I'll try and show in the next two posts that it's nevertheless feasible to create implementations of SPNs that feel similar to the _Keras_ style of stacking layers in an object-oriented fashion, even though we have to take care of constraints like decomposability and completeness. 
+If you're coming from a background with a main focus on neural networks or other main-stream machine learning approaches, the amount of theory and terminology coming at you in this post might seem a bit overwhelming at first. I'll try and show in the next few posts that it's nevertheless feasible to create implementations of SPNs that feel similar to the _Keras_ style of stacking layers in an object-oriented fashion, even though we have to take care of constraints like decomposability and completeness. 
 
 At least remember the following things:
 
@@ -145,12 +158,13 @@ At least remember the following things:
     * Decomposability: a product should not have children with overlapping scopes (think about the product rule of multiplying independent probabilities to get a joint distribution).
     * Completeness: a sum's children must have identical scopes
 3. Normalize your SPNs so that they compute a normalized probability distribution, rather than an unnormalized probability distribution.
-4. An SPN's nonlinearities are its products and can be seen as a special type of MLP.
+4. An SPN's nonlinearities are its products. SPNs can be seen as a special type of MLP.
 
 ## What's Next
 Hope you're still with me because there's more to come! At this point, we have only touched on the basic terminology and some simple architectures. In the next post, we'll be looking into the actual implementation of SPNs in a tensorized fashion, after which it becomes easy to experiment with them.
 
 ## References
-1. Poon, Hoifung, and Pedro Domingos. "Sum-product networks: A new deep architecture." 2011 IEEE International Conference on Computer Vision Workshops (ICCV Workshops). IEEE, 2011.
-2. Zheng, Kaiyu, Andrzej Pronobis, and Rajesh PN Rao. "Learning graph-structured sum-product networks for probabilistic semantic maps." Thirty-Second AAAI Conference on Artificial Intelligence. 2018.
-3. Gens, Robert, and Pedro Domingos. "Discriminative learning of sum-product networks." Advances in Neural Information Processing Systems. 2012.
+* Poon, Hoifung, and Pedro Domingos. "Sum-product networks: A new deep architecture." 2011 IEEE International Conference on Computer Vision Workshops (ICCV Workshops). IEEE, 2011.
+* Zheng, Kaiyu, Andrzej Pronobis, and Rajesh PN Rao. "Learning graph-structured sum-product networks for probabilistic semantic maps." Thirty-Second AAAI Conference on Artificial Intelligence. 2018.
+* Gens, Robert, and Pedro Domingos. "Discriminative learning of sum-product networks." Advances in Neural Information Processing Systems. 2012.
+
